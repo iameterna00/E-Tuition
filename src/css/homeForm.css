@@ -1,0 +1,114 @@
+.home-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  h1 {
+    margin-bottom: 20px;
+    color: var(--primary-text-color-light);
+  }
+  .classAndSubject{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    gap: 10px;
+  }
+  
+  .form-container {
+    padding: 20px;
+    border-radius: 8px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    max-width: 400px;
+    background-color: var(--primary-bg-color-light);
+  }
+  
+  body.dark-mode .form-container {
+    background-color: var(--primary-bg-color-dark);
+  }
+  
+  .studentFormHomeTuition {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+  }
+  
+  input {
+    display: flex;
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: transparent;
+    font-size: 16px;
+    color: #222; /* Default text color for light theme */
+  }
+  .formSelectInput {
+    display: flex;
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: transparent;
+    font-size: 16px;
+    color: #222;
+  }
+  
+  [data-theme='dark'] .formInput {
+    background-color: transparent;
+  }
+  [data-theme='dark'] .formSelectInput {
+    color: white;
+    
+  }
+  [data-theme='dark'] .formSelectInput option {
+    background-color: rgb(18,18,18); /* Set background color for the options */
+  }
+  
+  
+  
+  button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: var(--button-bg-light);
+    color: var(--button-text-color-light);
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: var(--button-hover-light);
+  }
+  
+  body.dark-mode button {
+    background-color: var(--button-bg-dark);
+    color: var(--button-text-color-dark);
+  }
+  
+  body.dark-mode button:hover {
+    background-color: var(--button-hover-dark);
+  }
+  @media (max-width: 600px) { 
+    
+    .classAndSubject{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    gap: 10px;
+  }
+  
+  }
+  
