@@ -88,6 +88,10 @@
     transition: background-color 0.3s ease;
   }
   
+  [data-theme="dark"] button {
+    background-color: transparent; /* Make button background transparent in dark mode */
+    color: var(--button-text-color-dark); /* Adjust text color for dark mode if needed */
+  }
   button:hover {
     background-color: var(--button-hover-light);
   }
