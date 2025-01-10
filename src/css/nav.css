@@ -5,7 +5,7 @@
   align-items: center;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
-  position: relative;
+  position: sticky;
   padding: 10px;
 }
 
@@ -15,9 +15,7 @@
 }
 
 .Title {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+  margin: -10px;
   text-align: center;
 }
 
@@ -53,7 +51,9 @@
 .themeButton svg {
   font-size: 1.5rem;
 }
-
+.OnlineClass{
+  display: block;
+}
 .hamburger {
   display: none;
   font-size: 2rem;
@@ -65,6 +65,10 @@
   .navbar {
     flex-direction: row;
     align-items: flex-start;
+  }
+  .OnlineClass{
+    border: 1px solid grey;
+    display: none;
   }
 
 
