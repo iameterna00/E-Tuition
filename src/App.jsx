@@ -5,6 +5,8 @@ import Navbar from './navbar';
 import OnlineClasses from './Pages/onlineclass'; 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import HomePage from './Pages/homepage';
+import BecomeTuitor from './Pages/betuitor';
+import ApplyForTuitor from './Pages/applyfortuitot';
 
 function App() {
   return (
@@ -14,6 +16,8 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/onlineclasses" element={<OnlineClasses />} />
+        <Route path="/iamatuitor" element={<BecomeTuitor />} />
+        <Route path="/applyfortuitor" element={<ApplyForTuitor />} />
       </Routes>
     </ThemeProvider>
   </Router>

@@ -101,7 +101,7 @@ const HomePageForm = () => {
             value={formData.subjects}
             onChange={handleChange}
             required
-            disabled={!formData.class} // Disable subject dropdown if no class is selected
+        
           >
             <option value="">Select Subject</option>
             {filteredSubjects.length > 0 ? (
@@ -111,7 +111,7 @@ const HomePageForm = () => {
                 </option>
               ))
             ) : (
-              <option value="">No subjects available</option>
+              <option value="">Please select your class</option>
             )}
           </select>
         </div>
