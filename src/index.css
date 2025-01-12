@@ -3,7 +3,7 @@
   --color: rgba(255, 255, 255, 0.87);
   --background-color: #242424;
   --link-color: #f3f3f3;
-  --link-hover: #535bf2;
+
   --button-background: #1a1a1a;
   --button-border-hover: #646cff;
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -14,7 +14,6 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
   color-scheme: light dark;
   color: var(--color);
   background-color: var(--background-color);
@@ -25,7 +24,6 @@
   --primary-text-color: black;
   --background-color: #ffffff;
   --link-color: #000000;
-  --link-hover: #b2b2b2;
   --button-background: #f9f9f9;
   --button-border-hover: #535bf2;
 }
@@ -52,6 +50,7 @@ body {
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+   color: var(--primary-text-color);
 }
 
 h3 {

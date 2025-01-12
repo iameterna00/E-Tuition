@@ -16,12 +16,21 @@
   }
   
   .gig-card {
-    background: #fff;
     border-radius: 8px;
     padding: 10px;
     text-align: start;
     transition: transform 0.2s ease;
   }
+  [data-theme='dark'] .gig-card{
+    background-color: #36454b3e;
+    }
+    
+    [data-theme='light'] .gig-card{
+      background-color: #f1f1f173;
+    }
+  
+  
+
   
   .gig-card:hover {
     transform: translateY(-5px);
@@ -41,24 +50,21 @@
   }
   .gigprofilecontainer{
     display: flex;
-    color: black;
     gap: 10px;
     font-size: 15px;
   }
   .gig-title {
     font-size: 18px;
     margin: 10px 10px 0px 0;
-    color: #333;
   }
   .gig-rating{
     display: flex;
     gap: 8px;
-    color: black;
+
     font-weight: bold;
   }
   .gig-price{
     font-weight: bold;
-    color: black;
   }
   
   .gig-qualification {
@@ -121,7 +127,7 @@
   }
   
   .searchBar {
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.452);
     height: 50px;
     width: 40%;
     border-radius: 25px;
@@ -144,7 +150,7 @@
   }
   
   .searchBar input::placeholder {
-    color: #aaa;
+    color: #434343;
     margin: 0px;
   }
   
@@ -163,6 +169,7 @@
     width: 100%;
     display: flex;
     justify-content: center;
+    background-color: #36454b3e;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 
   }
@@ -171,8 +178,8 @@
     display: flex;
     gap: 20px;
     font-size: 18px;
-    color: rgb(101, 101, 101);
     justify-content: center;
+    
     align-items: center;
   }
   .SubjectArea{

@@ -56,14 +56,20 @@
   .howitworks{
     margin: 10px;
     width: 100%;
-    background-color: #f7f7f7;
-    border-radius: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-
   }
+  [data-theme='dark'] .howitworks{
+    background-color: #36454b3f;
+    }
+    
+    [data-theme='light'] .howitworks{
+      background-color: #f7f7f7;
+    }
+  
+  
   .howitworksinsiders{
     width: 80%;
     display: flex;
@@ -111,10 +117,19 @@
     width: 70%;
     display: flex;
     padding: 20px;
+    border-radius: 10px;
     justify-content: space-between;
-    background-color: #f7f7f7;
+
 
   }
+  [data-theme='dark'] .learnfromuscontainer{
+    background-color: #36454b3f;
+    }
+    
+    [data-theme='light'] .learnfromuscontainer{
+      background-color: #f7f7f7;
+    }
+  
   .learnfromuscontainer h3{
     font-weight: 500;
     font-size: 40px;
@@ -172,7 +187,6 @@
   .tuitorgraphicsimg{
     width: 100%;
     height: 100%;
-    
     object-fit: cover;
   }
   .tuitorloginform{
@@ -181,8 +195,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgb(255, 255, 255);
   }
+  [data-theme='light'] .tuitorloginform {
+    background-color: rgb(255, 255, 255);
+    }
+    
+    [data-theme='dark'] .tuitorloginform{
+      background-color: #36454b;
+    }
 .loginmethods{
   width: 100%;
   display: flex;

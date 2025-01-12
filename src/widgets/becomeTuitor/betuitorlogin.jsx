@@ -30,10 +30,10 @@ function TuitorLogin({ close }) {
           <img className="tuitorgraphicsimg" src={joinus} alt="" />
         </div>
         <div className="tuitorloginform">
-          <h1>
+          <h2>
             Welcome! Create Your
             <br /> E-Tuitor Account
-          </h1>
+          </h2>
           <div className="loginmethods">
             <div className="continuewithgoogle" onClick={handleGoogleLogin}>
               <img className="continuewithgoogleimg" src={google} alt="" />

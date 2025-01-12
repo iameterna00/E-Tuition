@@ -63,7 +63,8 @@ const HomePageForm = () => {
   return (
     <div className="FormBox">
     <div className="formmainContainer">
-    <h2>Find Home Tutor In Nepal</h2>
+    <h2>Are you looking for a home tutor?</h2>
+    <p>Please fill out this form carefully, and we will reach out to you shortly to assist with your tutoring needs. </p>
     <form className="form-container" onSubmit={handleSubmit}>
 
 <div className="classAndSubject">
@@ -72,6 +73,7 @@ const HomePageForm = () => {
     <select
       className="formSelectInput"
       name="class"
+      style={{border:'none'}}
       value={formData.class}
       onChange={handleChange}
       required
@@ -99,6 +101,7 @@ const HomePageForm = () => {
     <select
       className="formSelectInput"
       name="subjects"
+      style={{border:'none'}}
       value={formData.subjects}
       onChange={handleChange}
       required
@@ -124,6 +127,7 @@ const HomePageForm = () => {
       className="formInput"
       type="text"
       name="name"
+      style={{border:'none'}}
       placeholder="Student Name"
       value={formData.name}
       onChange={handleChange}
@@ -138,6 +142,7 @@ const HomePageForm = () => {
     <input
       className="formInput"
       type="number"
+      style={{border:'none'}}
       name="age"
       placeholder="Age"
       value={formData.age}
@@ -145,13 +150,12 @@ const HomePageForm = () => {
       required
     />
   </div>
-</div>
-
   <div className="studentFormHomeTuition">
     <h3>Email</h3>
     <input
       className="formInput"
       type="email"
+      style={{border:'none'}}
       name="email"
       placeholder="Email"
       value={formData.email}
@@ -160,11 +164,15 @@ const HomePageForm = () => {
     />
   </div>
 
+</div>
+
+  
   <div className="studentFormHomeTuition">
     <h3>Phone Number</h3>
     <input
       className="formInput"
       type="tel"
+      style={{border:'none'}}
       name="phone"
       placeholder="Phone Number"
       value={formData.phone}
@@ -181,6 +189,7 @@ const HomePageForm = () => {
       className="formInput"
       type="text"
       name="location"
+      style={{border:'none'}}
       placeholder="Location"
       value={formData.location}
       onChange={handleChange}

@@ -8,8 +8,16 @@
     align-items: center;
     color: white;
     height: 500px;
+  
+  }
+  [data-theme='dark'] .homeBanner {
+    background: linear-gradient(to bottom, #1a282d, #3a5a64 80%, transparent);
+  }
+  
+  [data-theme='light'] .homeBanner{
     background: linear-gradient(to bottom, #add8e6, #add8e6 80%, transparent);
   }
+  
   .homefiltercontainer{
     width: 100%;
     background: transparent;
@@ -51,8 +59,15 @@
   }
   .homebannertext h1{
     font-size: 40px;
-    
   }
+  [data-theme='dark'] .homebannertext h1 {
+  color: white;
+  }
+  
+  [data-theme='light'] .homebannertext h1{
+    color: #222;
+  }
+  
 .getstartedbuttos{
   margin: 10px;
   display: flex;
@@ -80,13 +95,31 @@
   position: absolute;
   margin-left: 50%;
   top: 60px;
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 80%, rgba(0, 0, 0, 0) 100%);
  }
 .bottombarbanner{
   width: 100%;
   background-color: transparent;
-  height: 80px;
+  justify-content: center;
+  align-items: center;
   z-index: 10;
+  display: flex;
 }
+.bottombarbuttons{
+  display: flex;
+  background-color: transparent;
+  gap: 10px;
+  white-space: nowrap;
+}
+[data-theme='dark'] .bottombarbuttons {
+  color:  white; /* Default to white for light theme */
+}
+
+[data-theme='light'] .bottombarbuttons{
+  color: #222; /* Dark background color for dark theme */
+}
+
+
 
   /* FORM */
   .FormBox{
@@ -109,8 +142,8 @@
   }
   .formmainContainer {
     padding: 20px;
-    background-color: #ececec;
-    border-radius: 8px;
+
+    border-radius: 20px;
     width: 70%;
     display: flex;
     flex-direction: column;
@@ -119,13 +152,11 @@
   }
   .form-container {
     padding: 20px;
-    border-radius: 8px;
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    max-width: 400px;
     background-color: var(--primary-bg-color-light);
   }
 
@@ -179,6 +210,7 @@
   .nameandage{
     display: flex;
     gap: 30px;
+    width: 100%;
   }
   
   button {
