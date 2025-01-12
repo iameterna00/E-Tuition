@@ -1,5 +1,4 @@
 import './App.css';
-import HomePageForm from './widgets/homepageForm';
 import ThemeProvider from './utilities/themeprovider';
 import Navbar from './navbar';
 import OnlineClasses from './Pages/onlineclass'; 

@@ -8,6 +8,7 @@
   --button-border-hover: #646cff;
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
+  --primary-text-color: white;
   font-weight: 400;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -21,6 +22,7 @@
 
 [data-theme='light'] {
   --color: #213547;
+  --primary-text-color: black;
   --background-color: #ffffff;
   --link-color: #000000;
   --link-hover: #b2b2b2;

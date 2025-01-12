@@ -60,6 +60,11 @@ const handleLoginclick = () =>{
     <div className="navbarcontents">
     <div className="logoandclasses" style={{display:'flex', justifyContent:'center', alignItems:'center', gap:'20px'}}>
         <Link to={'/'}>  <img className="Logo" src={LOGO} alt="Logo" /></Link>
+        <div className="Title">
+        <Link style={{textDecoration:'none', color:'inherit'}} to={'/'}>
+          <h2>E-Tuition Nepal</h2>
+        </Link>
+      </div>
         {!menuOpen && (
           <div style={{marginRight:"100px"}} className={`navlinks ${menuOpen ? 'active' : ''}`}>
                  {!user ? (
@@ -81,12 +86,17 @@ const handleLoginclick = () =>{
           </div>
         )}
       </div>
+     
+    <div className="search-container-navbar">
+      <input
+        type="text"
+        placeholder="Search Anything..."
+        className="search-input"
+      />
+      <div className="search-iconContainer"><div className="search_icon"></div></div>
+    </div>
 
-      <div className="Title">
-        <Link style={{textDecoration:'none', color:'inherit'}} to={'/'}>
-          <h2>E-Tuition Nepal</h2>
-        </Link>
-      </div>
+      
 
       <div className={`navlinks ${menuOpen ? 'active' : ''}`}>
         {menuOpen && (

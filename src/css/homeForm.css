@@ -1,9 +1,102 @@
-.home-page {
+
+  /* BANNER */
+  .homeBanner {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    height: 500px;
+    background: linear-gradient(to bottom, #add8e6, #add8e6 80%, transparent);
+  }
+  .homefiltercontainer{
+    width: 100%;
+    background: transparent;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: white;
+    height: 100%;
+  }
+
+
+
+ .blue-dot {
+  width: 300px; /* Width of the flare */
+  height: 300px; /* Height of the flare */
+  background: radial-gradient(
+    circle,
+    rgba(0, 122, 255, 0.8) 20%, /* Intense blue at the center */
+    rgba(0, 122, 255, 0.3) 100%, /* Fading to a lighter blue */
+    rgba(0, 122, 255, 0.1) 100%, /* Very faint blue */
+    rgba(255, 255, 255, 0) 100% /* Fully transparent edges */
+  );
+  border-radius: 50%; /* Ensures the shape is a perfect circle */
+  box-shadow: 
+    0 0 100px 30px rgba(0, 122, 255, 0.5), /* Outer glow */
+    0 0 200px 60px rgba(0, 122, 255, 0.3); /* Fainter, extended glow */
+  margin-left: 30%; /* Adjust positioning */
+  margin-top: 5%; /* Adjust positioning */
+  position: absolute; /* Positioned absolutely */
+}
+
+
+  .homebannertext{
+    position: absolute;
+    font-size: 30px;
+    margin-left: 10%;
+    text-shadow: 10px 10px 5px rgba(46, 46, 46, 0.3), 5px 5px 6px rgba(40, 40, 40, 0.3);
+  }
+  .homebannertext h1{
+    font-size: 40px;
+    
+  }
+.getstartedbuttos{
+  margin: 10px;
+  display: flex;
+  gap: 10px;
+}
+.getstartedbuttos button:hover{
+  background-color: transparent;
+}
+
+.getstarted {
+  border-radius: 30px;
+  padding: 5px 10px;
+ background-color: #0099ff;
+}
+.Explore {
+  border-radius: 30px;
+  padding: 5px 10px;
+  background-color: transparent;
+  border-bottom: 2px solid black; /* Dynamic border color */
+  color: var(--primary-text-color); /* Dynamic text color */
+  transition: color 0.3s ease, border-color 0.3s ease; /* Smooth theme transitions */
+}
+.tuitorpngbanner{
+  width: 400px;
+  position: absolute;
+  margin-left: 50%;
+  top: 60px;
+ }
+.bottombarbanner{
+  width: 100%;
+  background-color: transparent;
+  height: 80px;
+  z-index: 10;
+}
+
+  /* FORM */
+  .FormBox{
+    margin-top: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
+
   }
-  
+
   h1 {
     margin-bottom: 20px;
     color: var(--primary-text-color-light);
@@ -14,7 +107,16 @@
     width: 100%;
     gap: 10px;
   }
-  
+  .formmainContainer {
+    padding: 20px;
+    background-color: #ececec;
+    border-radius: 8px;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center
+  }
   .form-container {
     padding: 20px;
     border-radius: 8px;
@@ -22,10 +124,11 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: start;
+    align-items: center;
     max-width: 400px;
     background-color: var(--primary-bg-color-light);
   }
+
   
   body.dark-mode .form-container {
     background-color: var(--primary-bg-color-dark);
@@ -73,7 +176,10 @@
     background-color: rgb(18,18,18); /* Set background color for the options */
   }
   
-  
+  .nameandage{
+    display: flex;
+    gap: 30px;
+  }
   
   button {
     display: block;
@@ -104,6 +210,7 @@
   body.dark-mode button:hover {
     background-color: var(--button-hover-dark);
   }
+
   @media (max-width: 600px) { 
     
     .classAndSubject{
