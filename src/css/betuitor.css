@@ -5,28 +5,67 @@
     justify-content: center;
     align-items: center;
     color: white;
-    height: 300px;
+    height: 700px;
+    margin-top: -80px;
   }
   .betuitorfiltercontainer{
     width: 100%;
-    background: linear-gradient(45deg, #007BFF, #00C6FF);
-    width: 90%;
+    border-radius: 12px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     color: white;
-    height: 100%;
+    align-items: center;
+    height: 520px;
   }
-  .bannerImage{
+ 
+  .bannerinsiders{
     height: 100%;
-    width: 100%;
-    object-fit: cover;
+    width: 80%;
+    background: linear-gradient(180deg, rgba(0, 64, 20, 1) 0%, rgba(1, 38, 12, 1) 100%);
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+  }
+  .bannerdiv{
+display: flex;
+width: 80%;
+justify-content: center;
+align-items: center;
+  }
+  .bannerimg{
+   height: 400px;
+
   }
   .bannertext{
-    position: absolute;
+
     font-size: 30px;
     margin-left: 10%;
-    text-shadow: 10px 10px 5px rgba(222, 55, 0, 0.6), 5px 5px 6px rgba(173, 43, 0, 0.6);
+    
+  }
+  .getstartedbetuitorButton{
+    margin: 10px;
+    display: flex;
+    gap: 10px;
+  }
+  .getstartedbetuitorButton button:hover{
+    background-color: transparent;
+  }
+  
+  .getstartedbetuitor {
+    border-radius: 30px;
+    padding: 5px 10px;
+   background-color: #0099ff;
+  }
+  .Explorebetuitor {
+    border-radius: 30px;
+    padding: 5px 10px;
+    background-color: transparent;
+    border-bottom: 2px solid white; /* Dynamic border color */
+   color: white;
+    transition: color 0.3s ease, border-color 0.3s ease; /* Smooth theme transitions */
   }
   
   /* BETUITOR CONTENTS */
@@ -44,7 +83,7 @@
     justify-content: start;
     flex-direction: column;
     align-items: start;
-    width: 90%;
+    width: 80%;
  
   }
   .BetuitotContentcontainer h3{
@@ -201,7 +240,7 @@
     }
     
     [data-theme='dark'] .tuitorloginform{
-      background-color: #36454b;
+      background: linear-gradient(180deg, rgba(0, 64, 20, 1) 0%, rgba(1, 38, 12, 1) 100%);
     }
 .loginmethods{
   width: 100%;

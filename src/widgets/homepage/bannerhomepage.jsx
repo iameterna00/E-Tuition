@@ -1,6 +1,6 @@
 
 import '../../css/betuitor.css'
-import Tuitot from '../../assets/teacher.png'
+import Tutor from '../../assets/teacher.png'
 function HomeBanner() {
   return (
  <div className="homeBanner">
@@ -14,7 +14,7 @@ function HomeBanner() {
         </div>
         </div>
      
-        <img className='tuitorpngbanner' src={Tuitot} alt="" />
+        <img className='tuitorpngbanner' src={Tutor} alt="" />
         
     </div>
     <div className="bottombarbanner">
