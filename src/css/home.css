@@ -123,19 +123,18 @@
 
 
   /* FORM */
-  .FormBox{
+  .FormBox {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-   
   }
   [data-theme='dark'] .FormBox {
-    background: linear-gradient(to top, rgb(22, 22, 22), #1a282d00);
+    background: linear-gradient(to top,  #1a282d00, #1a282d00);
   }
   
   [data-theme='light'] .FormBox{
-    background: linear-gradient(to top, rgb(185, 185, 185), white);
+    background: rgb(255, 255, 255);
   }
 
   h1 {
@@ -144,7 +143,8 @@
   }
   .classAndSubject{
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    justify-content: center;
     width: 100%;
     gap: 10px;
   }
@@ -193,7 +193,6 @@
     margin-bottom: 15px;
     padding: 10px;
     border: 1px solid #ccc;
-    border-radius: 5px;
     background-color: transparent;
     font-size: 16px;
     color: #222; /* Default text color for light theme */
@@ -204,26 +203,27 @@
     margin-bottom: 15px;
     padding: 10px;
     border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: transparent;
-    font-size: 16px;
-    color: #222;
+  
   }
   
-  [data-theme='dark'] .formInput {
-    background-color: transparent;
-  }
   [data-theme='dark'] .formSelectInput {
-    color: white;
+    background-color: #222;
+    border-radius: 8px;
+  }
+  [data-theme='light'] .formSelectInput {
+    color: rgb(65, 65, 65);
+    background-color: #cecece;
+    border-radius: 8px;
     
   }
-  [data-theme='dark'] .formSelectInput option {
-    background-color: rgb(18,18,18); /* Set background color for the options */
-  }
+
   
   .nameandage{
     display: flex;
     gap: 30px;
+    width: 100%;
+  }
+  .studentDetailsStep{
     width: 100%;
   }
   .phoneandlocation{
@@ -231,7 +231,23 @@
     gap: 30px;
     width: 100%;
   }
-  
+
+  .LocationStep{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+  }
+  [data-theme='dark'] .formInput {
+    background-color: #222;
+    border-radius: 8px;
+  }
+  [data-theme='light'] .formInput {
+    color: rgb(65, 65, 65);
+    background-color: #cecece;
+    border-radius: 8px;
+    
+  }
+
   button {
     display: block;
     width: 100%;
@@ -285,10 +301,16 @@
   .stepProgressBar {
     height: 100%;
     display: flex;
-
-    background-color:  #566d767f;
     transition: width 0.5s ease-in-out; 
   }
+  [data-theme='dark'] .stepProgressBar {
+    background-color:  #566d767f;
+   }
+   
+   [data-theme='light'] .stepProgressBar{
+    background-color: #0099ff;
+   }
+ 
   .stepProgressBarNames {
     height: 100%;
     width: 100%;
@@ -362,4 +384,147 @@
   
   
   }
+
+  /* Vaccancy */
+  
+/* ONNLINE CLASS RESULTS */
+.home-vaccancy-page {
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  margin-top: -20px;
+
+}
+[data-theme='dark'] .home-vaccancy-page{
+  background-color: #1a282d00;
+  }
+  
+  [data-theme='light'] .home-vaccancy-page{
+    background: rgb(255, 255, 255);
+  }
+
+.vaccancymainCntainer{
+  width: 80%;
+  text-align: start;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.vaccancyfilters{
+  display: flex;
+  width: 100%;
+  gap: 10px;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px;
+}
+.searchvaccancy input {
+  display: flex;
+  border-radius: 20px;
+  width: 400px;
+}
+.vaccancy-container {
+  cursor: pointer;
+
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(4, 1fr); /* Four cards per row */
+  gap: 10px;
+  margin: 10px auto;
+}
+
+.vaccancy-card {
+  border-radius: 8px;
+  padding: 10px;
+  text-align: start;
+  transition: transform 0.2s ease;
+}
+[data-theme='dark'] .gig-card{
+  background-color: #36454b3e;
+  }
+  
+  [data-theme='light'] .gig-card{
+    background-color: transparent;
+  }
+
+
+
+
+.vaccancy-card:hover {
+  transform: translateY(-5px);
+}
+
+.vaccancy-image {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+.vaccancyProfile{
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+  object-fit: cover;
+}
+.vaccancyprofilecontainer{
+  display: flex;
+  gap: 10px;
+  font-size: 15px;
+}
+.vaccancy-location {
+  font-size: 14px;
+  font-weight: 400;
+  margin: 10px 10px 0px 0;
+}
+.vaccancy-rating{
+  display: flex;
+  gap: 8px;
+
+  font-weight: bold;
+}
+.vaccancy-price{
+  font-size: 0.9rem;
+  color: #666;
+  font-weight: 300;
+}
+
+.vaccancy-qualification {
+  font-size: 0.9rem;
+  color: #666;
+  font-weight: 300;
+}
+.vaccancyapplybutton{
+  background-color: #0099ff;
+}
+
+
+@media (max-width: 1000px) {
+
+  .vaccancy-container {
+    grid-template-columns: repeat(3, 1fr); /* Two cards per row */
+  }
+}
+
+@media (max-width: 768px) {
+
+  .home-vaccancy-page {
+    padding: 0px;
+    font-family: Arial, sans-serif;
+    text-align: center;
+  }
+
+  .vaccancy-container {
+    grid-template-columns: repeat(2, 1fr); /* Two cards per row */
+  }
+}
+
+@media (max-width: 480px) {
+  .vaccancy-container {
+    grid-template-columns: repeat(1, 1fr); /* One card per row */
+  }
+}
+/* ONLINE CLASS FILTER */
+
   

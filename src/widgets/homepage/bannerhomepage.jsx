@@ -1,5 +1,4 @@
 
-import '../../css/betuitor.css'
 import Tutor from '../../assets/teacher.png'
 function HomeBanner() {
   return (

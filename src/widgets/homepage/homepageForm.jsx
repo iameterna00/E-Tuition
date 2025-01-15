@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import '../../css/homeForm.css';
+import '../../css/home.css';
 import subjectsData from '../../JSON/subjects.json';
 import { ImBooks } from "react-icons/im";
 import { PiStudentFill } from "react-icons/pi";
@@ -192,7 +192,7 @@ const HomePageForm = () => {
 
           {/* Step 3: Location */}
           {currentStep === 3 && (
-            <div className="SalaryStep">
+            <div className="LocationStep">
               <div className="studentFormHomeTuition">
                 <h3>Location</h3>
                 <input
@@ -206,7 +206,22 @@ const HomePageForm = () => {
                   required
                 />
               </div>
+              <div className="studentFormHomeTuition">
+                <h3>Description (optional)</h3>
+                <input
+                  className="formInput"
+                  type="text"
+                  name="Description"
+                  style={{ border: 'none' }}
+                  placeholder="Describe a tuitor you want"
+                  value={formData.location}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              
             </div>
+            
           )}
 {/*  */}
           {/* Navigation Buttons */}
