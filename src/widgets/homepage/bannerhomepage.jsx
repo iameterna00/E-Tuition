@@ -16,12 +16,6 @@ function HomeBanner() {
         <img className='tuitorpngbanner' src={Tutor} alt="" />
         
     </div>
-    <div className="bottombarbanner">
-  <div className="bottombarbuttons">
-  <button>Home Tuitor</button>
-  <button>Online Tuitor</button>
-  </div>
-    </div>
 
  </div>
   );

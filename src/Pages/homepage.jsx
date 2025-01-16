@@ -7,8 +7,8 @@ function HomePage (){
     return(
      <>
         <HomeBanner/>
-        <HomePageForm/>
         <Vaccancy/>
+        <HomePageForm/>
         </>
     )
 }

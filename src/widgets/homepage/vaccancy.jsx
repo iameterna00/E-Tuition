@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { GrStar } from "react-icons/gr";
 import { FaLocationDot } from "react-icons/fa6";
+import { CiSearch } from "react-icons/ci";
 
 const gigsData = [
   {
@@ -114,15 +115,38 @@ const gigsData = [
 function Vaccancy() {
   return (
     <div className="home-vaccancy-page">
-  <div className="vaccancymainCntainer">
-  <div className="vaccancyfilters">
-    <div className="title">
+        <div className="title">
         <h2>Available Vaccancy</h2>
     </div>
-    <div className="searchvaccancy">
-        <input type="text" placeholder="Search for vaccancy" />
+  <div className="vaccancymainCntainer">
+
+  <div className="vaccancyfilters">
+  <div className="filterboxs">
+    <div className="filterbox">
+      <h3>Location</h3>
+      <select name="location" id="location">
+        <option value="Kathmandu">Kathmandu</option>
+        <option value="Lalitpur">Lalitpur</option>
+        <option value="Bhaktapur">Bhaktapur</option>
+      </select>
     </div>
+    <div className="filterbox">
+      <h3>Gender</h3>
+      <select name="Gender" id="Gender">
+        <option value="Select Gender">Select Gender</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+      </select>
+    </div>
+    
+  </div>
+    <div className="search-container-vaccancy">
+          <input type="text" placeholder="Search Anything..." className="search-vaccancy" />
+          <div className="search-vaccancyiconcontainer"><div className="search_vaccancyicon"></div></div>
+        </div>
+
 </div>
+
   <div className="vaccancy-container">
         {gigsData.map((gig) => (
           <div key={gig.id} className="vaccancy-card">
