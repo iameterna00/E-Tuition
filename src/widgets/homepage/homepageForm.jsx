@@ -74,7 +74,7 @@ const HomePageForm = () => {
   return (
     <div className="FormBox">
       <div className="formmainContainer">
-        <h2>Are you looking for a home tutor?</h2>
+        <h2>Couldn't Find a Tutor??</h2>
         <p>Please fill out this form carefully, and we will reach out to you shortly to assist with your tutoring needs.</p>
         <form className="form-container" onSubmit={handleSubmit}>
           
