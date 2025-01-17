@@ -1,0 +1,366 @@
+.coursebuypage{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: start;
+
+}
+.coursestitle{
+  width: 80%;
+  margin: 10px 0;
+  font-size: 30px;
+}
+.course-details-page{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+  .course-details-body {
+    display: flex;
+    margin: 4px;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    
+  }
+  .coursebodyone{
+   display: flex;
+   background-color: #2e3b4563;
+   border-radius: 20px;
+
+  }
+
+  .course-profile {
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    
+
+
+  }
+  .courseImage{
+    max-width: 400px;
+    border-radius: 8px;
+    object-fit: cover;
+
+  }
+  .tutorsdetails{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: start;
+    padding: 10px;
+
+  }
+  .tuitorinfo{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    padding: 10px;
+
+  }
+  .toutorname{
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    width: 100%;
+    border-radius: 5px;
+    background-color: #3d4c5878;
+
+  }
+  .tuitornamedetails{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    margin: 5px;
+    gap: 10px;
+  }
+  .course-profile-image {
+    width: 40px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+
+  }
+  
+  .course-profile h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .course-profile p {
+    font-size: 16px;
+    margin: 5px 0;
+    color: #b0c4de;
+  }
+  
+  .course-description {
+    width: 48%;
+    background-color: #2e3b45;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .course-description h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .course-description p {
+    font-size: 16px;
+    color: #b0c4de;
+  }
+  .enrollnowcontainer{
+    width: 30%;
+    background-color: #2e3b4563;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    padding: 20px;
+   
+  }
+  .productdetails{
+    width: 100%;
+    justify-content: start;
+    align-items: start;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  
+  }
+.subtotal{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 50px;
+}
+.price-details {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.duration{
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  margin-top: 20px;
+  flex-direction: column;
+}
+.duration select {
+  width: 200px;
+  padding: 8px;
+  display: flex;
+  border: none;
+  border-radius: 25px;
+  font-size: 14px;
+}
+[data-theme='dark'] .duration select{
+  background-color: #36454bad;
+  }
+  
+  [data-theme='light'] .duration select{
+    background-color: #f1f1f173;
+    color: black;
+  }
+  [data-theme='dark'] .duration select:focus{
+    background-color: #36454b;
+    }
+    
+    [data-theme='light'] .duration select:focus{
+      background-color: #f1f1f173;
+      color: black;
+    }
+  
+[data-theme='dark'] .enrollbutton {
+  background-color: #0099ff;
+}
+
+[data-theme='light'] .enrollbutton{
+  background-color: #0099ff;
+  color: white;
+}
+
+/* OFFER HOME TUITOR OFFER */
+.offer-banner {
+  background-color: #2e3b4563;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  gap: 20px;
+  border-radius: 10px;
+  margin: 20px auto;
+  width: 80%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.dontmissout{
+ display: flex;
+ background-color: #36454b;
+ border-radius: 20px;
+  padding: 0 40px;
+ flex-direction: column;
+}
+.offer-banner h2 {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.countdown-timer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.countdown-timer span {
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin: 0 5px;
+}
+
+.offer-banner p {
+  font-size: 24px;
+  margin: 10px 0 0;
+}
+
+
+
+
+
+/* REVIEW  */
+.reviews-page {
+  width: 80%;
+  margin: 0 auto;
+  
+}
+
+.tab-bar {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+.icon-button{
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+.tab-bar button {
+  padding: 10px 20px;
+  margin: 0 5px;
+  border: 1px solid #36454b;
+  max-width: 100px;
+  cursor: pointer;
+  border-radius: 20px;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.tab-bar button:hover {
+  background-color: #0077cc;
+}
+
+.tab-bar .active {
+  background-color: #005bb5;
+}
+
+.reviews-section {
+  background-color: #3d4c5829;
+  width: 100%;
+  border-radius: 20px;
+  padding: 20px;
+  margin-top: 20px;
+  display: flex;
+  text-align: start;
+  flex-direction: column;
+  
+}
+
+.review {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: start;
+  padding: 10px 0;
+  gap: 10px;
+}
+
+.stars {
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+}
+.reviewcontents{
+  display: flex;
+  gap: 5px;
+
+}
+
+.rating-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+
+.popup-content {
+  text-align: center;
+}
+
+.popup-content h3 {
+  margin-bottom: 10px;
+}
+
+.popup-content .stars {
+  margin: 10px 0;
+}
+
+.submit-button {
+  background-color: #0099ff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.cancel-button {
+  background-color: #ddd;
+  color: #333;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.submit-button:hover {
+  background-color: #0077cc;
+}
+
+.cancel-button:hover {
+  background-color: #bbb;
+}
+
+
+
+

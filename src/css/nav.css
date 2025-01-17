@@ -10,7 +10,7 @@
 }
 
 [data-theme='dark'] .navbar.solid {
-  background-color:  #36454b; /* Default to white for light theme */
+  background-color: rgb(40,45,45); /* Default to white for light theme */
 }
 
 [data-theme='light'] .navbar.solid{
