@@ -60,7 +60,7 @@ function ReviewsPage({ gigsData }) {
       </div>
 
       {/* Average Rating Section */}
-      {activeTab === "Reviews" && (
+      {/* {activeTab === "Reviews" && (
         <div className="average-rating-section">
           <h3>Rating: {averageRating} / 5 ({reviews.length})</h3>
           <div className="stars">
@@ -69,7 +69,7 @@ function ReviewsPage({ gigsData }) {
             ))}
           </div>
         </div>
-      )}
+      )} */}
 
       {/* Rating Popup */}
       {showRatingPopup && (
@@ -125,7 +125,7 @@ function ReviewsPage({ gigsData }) {
       </div>
    <div className="reviewcontents">
    <img
-  src={review.Profile || "https://via.placeholder.com/50"} // Updated field name
+  src={review.Profile || "https://s3.eu-central-1.amazonaws.com/uploads.mangoweb.org/shared-prod/visegradfund.org/uploads/2021/08/placeholder-male.jpg"} // Updated field name
   alt="Reviewer's profile"
   style={{ width: "30px", height: "30px", borderRadius: "50%" }}
 />

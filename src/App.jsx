@@ -7,12 +7,14 @@ import HomePage from './Pages/homepage';
 import BecomeTuitor from './Pages/betuitor';
 import ApplyForTuitor from './Pages/applyfortuitot';
 import CourseDetails from './Pages/coursedetail';
+import ScrollToTop from './services/scrolltotop';
 
 function App() {
   return (
     <Router>
     <ThemeProvider>
       <Navbar />
+      <ScrollToTop/>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/onlineclasses" element={<OnlineClasses />} />

@@ -44,7 +44,8 @@
 
   }
   .courseImage{
-    max-width: 400px;
+    width: 400px;
+    height: 250px;
     border-radius: 8px;
     object-fit: cover;
 
@@ -181,11 +182,11 @@
     }
   
 [data-theme='dark'] .enrollbutton {
-  background-color: #0099ff;
+  background-color: #0099ffca;
 }
 
 [data-theme='light'] .enrollbutton{
-  background-color: #0099ff;
+  background-color: #0099ffca;
   color: white;
 }
 
@@ -206,7 +207,7 @@
 
 .dontmissout{
  display: flex;
- background-color: #36454b;
+ background-color: #0099ffca;
  border-radius: 20px;
   padding: 0 40px;
  flex-direction: column;
@@ -315,7 +316,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: white;
+  background-color: rgb(40,45,45);
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
@@ -335,7 +336,7 @@
 }
 
 .submit-button {
-  background-color: #0099ff;
+   background-color: #0099ffca;
   color: white;
   padding: 10px 20px;
   border: none;
