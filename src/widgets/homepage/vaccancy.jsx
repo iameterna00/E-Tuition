@@ -81,7 +81,7 @@ function Vaccancy() {
            
           </div>
    </div>
- 
+ {/* shider */}
     
   </div>
     <div className="search-container-vaccancy">
