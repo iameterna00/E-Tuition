@@ -1,11 +1,22 @@
 
 /* ONNLINE CLASS RESULTS */
 .online-classes-page {
-  
     text-align: center;
     width: 100%;
   }
-  
+  .gigfiltercontainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+  .gigfilter{
+     width: 80%;
+     margin-left: -40px;
+    justify-content: center;
+    align-items: center;
+  }
+
   .gigs-container {
     cursor: pointer;
     display: grid;
@@ -20,14 +31,8 @@
     padding: 10px;
     text-align: start;
     transition: transform 0.2s ease;
+    background-color: transparent;
   }
-  [data-theme='dark'] .gig-card{
-    background-color: #36454b3e;
-    }
-    
-    [data-theme='light'] .gig-card{
-      background-color: #f1f1f173;
-    }
   
   
 

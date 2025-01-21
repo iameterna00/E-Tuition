@@ -1,6 +1,6 @@
 import { FaSearch } from "react-icons/fa"; // Importing a search icon
 
-function OnlineClassFilter() {
+function OnlineClassBanner() {
   return (
  <div className="onlineclassBanner">
        <div className="onlineclassfiltercontainer">
@@ -26,4 +26,4 @@ function OnlineClassFilter() {
   );
 }
 
-export default OnlineClassFilter;
+export default OnlineClassBanner;

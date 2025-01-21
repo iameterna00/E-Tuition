@@ -1,10 +1,10 @@
-import OnlineClassFilter from "../widgets/onlineclassPages/onlineclassFilters";
+import OnlineClassBanner from "../widgets/onlineclassPages/onlineclassFilters";
 import OnlineClassResults from "../widgets/onlineclassPages/onlineclassresults";
 
 function OnlineClass (){
     return(
      <>
-        <OnlineClassFilter/>
+        <OnlineClassBanner/>
         <OnlineClassResults/></>
     )
 }

@@ -577,14 +577,8 @@
   padding: 10px;
   text-align: start;
   transition: transform 0.2s ease;
+  background-color: transparent;
 }
-[data-theme='dark'] .gig-card{
-  background-color: #36454b3e;
-  }
-  
-  [data-theme='light'] .gig-card{
-    background-color: transparent;
-  }
 
 
 

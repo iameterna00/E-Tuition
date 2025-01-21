@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../../css/onlineclass.css';
 import { GrStar } from "react-icons/gr";
+import Filters from '../filters/filter';
 
 const gigsData = [
   {
@@ -14,8 +15,10 @@ const gigsData = [
     fee: '$50',
     paymentMethod: 'PayPal, Credit Card',
     rating: 4.8,
+    subjects:'Maths, Science',
     ratedby: '45',
-    pricePerMonth: 'Rs 5,000/month',
+  
+    pricePerMonth: '5000',
   },
   {
     id: 2,
@@ -28,7 +31,9 @@ const gigsData = [
     paymentMethod: 'Bank Transfer',
     rating: 4.5,
     ratedby: '102',
-    pricePerMonth: 'Rs 4,500/month',
+    sex:'female',
+    subjects:'Maths, chemestry',
+    pricePerMonth: '4500',
   },
   {
     id: 3,
@@ -41,7 +46,9 @@ const gigsData = [
     paymentMethod: 'Google Pay, Credit Card',
     rating: 4.7,
     ratedby: '105',
-    pricePerMonth: 'Rs 3,500/month',
+    subjects:'Account, Economics',
+    sex:'female',
+    pricePerMonth: '3500',
   },
   {
     id: 4,
@@ -54,10 +61,12 @@ const gigsData = [
     paymentMethod: 'PayPal, Stripe',
     rating: 4.9,
     ratedby: '25',
-    pricePerMonth: 'Rs 7,000/month',
+    subjects:'Maths, Economics',
+    sex:'male',
+    pricePerMonth: '7000',
   },
   {
-    id: 1,
+    id: 5,
     name:'Sneha Poude',
     profile:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXva_C9hjWd_2bmLrB6GXl2Pjrcw26jymhtQ&s',
     title: 'I Teach Web-Development',
@@ -67,10 +76,12 @@ const gigsData = [
     paymentMethod: 'PayPal, Credit Card',
     rating: 4.8,
     ratedby: '55',
-    pricePerMonth: 'Rs 5,000/month',
+    sex:'male',
+    subjects:'Maths, Science',
+    pricePerMonth: '5000',
   },
   {
-    id: 2,
+    id: 6,
     name:'Adarsh Bhujel',
     profile:'https://scontent.fktm3-1.fna.fbcdn.net/v/t39.30808-1/462030428_1067174968306212_4294254538919611156_n.jpg?stp=c0.0.756.756a_dst-jpg_s200x200_tt6&_nc_cat=105&ccb=1-7&_nc_sid=e99d92&_nc_ohc=qKB7whPp3REQ7kNvgGSMYuv&_nc_oc=AdixXSaSXS3gStHI7gBdT5_jUl18pZg7zR3LlcxAT97rUguV3DdTKf37xqrQ4mMj_Q4&_nc_zt=24&_nc_ht=scontent.fktm3-1.fna&_nc_gid=AIozGTS4SM13ycysg55XCJc&oh=00_AYB8xinodiwXR6li0iqZwHDVX6IrY9C6VB71pI4_PO_Opw&oe=6786CE55',
     title: 'I Teach Class 11 Economics',
@@ -80,10 +91,12 @@ const gigsData = [
     paymentMethod: 'Bank Transfer',
     rating: 4.5,
     ratedby: '45',
-    pricePerMonth: 'Rs 4,500/month',
+    sex:'male',
+    subjects:'Maths, Science',
+    pricePerMonth: '4000',
   },
   {
-    id: 3,
+    id: 7,
     name:'Ankit Bhatta',
     profile:'https://scontent.fktm3-1.fna.fbcdn.net/v/t39.30808-1/394571011_1858958154562766_5956823731904385617_n.jpg?stp=dst-jpg_s200x200_tt6&_nc_cat=100&ccb=1-7&_nc_sid=e99d92&_nc_ohc=94DT5GCtGssQ7kNvgGAvFPJ&_nc_oc=AdjqjQ03_2c0oUGbOfi43QBXxRtOj0FBTyQ0Gs_UuIoV5nu1sFEYvHgkq5iBUh1lG_A&_nc_zt=24&_nc_ht=scontent.fktm3-1.fna&_nc_gid=AJidNEPQ1fzGxVM54r8AgPU&oh=00_AYDEcNI1Pwz-vgATknyj131izWICuL24AqNevdmNfNsnaQ&oe=6786BC86',
     title: 'I Teach Class 11 Accounting',
@@ -92,18 +105,49 @@ const gigsData = [
     fee: '$40',
     paymentMethod: 'Google Pay, Credit Card',
     rating: 4.7,
+    subjects:'Maths, Science',
     ratedby: '95',
-    pricePerMonth: 'Rs 3,500/month',
+    sex:'female',
+    pricePerMonth: '4000',
   },
 ];
 
 function OnlineClassResults() {
+    const [locationFilter, setLocationFilter] = useState('no need');
+    const [genderFilter, setGenderFilter] = useState('');
+    const [searchTerm, setSearchTerm] = useState('');
+    const [priceRange, setPriceRange] = useState([0, 25000]);
+
+
+      
+  const handlePriceChange = (values) => {
+    setPriceRange(values);
+  };
+    
+  const filteredGigs = gigsData.filter((gig) => {
+    const matchesGender = genderFilter ? gig.sex === genderFilter : true;
+    const matchesSearch = searchTerm
+      ? gig.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        gig.subjects.toLowerCase().includes(searchTerm.toLowerCase())
+      : true;
+    const matchesPrice = gig.pricePerMonth >= priceRange[0] && gig.pricePerMonth <= priceRange[1];
+    return matchesGender && matchesSearch && matchesPrice;
+  });
+   
+
+
   return (
     <div className="online-classes-page">
       <h2>Enroll in Online Classes</h2>
+   <div className="gigfiltercontainer">
+    <div className="gigfilter">
+    <Filters setLocationFilter={setLocationFilter} handlePriceChange={handlePriceChange} setGenderFilter={setGenderFilter} setSearchTerm={setSearchTerm} priceRange={priceRange} />
+    </div>
+   
+   </div>
 
       <div className="gigs-container">
-        {gigsData.map((gig) => (
+        {filteredGigs.map((gig) => (
           <div key={gig.id} className="gig-card">
             <Link to={`/onlineclasses/${gig.id}`} className="detail-link">
               <img src={gig.image} alt={gig.title} className="gig-image" />
