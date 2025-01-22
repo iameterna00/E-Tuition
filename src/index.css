@@ -28,6 +28,31 @@
   --button-border-hover: #535bf2;
 }
 
+::-webkit-scrollbar {
+  width: 6px; 
+  height: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(100, 100, 100, 0.6); 
+  border-radius: 20px; 
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 100, 100, 0.8); 
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(29, 29, 29, 0.2);
+  border-radius: 10px; 
+}
+
+
+* {
+  scrollbar-width: thin; 
+  scrollbar-color: rgba(63, 63, 63, 0.992) transparent; 
+}
+
 
 a {
   font-weight: 500;

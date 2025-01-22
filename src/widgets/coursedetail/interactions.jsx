@@ -118,17 +118,21 @@ function ReviewsPage({ gigsData }) {
   <h3>Reviews</h3>
   {reviews.map((review) => (
     <div key={review.id} className="review">
-      <div className="stars">
-        {Array.from({ length: 5 }, (_, i) => (
-          <FaStar key={i} color={i < review.rating ? "#FFD700" : "#ddd"} />
-        ))}
-      </div>
-   <div className="reviewcontents">
-   <img
+      <div className="Reviewerdetails">
+      <img
   src={review.Profile || "https://s3.eu-central-1.amazonaws.com/uploads.mangoweb.org/shared-prod/visegradfund.org/uploads/2021/08/placeholder-male.jpg"} // Updated field name
   alt="Reviewer's profile"
   style={{ width: "30px", height: "30px", borderRadius: "50%" }}
 />
+<p>{review.name}</p>
+      </div>
+   <div className="reviewcontents">
+
+<div className="stars">
+        {Array.from({ length: 5 }, (_, i) => (
+          <FaStar key={i} color={i < review.rating ? "#FFD700" : "#ddd"} />
+        ))}
+      </div>
       <p>{review.content}</p>
    </div>
     </div>

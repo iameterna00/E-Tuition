@@ -210,7 +210,7 @@ align-items: center;
     display: flex;
     width: 60%;
     z-index: 2;
-    overflow: hidden; /* Ensures content respects border-radius */
+    overflow: hidden; 
   }
   .closebutton{
     position: absolute;
@@ -220,16 +220,24 @@ align-items: center;
     font-size: 20px;
   }
   .tuitorgraphics{
-    width: 500px;
+    width: 50%;
     height: 100%;
   }
+  [data-theme='light'] .tuitorgraphics {
+    background-color: rgb(255, 255, 255);
+    }
+    
+    [data-theme='dark'] .tuitorgraphics{
+      background: linear-gradient(180deg,  rgb(40,45,45) 0%,rgb(2, 38, 38) 100%);
+    }
+
   .tuitorgraphicsimg{
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
   .tuitorloginform{
-    width: 100%;
+    width: 50%;
     flex-direction: column;
     display: flex;
     justify-content: center;
@@ -240,8 +248,30 @@ align-items: center;
     }
     
     [data-theme='dark'] .tuitorloginform{
-      background: linear-gradient(180deg, rgba(0, 64, 20, 1) 0%, rgba(1, 38, 12, 1) 100%);
+      background: linear-gradient(180deg,  rgb(40,45,45) 0%,rgb(2, 38, 38) 100%);
     }
+    .tick {
+      margin-right: 10px;
+    }
+    .indent {
+      display: inline-block;
+      margin-left: 30px; 
+    }
+    .tuitorgraphicstext{
+      position: absolute;
+      top: 20px;
+      text-align: start;
+      font-size: 14px;
+      padding: 0 20px;
+    }
+    .tuitorgraphicstext h1{
+      color: white;
+      font-size: 30px;
+    }
+    .tuitorgraphicstext h1,
+.tuitorgraphicstext h2 {
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.66); /* Adjust the shadow size and opacity */
+}
 .loginmethods{
   width: 100%;
   display: flex;

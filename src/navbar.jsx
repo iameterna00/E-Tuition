@@ -1,14 +1,14 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { ThemeContext } from './utilities/themeprovider';
 import './css/nav.css';
-import LOGO from './assets/Logo.png';
+import LOGO from './assets/KUBE.png';
 import { CiLight } from "react-icons/ci";
 import { MdDarkMode } from "react-icons/md";
 import { FaBars, FaTimes } from 'react-icons/fa'; // For hamburger and close icons
 import { Link } from 'react-router-dom';
 import { getAuth, signOut } from "firebase/auth"; // Import Firebase auth
 import { auth } from './firebase_config'; 
-import TuitorLogin from './widgets/becomeTuitor/betuitorlogin';
+import TuitorLogin from './widgets/login/betuitorlogin';
 
 const Navbar = () => {
   const { theme, toggleTheme } = useContext(ThemeContext);
@@ -40,6 +40,14 @@ const Navbar = () => {
       console.error("Error signing out:", error);
     }
   };
+  useEffect(() => {
+    if (tuitorLogin) {
+      document.body.classList.add('modal-open'); // Prevent scrolling
+    } else {
+      document.body.classList.remove('modal-open'); // Restore scrolling
+    }
+  }, [tuitorLogin]);
+  
 
   useEffect(() => {
     const unsubscribe = getAuth().onAuthStateChanged((user) => {
@@ -72,6 +80,7 @@ const Navbar = () => {
   }, []);
 
   return (
+    <>
     <nav className={`navbar ${isScrolled ? 'solid' : ''}`}>
       <div className="navbarcontents">
         <div className="logoandclasses" style={{display:'flex', justifyContent:'center', alignItems:'center', gap:'20px'}}>
@@ -80,7 +89,7 @@ const Navbar = () => {
           </Link>
           <div className="Title">
             <Link style={{textDecoration:'none', color:'inherit'}} to={'/'}>
-              <h2>E-Tuition Nepal</h2>
+              <h2>KUBE</h2>
             </Link>
           </div>
           {!menuOpen && (
@@ -150,11 +159,16 @@ const Navbar = () => {
           {menuOpen ? <FaTimes /> : <FaBars />}
         </div>
       </div>
-      
-      {tuitorLogin && (
-        <TuitorLogin close={handleLoginclick}/>
-      )}
+    
     </nav>
+
+    {/* Modal */}
+    {tuitorLogin && (
+      <div className="loginModal">
+        <TuitorLogin close={handleLoginclick} />
+      </div>
+    )}
+    </>
   );
 };
 

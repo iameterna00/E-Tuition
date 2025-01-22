@@ -147,6 +147,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  color: #0099ff;
   gap: 10px;
 }
 .duration{
@@ -299,15 +300,22 @@
   padding: 10px 0;
   gap: 10px;
 }
-
+.Reviewerdetails{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+   gap: 3px;
+   font-weight: 550;
+}
 .stars {
   display: flex;
   gap: 5px;
-  justify-content: center;
+  justify-content: start;
 }
 .reviewcontents{
   display: flex;
   gap: 5px;
+  flex-direction: column;
 
 }
 

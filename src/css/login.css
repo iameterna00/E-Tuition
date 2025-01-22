@@ -1,0 +1,223 @@
+
+.tuitorlogincontainer {
+    position: fixed;
+    height: 100vh; 
+    width: 100%; 
+    top: 50%;
+    transform: translateY(-50%); 
+    display: flex; 
+    background-color: rgb(12,12,12,0.4);
+    align-items: center; 
+    z-index: 100;
+    justify-content: center; 
+  }
+
+  
+  .tuitorlogincontents {
+    position: relative;
+    border-radius: 20px;
+    height: 80%;
+    display: flex;
+    width: 60%;
+    z-index: 2;
+    overflow: hidden; 
+  }
+  .closebutton{
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    cursor: pointer;
+    font-size: 20px;
+  }
+  .tuitorgraphics {
+    width: 50%;
+    height: 100%;
+    opacity: 1;
+    transition: all 0.5s ease; /* Smooth transition for width and opacity */
+  }
+  
+  .tuitorgraphics.inactive {
+    width: 0%;
+    opacity: 0; /* Fully transparent */
+    height: 100%;
+  }
+  
+  [data-theme='light'] .tuitorgraphics {
+    background-color: rgb(255, 255, 255);
+    }
+    
+    [data-theme='dark'] .tuitorgraphics{
+      background: linear-gradient(180deg,  rgb(40,45,45) 0%,rgb(2, 38, 38) 100%);
+    }
+
+  .tuitorgraphicsimg{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .tuitorloginform{
+    width: 50%;
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    transition: all 0.5s ease;
+    align-items: center;
+  }
+  .tuitorloginform.active{
+    width: 100%;
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  [data-theme='light'] .tuitorloginform {
+    background-color: rgb(255, 255, 255);
+    }
+    
+    [data-theme='dark'] .tuitorloginform{
+      background: linear-gradient(180deg,  rgb(40,45,45) 0%,rgb(2, 38, 38) 100%);
+    }
+    .tick {
+      margin-right: 10px;
+    }
+    .indent {
+      display: inline-block;
+      margin-left: 30px; 
+    }
+    .tuitorgraphicstext{
+      position: absolute;
+      top: 20px;
+      text-align: start;
+      font-size: 14px;
+      padding: 0 20px;
+    }
+    .tuitorgraphicstext h1{
+      color: white;
+      font-size: 30px;
+    }
+    .tuitorgraphicstext h1,
+.tuitorgraphicstext h2 {
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.66); /* Adjust the shadow size and opacity */
+}
+.loginmethods{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+
+  .continuewithgoogle{
+    width: 80%;
+    cursor: pointer;
+    border: 1px solid grey;
+    height: 40px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    display: flex;
+    border-radius: 12px;
+  }
+  .continuewithgoogleimg{
+    height: 20px;
+    width: 20px;
+  }
+  .continuewithemail{
+    cursor: pointer;
+    width: 80%;
+    border: 1px solid grey;
+    height: 40px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    display: flex;
+    border-radius: 12px;
+  }
+
+
+  .continuewithemail{
+    width: 80%;
+    border: 1px solid grey;
+    height: 40px;
+    border-radius: 12px;
+  }
+  .loginemailform{
+    width: 80%;
+    padding: 10px;
+  }
+  .loginemailform input{
+    border-radius: 10px;
+  }
+
+  [data-theme='light'] .loginemailform input{
+    color: black;
+  }
+    
+    [data-theme='dark'] .loginemailform input{
+      color: white;
+    }
+    .LoginButton{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .spinner {
+        border: 4px solid #f3f3f3; /* Light gray */
+        border-top: 4px solid #3498db; /* Blue */
+        border-radius: 50%;
+        width: 16px;
+        height: 16px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        animation: spin 1s linear infinite;
+      }
+      
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+      .selectYourPurpose {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        margin-top: 20px;
+      }
+      
+      .card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 200px;
+        height: 200px;
+        border: 2px solid #ccc;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        transition: transform 0.3s, box-shadow 0.3s;
+       
+      }
+      
+      .card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+      }
+      
+      .iconContainer {
+        font-size: 40px;
+        margin-bottom: 15px;
+      }
+      
+    
+      
+      .iAmTutor:hover {
+        background-color: rgba(76, 175, 80, 0.1);
+      }
+      
+    
+      .iAmStudent:hover {
+        background-color: rgba(33, 150, 243, 0.1);
+      }
+      

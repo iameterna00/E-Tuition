@@ -13,8 +13,8 @@
     "ratedby": "45",
     "class": "Class 11",
     "reviews": [
-      { "id": 1, "content": "Great teaching!", "rating": 5 , "Profile": "https://www.teachfornepal.org/media/images/de5ab36f-aec4-49f5-9e83-988b663ba532.jpg"},
-      { "id": 2, "content": "Very knowledgeable Teaching thankyou sir.", "rating": 4, "Profile": "https://www.teachfornepal.org/media/images/bcd5005d-8a7f-4d00-a8af-1e29051c5ee2.jpg"}
+      { "id": 1, "name":"Aavas gurung", "content": "Great teaching!", "rating": 5 , "Profile": "https://www.teachfornepal.org/media/images/de5ab36f-aec4-49f5-9e83-988b663ba532.jpg"},
+      { "id": 2,  "name":"Aavas gurung" ,"content": "Very knowledgeable Teaching thankyou sir.", "rating": 4, "Profile": "https://www.teachfornepal.org/media/images/bcd5005d-8a7f-4d00-a8af-1e29051c5ee2.jpg"}
     ],
     "pricePerMonth": "5000"
   },

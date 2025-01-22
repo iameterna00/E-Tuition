@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../firebase_config";
-import TuitorLogin from "../widgets/becomeTuitor/betuitorlogin";
+import TuitorLogin from "../widgets/login/betuitorlogin";
 import BetuitotBanner from "../widgets/becomeTuitor/banner";
 import BetuitotContent from "../widgets/becomeTuitor/betuitorcontent";
+import "../css/login.css";
 
 function BecomeTuitor() {
   const [isAuthenticated, setIsAuthenticated] = useState(null);

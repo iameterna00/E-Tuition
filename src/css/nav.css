@@ -17,6 +17,8 @@
   background-color: white; /* Dark background color for dark theme */
 }
 
+
+
 .navbarcontents{
   display: flex;
   justify-content: space-between;
@@ -29,8 +31,8 @@
 
 
 .Logo {
-  height: 50px;
-  width: 50px;
+  height: 35px;
+  width:30px;
 }
 
 .Title {
@@ -144,6 +146,25 @@
   display: none;
   font-size: 2rem;
   cursor: pointer;
+}
+/* Add this to your CSS file */
+
+.loginModal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  transform: translate(-50%, -50%);
+  z-index: 1100; /* Ensure modal is above the backdrop */
+  background: rgba(40, 40, 40, 0.282);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+body.modal-open {
+  overflow: hidden; /* Prevent scrolling */
 }
 
 /* Mobile responsiveness */

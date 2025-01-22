@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../../css/onlineclass.css';
 import { GrStar } from "react-icons/gr";
@@ -118,6 +118,10 @@ function OnlineClassResults() {
     const [searchTerm, setSearchTerm] = useState('');
     const [priceRange, setPriceRange] = useState([0, 25000]);
 
+
+    useEffect(()=>{
+      setLocationFilter('no need');
+    },[locationFilter])
 
       
   const handlePriceChange = (values) => {
