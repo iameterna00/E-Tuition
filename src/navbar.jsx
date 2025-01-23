@@ -90,6 +90,7 @@ const Navbar = () => {
           <div className="Title">
             <Link style={{textDecoration:'none', color:'inherit'}} to={'/'}>
               <h2>KUBE</h2>
+             
             </Link>
           </div>
           {!menuOpen && (

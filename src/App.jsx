@@ -7,6 +7,7 @@ import HomePage from './Pages/homepage';
 import BecomeTuitor from './Pages/betuitor';
 import ApplyForTuitor from './Pages/applyfortuitot';
 import CourseDetails from './Pages/coursedetail';
+import UserList from './Pages/dashboard';
 import ScrollToTop from './services/scrolltotop';
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
         <Route path="/coursesdetails/:id" element={<CourseDetails />} />
         <Route path="/iamatuitor" element={<BecomeTuitor />} />
         <Route path="/applyfortuitor" element={<ApplyForTuitor />} />
+        <Route path="/dashboard" element={<UserList />} />
       </Routes>
     </ThemeProvider>
   </Router>

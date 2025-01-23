@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import { IoMail } from "react-icons/io5";
 import joinus from "../../assets/onlineclasses.jpg";
 import google from "../../assets/google.png";
+import Cookies from 'js-cookie'; 
 import { getAuth, GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import { useNavigate } from "react-router-dom"; // For navigation after login
+import CSRFToken from "../../services/CSRFToken";
 
 function TuitorLogin({ close }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -43,20 +45,48 @@ function TuitorLogin({ close }) {
     }
   };
 
+
+  
   const handleEmailSignUp = async () => {
-    setLoading(true); // Start loading
+    setLoading(true);
     try {
+      // Create user with email and password using Firebase
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
-      setIsLoggedIn(true); // Set user as logged in
-      console.log("User signed up with email:", user);
+
+      
+      // Send user data to your Django backend to create the user there as well
+      const response = await fetch("http://localhost:8000/api/create-user/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRFToken": Cookies.get('csrftoken'),  // Include CSRF token in headers
+        },
+        body: JSON.stringify({
+          email: user.email,
+        }),
+        credentials: 'include',  // Ensure cookies are included
+      });
+  
+      const data = await response.json();
+      console.log('this is body', data);
+  
+      if (response.ok) {
+        console.log("User created successfully in Django:", data);
+        setIsLoggedIn(true);
+        navigate("/dashboard"); // Redirect user to the dashboard or another page
+      } else {
+        console.error("Error creating user in Django:", data.message);
+        alert(data.message || "Failed to create user in Django.");
+      }
     } catch (error) {
       console.error("Error signing up with email:", error);
+      alert("An error occurred while signing up.");
     } finally {
-      setLoading(false); // End loading
+      setLoading(false);
     }
   };
-
+  
   const handleEmailLogin = async () => {
     setLoading(true); // Start loading
     try {
@@ -72,12 +102,11 @@ function TuitorLogin({ close }) {
 
   const handleUserType = (type) => {
     if (type === "teacher") {
-     
+      navigate("/teacher-dashboard");
     } else {
-    
+      navigate("/student-dashboard");
     }
   };
-
 
   return (
     <div className="tuitorlogincontainer">
@@ -138,6 +167,7 @@ function TuitorLogin({ close }) {
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Password"
                 />
+                <CSRFToken/>
                 <button className="LoginButton" onClick={isSignUp ? handleEmailSignUp : handleEmailLogin} disabled={loading}>
                   {loading ? (
                     <div className="spinner"></div> // Loading spinner
@@ -155,24 +185,28 @@ function TuitorLogin({ close }) {
             </div>
           )}
 
-{isLoggedIn && (
-  <div className="selectYourPurpose">
-    <h2>helo</h2>
-    <div className="card iAmTutor" onClick={() => handleUserType("teacher")}>
-      <div className="iconContainer">
-        <i className="fas fa-chalkboard-teacher"></i> {/* Replace with your desired icon */}
-      </div>
-      <h3>I am a Tutor</h3>
-    </div>
-    <div className="card iAmStudent" onClick={() => handleUserType("student")}>
-      <div className="iconContainer">
-        <i className="fas fa-user-graduate"></i> 
-      </div>
-      <h3>I am a Student</h3>
-    </div>
-  </div>
-)}
-   </div>
+          {isLoggedIn && (
+            <div className="selectYourPurpose">
+              <div className="purposseheader">
+                <h2>Your account has been created! <br /> What brings you here?</h2>
+              </div>
+              <div className="purposecards">
+                <div className="card iAmTutor" onClick={() => handleUserType("teacher")}>
+                  <div className="iconContainer">
+                    <i className="fas fa-chalkboard-teacher"></i>
+                  </div>
+                  <h3>I am a Tutor</h3>
+                </div>
+                <div className="card iAmStudent" onClick={() => handleUserType("student")}>
+                  <div className="iconContainer">
+                    <i className="fas fa-user-graduate"></i>
+                  </div>
+                  <h3>I am a Student</h3>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

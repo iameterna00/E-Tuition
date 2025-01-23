@@ -182,7 +182,13 @@
         display: flex;
         justify-content: center;
         gap: 20px;
+        flex-direction: column;
         margin-top: 20px;
+      }
+      .purposecards{
+        display: flex; 
+        gap: 50px;
+        justify-content: center;
       }
       
       .card {
