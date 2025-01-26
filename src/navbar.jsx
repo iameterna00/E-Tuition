@@ -99,9 +99,9 @@ const Navbar = () => {
                 <button className="navbuttons" onClick={handleLoginclick}>Login</button>
               ) : (
                 <div className="profile-container" onClick={toggleDropdown} style={{ position: 'relative' }}>
-                  <img className="profile-pic" src={user.photoURL} alt="Profile" style={{ width: '40px', height: '40px', borderRadius: '50%' }} />
+                  <img className="profile-pic" src={user.photoURL} alt="Profile" style={{ width: '40px', height: '40px',  borderRadius: '50%' }} />
                   {dropdownVisible && (
-                    <div className="dropdown-menu" style={{ position: 'absolute', top: '50px', right: '0', backgroundColor: '#fff', padding:'10px', display:'flex', width:'100px', flexDirection:'column', boxShadow: '0px 8px 16px rgba(0,0,0,0.2)', zIndex: 1 }}>
+                    <div className="dropdown-menu" style={{ position: 'absolute', top: '50px', right: '0',backgroundColor: isScrolled ? " rgb(40,45,45)" : "transparent", padding:'10px', display:'flex', width:'100px', flexDirection:'column', boxShadow: '0px 8px 16px rgba(0,0,0,0.2)', zIndex: 1 }}>
                       <Link to="/profile" className="dropdown-item">View Profile</Link>
                       <Link to="/settings" className="dropdown-item">Settings</Link>
                       <button onClick={handleLogout} className="dropdown-item">Logout</button>

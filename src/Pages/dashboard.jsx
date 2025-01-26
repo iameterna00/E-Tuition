@@ -1,40 +1,46 @@
 import React, { useState, useEffect } from 'react';
+import { webApi } from '../api';
 
 const UserList = () => {
-  const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(true);
+    const [users, setUsers] = useState([]);
+    const [error, setError] = useState(null);
 
-  // Fetch users when the component is mounted
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const response = await fetch('http://localhost:8000/api/get-users/');
-        const data = await response.json();
-        setUsers(data.users); // Store users in state
-        setLoading(false); // Set loading to false after data is fetched
-      } catch (error) {
-        console.error('Error fetching users:', error);
-        setLoading(false); // Set loading to false even on error
-      }
-    };
+    useEffect(() => {
+        const fetchUsers = async () => {
+            try {
+                const response = await fetch(`${webApi}/api/get-users`);
+                if (!response.ok) {
+                    throw new Error(`Error: ${response.status} ${response.statusText}`);
+                }
+                const data = await response.json();
+                console.log(data); // Log the response to check structure
+                setUsers(data.users || []);
+            } catch (err) {
+                setError(err.message);
+            }
+        };
+    
+        fetchUsers();
+    }, []);
+    
 
-    fetchUsers();
-  }, []); // Empty array ensures this runs only once on mount
+    if (error) {
+        return <div>Error: {error}</div>;
+    }
 
-  if (loading) {
-    return <div>Loading users...</div>;
-  }
+    if (!users.length) {
+        return <div>No users found.</div>;
+    }
 
-  return (
-    <div>
-      <h2>User List</h2>
-      <ul>
-        {users.map((user) => (
-          <li key={user.id}>{user.email}{user.username} </li>
-        ))}
-      </ul>
-    </div>
-  );
+    return (
+        <ul>
+            {users.map((user) => (
+                <li key={user.id}>
+                    {user.name} ({user.email})
+                </li>
+            ))}
+        </ul>
+    );
 };
 
 export default UserList;

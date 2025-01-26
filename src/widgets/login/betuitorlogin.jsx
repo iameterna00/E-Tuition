@@ -2,18 +2,19 @@ import React, { useState, useEffect } from "react";
 import { IoMail } from "react-icons/io5";
 import joinus from "../../assets/onlineclasses.jpg";
 import google from "../../assets/google.png";
-import Cookies from 'js-cookie'; 
 import { getAuth, GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import { useNavigate } from "react-router-dom"; // For navigation after login
-import CSRFToken from "../../services/CSRFToken";
+
 
 function TuitorLogin({ close }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [emailLogin, setEmailLogin] = useState(false);
-  const [isSignUp, setIsSignUp] = useState(false); // Track whether it's sign-up or login
+  const [isSignUp, setIsSignUp] = useState(false);  
   const [email, setEmail] = useState("");
+  const [Otp, setOtp] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false); // Loading state
+  const [loading, setLoading] = useState(false); 
+  const [sendOTP, setSendOTP] = useState(false);
   const auth = getAuth();
   const navigate = useNavigate();
 
@@ -35,57 +36,151 @@ function TuitorLogin({ close }) {
 
   const handleGoogleLogin = async () => {
     const provider = new GoogleAuthProvider();
+  
     try {
+      // Step 1: Sign in with Google
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
-      console.log("User signed in with Google:", user);
-      setIsLoggedIn(true); // Set user as logged in
-    } catch (error) {
-      console.error("Error signing in with Google:", error);
-    }
-  };
-
-
   
-  const handleEmailSignUp = async () => {
-    setLoading(true);
-    try {
-      // Create user with email and password using Firebase
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      const user = userCredential.user;
-
-      
-      // Send user data to your Django backend to create the user there as well
-      const response = await fetch("http://localhost:8000/api/create-user/", {
+      console.log("User signed in with Google:", user);
+  
+      // Get the user's ID token from Firebase Authentication
+      const idToken = await user.getIdToken();
+  
+      // Step 2: Send user data to the backend
+      const response = await fetch("http://localhost:5001/api/create-user", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "X-CSRFToken": Cookies.get('csrftoken'),  // Include CSRF token in headers
+          // Authorization: `Bearer ${idToken}`, 
         },
         body: JSON.stringify({
           email: user.email,
+          name: user.displayName,
+          photoURL: user.photoURL, 
+          uid: user.uid, 
         }),
-        credentials: 'include',  // Ensure cookies are included
       });
   
-      const data = await response.json();
-      console.log('this is body', data);
+      const responseData = await response.json();
   
       if (response.ok) {
-        console.log("User created successfully in Django:", data);
-        setIsLoggedIn(true);
-        navigate("/dashboard"); // Redirect user to the dashboard or another page
+        console.log("User successfully logged in:", responseData);
+        setIsLoggedIn(true); // Update login state
       } else {
-        console.error("Error creating user in Django:", data.message);
-        alert(data.message || "Failed to create user in Django.");
+        console.error("Error logging in:", responseData.message);
+        alert(responseData.message || "Login failed.");
       }
     } catch (error) {
-      console.error("Error signing up with email:", error);
-      alert("An error occurred while signing up.");
-    } finally {
+      console.error("Error signing in with Google:", error);
+      alert("An error occurred while signing in with Google.");
+    }
+  };
+  
+  
+  const handleEmailSignUp = async () => { 
+    setLoading(true);
+  
+    
+    try {
+      // Step 1: Send OTP
+      const otpResponse = await fetch("http://localhost:5001/api/send-otp", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,  // The email address to send OTP
+        }),
+      });
+  
+      const otpData = await otpResponse.json();
+      if (!otpResponse.ok) {
+        console.error("Error sending OTP:", otpData.message);
+        alert(otpData.message || "Failed to send OTP.");
+        return;
+      }
+  
+      console.log("OTP sent to email:", otpData);
+      alert("OTP sent to your email. Please check your inbox.");
+      setSendOTP(true);  // Show OTP input after sending OTP
+      setLoading(false);
+  
+    } catch (error) {
+      console.error("Error during OTP send:", error);
+      alert("An error occurred while sending OTP.");
       setLoading(false);
     }
   };
+  
+  const handleOTPVerification = async () => {
+    setLoading(true);
+    let user = null;
+  
+    try {
+      // Step 2: Verify OTP
+      const verifyOtpResponse = await fetch("http://localhost:5001/api/verify-otp", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          otp: Otp,  // The entered OTP
+        }),
+      });
+  
+      const verifyOtpData = await verifyOtpResponse.json();
+      if (!verifyOtpResponse.ok) {
+        console.error("Error verifying OTP:", verifyOtpData.message);
+        alert(verifyOtpData.message || "OTP verification failed.");
+        return;
+      }
+  
+      console.log("OTP verified:", verifyOtpData);
+  
+      // Step 3: Create user in Firebase Authentication after OTP verification
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      user = userCredential.user;  // Get the Firebase user
+  
+      const token = await user.getIdToken();  // Get Firebase token
+      const uid = user.uid;  // Firebase UID
+  
+      // Step 4: Create user in MongoDB
+      const response = await fetch("http://localhost:5001/api/create-user", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          name,
+          firebase_token: token,
+          uid,
+        }),
+      });
+  
+      const data = await response.json();
+      if (response.ok) {
+        setSendOTP(false);
+        console.log("User successfully created in MongoDB:", data);
+        navigate("/dashboard");  // Navigate to the dashboard
+      } else {
+        alert(data.message || "Failed to create user in MongoDB.");
+      }
+    } catch (error) {
+      console.error("Error signing up:", error);
+      alert("An error occurred during sign-up. Please try again later.");
+      if (user) {
+        console.log("Deleting Firebase user...");
+        await user.delete();  // Delete Firebase user if user exists
+      }
+    } finally {
+      setLoading(false);
+     
+    }
+  };
+  
   
   const handleEmailLogin = async () => {
     setLoading(true); // Start loading
@@ -133,7 +228,7 @@ function TuitorLogin({ close }) {
           </div>
         </div>
         <div className={`tuitorloginform ${isLoggedIn ? 'active' : ''}`}>
-          {!emailLogin && !isLoggedIn && (
+          {!emailLogin && !isLoggedIn &&  (
             <div className="loginmethods">
               <h2>
                 Welcome! Create Your
@@ -150,7 +245,7 @@ function TuitorLogin({ close }) {
             </div>
           )}
 
-          {emailLogin && !isLoggedIn && (
+          {emailLogin && !isLoggedIn && !sendOTP &&(
             <div className="loginmethods">
               <h2>{isSignUp ? "Create Your Account" : "Login With Your Email"}</h2>
               <div className="loginemailform">
@@ -167,7 +262,6 @@ function TuitorLogin({ close }) {
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Password"
                 />
-                <CSRFToken/>
                 <button className="LoginButton" onClick={isSignUp ? handleEmailSignUp : handleEmailLogin} disabled={loading}>
                   {loading ? (
                     <div className="spinner"></div> // Loading spinner
@@ -184,6 +278,31 @@ function TuitorLogin({ close }) {
               </div>
             </div>
           )}
+       {sendOTP && (
+  <div className="loginmethods">
+    <h2>OTP sent to your email. Please check your inbox.</h2>
+    <div className="loginemailform">
+      <input
+        type="number"
+        value={Otp}  // Bind the input value to the OTP state
+        onChange={(e) => setOtp(e.target.value)}  // Update OTP value
+        maxLength={6}
+        style={{ borderRadius: "10px" }}
+        placeholder="Enter OTP"
+      />
+      <button className="Confirm" onClick={handleOTPVerification} disabled={loading}>
+        {loading ? (
+          <div className="spinner"></div> // Loading spinner
+        ) : (
+          isSignUp ? "Sign Up" : "Login"
+        )}
+      </button>
+    </div>
+  </div>
+)}
+
+
+          
 
           {isLoggedIn && (
             <div className="selectYourPurpose">
