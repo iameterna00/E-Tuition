@@ -4,6 +4,7 @@ import joinus from "../../assets/onlineclasses.jpg";
 import google from "../../assets/google.png";
 import { getAuth, GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import { useNavigate } from "react-router-dom"; // For navigation after login
+import { webApi } from "../../api";
 
 
 function TuitorLogin({ close }) {
@@ -15,6 +16,7 @@ function TuitorLogin({ close }) {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false); 
   const [sendOTP, setSendOTP] = useState(false);
+  const [user, setUser] = useState('');
   const auth = getAuth();
   const navigate = useNavigate();
 
@@ -22,6 +24,7 @@ function TuitorLogin({ close }) {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
+        setUser(user)
         setIsLoggedIn(true); // User is logged in
       } else {
         setIsLoggedIn(false); // User is not logged in
@@ -195,11 +198,35 @@ function TuitorLogin({ close }) {
     }
   };
 
-  const handleUserType = (type) => {
-    if (type === "teacher") {
-      navigate("/teacher-dashboard");
-    } else {
-      navigate("/student-dashboard");
+  const handleUserType = async (purpose) => {
+    console.log(user.uid, purpose)
+    try {
+      setLoading(true);
+      
+    
+      const response = await fetch(`${webApi}/api/update-purpose`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          uid: user.uid, 
+          purpose,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        alert(`Your purpose has been updated to "${purpose}"!`);
+      } else {
+        alert(data.message || "Failed to update purpose.");
+      }
+    } catch (error) {
+      console.error("Error updating purpose:", error);
+      alert("An error occurred. Please try again later.");
+    } finally {
+      setLoading(false);
     }
   };
 

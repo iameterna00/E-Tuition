@@ -646,26 +646,67 @@
   .vaccancy-container {
     grid-template-columns: repeat(3, 1fr); /* Two cards per row */
   }
+  .vaccancyfilters {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  .filterboxs {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap; /* Allows wrapping if there's not enough space in the row */
+    gap: 20px; /* Adds spacing between the individual filters */
+    align-items: center; /* Vertically centers the items */
+  }
 }
 
 @media (max-width: 768px) {
 
   .home-vaccancy-page {
     padding: 0px;
-    font-family: Arial, sans-serif;
     text-align: center;
   }
 
   .vaccancy-container {
     grid-template-columns: repeat(2, 1fr); /* Two cards per row */
   }
+
   
 }
 
 @media (max-width: 480px) {
+  .vaccancyfilters {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
   .vaccancy-container {
     grid-template-columns: repeat(1, 1fr); /* One card per row */
   }
+  .filterboxs {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap; /* Allows wrapping if there's not enough space in the row */
+    gap: 20px; /* Adds spacing between the individual filters */
+    align-items: center; /* Vertically centers the items */
+
+  }
+  .search-container-vaccancy {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  width: 100%;
+  }
+  
+  .search-vaccancy {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
 }
 /* ONLINE CLASS FILTER */
 
