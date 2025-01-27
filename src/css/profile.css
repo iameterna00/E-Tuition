@@ -57,6 +57,92 @@
     flex-direction: column;
     text-align: start;
 }
+.completeyourprofile{
+    margin-top: 20px;
+    border: 1px solid rgb(74, 74, 74);
+    border-radius: 20px;
+}
+.profilechecklist{
+    padding: 10px 20px;
+    font-size: 14px;
+}
+.personalizationbar{
+    height: 10px;
+    border-radius: 10px;
+    background-color: #0099ff17;
+   
+}
+.yourpurposeonkube {
+    margin: 10px 20px;
+    display: flex;
+    gap: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.163);
+    align-items: flex-start; 
+    justify-content: space-between; 
+    padding: 10px; 
+    position: relative;
+    transition: transform 0.2s ease;
+    cursor: pointer;
+}
+.yourpurposeonkube:hover{
+    transform: translateX(5px);
+}
+
+.iconcontainer {
+    margin-top: 12px;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.purposeonkubeinsiders {
+    padding: 10px;
+    flex: 1; 
+}
+
+.purposebutton {
+    border: none;
+    padding: 0px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    align-self: center; 
+    transition: background-color 0.3s ease;
+}
+
+
+.reviewsfromteachers {
+    margin-top: 20px;
+    border: 1px solid rgb(74, 74, 74);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    height: 300px;
+    align-items: stretch; /* Allow the content to stretch the full width */
+}
+
+
+.reviewfromteacherinsiders {
+    padding: 20px;
+    text-align: start;
+    display: flex;
+    justify-content: flex-start; /* Align text to the start */
+}
+
+.reviewimage {
+    height: 140px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto; 
+}
+.reviewinsiders {
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    justify-content: center; /* Align text to the start */
+}
 
 
 @media (max-width: 600px) {
