@@ -88,9 +88,17 @@
   border-radius: 30px;
   padding: 5px 10px;
   background-color: transparent;
-  border-bottom: 2px solid black; /* Dynamic border color */
   color: var(--primary-text-color); /* Dynamic text color */
   transition: color 0.3s ease, border-color 0.3s ease; /* Smooth theme transitions */
+}
+
+[data-theme='dark'] .Explore {
+  border-bottom: 2px solid white;
+}
+
+[data-theme='light'] .Explore{
+  border-bottom: 2px solid rgb(0, 0, 0);
+  
 }
 .tuitorpngbanner{
   width: 400px;

@@ -4,9 +4,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    color: white;
-    height: 700px;
-    margin-top: -80px;
+
   }
   .betuitorfiltercontainer{
     width: 100%;
@@ -14,35 +12,49 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    color: white;
     align-items: center;
-    height: 520px;
+    height: 620px;
+    margin-top: -190px;
   }
  
   .bannerinsiders{
     height: 100%;
-    width: 80%;
-    background: linear-gradient(180deg, rgba(0, 64, 20, 1) 0%, rgba(1, 38, 12, 1) 100%);
+    width: 100%;
     justify-content: center;
     align-items: center;
     display: flex;
     flex-direction: column;
     border-radius: 20px;
   }
-  .bannerdiv{
-display: flex;
-width: 80%;
-justify-content: center;
-align-items: center;
+  [data-theme='dark'] .bannerinsiders {
+    background: linear-gradient(to bottom, #1a2d26, #3a6459 60%, transparent);
   }
+  
+  [data-theme='light'] .bannerinsiders{
+    background: linear-gradient(to bottom,#4ac9ff,#ffffff  80%,transparent);
+    
+  }
+  .bannerdiv{
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 100px;
+
+  }
+  
   .bannerimg{
-   height: 400px;
+   height: 300px;
+   margin-top: 50px;
 
   }
   .bannertext{
-
     font-size: 30px;
-    margin-left: 10%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     
   }
   .getstartedbetuitorButton{
@@ -57,16 +69,10 @@ align-items: center;
   .getstartedbetuitor {
     border-radius: 30px;
     padding: 5px 10px;
+    display: flex;
    background-color: #0099ff;
   }
-  .Explorebetuitor {
-    border-radius: 30px;
-    padding: 5px 10px;
-    background-color: transparent;
-    border-bottom: 2px solid white; /* Dynamic border color */
-   color: white;
-    transition: color 0.3s ease, border-color 0.3s ease; /* Smooth theme transitions */
-  }
+ 
   
   /* BETUITOR CONTENTS */
   .BetuitotContent{
@@ -82,12 +88,11 @@ align-items: center;
     display: flex;
     justify-content: start;
     flex-direction: column;
-    align-items: start;
+    align-items: center;
     width: 80%;
  
   }
   .BetuitotContentcontainer h3{
-    font-weight: 300px;
     font-size: 30px;
     
   }
@@ -115,6 +120,7 @@ align-items: center;
     flex-direction: column;
     justify-content: center;
    align-items: center;
+   
   }
   .howitworks h3{
     font-weight: 400;
@@ -181,6 +187,10 @@ align-items: center;
     align-items: start;
     display: flex;
     flex-direction: column;
+  }
+  .learfromusVideo iframe{
+    width: 560px;
+    height: 315px;
   }
 
 
@@ -314,4 +324,34 @@ align-items: center;
     border: 1px solid grey;
     height: 40px;
     border-radius: 12px;
+  }
+  @media (max-width: 600px) {
+    .learnfromus{
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .learnfromuscontainer{
+      width: 100%;
+      display: flex;
+      padding: 0px;
+      border-radius: 0px;
+      flex-direction: column;
+    
+  
+    }
+    .learfromusVideo iframe{
+      width: 100%;
+      height: 315px;
+    }
+    .howitworksinsiders{
+      width: 100%;
+      font-size: 14px;
+    }
+    .informationofwork{
+      padding: 0px;
+    }
+  
   }

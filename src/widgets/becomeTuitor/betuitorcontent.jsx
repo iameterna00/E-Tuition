@@ -7,8 +7,8 @@ function BetuitotContent() {
   return (
     <div className="BetuitotContent">
       <div className="BetuitotContentcontainer">
-        <h3>Sell The Skill You Have</h3>
-        <p>From critical skills to technical topics, eTuition Nepal supports your professional development.</p>
+        <h3>Join Our Growing Tuitor Community</h3>
+        <p>From critical skills to technical topics, KUBE supports your professional development.</p>
       </div>
       
       <div className="howitworks">
@@ -36,21 +36,16 @@ function BetuitotContent() {
         </div>
  </div>
       </div>
-  <Link to={'/applyfortuitor'}> <div className="applyButton" style={{padding:'10px'}}>
-   <button style={{backgroundColor:'  #007BFF', color:'white', padding:'10px', width:'200px'}}>Apply Now</button>
-   </div></Link>
    <div className="learnfromus">
    <div className="learnfromuscontainer">
   <div className="learfromusText">
     <h3>Learn From</h3>
-    <p>E-Home Tuition Nepal</p>
-     <p style={{textAlign:'start'}} >Watch our video to learn how E-Tuition Nepal connects students with skilled teachers for a personalized learning experience. Join us to learn at your own pace, anywhere, anytime!</p>
+    <p>KUBE</p>
+     <p style={{textAlign:'start'}}>Watch our video to learn how KUBE connects students with skilled teachers for a personalized learning experience. Join us to learn at your own pace, anywhere, anytime!</p>
   </div>
   
   <div className="learfromusVideo">
     <iframe 
-      width="560" 
-      height="315" 
       src="https://www.youtube.com/embed/rokmLmpiG9k" 
       title="YouTube video player" 
       frameBorder="0" 

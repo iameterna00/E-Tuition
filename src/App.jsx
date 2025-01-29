@@ -26,7 +26,7 @@ function App() {
             <Route path="/onlineclasses" element={<OnlineClasses />} />
             <Route path="/coursesdetails/:id" element={<CourseDetails />} />
             <Route path="/iamatuitor" element={<BecomeTuitor />} />
-            <Route path="/applyfortuitor" element={<ApplyForTuitor />} />
+            <Route path="/tuitorform" element={<ApplyForTuitor />} />
             <Route path="/dashboard" element={<UserList />} />
             <Route path="/profile" element={<ProfilePage />} />
           </Routes>

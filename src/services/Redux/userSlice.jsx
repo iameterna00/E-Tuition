@@ -23,9 +23,11 @@ const userSlice = createSlice({
         state.error = null;
       })
       .addCase(fetchUser.fulfilled, (state, action) => {
+        console.log("Fetched user:", action.payload);  // Log user data
         state.loading = false;
         state.user = action.payload;
       })
+      
       .addCase(fetchUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;

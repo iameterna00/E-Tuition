@@ -1,0 +1,90 @@
+.student-form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+
+}
+.studentdetailprofilecontainer{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+.studentprofile{
+    height: 100px;
+    border-radius: 50%;
+    width: 100px;
+    object-fit: cover;
+    
+}
+.changeprofilebutton{
+    max-width: 300px;
+}
+
+.student-form {
+    border-radius: 20px;
+    padding: 20px;
+    width: 100%;
+    max-width: 600px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    font-size: 14px;
+
+    margin-bottom: 5px;
+    display: block;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 90%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 14px;
+    font-size: 14px;
+}
+[data-theme='dark'] .form-group textarea {
+    color: white;
+  }
+  
+  [data-theme='light'] .form-group textarea{
+    color: black;
+  }
+  [data-theme='dark'] .form-group input {
+    color: white;
+  }
+  
+  [data-theme='light'] .form-group input{
+    color: black;
+  }
+  [data-theme='dark'] .form-group select {
+    color: white;
+    background-color: transparent;
+  }
+  
+  [data-theme='light'] .form-group select{
+    color: black;
+    background-color: white;
+  }
+  
+
+
+  
+
+.form-group textarea {
+    height: 100px;
+    resize: none;
+}
+
+
+
