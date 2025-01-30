@@ -1,6 +1,6 @@
 
 import '../css/tuitorapply.css'
-import TutorApplicationForm from '../widgets/tuitorform/tuitorform';
+import TutorApplicationForm from '../widgets/becomeTuitor/tuitorform';
 function ApplyForTuitor() {
   return (
  <>

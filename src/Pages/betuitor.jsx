@@ -5,10 +5,13 @@ import TuitorLogin from "../widgets/login/betuitorlogin";
 import BetuitotBanner from "../widgets/becomeTuitor/banner";
 import BetuitotContent from "../widgets/becomeTuitor/betuitorcontent";
 import "../css/login.css";
+import "../css/tuitorapply.css"
+import TeachingExperience from "../widgets/becomeTuitor/tuitorexperience";
 
 function BecomeTuitor() {
   const [isAuthenticated, setIsAuthenticated] = useState(null);
-  const [closetuitorlogin, setClosetuitorLogin] = useState(true); // Initially true to show the login modal
+  const [closetuitorlogin, setClosetuitorLogin] = useState(true); 
+  const [opentuitorinitialmodal, setopentuitorinitialmodal] = useState(false); 
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -25,7 +28,7 @@ function BecomeTuitor() {
 
   // Loading state
   if (isAuthenticated === null) {
-    return <div>Loading...</div>; // Replace with a spinner or skeleton if needed
+    return <div>Loading...</div>; 
   }
 
   return (
@@ -36,8 +39,11 @@ function BecomeTuitor() {
       )}
 
       {/* Always show BetuitotBanner and BetuitotContent */}
-      <BetuitotBanner />
+      <BetuitotBanner setopentuitorinitialmodal={setopentuitorinitialmodal} />
       <BetuitotContent />
+      {opentuitorinitialmodal && (
+        <TeachingExperience/>
+      )}
     </>
   );
 }

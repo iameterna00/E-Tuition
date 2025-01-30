@@ -46,7 +46,11 @@ function Filters({setLocationFilter, setGenderFilter, setSearchTerm, priceRange,
                     defaultValue={[0, 10000]}
                     value={priceRange}
                     onChange={handlePriceChange}
-                    renderThumb={(props, state) => <div {...props}></div>}
+                    renderThumb={(props, state) => {
+                      const { key, ...restProps } = props; // Extract 'key' separately
+                      return <div key={key} {...restProps}></div>;
+                  }}
+                  
                   />
                  
                 </div>

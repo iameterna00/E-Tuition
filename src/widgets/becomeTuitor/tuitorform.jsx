@@ -115,7 +115,7 @@ const TutorApplicationForm = () => {
               style={{ display: 'none' }}
               required
             />
-            <button type="button" onClick={() => document.getElementById('profile_upload').click()}>
+            <button style={{maxWidth:"200px"}} type="button" onClick={() => document.getElementById('profile_upload').click()}>
               Choose Profile Image
             </button>
           </div>
@@ -205,17 +205,7 @@ const TutorApplicationForm = () => {
             />
           </div>
 
-          <div className="input-group">
-            <label>Short Bio</label>
-            <textarea
-              name="bio"
-              placeholder="Tell us a little about yourself..."
-              value={formData.bio}
-              onChange={handleChange}
-              rows="3"
-              required
-            ></textarea>
-          </div>
+      
 
           <div className="input-group">
             <label>Upload your CV</label>

@@ -199,7 +199,9 @@ function StudentForm({ studentdetails }) {
                 </div>
 
 
-                <button type="submit">Save Changes</button>
+              <div className="sutdentidentitysavechange" style={{width:'100%', display:'flex', justifyContent:'center'}}>
+              <button style={{ maxWidth:"300px"}} type="submit">Save Changes</button>
+              </div>
             </form>
         </div>
     );
