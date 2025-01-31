@@ -70,6 +70,8 @@
     color: #222;
   }
   
+
+
 .getstartedbuttos{
   margin: 10px;
   display: flex;
@@ -82,14 +84,17 @@
 .getstarted {
   border-radius: 30px;
   padding: 5px 10px;
- background-color: #0099ff;
+  background-color: #0099ff;
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
 }
+
 .Explore {
   border-radius: 30px;
   padding: 5px 10px;
   background-color: transparent;
   color: var(--primary-text-color); /* Dynamic text color */
-  transition: color 0.3s ease, border-color 0.3s ease; /* Smooth theme transitions */
+ 
 }
 
 [data-theme='dark'] .Explore {
@@ -100,6 +105,36 @@
   border-bottom: 2px solid rgb(0, 0, 0);
   
 }
+.getstarted button{
+  background-color: transparent;
+  font-size: 16px;
+  padding: 10px;
+  display: block;
+  width: 100%;
+  
+
+}
+.getstarted:hover {
+  background-color: rgb(0, 162, 255);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  
+}
+
+.Explore button:hover {
+    text-shadow: 0px 0px 8px rgba(255, 255, 255, 0.635); 
+}
+
+.Explore button{
+  background-color: transparent;
+  font-size: 16px;
+  color: var(--primary-text-color);
+  padding: 10px;
+  display: block;
+  width: 100%;
+  transition: text-shadow 0.3s ease-in-out; /* Smooth transition */
+}
+
 .tuitorpngbanner{
   width: 400px;
   position: absolute;
@@ -237,35 +272,6 @@
     
   }
 
-  button {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    background-color: var(--button-bg-light);
-    color: var(--button-text-color-light);
-    border: none;
-    border-radius: 20px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  [data-theme="dark"] button {
-    background-color: transparent; /* Make button background transparent in dark mode */
-    color: var(--button-text-color-dark); /* Adjust text color for dark mode if needed */
-  }
-  button:hover {
-    background-color: var(--button-hover-light);
-  }
-  
-  body.dark-mode button {
-    background-color: var(--button-bg-dark);
-    color: var(--button-text-color-dark);
-  }
-  
-  body.dark-mode button:hover {
-    background-color: var(--button-hover-dark);
-  }
 
 
 

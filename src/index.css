@@ -1,11 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap');
 :root {
   --color: rgba(255, 255, 255, 0.87);
-  --background-color:rgb(33,33,33);
+  --background-color: rgb(33, 33, 33);
   --link-color: #f3f3f3;
 
-  --button-background: #1a1a1a;
-  --button-border-hover: #646cff;
+  --button-background: #1877f2; /* Facebook blue */
+  --button-background-hover: #166fe5; /* Darker Facebook blue */
+  --button-text-color: white;
+
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   --primary-text-color: white;
@@ -24,10 +26,34 @@
   --primary-text-color: black;
   --background-color: #ffffff;
   --link-color: #000000;
-  --button-background: #f9f9f9;
-  --button-border-hover: #535bf2;
+
+  --button-background: #1877f2; /* Facebook blue */
+  --button-background-hover: #166fe5; /* Darker Facebook blue */
+  --button-text-color: white;
 }
 
+button {
+  border: none; /* Removes border */
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: var(--button-background);
+  color: var(--button-text-color);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: var(--button-background-hover);
+  color: var(--button-text-color)
+}
+
+button:focus,
+button:focus-visible {
+  outline: none; /* Removes focus ring */
+}
 ::-webkit-scrollbar {
   width: 6px; 
   height: 6px;
@@ -85,23 +111,3 @@ p{
   margin: 5px;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: var(--button-background);
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-
-button:hover {
-  border-color: var(--button-border-hover);
-}
-
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}

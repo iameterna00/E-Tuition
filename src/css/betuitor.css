@@ -69,9 +69,17 @@
   .getstartedbetuitor {
     border-radius: 30px;
     padding: 5px 10px;
+    font-size: 20px;
     display: flex;
    background-color: #0099ff;
   }
+  .getstartedbetuitor button {
+    background-color: transparent;
+  }
+  .getstartedbetuitor:hover {
+   background-color: #1aa4ff;
+  }
+ 
  
   
   /* BETUITOR CONTENTS */

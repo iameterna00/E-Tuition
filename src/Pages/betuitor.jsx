@@ -42,7 +42,7 @@ function BecomeTuitor() {
       <BetuitotBanner setopentuitorinitialmodal={setopentuitorinitialmodal} />
       <BetuitotContent />
       {opentuitorinitialmodal && (
-        <TeachingExperience/>
+        <TeachingExperience setopentuitorinitialmodal={()=>setopentuitorinitialmodal(false)}/>
       )}
     </>
   );

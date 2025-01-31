@@ -138,6 +138,11 @@ button:hover {
   padding: 10px 20px;
   text-align: start;
  }
+ .tuitorinitialbottombar{
+  box-shadow: 0px -4px 6px rgba(0, 0, 0, 0.2); /* Top shadow */
+  padding: 10px 20px;
+  text-align: start;
+ }
  .tuitorinitialstepsnavcontents{
   display: flex;
   height: 50px;
@@ -170,6 +175,10 @@ button:hover {
   align-items: center;
   margin-right: 20px;
   height: 100%;
+ }
+ .teacherexperiencesclose button{
+  background-color: transparent;
+  color: var(--primary-text-color);
  }
  .teacherexperiencecontents{
   display: flex;
@@ -217,6 +226,7 @@ button:hover {
   width: 18px;
   height: 18px;
   margin: 10px;
+  
 
 }
 
@@ -232,6 +242,69 @@ button:hover {
   width: 100%;
   max-width: 300px;
 }
+ .teacherexperiencesclose{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 20px;
+  height: 100%;
+ }
+ 
+
+
+.school-input {
+  position: relative; 
+}
+
+/* Styling for the suggestions dropdown */
+.suggestionsdropdown {
+  height: 40px;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 10px;
+  margin: 2px 0;
+  transition: background-color 0.2s ease;
+}
+
+
+[data-theme='dark'] .suggestionsdropdown:hover {
+  background-color: rgb(40,45,45);
+ }
+ 
+ [data-theme='light'] .suggestionsdropdown:hover{
+  background-color: #f1f1f1;
+ }
+
+.suggestionsdropdown:hover {
+  background-color: #f1f1f1;
+}
+
+
+.suggestionsdropdown.selected {
+  background-color: #007bff;
+  color: white;
+}
+
+/* Suggestions list container */
+.suggestions-list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  max-height: 200px;
+  overflow-y: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+}
+[data-theme='dark'] .suggestions-list {
+  background-color: rgb(27, 27, 27);
+ }
+ 
+ [data-theme='light'] .suggestions-list{
+  background-color: #f1f1f1;
+ }
+
 
 
 
