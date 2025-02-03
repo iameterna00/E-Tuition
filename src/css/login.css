@@ -97,6 +97,7 @@
     }
     .tuitorgraphicstext h1,
 .tuitorgraphicstext h2 {
+  color: white;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.66); /* Adjust the shadow size and opacity */
 }
 .loginmethods{
@@ -145,6 +146,10 @@
   .loginemailform{
     width: 80%;
     padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
   .loginemailform input{
     border-radius: 10px;
@@ -161,6 +166,9 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        padding: 10px;
+        min-width: 100px;
+
     }
     .spinner {
         border: 4px solid #f3f3f3; /* Light gray */

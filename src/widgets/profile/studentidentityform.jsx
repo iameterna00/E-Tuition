@@ -80,7 +80,7 @@ function StudentForm({ studentdetails }) {
                             alt="Profile"
                         />
                         <label htmlFor="profilePicture" className="changeprofilebutton">
-                            Change your Profile Picture
+                         <button>   Change your Profile Picture</button>
                         </label>
                         <input
                             type="file"

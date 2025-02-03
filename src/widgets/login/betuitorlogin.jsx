@@ -16,6 +16,7 @@ function TuitorLogin({ close }) {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false); 
   const [sendOTP, setSendOTP] = useState(false);
+  const [emailerror , setemailerror] = useState(false);
   const [user, setUser] = useState('');
   const auth = getAuth();
   const navigate = useNavigate();
@@ -72,7 +73,7 @@ function TuitorLogin({ close }) {
         setIsLoggedIn(true); // Update login state
       } else {
         console.error("Error logging in:", responseData.message);
-        alert(responseData.message || "Login failed.");
+        setIsLoggedIn(true);
       }
     } catch (error) {
       console.error("Error signing in with Google:", error);
@@ -105,7 +106,6 @@ function TuitorLogin({ close }) {
       }
   
       console.log("OTP sent to email:", otpData);
-      alert("OTP sent to your email. Please check your inbox.");
       setSendOTP(true);  // Show OTP input after sending OTP
       setLoading(false);
   
@@ -167,7 +167,7 @@ function TuitorLogin({ close }) {
       if (response.ok) {
         setSendOTP(false);
         console.log("User successfully created in MongoDB:", data);
-        navigate("/dashboard");  // Navigate to the dashboard
+        navigate("/profile");  // Navigate to the dashboard
       } else {
         alert(data.message || "Failed to create user in MongoDB.");
       }
@@ -193,10 +193,19 @@ function TuitorLogin({ close }) {
       console.log("User logged in with email:", email);
     } catch (error) {
       console.error("Error logging in with email:", error);
+      
+      if (error.code === "auth/user-not-found") {
+       setemailerror(true);
+      } else if (error.code === "auth/wrong-password") {
+        alert("Incorrect password. Please try again.");
+      } else {
+        setemailerror(true);
+      }
     } finally {
       setLoading(false); // End loading
     }
   };
+  
 
   const handleUserType = async (purpose) => {
     console.log(user.uid, purpose)
@@ -275,6 +284,9 @@ function TuitorLogin({ close }) {
           {emailLogin && !isLoggedIn && !sendOTP &&(
             <div className="loginmethods">
               <h2>{isSignUp ? "Create Your Account" : "Login With Your Email"}</h2>
+              {emailerror && (
+                <p style={{color:"red"}}>Email not found! Try signing up</p>
+              )}
               <div className="loginemailform">
                 <input
                   type="email"
@@ -298,7 +310,7 @@ function TuitorLogin({ close }) {
                 </button>
                 <p>
                   {isSignUp ? "Already have an account?" : "Don't have an account?"}{" "}
-                  <span onClick={() => setIsSignUp(!isSignUp)}>
+                  <span style={{cursor:"pointer"}} onClick={() => setIsSignUp(!isSignUp)}>
                     {isSignUp ? "Login" : "Sign Up"}
                   </span>
                 </p>

@@ -254,7 +254,42 @@ button:hover {
 
 .school-input {
   position: relative; 
+
 }
+
+.school-input input {
+  border-radius: 10px;
+  height: 30px;
+}
+[data-theme='dark'] .school-input input {
+  color: white;;
+  
+ }
+ 
+ [data-theme='light'].school-input input{
+  color: black;
+ }
+
+ .degree-input {
+  position: relative; 
+
+}
+
+.degree-input input {
+  border-radius: 10px;
+  height: 30px;
+}
+[data-theme='dark'] .degree-input input {
+  color: white;;
+  
+ }
+ 
+ [data-theme='light'].degree-input input{
+  color: black;
+ }
+
+
+
 
 /* Styling for the suggestions dropdown */
 .suggestionsdropdown {

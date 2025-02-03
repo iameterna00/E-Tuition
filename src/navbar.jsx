@@ -37,10 +37,7 @@ const Navbar = () => {
     }
   };
 
-  // Prevent scrolling when modal is open
-  useEffect(() => {
-    document.body.classList.toggle('modal-open', tuitorLogin);
-  }, [tuitorLogin]);
+
 
   // Handle Firebase authentication and fetch user details
   useEffect(() => {
