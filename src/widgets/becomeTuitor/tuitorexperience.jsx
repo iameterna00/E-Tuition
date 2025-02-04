@@ -2,12 +2,16 @@ import { useEffect, useRef, useState } from "react";
 import KUBE from "../../assets/KUBE.png";
 import Teacher from "../../assets/teach.png";
 import collegeData from "../../JSON/kathmandu_college.json";
+import { FaCloudUploadAlt } from "react-icons/fa";
+import { IoMdMale } from "react-icons/io";
+import { IoMdFemale } from "react-icons/io";
+import { webApi } from "../../api";
 
-function TeachingExperience({ setopentuitorinitialmodal }) {
+function TeachingExperience({ setopentuitorinitialmodal, user }) {
     const [step, setStep] = useState(1);
     const [selectedTeachingType, setSelectedTeachingType] = useState("");
     const [teachingExperience, setTeachingExperience] = useState("");
-    const [teachingLevel, setTeachingLevel] = useState("");
+    const [identity, setIdentity] = useState("");
     const [searchSchool, setSearchSchool] = useState("");
     const [searchDegree, setSearchDegree] = useState("");
     const [showSuggestions, setShowSuggestions] = useState(false);
@@ -17,18 +21,13 @@ function TeachingExperience({ setopentuitorinitialmodal }) {
     const [schoolSuggestions, setSchoolSuggestions] = useState([]);
     const [degreeSuggestions, setDegreeSuggestions] = useState([]);
     const [cvFile, setCvFile] = useState(null);
-    const [identityType, setIdentityType] = useState("");
+    const [identityType, setIdentityType] = useState("National ID");
     const [identityFile, setIdentityFile] = useState(null);
+    const[gender , setTeachergender] = useState('')
     const suggestionsRef = useRef(null);
     const degreeRef = useRef(null);
 
     // Handles selection based on current step
-    const handleSelection = (event) => {
-        const value = event.target.value;
-        if (step === 1) setTeachingExperience(value);
-        if (step === 2) setSelectedTeachingType(value);
-        if (step === 3) setTeachingLevel(value);
-    };
 
     const handleNext = () => setStep((prev) => prev + 1);
     const handlePrevious = () => setStep((prev) => prev - 1);
@@ -111,21 +110,57 @@ function TeachingExperience({ setopentuitorinitialmodal }) {
     }, []);
     const handleCvUpload = (event) => {
         const file = event.target.files[0];
-        if (file && file.type === "application/pdf") {
+        if (file && file.type.startsWith("image/")) {
             setCvFile(file);
+            console.log('this is cv ', cvFile)
         } else {
-            alert("Please upload a valid PDF file.");
+            alert("Please upload a valid image file.");
         }
     };
     
     const handleIdentityUpload = (event) => {
         const file = event.target.files[0];
-        if (file && (file.type === "application/pdf" || file.type.startsWith("image/"))) {
+        if (file && ( file.type.startsWith("image/"))) {
             setIdentityFile(file);
         } else {
             alert("Please upload a valid PDF or image file.");
         }
     };
+    const handleTeacherxp = () => {
+        if (!teachingExperience || !selectedSchool || !selectedDegree || !cvFile || !identityFile || !gender) {
+            alert("Please complete all fields before submitting.");
+            return;
+        }
+    
+        const formData = new FormData();
+        formData.append("teachingExperience", teachingExperience);
+        formData.append("school", selectedSchool);
+        formData.append("degree", selectedDegree);
+        formData.append("cvFile", cvFile, cvFile.name); // Ensure file is properly added
+        formData.append("identityType", identityType);
+        formData.append("identityFile", identityFile, identityFile.name);
+        formData.append("teachergender", gender);
+        formData.append("uid", user.uid);
+
+    
+        fetch(`${webApi}/api/update-teacher-details`, {
+            method: 'POST',
+            body: formData,
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message === "Teacher details updated successfully") {
+                    alert("Teacher details updated successfully!");
+                } else {
+                    alert(`Error: ${data.message}`);
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                alert("An error occurred while submitting the form.");
+            });
+    };
+    
 
     return (
         <div className="teacherexperiencemodal">
@@ -138,7 +173,7 @@ function TeachingExperience({ setopentuitorinitialmodal }) {
                                 <img src={KUBE} className="Kubelogo" alt="KUBE Logo" />
                             </div>
                             <div className="teacherexperiencestepscounts">
-                                <h3>Step {step} of 3</h3>
+                                <h3>Step {step} of 4</h3>
                             </div>
                         </div>
                         <div className="tuitorinitialnavcontainerright">
@@ -163,7 +198,7 @@ function TeachingExperience({ setopentuitorinitialmodal }) {
                                                 type="radio"
                                                 value={option}
                                                 checked={teachingExperience === option}
-                                                onChange={handleSelection}
+                                                onChange={(e) => setTeachingExperience(e.target.value)}
                                             />
                                             <span>{option}</span>
                                         </label>
@@ -233,14 +268,27 @@ function TeachingExperience({ setopentuitorinitialmodal }) {
         <h2>Please upload your CV and Identity</h2>
 
         {/* CV Upload */}
-        <div className="file-upload">
-            <label>Upload CV (PDF only):</label>
-            <input 
-                type="file" 
-                accept=".pdf" 
-                onChange={handleCvUpload} 
-            />
-        </div>
+        <div className="CVfile-upload">
+    <label>Upload CV (Image only):</label>
+    <div className="file-upload-container">
+    <input
+    className="cvfileinput"
+    type="file"
+    accept=".jpg, .jpeg, .png"
+    onChange={handleCvUpload}
+/>
+
+        <span className="upload-icon">
+            {cvFile ? (
+                <img src={URL.createObjectURL(cvFile)} alt="CV Preview" className="cv-preview" />
+            ) : (
+                <>
+                    <FaCloudUploadAlt fontSize={50} /> Upload
+                </>
+            )}
+        </span>
+    </div>
+</div>
 
         {/* Identity Selection */}
         <div className="identity-selection">
@@ -256,22 +304,47 @@ function TeachingExperience({ setopentuitorinitialmodal }) {
         {/* Identity Upload */}
         {identityType && (
             <div className="file-upload">
-                <label>Upload {identityType} (PDF or Image):</label>
+                <label>Upload {identityType} (Image Only):</label>
+                <div className="file-upload-container">
                 <input 
+                    className="cvfileinput"
                     type="file" 
-                    accept=".pdf, .jpg, .jpeg, .png" 
+                    accept=".jpg, .jpeg, .png" 
                     onChange={handleIdentityUpload} 
-                />
+                 />
+                  <span className="upload-icon">
+            {identityFile ? (
+                <img src={URL.createObjectURL(identityFile)} alt="CV Preview" className="cv-preview" />
+            ) : (
+                <>
+                    <FaCloudUploadAlt fontSize={50} /> Upload
+                </>
+            )}
+        </span>
+            </div>
             </div>
         )}
     </>
 )}
+                            {step === 4 && (        
+                            <>
+                                <h2>One Last Step Before We Begin?</h2>
+                                <h3>Please Select Your Gender.</h3>
+                                <div className="Gender-options">
+                                    <div className="maleoption" style={{border: gender==='Male'? '1px solid #0099ffca':'transparent' }} onClick={()=>setTeachergender('Male')}>
+                                    <IoMdMale  fontSize={60} /> Male
+                                    </div>
+                                    <div className="maleoption" style={{border: gender==='Female'? '1px solid #0099ffca':'transparent' }} onClick={()=>setTeachergender('Female')}>
+                                          <IoMdFemale   fontSize={60} /> Female</div>
+                                </div>
+                            </>
+                        )}
 
                     </div>
 
-                    <div className="teacherimagecontainer">
+                 {step !=4 &&(   <div className="teacherimagecontainer">
                         <img className="teachimage" src={Teacher} alt="Teacher" />
-                    </div>
+                    </div>)}
                 </div>
 
 
@@ -290,11 +363,14 @@ function TeachingExperience({ setopentuitorinitialmodal }) {
                                 {step === 1 && teachingExperience && (
                                     <button onClick={handleNext}>Next</button>
                                 )}
-                                 {step === 2 && searchSchool.trim() !== "" && selectedDegree.trim() !== "" && (
+                                 {step === 2 && selectedSchool.trim() !== "" && selectedDegree.trim() !== "" && (
                                     <button onClick={handleNext}>Next</button>
                                 )}
-                                {step === 3 && teachingLevel && (
-                                    <button>Finish</button>
+                                {step === 3 && cvFile && identityFile && (
+                                    <button onClick={handleNext} >Next</button>
+                                )}
+                                  {step === 4 && gender && (
+                                    <button onClick={handleTeacherxp} >Finish</button>
                                 )}
                             </div>
                         </div>

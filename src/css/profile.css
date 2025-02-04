@@ -252,6 +252,43 @@ body.modal-open {
     max-height: 70vh; /* Adjust this for your desired height */
     padding: 20px;
 }
+.submit-btn {
+    position: relative;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    width: 100px;
+    height: 40px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+}
+
+.submit-btn:disabled {
+    background-color: #50505075;
+    cursor: not-allowed;
+}
+
+.spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgb(0, 157, 255);
+    border-top-color: white;
+    border-radius: 50%;
+    display: inline-block;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
 
   
 

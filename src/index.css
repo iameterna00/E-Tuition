@@ -4,8 +4,8 @@
   --background-color: rgb(33, 33, 33);
   --link-color: #f3f3f3;
 
-  --button-background: #1877f2; /* Facebook blue */
-  --button-background-hover: #166fe5; /* Darker Facebook blue */
+  --button-background:  rgb(43, 53, 53); /* Facebook blue */
+  --button-background-hover:  rgba(43, 53, 53, 0.624); /* Darker Facebook blue */
   --button-text-color: white;
 
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -45,10 +45,11 @@ button {
   transition: background-color 0.3s ease;
 }
 
-button:hover {
-  background-color: var(--button-background-hover);
-  color: var(--button-text-color)
-}
+  button:hover {
+    background-color: var(--button-background-hover);
+    color: var(--button-text-color-hover); /* Optional: change text color on hover */
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.355), 0 0 16px rgba(255, 255, 255, 0.387); /* Soft white glow */
+  }
 
 button:focus,
 button:focus-visible {

@@ -87,6 +87,8 @@ function StudentProfile() {
             closepurposemodal('teacher')
             if(purpose === 'teacher'){
                 navigate('/iamatuitor')
+            }else{
+                navigate('/')
             }
        
         }

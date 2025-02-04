@@ -79,25 +79,7 @@ const Navbar = () => {
             </div>
             {!menuOpen && (
               <div style={{ marginRight: "100px" }} className={`navlinks ${menuOpen ? 'active' : ''}`}>
-                {!user ? (
-                  <button className="navbuttons" onClick={handleLoginclick}>Login</button>
-                ) : (
-                  <div className="profile-container" onClick={toggleDropdown} style={{ position: 'relative' }}>
-                    <img
-                      className="profile-pic"
-                      src={myuser?.profile}
-                      alt="Profile"
-                      style={{ width: '35px', height: '35px', borderRadius: '50%', objectFit:"cover" }}
-                    />
-                    {dropdownVisible && (
-                      <div className="dropdown-menu" style={{ position: 'absolute', top: '50px', right: '0', backgroundColor: isScrolled ? "rgb(40,45,45)" : "transparent", padding: '10px', display: 'flex', flexDirection: 'column', boxShadow: '0px 8px 16px rgba(0,0,0,0.2)', zIndex: 1 }}>
-                        <Link to="/profile" className="dropdown-item">Profile</Link>
-                        <Link to="/settings" className="dropdown-item">Settings</Link>
-                        <button onClick={handleLogout} className="dropdown-item">Logout</button>
-                      </div>
-                    )}
-                  </div>
-                )}
+         
                 <button className="navbuttons">About</button>
               </div>
             )}
@@ -112,25 +94,7 @@ const Navbar = () => {
             {menuOpen && (
               <>
                 <button className="navbuttons">About</button>
-                {!user ? (
-                  <button className="navbuttons">Login</button>
-                ) : (
-                  <div className="profile-container" onClick={toggleDropdown} style={{ position: 'relative' }}>
-                    <img
-                      className="profile-pic"
-                      src={user.photoURL}
-                      alt="Profile"
-                      style={{ width: '40px', height: '40px', borderRadius: '50%' }}
-                    />
-                    {dropdownVisible && (
-                      <div className="dropdown-menu" style={{ position: 'absolute', top: '50px', right: '0', backgroundColor: '#fff', boxShadow: '0px 8px 16px rgba(0,0,0,0.2)', zIndex: 1 }}>
-                        <Link to="/profile" className="dropdown-item">View Profile</Link>
-                        <Link to="/settings" className="dropdown-item">Settings</Link>
-                        <button onClick={handleLogout} className="dropdown-item">Logout</button>
-                      </div>
-                    )}
-                  </div>
-                )}
+            
               </>
             )}
             <Link to='/iamatuitor' style={{ textDecoration: 'none', color: 'inherit' }}>
@@ -139,6 +103,28 @@ const Navbar = () => {
             <Link to='/onlineclasses' style={{ textDecoration: 'none', color: 'inherit' }}>
               <button className="navbuttons">Online Classes</button>
             </Link>
+           {!menuOpen &&(
+            <>
+             {!user ? (
+              <button className="navbuttons" onClick={handleLoginclick}>Login</button>
+            ) : (
+              <div className="profile-container" onClick={toggleDropdown} style={{ position: 'relative' }}>
+                <img
+                  className="profile-pic"
+                  src={myuser?.profile}
+                  alt="Profile"
+                  style={{ width: '35px', height: '35px', borderRadius: '50%', objectFit:"cover" }}
+                />
+                {dropdownVisible && (
+                  <div className="dropdown-menu" style={{ position: 'absolute', top: '50px', right: '0', backgroundColor: isScrolled ? "rgb(40,45,45)" : "transparent", padding: '10px', display: 'flex', flexDirection: 'column', boxShadow: '0px 8px 16px rgba(0,0,0,0.2)', zIndex: 1 }}>
+                    <Link to="/profile" className="dropdown-item">Profile</Link>
+                    <Link to="/settings" className="dropdown-item">Settings</Link>
+                    <button onClick={handleLogout} className="dropdown-item">Logout</button>
+                  </div>
+                )}
+              </div>
+            )}</>
+           )}
             <button className="navbuttons" style={{ display: 'flex', gap: '10px' }} onClick={toggleTheme}>
               {menuOpen ? (
                 <>
@@ -148,6 +134,21 @@ const Navbar = () => {
                 theme === 'dark' ? <CiLight /> : <MdDarkMode />
               )}
             </button>
+            {menuOpen && user && (
+               <>
+             <div style={{display:'flex', justifyContent:'center', alignItems:"center", gap:"10px"}} className="profileinsidemenubar">
+             <img
+                      className="profile-pic"
+                      src={myuser?.profile}
+                      alt="Profile"
+                      style={{ width: '35px', height: '35px', borderRadius: '50%', objectFit:"cover" }}
+                    />
+             <Link to="/profile" className="dropdown-item">Visit Profile</Link>
+             </div>
+                <Link to="/settings" className="dropdown-item">Settings</Link>
+                <button style={{backgroundColor:'transparent'}} onClick={handleLogout} className="dropdown-item">Logout</button>
+               </>
+            )}
           </div>
 
           <div className="hamburger" onClick={toggleMenu}>

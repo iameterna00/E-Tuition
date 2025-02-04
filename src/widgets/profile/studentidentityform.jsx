@@ -17,6 +17,7 @@ function StudentForm({ studentdetails }) {
         parentContact: '',
     });
     const [previewImage, setPreviewImage] = useState(null);
+    const [loading, setLoading] = useState(false); 
 
     const handleChange = (e) => {
         const { name, value, type, files } = e.target;
@@ -30,6 +31,7 @@ function StudentForm({ studentdetails }) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true); // Show loading when submission starts
     
         // Create a FormData object
         const formDataToSend = new FormData();
@@ -54,19 +56,20 @@ function StudentForm({ studentdetails }) {
             const response = await fetch(`${webApi}/api/save-student-details`, {
                 method: 'POST',
                 body: formDataToSend, // Send FormData instead of JSON
-                // Do not set Content-Type header; let the browser handle it
             });
     
             const result = await response.json();
     
             if (response.ok) {
-                alert('Student details saved successfully');
             } else {
                 alert(`Error: ${result.message}`);
             }
         } catch (error) {
             console.error('Error saving student details:', error);
             alert('An error occurred while saving the student details.');
+        } finally {
+            setLoading(false); // Hide loading after submission
+            window.location.reload();
         }
     };
     return (
@@ -80,7 +83,7 @@ function StudentForm({ studentdetails }) {
                             alt="Profile"
                         />
                         <label htmlFor="profilePicture" className="changeprofilebutton">
-                         <button>   Change your Profile Picture</button>
+                         <button type="button" onClick={() => document.getElementById('profilePicture').click()} >   Change your Profile Picture</button>
                         </label>
                         <input
                             type="file"
@@ -199,8 +202,11 @@ function StudentForm({ studentdetails }) {
                 </div>
 
 
-              <div className="sutdentidentitysavechange" style={{width:'100%', display:'flex', justifyContent:'center'}}>
-              <button style={{ maxWidth:"300px"}} type="submit">Save Changes</button>
+              <div className="loadingbutton" style={{width:'100%', display:'flex', justifyContent:'center'}}>
+              <button type="submit" disabled={loading} className="submit-btn">
+    {loading ? <span className="spinner"></span> : "Submit"}
+</button>
+
               </div>
             </form>
         </div>

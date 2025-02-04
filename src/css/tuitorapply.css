@@ -103,9 +103,7 @@
   transition: 0.3s;
 }
 
-button:hover {
-  background: #1d8ad9;
-}
+
 .teacherexperiencemodal {
   position: fixed; /* Stays fixed on the screen */
   top: 0;
@@ -258,16 +256,22 @@ button:hover {
 }
 
 .school-input input {
-  border-radius: 10px;
+  border-radius: 14px;
   height: 30px;
+  padding: 10px 15px;
+  border: none;
+  background-color: #ededed;
 }
 [data-theme='dark'] .school-input input {
   color: white;;
+  background-color: #2a2a2a;
   
  }
  
  [data-theme='light'].school-input input{
   color: black;
+  background-color: #ededed;
+
  }
 
  .degree-input {
@@ -276,16 +280,22 @@ button:hover {
 }
 
 .degree-input input {
-  border-radius: 10px;
+  border-radius: 14px;
   height: 30px;
+  padding: 10px 15px;
+  border: none;
+  background-color: #ededed;
 }
 [data-theme='dark'] .degree-input input {
   color: white;;
+  background-color: #2a2a2a;
   
  }
  
  [data-theme='light'].degree-input input{
   color: black;
+  background-color: #efefef;
+ 
  }
 
 
@@ -307,7 +317,7 @@ button:hover {
  }
  
  [data-theme='light'] .suggestionsdropdown:hover{
-  background-color: #f1f1f1;
+  background-color: #e8e8e8;
  }
 
 .suggestionsdropdown:hover {
@@ -340,6 +350,119 @@ button:hover {
   background-color: #f1f1f1;
  }
 
+.upload-icon{
+  display: flex;
+  flex-direction: column;
+}
+ .file-upload-container {
+  position: relative;
+  width: 100%;
+  height: 150px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  padding: 10px;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+}
+[data-theme='dark']  .file-upload-container {
+  background-color: rgba(40, 45, 45, 0.767);
+ 
+ }
+ 
+ [data-theme='light'] .file-upload-container {
+  background-color:rgb(242, 242, 242);
+ }
+
+.identity-selection {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 10px;
+}
+
+.identity-selection select{
+  border-radius: 10px;
+  padding: 5px 10px;
+ 
+}
+[data-theme='dark'] .identity-selection select {
+  background-color:rgb(33, 33, 33);
+  color: white;
+  border: none;
+ 
+  
+ }
+ 
+ [data-theme='light'] .identity-selection select{
+  background-color:rgb(240, 240, 240);
+  color: black;
+  border: none;
+ 
+ }
+
+
+.cvfileinput {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;  
+  cursor: pointer;
+}
+.cv-preview{
+  height: 140px;
+}
+.Gender-options{
+  border-radius: 12px;
+  padding: 20px;
+  width: 90%;
+  gap: 20px;
+  max-width: 400px;
+  position: relative;
+  text-align: center;
+  pointer-events: auto;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+
+}
+.maleoption{
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 10px;
+    gap: 10px;
+    font-size: 20px;
+    border-radius: 8px;
+    width: 200px;
+    height: 150px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    
+}
+[data-theme='dark'] .maleoption{
+  background-color:rgb(33, 33, 33);
+  color: white;
+
+  
+ }
+ 
+ [data-theme='light'] .maleoption{
+  background-color:rgb(255, 255, 255);
+  color: black;
+
+ 
+ }
+.maleoption:hover{
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+
 
 
 
@@ -350,8 +473,20 @@ button:hover {
   
 
   .teacherimagecontainer{
-
    display: none;
+  }
+  .teacherexperienceinsiders{
+    width: 90%;
+  }
+  .school-input {
+    width: 90%;
+  }
+  .degree-input{
+    width: 90%;
+  
+  }
+  .Gender-options{
+    flex-direction: column;
   }
   
 }

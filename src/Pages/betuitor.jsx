@@ -10,12 +10,14 @@ import TeachingExperience from "../widgets/becomeTuitor/tuitorexperience";
 
 function BecomeTuitor() {
   const [isAuthenticated, setIsAuthenticated] = useState(null);
+  const [user, setUsers] = useState(null);
   const [closetuitorlogin, setClosetuitorLogin] = useState(true); 
   const [opentuitorinitialmodal, setopentuitorinitialmodal] = useState(false); 
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
+        setUsers(user);
         setIsAuthenticated(true);
       } else {
         setIsAuthenticated(false);
@@ -42,7 +44,8 @@ function BecomeTuitor() {
       <BetuitotBanner setopentuitorinitialmodal={setopentuitorinitialmodal} />
       <BetuitotContent />
       {opentuitorinitialmodal && (
-        <TeachingExperience setopentuitorinitialmodal={()=>setopentuitorinitialmodal(false)}/>
+        <TeachingExperience user={user}
+         setopentuitorinitialmodal={()=>setopentuitorinitialmodal(false)}/>
       )}
     </>
   );

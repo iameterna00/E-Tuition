@@ -104,7 +104,14 @@
   cursor: pointer; /* Pointer cursor for interactivity */
 }
 
-
+.profile-container{
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  object-fit: cover;
+  background-color: white;
+  background-image: url('https://res.cloudinary.com/dbxx2qxxw/image/upload/v1735804900/user_gusmci.png');
+}
 
 .navlinks {
   display: flex;
