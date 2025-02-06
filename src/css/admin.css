@@ -19,7 +19,7 @@
     border-radius: 50%;
     height: 60px;
     width: 60px;
-    z-index: 100;
+    z-index: 10000;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -28,6 +28,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 1000;
     position: fixed; /* Use fixed positioning to cover the entire viewport */
     top: 0; /* Position the overlay at the top of the viewport */
     left: 0; /* Position the overlay at the left of the viewport */

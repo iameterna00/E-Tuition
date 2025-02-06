@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
-import backgroundImage from '../assets/vacancy.png'; // Import the image directly
+import React from 'react';
+import defaultBackground from '../assets/vacancy.png'; // Import the default image
+import onlineTuitionBackground from '../assets/online-vacancy.png'; // Import online vacancy image
 import html2canvas from 'html2canvas'; // Import html2canvas
 import { BsStars } from "react-icons/bs";
 
 const VacancyPreview = ({ vacancy }) => {
+  // Determine the background image based on tuition type
+  const vacancyBackground = vacancy.tuitionType === "Online Tuition" ? onlineTuitionBackground : defaultBackground;
 
   // Function to handle the download using html2canvas
   const downloadImage = () => {
@@ -26,88 +29,60 @@ const VacancyPreview = ({ vacancy }) => {
     { label: 'Grade:', value: vacancy.grade },
     { label: 'Location:', value: vacancy.location },
     { label: 'Subject:', value: vacancy.subject },
-    { label: 'No of student:', value: vacancy.students },
+    { label: 'No of students:', value: vacancy.students },
     { label: 'Duration:', value: vacancy.duration },
     { label: 'Salary:', value: vacancy.salary },
     { label: 'Time:', value: vacancy.time },
   ];
 
   // Conditionally add the "Requirements" section
+  if (vacancy.tutorType) {
+    vacancyDetails.push({ label: 'Tutor:', value: vacancy.tutorType });
+  }
   if (vacancy.minRequirement) {
-    vacancyDetails.push({
-      label: 'Requirements:',
-      value: vacancy.minRequirement,
-    });
+    vacancyDetails.push({ label: 'Requirements:', value: vacancy.minRequirement });
   }
 
   return (
-  <>
-    <div style={{height:"0px", overflow:'auto', position:"absolute"}}>
-      <div
-        id="vacancy-image"
-        className="vacancyimagediv"
-        style={{ position: 'relative' , }}
-      >
-        <img src={backgroundImage} alt="" />
-        <div
-          className="detailsoftext"
-          style={{
-            position: 'absolute',
-            top: '38%',
-            left: '13%',
-            fontSize: '40px',
-            color: 'black',
-            display: 'flex',
-            flexDirection: 'column',
-            textAlign: 'start',
-            alignItems: 'start',
-            gap: '0px',
-          }}
-        >
-          {vacancyDetails.map((item, index) => (
-            <div
-              key={index}
-              style={{
-                display: 'flex',
-                gap: '15px',
-                marginBottom: '-110px',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}
-              className="vacancytext"
-            >
-              <div
-                style={{
-                  display: 'flex',
-                  gap: '10px',
-                  marginBottom: '0px',
-                  alignItems: 'center',
-                }}
-              >
-                {/* Bullet point */}
-                <span
-                  style={{
-                    width: '20px',
-                    height: '20px',
-                    borderRadius: '50%',
-                    backgroundColor: '#000',
-                  }}
-                />
-                <h2>{item.label}</h2>
+    <>
+      <div style={{ height: "0px", overflow: 'auto', position:"absolute"}}>
+        <div id="vacancy-image" className="vacancyimagediv" style={{ position: 'relative' }}>
+          <img src={vacancyBackground} alt="Vacancy Background" />
+
+          <div
+            className="detailsoftext"
+            style={{
+              position: 'absolute',
+              top: '38%',
+              left: '13%',
+              fontSize: '40px',
+              color: 'black',
+              display: 'flex',
+              flexDirection: 'column',
+              textAlign: 'start',
+              alignItems: 'start',
+              gap: '30px',
+            }}
+          >
+            {vacancyDetails.map((item, index) => (
+              <div key={index} className="vacancytext" style={{ display: 'flex', gap: '15px', marginBottom: '-110px', justifyContent: 'center', alignItems: 'center' }}>
+                <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+                  {/* Bullet point */}
+                  <span style={{ width: '20px', height: '20px', borderRadius: '50%', backgroundColor: '#000' }} />
+                  <h2 style={{ fontSize: "50px" }}>{item.label}</h2>
+                </div>
+                <h2 style={{ fontWeight: '400', fontSize: "50px" }}>{item.value}</h2>
               </div>
-              <h2 style={{ fontWeight: '400' }}>{item.value}</h2>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
 
-  
-    </div>
- <div className="genetatebacancy">
- <button  style={{backgroundColor:"green"}} onClick={downloadImage}>
- <BsStars /> Generate Vacancy
-      </button>
- </div>
+      <div className="generateVacancy">
+        <button style={{ backgroundColor: "green" }} onClick={downloadImage}>
+          <BsStars /> Generate Vacancy
+        </button>
+      </div>
     </>
   );
 };

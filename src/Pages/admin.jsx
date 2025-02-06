@@ -18,12 +18,14 @@ const ADMIN = () => {
     name: "",
     grade: "",
     location: "",
-    students: "",
+    noofstudents: "",
     subject: "",
     duration: "",
     salary: "",
     time: "",
     minRequirement: "",
+    tutorType: "", // New field
+    tuitionType: "Home Tuition", // New field, default to Home Tuition
     teachers: [],
   });
   const [teacherData, setTeacherData] = useState({ teacherName: "", commission: "" });
@@ -47,12 +49,14 @@ const ADMIN = () => {
         name: "",
         grade: "",
         location: "",
-        students: "",
+        noofstudents: "",
         subject: "",
         duration: "",
         salary: "",
         time: "",
         minRequirement: "",
+        tutorType: "", // New field
+        tuitionType: "Home Tuition", // New field, default to Home Tuition
         teachers: [],
       });
       setIsModalOpen(false);
@@ -162,7 +166,7 @@ const ADMIN = () => {
         {vacancies.filter((v) => v.status === tab).map((v) => (
           <div key={v._id} className="tuition-vacancy-card">
             <h3 className="tuition-vacancy-title">{v.name} ({v.grade}) - {v.subject}</h3>
-            <p className="tuition-vacancy-info">Location: {v.location} | Students: {v.students}</p>
+            <p className="tuition-vacancy-info">Location: {v.location} | Students: {v.students || noofstudents}</p>
             <p className="tuition-vacancy-info">Salary: {v.salary} | Time: {v.time}</p>
             <p className="tuition-vacancy-info">Requirement: {v.minRequirement}</p>
             {tab === "available" && (
@@ -208,17 +212,35 @@ const ADMIN = () => {
           <div className="modal-content">
             <h2>Add Vacancy</h2>
             <form className="tuition-form" onSubmit={handleSubmit}>
-              {["name", "grade", "location", "students", "subject", "duration", "salary", "time", "minRequirement"].map((field) => (
+              {["name", "grade", "location", "noofstudents", "subject", "duration", "salary", "time", "minRequirement"].map((field) => (
                 <input
                   key={field}
                   className="tuition-input"
-                  type={field === "students" ? "number" : "text"}
+                  type={field === "noofstudents" ? "number" : "text"}
                   placeholder={field.charAt(0).toUpperCase() + field.slice(1)}
                   value={formData[field]}
                   onChange={(e) => setFormData({ ...formData, [field]: e.target.value })}
                   required
                 />
               ))}
+               <input
+                className="tuition-input"
+                type="text"
+                placeholder="Tutor Type"
+                value={formData.tutorType}
+                onChange={(e) => setFormData({ ...formData, tutorType: e.target.value })}
+                required
+              />
+              {/* New Tuition Type Field */}
+              <select
+              style={{backgroundColor:'transparent'}}
+                className="tuition-input"
+                value={formData.tuitionType}
+                onChange={(e) => setFormData({ ...formData, tuitionType: e.target.value })}
+              >
+                <option value="Home Tuition">Home Tuition</option>
+                <option value="Online Tuition">Online Tuition</option>
+              </select>
               <button className="tuition-button" type="submit">Add Vacancy</button>
             </form>
           </div>
