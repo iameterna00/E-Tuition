@@ -34,14 +34,21 @@ const ADMIN = () => {
   const [selectedTeacherCommission, setSelectedTeacherCommission] = useState("");
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 const [vacancyToDelete, setVacancyToDelete] = useState(null);
+const [loading, setLoading] = useState(true);
 
 
-  useEffect(() => {
-    axios
-      .get(API_URL)
-      .then((res) => setVacancies(res.data))
-      .catch((err) => console.error("Error fetching vacancies:", err));
-  }, []);
+useEffect(() => {
+  axios
+    .get(API_URL)
+    .then((res) => {
+      setVacancies(res.data);
+      setLoading(false); // Set loading to false after data is fetched
+    })
+    .catch((err) => {
+      console.error("Error fetching vacancies:", err);
+      setLoading(false); // Ensure loading is turned off even if there's an error
+    });
+}, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -171,19 +178,25 @@ const [vacancyToDelete, setVacancyToDelete] = useState(null);
 
   return (
     <div className="tuition-container">
-      <h1 className="tuition-heading">Tuition Vacancy Management</h1>
-      <div className="tuition-tabs">
-        {["available", "pending", "complete"].map((status) => (
-          <button
-            key={status}
-            className={`tuition-tab ${tab === status ? "tuition-tab-active" : ""}`}
-            onClick={() => setTab(status)}
-          >
-            {status.charAt(0).toUpperCase() + status.slice(1)}
-          </button>
-        ))}
+    {/* Loading screen */}
+    {loading && (
+      <div className="loading-screen">
+        <p>Loading vacancies...</p>
       </div>
+    )}
 
+    <h1 className="tuition-heading">Tuition Vacancy Management</h1>
+    <div className="tuition-tabs">
+      {["available", "pending", "complete"].map((status) => (
+        <button
+          key={status}
+          className={`tuition-tab ${tab === status ? "tuition-tab-active" : ""}`}
+          onClick={() => setTab(status)}
+        >
+          {status.charAt(0).toUpperCase() + status.slice(1)}
+        </button>
+      ))}
+    </div>
       {/* Display calculated values below tabs */}
       <div className="tab-stats">
         {tab === "available" && <p>Total Vacancies: {availableVacancies}</p>}

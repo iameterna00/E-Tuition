@@ -89,14 +89,19 @@
     border: 1px solid #cccccc87;
     border-radius: 10px;
     font-size: 14px;
+    
   }
   [data-theme='light'] .tuition-input {
     color: black;
   }
-  [data-theme='dark'] .tuition-input {
+  [data-theme='dark'] .tuition-input  {
     color: white;
-  }
   
+  }
+  .tuition-input option {
+    background-color: #d1e7ff62; /* Light blue background for the options */
+    color: #333; /* Dark text color for the options */
+  }
   
   .tuition-button {
     background-color: #3498db;
