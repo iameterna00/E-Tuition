@@ -18,7 +18,7 @@ const ADMIN = () => {
     name: "",
     grade: "",
     location: "",
-    noofstudents: "",
+    students: "",
     subject: "",
     duration: "",
     salary: "",
@@ -146,6 +146,15 @@ const ADMIN = () => {
     }
   };
 
+  // Calculate total vacancies, commissions, and revenue
+  const availableVacancies = vacancies.filter((v) => v.status === "available").length;
+  const pendingCommissions = vacancies
+    .filter((v) => v.status === "pending")
+    .reduce((total, vacancy) => total + vacancy.teachers.reduce((sum, teacher) => sum + parseFloat(teacher.commission || 0), 0), 0);
+  const completeRevenue = vacancies
+    .filter((v) => v.status === "complete")
+    .reduce((total, vacancy) => total + parseFloat(vacancy.teacherCommission || 0), 0);
+
   return (
     <div className="tuition-container">
       <h1 className="tuition-heading">Tuition Vacancy Management</h1>
@@ -161,12 +170,19 @@ const ADMIN = () => {
         ))}
       </div>
 
+      {/* Display calculated values below tabs */}
+      <div className="tab-stats">
+        {tab === "available" && <p>Total Vacancies: {availableVacancies}</p>}
+        {tab === "pending" && <p>Total Commissions: {pendingCommissions}</p>}
+        {tab === "complete" && <p>Total Revenue: {completeRevenue}</p>}
+      </div>
+
       {/* Vacancy List */}
       <div className="tuition-vacancy-list">
         {vacancies.filter((v) => v.status === tab).map((v) => (
           <div key={v._id} className="tuition-vacancy-card">
             <h3 className="tuition-vacancy-title">{v.name} ({v.grade}) - {v.subject}</h3>
-            <p className="tuition-vacancy-info">Location: {v.location} | Students: {v.students || noofstudents}</p>
+            <p className="tuition-vacancy-info">Location: {v.location} | Students: {v.noofstudent}</p>
             <p className="tuition-vacancy-info">Salary: {v.salary} | Time: {v.time}</p>
             <p className="tuition-vacancy-info">Requirement: {v.minRequirement}</p>
             {tab === "available" && (
@@ -215,69 +231,64 @@ const ADMIN = () => {
               {["name", "grade", "location", "noofstudents", "subject", "duration", "salary", "time", "minRequirement"].map((field) => (
                 <input
                   key={field}
-                  className="tuition-input"
-                  type={field === "noofstudents" ? "number" : "text"}
-                  placeholder={field.charAt(0).toUpperCase() + field.slice(1)}
+                  type="text"
+                  name={field}
+                  placeholder={field.replace(/([A-Z])/g, " $1")}
                   value={formData[field]}
-                  onChange={(e) => setFormData({ ...formData, [field]: e.target.value })}
-                  required
+                  onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })}
                 />
               ))}
-               <input
-                className="tuition-input"
-                type="text"
-                placeholder="Tutor Type"
-                value={formData.tutorType}
-                onChange={(e) => setFormData({ ...formData, tutorType: e.target.value })}
-                required
-              />
-              {/* New Tuition Type Field */}
-              <select
-              style={{backgroundColor:'transparent'}}
-                className="tuition-input"
-                value={formData.tuitionType}
-                onChange={(e) => setFormData({ ...formData, tuitionType: e.target.value })}
-              >
-                <option value="Home Tuition">Home Tuition</option>
-                <option value="Online Tuition">Online Tuition</option>
-              </select>
-              <button className="tuition-button" type="submit">Add Vacancy</button>
+              <div>
+                <button type="submit">Add Vacancy</button>
+              </div>
             </form>
           </div>
         </div>
       )}
 
-      {/* Teacher Modal */}
+      {/* Assign Teacher Modal */}
       {isTeacherModalOpen && (
-        <div className="teachermodal-overlay">
-          <div className="teachermodal-content">
-            <h2>Add Teacher Details</h2>
-            <form onSubmit={handleTeacherSubmit}>
-              <input className="tuition-input" type="text" placeholder="Teacher Name" value={teacherData.teacherName} onChange={(e) => setTeacherData({ ...teacherData, teacherName: e.target.value })} required />
-              <input className="tuition-input" type="text" placeholder="Commission" value={teacherData.commission} onChange={(e) => setTeacherData({ ...teacherData, commission: e.target.value })} required />
-              <button type="submit" className="tuition-button">Submit</button>
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <h2>Assign Teacher</h2>
+            <form className="tuition-form" onSubmit={handleTeacherSubmit}>
+              <input
+                type="text"
+                name="teacherName"
+                placeholder="Teacher Name"
+                value={teacherData.teacherName}
+                onChange={(e) => setTeacherData({ ...teacherData, teacherName: e.target.value })}
+              />
+              <input
+                type="number"
+                name="commission"
+                placeholder="Commission"
+                value={teacherData.commission}
+                onChange={(e) => setTeacherData({ ...teacherData, commission: e.target.value })}
+              />
+              <button type="submit">Assign Teacher</button>
             </form>
           </div>
         </div>
       )}
 
-      {/* Complete Teacher Modal */}
+      {/* Confirm Complete Teacher Modal */}
       {isCompleteTeacherModalOpen && (
-        <div className="teachermodal-overlay">
-          <div className="teachermodal-content">
-            <h2>Select a Teacher</h2>
-            <select onChange={handleCompleteTeacherSelect} value={selectedTeacher} required>
-              <option value="">Select a teacher</option>
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <h2>Complete Vacancy</h2>
+            <label>Select Teacher</label>
+            <select onChange={handleCompleteTeacherSelect}>
+              <option value="">Select Teacher</option>
               {vacancies
                 .find((vacancy) => vacancy._id === vacancyId)
-                ?.teachers.map((teacher) => (
-                  <option key={teacher.teacherName} value={teacher.teacherName}>
+                ?.teachers.map((teacher, index) => (
+                  <option key={index} value={teacher.teacherName}>
                     {teacher.teacherName}
                   </option>
                 ))}
             </select>
-            <p>Commission: {selectedTeacherCommission}</p>
-            <button onClick={handleConfirmComplete}>Confirm</button>
+            <button onClick={handleConfirmComplete}>Confirm Complete</button>
           </div>
         </div>
       )}

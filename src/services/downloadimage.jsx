@@ -10,26 +10,33 @@ const VacancyPreview = ({ vacancy }) => {
 
   // Function to handle the download using html2canvas
   const downloadImage = () => {
-    const div = document.getElementById('vacancy-image'); // Get the div reference
+    const div = document.getElementById(`vacancy-image-${vacancy._id}`); 
 
-    // Use html2canvas to capture the div as an image
-    html2canvas(div).then((canvas) => {
-      // Convert the canvas to a data URL (PNG image format)
-      const dataUrl = canvas.toDataURL('image/png');
+    // Check if the div is available
+    if (div) {
+      // Use html2canvas to capture the div as an image
+      html2canvas(div).then((canvas) => {
+        // Convert the canvas to a data URL (PNG image format)
+        const dataUrl = canvas.toDataURL('image/png');
 
-      // Create an anchor tag to trigger the download
-      const link = document.createElement('a');
-      link.href = dataUrl;
-      link.download = 'vacancy-preview.png'; // Name of the file to download
-      link.click();
-    });
+        // Create an anchor tag to trigger the download
+        const link = document.createElement('a');
+        link.href = dataUrl;
+        link.download = `vacancy-preview-${vacancy._id}.png`; // Use unique filename with vacancy ID
+        link.click();
+      }).catch((error) => {
+        console.error('Error capturing the vacancy image:', error);
+      });
+    } else {
+      console.error(`Element with id 'vacancy-image-${vacancy._id}' not found.`);
+    }
   };
 
   const vacancyDetails = [
     { label: 'Grade:', value: vacancy.grade },
     { label: 'Location:', value: vacancy.location },
     { label: 'Subject:', value: vacancy.subject },
-    { label: 'No of students:', value: vacancy.students },
+    { label: 'No of students:', value: vacancy.noofstudents },
     { label: 'Duration:', value: vacancy.duration },
     { label: 'Salary:', value: vacancy.salary },
     { label: 'Time:', value: vacancy.time },
@@ -45,8 +52,8 @@ const VacancyPreview = ({ vacancy }) => {
 
   return (
     <>
-      <div style={{ height: "0px", overflow: 'auto', position:"absolute"}}>
-        <div id="vacancy-image" className="vacancyimagediv" style={{ position: 'relative' }}>
+      <div style={{ height: "0px", overflow: 'auto', position:'absolute'}}>
+        <div id={`vacancy-image-${vacancy._id}`} className="vacancyimagediv" style={{ position: 'relative' }}>
           <img src={vacancyBackground} alt="Vacancy Background" />
 
           <div
