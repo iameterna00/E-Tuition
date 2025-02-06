@@ -80,7 +80,7 @@ const Navbar = () => {
             {!menuOpen && (
               <div style={{ marginRight: "100px" }} className={`navlinks ${menuOpen ? 'active' : ''}`}>
          
-                <button className="navbuttons">About</button>
+                <Link to={'/admin'}><button className="navbuttons">About</button></Link>
               </div>
             )}
           </div>
