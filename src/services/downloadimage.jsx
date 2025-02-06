@@ -32,15 +32,16 @@ const VacancyPreview = ({ vacancy }) => {
     }
   };
 
-  const vacancyDetails = [
-    { label: 'Grade:', value: vacancy.grade },
-    { label: 'Location:', value: vacancy.location },
-    { label: 'Subject:', value: vacancy.subject },
-    { label: 'No of students:', value: vacancy.noofstudents },
-    { label: 'Duration:', value: vacancy.duration },
-    { label: 'Salary:', value: vacancy.salary },
-    { label: 'Time:', value: vacancy.time },
-  ];
+const vacancyDetails = [
+  { label: 'Grade:', value: vacancy.grade },
+  vacancy.location ? { label: 'Location:', value: vacancy.location } : null,
+  { label: 'Subject:', value: vacancy.subject },
+  { label: 'No of students:', value: vacancy.noofstudents },
+  { label: 'Duration:', value: vacancy.duration },
+  { label: 'Salary:', value: vacancy.salary },
+  { label: 'Time:', value: vacancy.time },
+].filter(item => item !== null); // This removes null values from the array
+
 
   // Conditionally add the "Requirements" section
   if (vacancy.tutorType) {

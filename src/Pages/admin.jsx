@@ -32,6 +32,9 @@ const ADMIN = () => {
   const [vacancyId, setVacancyId] = useState(null);
   const [selectedTeacher, setSelectedTeacher] = useState(null);
   const [selectedTeacherCommission, setSelectedTeacherCommission] = useState("");
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+const [vacancyToDelete, setVacancyToDelete] = useState(null);
+
 
   useEffect(() => {
     axios
@@ -101,15 +104,26 @@ const ADMIN = () => {
       console.error("Error updating teacher data:", err);
     }
   };
+  const handleDeleteClick = (id) => {
+    setVacancyToDelete(id);
+    setIsDeleteModalOpen(true);
+  };
+  
 
-  const deleteVacancy = async (id) => {
+
+
+  const confirmDeleteVacancy = async () => {
     try {
-      await axios.delete(`${API_URL}/${id}`);
-      setVacancies(vacancies.filter((v) => v._id !== id));
+      if (vacancyToDelete) {
+        await axios.delete(`${API_URL}/${vacancyToDelete}`);
+        setVacancies(vacancies.filter((v) => v._id !== vacancyToDelete));
+      }
+      setIsDeleteModalOpen(false); // Close the modal after deletion
     } catch (err) {
       console.error("Error deleting vacancy:", err);
     }
   };
+  
 
   const handleCompleteTeacherSelect = (e) => {
     const selectedTeacherName = e.target.value;
@@ -196,7 +210,7 @@ const ADMIN = () => {
                 {v.teachers && v.teachers.map((teacher, index) => (
                   <p key={index}>Teacher: {teacher.teacherName} | Commission: {teacher.commission}</p>
                 ))}
-                <div className="addteacher" onClick={() => setIsTeacherModalOpen(true)}>
+                <div className="addteacher" style={{display:'flex', gap:'5px'}} onClick={() => setIsTeacherModalOpen(true)}>
                   Add More <IoIosAddCircle fontSize={25} />
                 </div>
               </div>
@@ -215,7 +229,8 @@ const ADMIN = () => {
                   <button onClick={() => updateStatus(v._id, "complete")}>Move to Complete</button>
                 </>
               )}
-              <button className="tuition-delete-button" onClick={() => deleteVacancy(v._id)}>Delete</button>
+             <button className="tuition-delete-button" onClick={() => handleDeleteClick(v._id)}>Delete</button>
+
             </div>
           </div>
         ))}
@@ -231,25 +246,43 @@ const ADMIN = () => {
               {["name", "grade", "location", "noofstudents", "subject", "duration", "salary", "time", "minRequirement"].map((field) => (
                 <input
                   key={field}
-                  type="text"
-                  name={field}
-                  placeholder={field.replace(/([A-Z])/g, " $1")}
+                  className="tuition-input"
+                  type={field === "noofstudents" ? "number" : "text"}
+                  placeholder={field.charAt(0).toUpperCase() + field.slice(1)}
                   value={formData[field]}
-                  onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })}
+                  onChange={(e) => setFormData({ ...formData, [field]: e.target.value })}
+                  
                 />
               ))}
-              <div>
-                <button type="submit">Add Vacancy</button>
-              </div>
+               <input
+                className="tuition-input"
+                type="text"
+                placeholder="Tutor Type"
+                value={formData.tutorType}
+                onChange={(e) => setFormData({ ...formData, tutorType: e.target.value })}
+                
+              />
+              {/* New Tuition Type Field */}
+              <select
+              style={{backgroundColor:'transparent'}}
+                className="tuition-input"
+                value={formData.tuitionType}
+                onChange={(e) => setFormData({ ...formData, tuitionType: e.target.value })}
+              >
+                <option value="Home Tuition">Home Tuition</option>
+                <option value="Online Tuition">Online Tuition</option>
+              </select>
+              <button className="tuition-button" type="submit">Add Vacancy</button>
             </form>
           </div>
         </div>
       )}
 
+
       {/* Assign Teacher Modal */}
       {isTeacherModalOpen && (
         <div className="modal-overlay">
-          <div className="modal-content">
+          <div className="modal-content" style={{maxWidth:'500px', marginLeft:"-20px"}}>
             <h2>Assign Teacher</h2>
             <form className="tuition-form" onSubmit={handleTeacherSubmit}>
               <input
@@ -266,7 +299,9 @@ const ADMIN = () => {
                 value={teacherData.commission}
                 onChange={(e) => setTeacherData({ ...teacherData, commission: e.target.value })}
               />
-              <button type="submit">Assign Teacher</button>
+           <div className="buttons" style={{display:"flex", gap:'10px'}}>   <button type="submit">Assign Teacher</button>
+              <button className="tuition-delete-button" onClick={()=> setIsTeacherModalOpen(false)} >Cancel</button>
+              </div>
             </form>
           </div>
         </div>
@@ -278,7 +313,7 @@ const ADMIN = () => {
           <div className="modal-content">
             <h2>Complete Vacancy</h2>
             <label>Select Teacher</label>
-            <select onChange={handleCompleteTeacherSelect}>
+            <select style={{padding:"10px"}} onChange={handleCompleteTeacherSelect}>
               <option value="">Select Teacher</option>
               {vacancies
                 .find((vacancy) => vacancy._id === vacancyId)
@@ -289,9 +324,22 @@ const ADMIN = () => {
                 ))}
             </select>
             <button onClick={handleConfirmComplete}>Confirm Complete</button>
+            <button className="tuition-delete-button" onClick={()=> setIsCompleteTeacherModalOpen(false)}>Close</button>
           </div>
         </div>
       )}
+      {isDeleteModalOpen && (
+  <div className="modal-overlay">
+    <div className="modal-content">
+      <h2>Are you sure you want to delete this vacancy?</h2>
+      <div className="modal-actions" style={{display:"flex", gap:'10px'}}>
+        <button className="cancel-button" onClick={() => setIsDeleteModalOpen(false)}>Cancel</button>
+        <button className="tuition-delete-button" onClick={confirmDeleteVacancy}>Delete</button>
+      </div>
+    </div>
+  </div>
+)}
+
     </div>
   );
 };
