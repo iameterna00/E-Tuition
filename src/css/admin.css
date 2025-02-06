@@ -1,0 +1,230 @@
+
+  
+  .tuition-container {
+    width: 80%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+  }
+  .floating-button{
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    border-radius: 50%;
+    height: 60px;
+    width: 60px;
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .modal-overlay{
+    display: flex;
+    margin-top: 100px;
+    position: absolute;
+    overflow-y: auto;
+    height: 90vh;
+    width: 100%;
+  }
+  [data-theme='light'] .modal-overlay {
+    background-color: rgb(255, 255, 255);
+  }
+  [data-theme='dark'] .modal-overlay {
+    background-color: black;
+  }
+  
+  .modal-content{ 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+  }
+  .teachermodal-content{
+    padding: 10px;
+  }
+  .tuition-heading {
+    text-align: center;
+    color: #2d96ff;
+    font-size: 20px;
+  }
+  
+  /* Form Styles */
+  .tuition-form {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 12px;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .tuition-input {
+    width: calc(50% - 12px);
+    padding: 10px;
+    border: 1px solid #cccccc87;
+    border-radius: 10px;
+    font-size: 14px;
+  }
+  [data-theme='light'] .tuition-input {
+    color: black;
+  }
+  [data-theme='dark'] .tuition-input {
+    color: white;
+  }
+  
+  
+  .tuition-button {
+    background-color: #3498db;
+    padding: 12px 18px;
+    border: none;
+    max-width: 200px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .tuition-button:hover {
+    background-color: #2980b9;
+  }
+  
+  /* Tabs */
+  .tuition-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    font-size: 12px;
+    margin-bottom: 20px;
+  }
+  
+  .tuition-tab {
+    padding: 10px 20px;
+    display: flex;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background 0.3s;
+    font-weight: bold;
+  }
+  
+  .tuition-tab:hover {
+    background-color: #bdc3c7;
+  }
+  
+  .tuition-tab-active {
+    background-color: #1f007e;
+    color: white;
+  }
+  
+  /* Vacancy List */
+  .tuition-vacancy-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .tuition-vacancy-card {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-left: 5px solid #3498db;
+  }
+  
+  .tuition-vacancy-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #3498db;
+  }
+  
+  .tuition-vacancy-info {
+    font-size: 14px;
+    display: flex;
+    align-items: start;
+    margin: 5px 0;
+  }
+  .assignedteachers{
+    background-color:rgba(128, 128, 128, 0.208) ;
+    width: 90%;
+    text-align: start;
+    border-radius: 10px;
+    padding: 10px;
+
+  }
+  
+  .tuition-action-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  
+  .tuition-move-button {
+    background-color: #27ae60;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .tuition-move-button:hover {
+    background-color: #219150;
+  }
+  
+  .tuition-delete-button {
+    background-color: #e74c3c;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .tuition-delete-button:hover {
+    background-color: #c0392b;
+  }
+  
+  
+@media (max-width: 600px) {
+      
+  .tuition-container {
+    width: 100%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+  }
+  .tuition-input {
+    width: 80%;
+    padding: 10px;
+    border: 1px solid #cccccc87;
+    border-radius: 10px;
+    font-size: 14px;
+  }
+  .tuition-form {
+    width: 90%;
+ 
+  }
+}

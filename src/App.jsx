@@ -13,6 +13,7 @@ import ScrollToTop from './services/scrolltotop';
 
 import { Provider } from 'react-redux'; // Import Provider from react-redux
 import store from './services/Redux/store'; // Import your configured Redux store
+import ADMIN from './Pages/admin';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
             <Route path="/tuitorform" element={<ApplyForTuitor />} />
             <Route path="/dashboard" element={<UserList />} />
             <Route path="/profile" element={<ProfilePage />} />
+             <Route path="/admin" element={<ADMIN />} />
           </Routes>
         </ThemeProvider>
       </Router>
