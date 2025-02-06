@@ -24,14 +24,19 @@
     justify-content: center;
     align-items: center;
   }
-  .modal-overlay{
+  .modal-overlay {
     display: flex;
-    margin-top: 100px;
-    position: absolute;
-    overflow-y: auto;
-    height: 90vh;
-    width: 100%;
-  }
+    justify-content: center;
+    align-items: center;
+    position: fixed; /* Use fixed positioning to cover the entire viewport */
+    top: 0; /* Position the overlay at the top of the viewport */
+    left: 0; /* Position the overlay at the left of the viewport */
+    height: 100vh; /* Full viewport height */
+    width: 100vw; /* Full viewport width */
+    overflow-y: auto; /* Allow vertical scrolling if necessary */
+    background-color: rgba(0, 0, 0, 0.5); /* Optional: semi-transparent background for the overlay */
+}
+
   [data-theme='light'] .modal-overlay {
     background-color: rgb(255, 255, 255);
   }
