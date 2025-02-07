@@ -41,20 +41,34 @@ const ADMIN = () => {
   const [isAssigningTeacher, setIsAssigningTeacher] = useState(false);
   const [isCompleting, setIsCompleting] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [progress, setProgress] = useState(0);
 
 
-useEffect(() => {
-  axios
-    .get(API_URL)
-    .then((res) => {
-      setVacancies(res.data);
-      setLoading(false); // Set loading to false after data is fetched
-    })
-    .catch((err) => {
-      console.error("Error fetching vacancies:", err);
-      setLoading(false); // Ensure loading is turned off even if there's an error
-    });
-}, []);
+
+  useEffect(() => {
+    const fetchVacancies = async () => {
+      try {
+        const response = await axios.get(API_URL, {
+          // Example: you can specify progress updates if your API supports it
+          onDownloadProgress: (progressEvent) => {
+            const totalLength = progressEvent.total;
+            if (totalLength) {
+              const progressPercentage = Math.round((progressEvent.loaded * 100) / totalLength);
+              setProgress(progressPercentage); // Update progress state
+            }
+          },
+        });
+
+        setVacancies(response.data);
+        setLoading(false);
+      } catch (err) {
+        console.error("Error fetching vacancies:", err);
+        setLoading(false);
+      }
+    };
+
+    fetchVacancies();
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -214,10 +228,14 @@ useEffect(() => {
     <div className="tuition-container">
     {/* Loading screen */}
     {loading && (
-      <div className="loading-screen">
-    <FaSpinner className="newspinner" />
-      </div>
-    )}
+        <div className="loading-screen">
+          <FaSpinner className="newspinner" />
+          <div className="progress-bar">
+            <div className="progress" style={{ width: `${progress}%` }}></div>
+          </div>
+          <div className="loading-text">{progress}%</div>
+        </div>
+      )}
 
     <h1 className="tuition-heading">Tuition Vacancy Management</h1>
     <div className="tuition-tabs">
