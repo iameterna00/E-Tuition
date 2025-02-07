@@ -3,7 +3,7 @@ import axios from "axios";
 import "../css/admin.css";
 import { IoIosAddCircle } from "react-icons/io";
 import DownloadImageButton from "../services/downloadimage";
-
+import { Faloader } from "react-icons/fa"; // loader Icon
 const API_URL = window.location.hostname === "localhost"
   ? "http://localhost:5001/api/vacancies"  // Local development
   : "https://kube-backend.onrender.com/api/vacancies"; 
@@ -33,8 +33,14 @@ const ADMIN = () => {
   const [selectedTeacher, setSelectedTeacher] = useState(null);
   const [selectedTeacherCommission, setSelectedTeacherCommission] = useState("");
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-const [vacancyToDelete, setVacancyToDelete] = useState(null);
-const [loading, setLoading] = useState(true);
+  const [vacancyToDelete, setVacancyToDelete] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isUpdatingStatus, setIsUpdatingStatus] = useState(false);
+  const [isAssigningTeacher, setIsAssigningTeacher] = useState(false);
+  const [isCompleting, setIsCompleting] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
 
 
 useEffect(() => {
@@ -52,6 +58,7 @@ useEffect(() => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
     try {
       const res = await axios.post(API_URL, { ...formData, status: "available" });
       setVacancies([...vacancies, { ...formData, status: "available", _id: res.data.id }]);
@@ -73,9 +80,11 @@ useEffect(() => {
     } catch (err) {
       console.error("Error adding vacancy:", err);
     }
+    setIsSubmitting(false);
   };
 
   const updateStatus = async (id, status) => {
+    setIsUpdatingStatus(true);
     try {
       const updateData = { status };
       if (status === "pending") {
@@ -91,35 +100,50 @@ useEffect(() => {
     } catch (err) {
       console.error("Error updating status:", err);
     }
+    setIsUpdatingStatus(false);
   };
+
 
   const handleTeacherSubmit = async (e) => {
     e.preventDefault();
-    const updatedVacancies = vacancies.map((vacancy) => {
-      if (vacancy._id === vacancyId) {
-        vacancy.teachers.push(teacherData);
-        vacancy.status = "pending";
-      }
-      return vacancy;
-    });
+    setIsAssigningTeacher(true);
+    if (!vacancyId) {
+      console.error("No vacancy selected for teacher assignment!");
+      return;
+    }
+    console.log("Adding teacher:", teacherData, "to vacancy ID:", vacancyId);
+
     try {
-      await axios.put(`${API_URL}/${vacancyId}`, { status: "pending", teachers: updatedVacancies.find((v) => v._id === vacancyId).teachers });
+      const updatedVacancies = vacancies.map((vacancy) => {
+        if (vacancy._id === vacancyId) {
+          return {
+            ...vacancy,
+            teachers: [...vacancy.teachers, teacherData],
+            status: "pending",
+          };
+        }
+        return vacancy;
+      });
+
+      await axios.put(`${API_URL}/${vacancyId}`, {
+        status: "pending",
+        teachers: updatedVacancies.find((v) => v._id === vacancyId).teachers,
+      });
+
+      console.log("Teacher assigned successfully");
       setVacancies(updatedVacancies);
       setTeacherData({ teacherName: "", commission: "" });
       setIsTeacherModalOpen(false);
     } catch (err) {
-      console.error("Error updating teacher data:", err);
+      console.error("Error updating teacher data:", err.response ? err.response.data : err);
     }
+    setIsAssigningTeacher(false);
   };
-  const handleDeleteClick = (id) => {
-    setVacancyToDelete(id);
-    setIsDeleteModalOpen(true);
-  };
-  
 
 
 
   const confirmDeleteVacancy = async () => {
+    setIsDeleting(true);
     try {
       if (vacancyToDelete) {
         await axios.delete(`${API_URL}/${vacancyToDelete}`);
@@ -129,6 +153,7 @@ useEffect(() => {
     } catch (err) {
       console.error("Error deleting vacancy:", err);
     }
+    setIsDeleting(false);
   };
   
 
@@ -148,6 +173,7 @@ useEffect(() => {
   };
 
   const handleConfirmComplete = async () => {
+    setIsCompleting(true);
     if (selectedTeacher) {
       try {
         await axios.put(`${API_URL}/${vacancyId}`, {
@@ -165,7 +191,15 @@ useEffect(() => {
     } else {
       alert("Please select a teacher.");
     }
+    setIsCompleting(true);
   };
+
+
+    const handleDeleteClick = (id) => {
+    setVacancyToDelete(id);
+    setIsDeleteModalOpen(true);
+  };
+  
 
   // Calculate total vacancies, commissions, and revenue
   const availableVacancies = vacancies.filter((v) => v.status === "available").length;
@@ -181,7 +215,7 @@ useEffect(() => {
     {/* Loading screen */}
     {loading && (
       <div className="loading-screen">
-        <p>Loading vacancies...</p>
+    <Faloader className="loader" />
       </div>
     )}
 
@@ -211,7 +245,9 @@ useEffect(() => {
             <h3 className="tuition-vacancy-title">{v.name} ({v.grade}) - {v.subject}</h3>
             <p className="tuition-vacancy-info">Location: {v.location} | Students: {v.noofstudent}</p>
             <p className="tuition-vacancy-info">Salary: {v.salary} | Time: {v.time}</p>
-            <p className="tuition-vacancy-info">Requirement: {v.minRequirement}</p>
+           {v.minRequirement &&( <p className="tuition-vacancy-info">Requirement: {v.minRequirement}</p>)}
+            <p className="tuition-vacancy-info">UploadDate: {v.created_at}</p>
+
             {tab === "available" && (
                 <div className="uploadvacancycontainer" >
                      <DownloadImageButton vacancy={v} />
@@ -235,7 +271,7 @@ useEffect(() => {
               </div>
             )}
             <div className="tuition-action-buttons">
-              {tab === "available" && <button onClick={() => updateStatus(v._id, "pending")}>Move to Pending</button>}
+              {tab === "available" && <button onClick={() => updateStatus(v._id, "pending")}>  {isUpdatingStatus ? <FaSpinner className="loader" /> : "Move To Pending"}</button>}
               {tab === "pending" && (
                 <>
                   <button onClick={() => updateStatus(v._id, "available")}>Move to Available</button>
@@ -285,7 +321,7 @@ useEffect(() => {
                 <option value="Home Tuition">Home Tuition</option>
                 <option value="Online Tuition">Online Tuition</option>
               </select>
-              <button className="tuition-button" type="submit">Add Vacancy</button>
+              <button className="tuition-button" type="submit">  {isSubmitting ? <Faloader className="loader" /> : "Add Vacancy"}</button>
             </form>
           </div>
         </div>
@@ -312,7 +348,7 @@ useEffect(() => {
                 value={teacherData.commission}
                 onChange={(e) => setTeacherData({ ...teacherData, commission: e.target.value })}
               />
-           <div className="buttons" style={{display:"flex", gap:'10px'}}>   <button type="submit">Assign Teacher</button>
+           <div className="buttons" style={{display:"flex", gap:'10px'}}>   <button type="submit">{isAssigningTeacher ? <FaSpinner className="loader" /> : "Assign Teacher"}</button>
               <button className="tuition-delete-button" onClick={()=> setIsTeacherModalOpen(false)} >Cancel</button>
               </div>
             </form>
@@ -332,7 +368,7 @@ useEffect(() => {
                 .find((vacancy) => vacancy._id === vacancyId)
                 ?.teachers.map((teacher, index) => (
                   <option key={index} value={teacher.teacherName}>
-                    {teacher.teacherName}
+                    {teacher.teacherName} {teacher.commission}
                   </option>
                 ))}
             </select>
@@ -347,7 +383,7 @@ useEffect(() => {
       <h2>Are you sure you want to delete this vacancy?</h2>
       <div className="modal-actions" style={{display:"flex", gap:'10px'}}>
         <button className="cancel-button" onClick={() => setIsDeleteModalOpen(false)}>Cancel</button>
-        <button className="tuition-delete-button" onClick={confirmDeleteVacancy}>Delete</button>
+        <button className="tuition-delete-button" onClick={confirmDeleteVacancy}> {isDeleting ? <Faloader className="loader" /> : "Delete"}</button>
       </div>
     </div>
   </div>

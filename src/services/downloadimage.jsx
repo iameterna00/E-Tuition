@@ -61,7 +61,7 @@ const vacancyDetails = [
             className="detailsoftext"
             style={{
               position: 'absolute',
-              top: '38%',
+              top: '42%',
               left: '13%',
               fontSize: '40px',
               color: 'black',
@@ -73,14 +73,26 @@ const vacancyDetails = [
             }}
           >
             {vacancyDetails.map((item, index) => (
-              <div key={index} className="vacancytext" style={{ display: 'flex', gap: '15px', marginBottom: '-110px', justifyContent: 'center', alignItems: 'center' }}>
-                <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
-                  {/* Bullet point */}
-                  <span style={{ width: '20px', height: '20px', borderRadius: '50%', backgroundColor: '#000' }} />
-                  <h2 style={{ fontSize: "50px" }}>{item.label}</h2>
-                </div>
-                <h2 style={{ fontWeight: '400', fontSize: "50px" }}>{item.value}</h2>
-              </div>
+             <div key={index} className="vacancytext" 
+             style={{ 
+               display: 'flex', 
+               gap: '15px', 
+               marginBottom:'-20px',
+               justifyContent: 'flex-start', 
+               alignItems: 'center', 
+               flexWrap: 'wrap',
+             
+               width: '100%' // Ensure elements take full width
+             }}
+           >
+             <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+               {/* Bullet point */}
+               <span style={{ width: '20px', height: '20px', borderRadius: '50%', backgroundColor: '#000' }} />
+               <h2 style={{ fontSize: "42px", margin: 0 }}>{item.label}</h2>
+             </div>
+             <h2 style={{ fontWeight: '400', fontSize: "42px", margin: 0, wordBreak: 'break-word' }}>{item.value}</h2>
+           </div>
+           
             ))}
           </div>
         </div>
