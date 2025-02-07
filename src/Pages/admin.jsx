@@ -3,7 +3,7 @@ import axios from "axios";
 import "../css/admin.css";
 import { IoIosAddCircle } from "react-icons/io";
 import DownloadImageButton from "../services/downloadimage";
-import { Faloader } from "react-icons/fa"; // loader Icon
+import { FaSpinner } from "react-icons/fa";  
 const API_URL = window.location.hostname === "localhost"
   ? "http://localhost:5001/api/vacancies"  // Local development
   : "https://kube-backend.onrender.com/api/vacancies"; 
@@ -215,7 +215,7 @@ useEffect(() => {
     {/* Loading screen */}
     {loading && (
       <div className="loading-screen">
-    <Faloader className="loader" />
+    <FaSpinner className="newspinner" />
       </div>
     )}
 
@@ -271,7 +271,7 @@ useEffect(() => {
               </div>
             )}
             <div className="tuition-action-buttons">
-              {tab === "available" && <button onClick={() => updateStatus(v._id, "pending")}>  {isUpdatingStatus ? <FaSpinner className="loader" /> : "Move To Pending"}</button>}
+              {tab === "available" && <button onClick={() => updateStatus(v._id, "pending")}>  {isUpdatingStatus ? <FaSpinner className="newspinner" /> : "Move To Pending"}</button>}
               {tab === "pending" && (
                 <>
                   <button onClick={() => updateStatus(v._id, "available")}>Move to Available</button>
@@ -321,7 +321,7 @@ useEffect(() => {
                 <option value="Home Tuition">Home Tuition</option>
                 <option value="Online Tuition">Online Tuition</option>
               </select>
-              <button className="tuition-button" type="submit">  {isSubmitting ? <Faloader className="loader" /> : "Add Vacancy"}</button>
+              <button className="tuition-button" type="submit">  {isSubmitting ? <FaSpinner className="newspinner" /> : "Add Vacancy"}</button>
             </form>
           </div>
         </div>
@@ -348,7 +348,7 @@ useEffect(() => {
                 value={teacherData.commission}
                 onChange={(e) => setTeacherData({ ...teacherData, commission: e.target.value })}
               />
-           <div className="buttons" style={{display:"flex", gap:'10px'}}>   <button type="submit">{isAssigningTeacher ? <FaSpinner className="loader" /> : "Assign Teacher"}</button>
+           <div className="buttons" style={{display:"flex", gap:'10px'}}>   <button type="submit">{isAssigningTeacher ? <FaSpinner className="newspinner" /> : "Assign Teacher"}</button>
               <button className="tuition-delete-button" onClick={()=> setIsTeacherModalOpen(false)} >Cancel</button>
               </div>
             </form>
@@ -383,7 +383,7 @@ useEffect(() => {
       <h2>Are you sure you want to delete this vacancy?</h2>
       <div className="modal-actions" style={{display:"flex", gap:'10px'}}>
         <button className="cancel-button" onClick={() => setIsDeleteModalOpen(false)}>Cancel</button>
-        <button className="tuition-delete-button" onClick={confirmDeleteVacancy}> {isDeleting ? <Faloader className="loader" /> : "Delete"}</button>
+        <button className="tuition-delete-button" onClick={confirmDeleteVacancy}> {isDeleting ? <FaSpinner className="newspinner" /> : "Delete"}</button>
       </div>
     </div>
   </div>
