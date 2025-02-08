@@ -4,6 +4,7 @@ import "../css/admin.css";
 import { IoIosAddCircle } from "react-icons/io";
 import DownloadImageButton from "../services/downloadimage";
 import { FaSpinner } from "react-icons/fa";  
+import { useNavigate } from "react-router-dom";
 const API_URL = window.location.hostname === "localhost"
   ? "http://localhost:5001/api/vacancies"  // Local development
   : "https://kube-backend.onrender.com/api/vacancies"; 
@@ -35,6 +36,7 @@ const ADMIN = () => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [vacancyToDelete, setVacancyToDelete] = useState(null);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isUpdatingStatus, setIsUpdatingStatus] = useState(false);
@@ -226,17 +228,9 @@ const ADMIN = () => {
 
   return (
     <div className="tuition-container">
-    {/* Loading screen */}
-    {loading && (
-        <div className="loading-screen">
-          <FaSpinner className="newspinner" />
-          <div className="progress-bar">
-            <div className="progress" style={{ width: `${progress}%` }}></div>
-          </div>
-          <div className="loading-text">{progress}%</div>
-        </div>
-      )}
-
+         <button onClick={() => navigate('teacher/')}>
+      Go to Teacher Page
+    </button>
     <h1 className="tuition-heading">Tuition Vacancy Management</h1>
     <div className="tuition-tabs">
       {["available", "pending", "complete"].map((status) => (
@@ -255,6 +249,17 @@ const ADMIN = () => {
         {tab === "pending" && <p>Total Commissions: {pendingCommissions}</p>}
         {tab === "complete" && <p>Total Revenue: {completeRevenue}</p>}
       </div>
+        {/* Loading screen */}
+    {loading && (
+        <div className="loading-screen">
+          <FaSpinner className="newspinner" />
+          <div className="progress-bar">
+            <div className="progress" style={{ width: `${progress}%` }}></div>
+          </div>
+          <div className="loading-text">{progress}%</div>
+        </div>
+      )}
+
 
       {/* Vacancy List */}
       <div className="tuition-vacancy-list">

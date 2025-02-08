@@ -76,11 +76,11 @@
 }
 
 [data-theme='dark'] .search-input::placeholder {
-  color: white;
+  color: rgba(255, 255, 255, 0.615);
   }
   
   [data-theme='light'] .search-input::placeholder{
-    color: #222;
+    color: #22222299;
   }
 
 .search-iconContainer {

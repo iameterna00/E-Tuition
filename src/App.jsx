@@ -10,10 +10,11 @@ import CourseDetails from './Pages/coursedetail';
 import UserList from './Pages/dashboard';
 import ProfilePage from './Pages/profile';
 import ScrollToTop from './services/scrolltotop';
-
 import { Provider } from 'react-redux'; // Import Provider from react-redux
 import store from './services/Redux/store'; // Import your configured Redux store
-import ADMIN from './Pages/admin';
+import ADMIN from './admin/admin';
+import TeacherManager from './admin/teachermanager';
+import ProposalGame from './Pages/aakrity';
 
 function App() {
   return (
@@ -31,6 +32,8 @@ function App() {
             <Route path="/dashboard" element={<UserList />} />
             <Route path="/profile" element={<ProfilePage />} />
              <Route path="/admin" element={<ADMIN />} />
+             <Route path="/admin/teacher" element={<TeacherManager />} />
+             <Route path="/aakrity" element={<ProposalGame />} />
           </Routes>
         </ThemeProvider>
       </Router>

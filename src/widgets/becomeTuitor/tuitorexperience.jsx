@@ -6,12 +6,11 @@ import { FaCloudUploadAlt } from "react-icons/fa";
 import { IoMdMale } from "react-icons/io";
 import { IoMdFemale } from "react-icons/io";
 import { webApi } from "../../api";
+import { FaSpinner } from "react-icons/fa";  
 
 function TeachingExperience({ setopentuitorinitialmodal, user }) {
     const [step, setStep] = useState(1);
-    const [selectedTeachingType, setSelectedTeachingType] = useState("");
     const [teachingExperience, setTeachingExperience] = useState("");
-    const [identity, setIdentity] = useState("");
     const [searchSchool, setSearchSchool] = useState("");
     const [searchDegree, setSearchDegree] = useState("");
     const [showSuggestions, setShowSuggestions] = useState(false);
@@ -26,6 +25,7 @@ function TeachingExperience({ setopentuitorinitialmodal, user }) {
     const[gender , setTeachergender] = useState('')
     const suggestionsRef = useRef(null);
     const degreeRef = useRef(null);
+    const [loading, setLoading] = useState(false);
 
     // Handles selection based on current step
 
@@ -127,8 +127,11 @@ function TeachingExperience({ setopentuitorinitialmodal, user }) {
         }
     };
     const handleTeacherxp = () => {
+        setLoading(true);
+    
         if (!teachingExperience || !selectedSchool || !selectedDegree || !cvFile || !identityFile || !gender) {
             alert("Please complete all fields before submitting.");
+            setLoading(false); // Reset loading state if validation fails
             return;
         }
     
@@ -136,15 +139,15 @@ function TeachingExperience({ setopentuitorinitialmodal, user }) {
         formData.append("teachingExperience", teachingExperience);
         formData.append("school", selectedSchool);
         formData.append("degree", selectedDegree);
-        formData.append("cvFile", cvFile, cvFile.name); // Ensure file is properly added
+        formData.append("cvFile", cvFile, cvFile.name);
         formData.append("identityType", identityType);
         formData.append("identityFile", identityFile, identityFile.name);
         formData.append("teachergender", gender);
+        formData.append("teacherconfirm", "pending");
         formData.append("uid", user.uid);
-
     
         fetch(`${webApi}/api/update-teacher-details`, {
-            method: 'POST',
+            method: "POST",
             body: formData,
         })
             .then(response => response.json())
@@ -158,6 +161,10 @@ function TeachingExperience({ setopentuitorinitialmodal, user }) {
             .catch(error => {
                 console.error("Error:", error);
                 alert("An error occurred while submitting the form.");
+            })
+            .finally(() => {
+                setLoading(false); // Ensure loading is reset after fetch completes
+                window.location.reload()
             });
     };
     
@@ -370,7 +377,7 @@ function TeachingExperience({ setopentuitorinitialmodal, user }) {
                                     <button onClick={handleNext} >Next</button>
                                 )}
                                   {step === 4 && gender && (
-                                    <button onClick={handleTeacherxp} >Finish</button>
+                                    <button onClick={handleTeacherxp} >{loading? <FaSpinner className="newspinner"/>:'Finish'}</button>
                                 )}
                             </div>
                         </div>

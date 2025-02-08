@@ -90,7 +90,17 @@ a {
 a:hover {
   color: var(--link-hover);
 }
+input{
+  color: var(--primary-text-color);
+}
+[data-theme='light'] input {
+  color: black; 
+  
+}
 
+[data-theme='dark'] input {
+  color: white; /* White text in dark mode */
+}
 body {
   margin: 0;
   display: flex;

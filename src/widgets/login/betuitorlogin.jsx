@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom"; // For navigation after login
 import { webApi } from "../../api";
 
 
+
 function TuitorLogin({ close }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [emailLogin, setEmailLogin] = useState(false);
@@ -50,19 +51,21 @@ function TuitorLogin({ close }) {
   
       // Get the user's ID token from Firebase Authentication
       const idToken = await user.getIdToken();
+      
   
       // Step 2: Send user data to the backend
       const response = await fetch("http://localhost:5001/api/create-user", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          // Authorization: `Bearer ${idToken}`, 
+       
         },
         body: JSON.stringify({
           email: user.email,
           name: user.displayName,
           photoURL: user.photoURL, 
           uid: user.uid, 
+          idToken: idToken
         }),
       });
   
@@ -77,6 +80,7 @@ function TuitorLogin({ close }) {
       }
     } catch (error) {
       console.error("Error signing in with Google:", error);
+      alert(error.message);
       alert("An error occurred while signing in with Google.");
     }
   };
