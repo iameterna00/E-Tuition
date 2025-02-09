@@ -5,47 +5,70 @@ import TuitorLogin from "../widgets/login/betuitorlogin";
 import BetuitotBanner from "../widgets/becomeTuitor/banner";
 import BetuitotContent from "../widgets/becomeTuitor/betuitorcontent";
 import "../css/login.css";
-import "../css/tuitorapply.css"
+import "../css/tuitorapply.css";
 import TeachingExperience from "../widgets/becomeTuitor/tuitorexperience";
+import { webApi } from "../api";
 
 function BecomeTuitor() {
   const [isAuthenticated, setIsAuthenticated] = useState(null);
-  const [user, setUsers] = useState(null);
-  const [closetuitorlogin, setClosetuitorLogin] = useState(true); 
-  const [opentuitorinitialmodal, setopentuitorinitialmodal] = useState(false); 
+  const [user, setUser] = useState(null);
+  const [myuser, setMYUsers] = useState({});
+
+  const [closetuitorlogin, setClosetuitorLogin] = useState(true);
+  const [opentuitorinitialmodal, setopentuitorinitialmodal] = useState(false);
+
+  // Function to fetch user data
+  const fetchUserData = async (uid) => {
+    try {
+      const response = await fetch(`${webApi}/api/user/${uid}`);
+      if (!response.ok) {
+        throw new Error("Error fetching user data");
+      }
+      const data = await response.json();
+      setMYUsers(data);
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+    }
+  };
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setUsers(user);
+    const unsubscribe = onAuthStateChanged(auth, (authUser) => {
+      if (authUser) {
+        setUser(authUser);
         setIsAuthenticated(true);
+        fetchUserData(authUser.uid); // Fetch user data when authenticated
       } else {
         setIsAuthenticated(false);
+        setUser(null);
+        setMYUsers(null); // Reset user data when logged out
       }
     });
 
-    // Cleanup subscription on unmount
     return () => unsubscribe();
   }, []);
 
   // Loading state
   if (isAuthenticated === null) {
-    return <div>Loading...</div>; 
+    return <div>Loading...</div>;
   }
 
   return (
     <>
-      {/* Show TuitorLogin if not authenticated and closetuitorlogin is true */}
       {!isAuthenticated && closetuitorlogin && (
         <TuitorLogin close={() => setClosetuitorLogin(false)} />
       )}
 
-      {/* Always show BetuitotBanner and BetuitotContent */}
-      <BetuitotBanner setopentuitorinitialmodal={setopentuitorinitialmodal} />
+      <BetuitotBanner 
+        setopentuitorinitialmodal={setopentuitorinitialmodal} 
+        user={myuser}
+      />
       <BetuitotContent />
+
       {opentuitorinitialmodal && (
-        <TeachingExperience user={user}
-         setopentuitorinitialmodal={()=>setopentuitorinitialmodal(false)}/>
+        <TeachingExperience 
+          user={user} 
+          setopentuitorinitialmodal={() => setopentuitorinitialmodal(false)}
+        />
       )}
     </>
   );

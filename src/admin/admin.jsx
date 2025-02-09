@@ -44,6 +44,7 @@ const ADMIN = () => {
   const [isCompleting, setIsCompleting] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const [progress, setProgress] = useState(0);
+  const [searchQuery, setSearchQuery] = useState("");
 
 
 
@@ -72,32 +73,50 @@ const ADMIN = () => {
     fetchVacancies();
   }, []);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    try {
-      const res = await axios.post(API_URL, { ...formData, status: "available" });
-      setVacancies([...vacancies, { ...formData, status: "available", _id: res.data.id }]);
-      setFormData({
-        name: "",
-        grade: "",
-        location: "",
-        noofstudents: "",
-        subject: "",
-        duration: "",
-        salary: "",
-        time: "",
-        minRequirement: "",
-        tutorType: "", // New field
-        tuitionType: "Home Tuition", // New field, default to Home Tuition
-        teachers: [],
-      });
-      setIsModalOpen(false);
-    } catch (err) {
-      console.error("Error adding vacancy:", err);
+const handleSubmit = async (e) => {
+  e.preventDefault(); // Prevent default form submission behavior
+
+  if (isSubmitting) return; // Prevent multiple submissions when the button is spammed
+
+  setIsSubmitting(true); // Set the submitting state to true to disable the button
+  try {
+    // Send the POST request to the API
+    const res = await axios.post(API_URL, { ...formData, status: "available" });
+
+    // Ensure that a valid response is received before updating state
+    if (res.data && res.data.id) {
+      setVacancies((prevVacancies) => [
+        ...prevVacancies,
+        { ...formData, status: "available", _id: res.data.id },
+      ]);
     }
+
+    // Reset the form fields after successful submission
+    setFormData({
+      name: "",
+      grade: "",
+      location: "",
+      noofstudents: "",
+      subject: "",
+      duration: "",
+      salary: "",
+      time: "",
+      minRequirement: "",
+      tutorType: "", 
+      tuitionType: "Home Tuition",
+      teachers: [],
+    });
+
+    // Close the modal after successfully adding a vacancy
+    setIsModalOpen(false);
+  } catch (err) {
+    console.error("Error adding vacancy:", err);
+  } finally {
+    // Ensure isSubmitting is reset, even if there's an error
     setIsSubmitting(false);
-  };
+  }
+};
+
 
   const updateStatus = async (id, status) => {
     setIsUpdatingStatus(true);
@@ -217,6 +236,13 @@ const ADMIN = () => {
   };
   
 
+  const filteredVacancies = vacancies.filter(
+    (v) =>
+      (v.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        v.location.toLowerCase().includes(searchQuery.toLowerCase())) &&
+      v.status === tab
+  );
+  
   // Calculate total vacancies, commissions, and revenue
   const availableVacancies = vacancies.filter((v) => v.status === "available").length;
   const pendingCommissions = vacancies
@@ -225,6 +251,7 @@ const ADMIN = () => {
   const completeRevenue = vacancies
     .filter((v) => v.status === "complete")
     .reduce((total, vacancy) => total + parseFloat(vacancy.teacherCommission || 0), 0);
+  
 
   return (
     <div className="tuition-container">
@@ -232,6 +259,15 @@ const ADMIN = () => {
       Go to Teacher Page
     </button>
     <h1 className="tuition-heading">Tuition Vacancy Management</h1>
+    {/* 🔍 Search Bar for Vacancy Name & Location */}
+    <input
+      type="text"
+      className="tuition-search-bar"
+      placeholder="Search by Name or Location"
+      value={searchQuery}
+      onChange={(e) => setSearchQuery(e.target.value)}
+    />
+
     <div className="tuition-tabs">
       {["available", "pending", "complete"].map((status) => (
         <button
@@ -263,50 +299,60 @@ const ADMIN = () => {
 
       {/* Vacancy List */}
       <div className="tuition-vacancy-list">
-        {vacancies.filter((v) => v.status === tab).map((v) => (
-          <div key={v._id} className="tuition-vacancy-card">
-            <h3 className="tuition-vacancy-title">{v.name} ({v.grade}) - {v.subject}</h3>
-            <p className="tuition-vacancy-info">Location: {v.location} | Students: {v.noofstudent}</p>
-            <p className="tuition-vacancy-info">Salary: {v.salary} | Time: {v.time}</p>
-           {v.minRequirement &&( <p className="tuition-vacancy-info">Requirement: {v.minRequirement}</p>)}
-            <p className="tuition-vacancy-info">UploadDate: {v.created_at}</p>
+      {filteredVacancies.map((v) => (
+        <div key={v._id} className="tuition-vacancy-card">
+          <h3 className="tuition-vacancy-title">
+            {v.name} ({v.grade}) - {v.subject}
+          </h3>
+          <p className="tuition-vacancy-info">
+            Location: {v.location} | Students: {v.noofstudent}
+          </p>
+          <p className="tuition-vacancy-info">Salary: {v.salary} | Time: {v.time}</p>
+          {v.minRequirement && <p className="tuition-vacancy-info">Requirement: {v.minRequirement}</p>}
+          <p className="tuition-vacancy-info">UploadDate: {v.created_at}</p>
 
+          {tab === "available" && (
+            <div className="uploadvacancycontainer">
+              <DownloadImageButton vacancy={v} />
+            </div>
+          )}
+          {tab === "pending" && (
+            <div className="assignedteachers">
+              <h3 className="tuition-vacancy-info">Teachers Assigned:</h3>
+              {v.teachers &&
+                v.teachers.map((teacher, index) => (
+                  <p key={index}>
+                    Teacher: {teacher.teacherName} | Commission: {teacher.commission}
+                  </p>
+                ))}
+              <div className="addteacher" style={{ display: 'flex', gap: '5px' }} onClick={() => setIsTeacherModalOpen(true)}>
+                Add More <IoIosAddCircle fontSize={25} />
+              </div>
+            </div>
+          )}
+          {tab === "complete" && (
+            <div className="assignedteachers">
+              <h3>Commission for {v.selectedTeacher || "No teacher assigned"}</h3>
+              <p>Commission: {v.teacherCommission || "N/A"}</p>
+            </div>
+          )}
+          <div className="tuition-action-buttons">
             {tab === "available" && (
-                <div className="uploadvacancycontainer" >
-                     <DownloadImageButton vacancy={v} />
-                </div>
+              <button onClick={() => updateStatus(v._id, "pending")}>
+                {isUpdatingStatus ? <FaSpinner className="newspinner" /> : "Move To Pending"}
+              </button>
             )}
             {tab === "pending" && (
-              <div className="assignedteachers">
-                <h3 className="tuition-vacancy-info">Teachers Assigned:</h3>
-                {v.teachers && v.teachers.map((teacher, index) => (
-                  <p key={index}>Teacher: {teacher.teacherName} | Commission: {teacher.commission}</p>
-                ))}
-                <div className="addteacher" style={{display:'flex', gap:'5px'}} onClick={() => setIsTeacherModalOpen(true)}>
-                  Add More <IoIosAddCircle fontSize={25} />
-                </div>
-              </div>
+              <>
+                <button onClick={() => updateStatus(v._id, "available")}>Move to Available</button>
+                <button onClick={() => updateStatus(v._id, "complete")}>Move to Complete</button>
+              </>
             )}
-            {tab === "complete" && (
-              <div className="assignedteachers">
-                <h3>Commission for {v.selectedTeacher || "No teacher assigned"}</h3>
-                <p>Commission: {v.teacherCommission || "N/A"}</p>
-              </div>
-            )}
-            <div className="tuition-action-buttons">
-              {tab === "available" && <button onClick={() => updateStatus(v._id, "pending")}>  {isUpdatingStatus ? <FaSpinner className="newspinner" /> : "Move To Pending"}</button>}
-              {tab === "pending" && (
-                <>
-                  <button onClick={() => updateStatus(v._id, "available")}>Move to Available</button>
-                  <button onClick={() => updateStatus(v._id, "complete")}>Move to Complete</button>
-                </>
-              )}
-             <button className="tuition-delete-button" onClick={() => handleDeleteClick(v._id)}>Delete</button>
-
-            </div>
+            <button className="tuition-delete-button" onClick={() => handleDeleteClick(v._id)}>Delete</button>
           </div>
-        ))}
-      </div>
+        </div>
+      ))}
+    </div>
 
       {/* Add Vacancy Modal */}
       <button className="floating-button" onClick={() => setIsModalOpen(!isModalOpen)}>{isModalOpen ? "X" : "Add"}</button>
