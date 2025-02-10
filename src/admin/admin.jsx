@@ -304,7 +304,7 @@ const handleSubmit = async (e) => {
     <input
       type="text"
       className="tuition-search-bar"
-      placeholder="Search by Name or Location"
+      placeholder="Search by Name or Location "
       value={searchQuery}
       onChange={(e) => setSearchQuery(e.target.value)}
     />
@@ -549,6 +549,12 @@ const handleSubmit = async (e) => {
                 type="text"
                 name="tutorType"
                 value={editingVacancy.tutorType || ""}
+                onChange={handleEditChange}
+              />
+               <input
+                type="text"
+                name="duration"
+                value={editingVacancy.duration || ""}
                 onChange={handleEditChange}
               />
       

@@ -4,6 +4,8 @@ import animationData from '../../assets/animations/reviewanimation.json'; // You
 import '../../css/betuitor.css';
 import heroimg from '../../assets/hero.png';
 import { Link, useNavigate } from 'react-router-dom';
+import { TbDashboardFilled } from "react-icons/tb";
+import { RiUserCommunityLine } from "react-icons/ri";
 
 function BetuitotBanner({ setopentuitorinitialmodal, user }) {
   const [isTuitors, setIsTuitors] = useState('')
@@ -38,15 +40,22 @@ function BetuitotBanner({ setopentuitorinitialmodal, user }) {
               </div>
                <p style={{marginTop:"-50px"}}>We are reviewing your doccuments<br/>this could take few moments...</p></div>
             ) : isTuitors === 'approved' ? (
-              // ✅ If status is "approved"
               <div className="bannertext">
-                <h3>🎉 You are now a Verified Tutor!</h3>
-                <p style={{ margin: '0px' }}>Start teaching and earning today.</p>
-                <div className="getstartedbetuitorButton">
+                <h3 style={{fontSize:"25px"}}>🎉 You are now a Verified Tutor!</h3>
+                <p style={{ margin: '0px', fontSize:"20px" }}>Start teaching and earning today.</p>
+               <div className="bannerbuttons" style={{display:'flex', width:"90%", gap:"10px"}} >
+            <div className="visitteachercommunity">
+           <Link> <RiUserCommunityLine style={{color:"#0099ff"}} size={100} />
+           <p style={{margin:"0px", fontSize:"20px"}}>Join our tutors community</p></Link>
+            
+            </div>
+                <div className='visitdashboard'>
                   <Link to="/dashboard">
-                    <button>Go to Dashboard</button>
+                  <TbDashboardFilled style={{color:"#0099ff"}} size={100} />
+                  <p style={{margin:"0px", fontSize:"20px"}}>Go to Dashboard</p>
                   </Link>
                 </div>
+               </div>
               </div>
             ): (
               <div className="bannertext">

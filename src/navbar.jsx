@@ -5,12 +5,14 @@ import LOGO from './assets/KUBE.png';
 import { CiLight } from "react-icons/ci";
 import { MdDarkMode } from "react-icons/md";
 import { FaBars, FaTimes } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { getAuth, signOut } from "firebase/auth"; 
 import { auth } from './firebase_config'; 
 import TuitorLogin from './widgets/login/betuitorlogin';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUser, selectUser } from './services/Redux/userSlice';
+import { webApi } from './api';
+import { FaUsersGear } from "react-icons/fa6";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -22,10 +24,12 @@ const Navbar = () => {
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const [tuitorLogin, setTuitorLogin] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [tuitorsloacing, settuitotsLoading] = useState(false); 
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
   const toggleDropdown = () => setDropdownVisible(!dropdownVisible);
   const handleLoginclick = () => setTuitorLogin(!tuitorLogin);
+  const navigate = useNavigate();
 
   const handleLogout = async () => {
     try {
@@ -45,6 +49,7 @@ const Navbar = () => {
     const unsubscribe = authInstance.onAuthStateChanged((firebaseUser) => {
       if (firebaseUser) {
         setUser(firebaseUser);
+       
         dispatch(fetchUser(firebaseUser.uid));
       } else {
         setUser(null);
@@ -63,6 +68,44 @@ const Navbar = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+  
+  const updateUserType = async (purpose) => {
+    settuitotsLoading(true);
+    try {
+      const response = await fetch(`${webApi}/api/update-purpose`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ uid: myuser.uid, purpose }),
+      });
+  
+      const data = await response.json();
+  
+      if (!response.ok) {
+        alert(data.message || "Failed to update purpose.");
+        return;
+      }
+  
+      if (purpose === 'student') {
+        navigate('/'); 
+        window.location.reload(); // Ensures navigation completes before reloading
+      } else {
+        navigate('/iamatuitor');
+        window.location.reload();
+      }
+  
+    } catch (error) {
+      console.error("Error updating purpose:", error);
+      alert("An error occurred. Please try again later.");
+    } finally {
+      settuitotsLoading(false);
+    }
+  };
+  
+
+  
+  
+  
+  
 
   return (
     <>
@@ -97,9 +140,28 @@ const Navbar = () => {
             
               </>
             )}
-            <Link to='/iamatuitor' style={{ textDecoration: 'none', color: 'inherit' }}>
-              <button className="navbuttons">Become a Tutor</button>
-            </Link>
+       {myuser?.teacherconfirm === 'pending' || myuser?.teacherconfirm === 'approved' ? (
+  <>
+    {myuser.purpose === 'student' ? (
+  
+  <button onClick={() => updateUserType('teacher')} className="navbuttons">
+  Switch as Tutor
+</button>
+    
+    ) : (
+     
+      <button onClick={() => updateUserType('student')} className="navbuttons">
+      Switch as student
+    </button>
+
+    )}
+  </>
+) : (
+  <Link to='/iamatuitor' style={{ textDecoration: 'none', color: 'inherit' }}>
+    <button className="navbuttons">Become a Tutor</button>
+  </Link>
+)}
+
             <Link to='/onlineclasses' style={{ textDecoration: 'none', color: 'inherit' }}>
               <button className="navbuttons">Online Classes</button>
             </Link>
@@ -163,6 +225,17 @@ const Navbar = () => {
           <TuitorLogin close={handleLoginclick} />
         </div>
       )}
+   {tuitorsloacing && (
+  <div className="loading-modal">
+   <div className="switchinganimationcontainer">
+   <div className="loading-animation">
+    <FaUsersGear style={{marginLeft:"-20px", fontSize:"100px"}} />
+    </div>
+    <p>Loading, please wait...</p>
+   </div>
+  </div>
+)}
+
     </>
   );
 };
