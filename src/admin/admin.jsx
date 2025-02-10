@@ -3,7 +3,7 @@ import axios from "axios";
 import "../css/admin.css";
 import { IoIosAddCircle } from "react-icons/io";
 import DownloadImageButton from "../services/downloadimage";
-import { FaSpinner } from "react-icons/fa";  
+import { FaSpinner, FaEdit } from "react-icons/fa";  
 import { useNavigate } from "react-router-dom";
 const API_URL = window.location.hostname === "localhost"
   ? "http://localhost:5001/api/vacancies"  // Local development
@@ -13,8 +13,10 @@ const ADMIN = () => {
   const [vacancies, setVacancies] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isTeacherModalOpen, setIsTeacherModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isCompleteTeacherModalOpen, setIsCompleteTeacherModalOpen] = useState(false);
   const [tab, setTab] = useState("available");
+  const [editingVacancy, setEditingVacancy] = useState(null);
   const [formData, setFormData] = useState({
     name: "",
     grade: "",
@@ -234,6 +236,45 @@ const handleSubmit = async (e) => {
     setVacancyToDelete(id);
     setIsDeleteModalOpen(true);
   };
+
+  
+  const handleEditClick = (vacancy) => {
+    setEditingVacancy(vacancy);
+    setIsEditModalOpen(true);
+  };
+  
+  const handleEditChange = (e) => {
+    const { name, value } = e.target;
+    setEditingVacancy((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleEditSubmit = async (e) => {
+    e.preventDefault();
+    if (!editingVacancy) return;
+  
+    console.log("Submitting Edit:", editingVacancy);
+  
+    try {
+      const res = await axios.put(`${API_URL}/data/${editingVacancy._id}`, editingVacancy);
+      console.log('this is res ', res)
+  
+      if (res.status === 200) {
+        setVacancies((prevVacancies) =>
+          prevVacancies.map((v) =>
+            v._id === editingVacancy._id ? { ...v, ...editingVacancy } : v
+          )
+        );
+        setIsEditModalOpen(false);
+        setEditingVacancy(null);
+      }
+    } catch (err) {
+      console.error("Error updating vacancy:", err.response?.data || err);
+      alert("Error updating vacancy: " + (err.response?.data?.message || "Unknown error"));
+    }
+  };
   
 
   const filteredVacancies = vacancies.filter(
@@ -315,6 +356,7 @@ const handleSubmit = async (e) => {
             <div className="uploadvacancycontainer">
               <DownloadImageButton vacancy={v} />
             </div>
+            
           )}
           {tab === "pending" && (
             <div className="assignedteachers">
@@ -338,9 +380,15 @@ const handleSubmit = async (e) => {
           )}
           <div className="tuition-action-buttons">
             {tab === "available" && (
+             <>
               <button onClick={() => updateStatus(v._id, "pending")}>
                 {isUpdatingStatus ? <FaSpinner className="newspinner" /> : "Move To Pending"}
               </button>
+              <button onClick={() => handleEditClick(v)}>
+    <FaEdit /> Edit
+  </button>
+
+              </>
             )}
             {tab === "pending" && (
               <>
@@ -457,6 +505,62 @@ const handleSubmit = async (e) => {
     </div>
   </div>
 )}
+  {isEditModalOpen && editingVacancy && (
+          <div className="modal-overlay">
+          <div className="modal-content" style={{ textAlign: "start" }}>
+            <h2>Edit Vacancy</h2>
+            <form onSubmit={handleEditSubmit}>
+              <p style={{ margin: "0px" }}>Name</p>
+              <input
+                type="text"
+                name="name"
+                value={editingVacancy.name || ""}
+                onChange={handleEditChange}
+              />
+      
+              <p style={{ margin: "0px" }}>Location</p>
+              <input
+                type="text"
+                name="location"
+                value={editingVacancy.location || ""}
+                onChange={handleEditChange}
+              />
+      
+              <p style={{ margin: "0px" }}>Salary</p>
+              <input
+                type="text"
+                name="salary"
+                value={editingVacancy.salary || ""}
+                onChange={handleEditChange}
+              />
+      
+              {/* New Fields */}
+              <p style={{ margin: "0px" }}>Time</p>
+              <input
+                type="text"
+                name="time"
+                value={editingVacancy.time || ""}
+                onChange={handleEditChange}
+              />
+      
+              <p style={{ margin: "0px" }}>Tutor Type</p>
+             
+              <input
+                type="text"
+                name="tutorType"
+                value={editingVacancy.tutorType || ""}
+                onChange={handleEditChange}
+              />
+      
+              <button type="submit">Save</button>
+              <button className="tuition-delete-button" style={{ marginLeft: "5px" }} type="button" onClick={() => setIsEditModalOpen(false)}>
+                Cancel
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
+
 
     </div>
   );
