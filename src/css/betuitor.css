@@ -42,7 +42,16 @@
   gap: 10px;
   margin-top: 100px;
 
+  }.lottie-animation-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 300px; /* Match the Lottie width */
+    height: 300px; /* Match the Lottie height */
+    -webkit-mask-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1) 20%, rgba(0, 0, 0, 1) 80%, rgba(0, 0, 0, 0));
+    mask-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1) 20%, rgba(0, 0, 0, 1) 80%, rgba(0, 0, 0, 0));
   }
+  
   
   .bannerimg{
    height: 300px;

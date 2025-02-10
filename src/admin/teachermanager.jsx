@@ -5,95 +5,133 @@ import { FaSearch } from "react-icons/fa";
 import "./teachermanager.css";
 
 function TeacherManager() {
-    const [tab, setTab] = useState("Pending");
-    const [teachers, setTeachers] = useState([]);
-    const [searchQuery, setSearchQuery] = useState(""); // Search query state
+  const [tab, setTab] = useState("Pending");
+  const [teachers, setTeachers] = useState([]);
+  const [searchQuery, setSearchQuery] = useState(""); // Search query state
 
-    useEffect(() => {
-        axios.get(`${webApi}/api/teachers`)
-            .then((res) => {
-                if (res.data && Array.isArray(res.data.teachers)) {  
-                    setTeachers(res.data.teachers);
-                }
-            })
-            .catch((err) => console.error("Error fetching teachers:", err));
-    }, []);
+  // Fetch teachers when component mounts
+  useEffect(() => {
+    axios
+      .get(`${webApi}/api/teachers`)
+      .then((res) => {
+        if (res.data && Array.isArray(res.data.teachers)) {
+          setTeachers(res.data.teachers);
+        }
+      })
+      .catch((err) => console.error("Error fetching teachers:", err));
+  }, []);
 
-
-const filteredTeachers = teachers.filter((teacher) => 
+  // Filter teachers based on selected tab and search query
+  const filteredTeachers = teachers.filter((teacher) =>
     teacher.teacherconfirm &&
     teacher.teacherconfirm.toLowerCase() === tab.toLowerCase() &&
     (
-        (teacher.name?.toLowerCase() || "").includes(searchQuery.toLowerCase()) ||
-        (teacher.address?.toLowerCase() || "").includes(searchQuery.toLowerCase()) ||
-        (teacher.degree?.toLowerCase() || "").includes(searchQuery.toLowerCase()) ||
-        (teacher.school?.toLowerCase() || "").includes(searchQuery.toLowerCase()) // Assuming school represents college
+      (teacher.name?.toLowerCase() || "").includes(searchQuery.toLowerCase()) ||
+      (teacher.address?.toLowerCase() || "").includes(searchQuery.toLowerCase()) ||
+      (teacher.degree?.toLowerCase() || "").includes(searchQuery.toLowerCase()) ||
+      (teacher.school?.toLowerCase() || "").includes(searchQuery.toLowerCase())
     )
+  );
 
-    );
+  // Approve teacher by updating 'teacherconfirm' status to 'approved'
+  const approveTeacher = async (uid) => {
+    console.log("Approving teacher with UID:", uid);  // Log the UID for debugging
+    try {
+      const response = await axios.post(`${webApi}/api/teachers/confirm`, {
+        uid: uid,  // Pass 'uid' instead of 'teacher_id'
+        teacherconfirm: "approved"
+      });
 
-    return (
-        <div className="teachermanagerbody">
-            <div className="teachermanagercontainer">
-                <h2>Teacher Management System</h2>
-                
-                {/* Tabs for switching between Approved and Pending teachers */}
-                <div className="tuition-tabs">
-                    {["Pending", "Approved"].map((status) => (
-                        <button
-                            key={status}
-                            className={`tuition-tab ${tab === status ? "tuition-tab-active" : ""}`}
-                            onClick={() => setTab(status)}
-                        >
-                            {status}
-                        </button>
-                    ))}
-                </div>
+      if (response.data.message) {
+        // Update local state to reflect the change in confirmation status
+        setTeachers(prevTeachers =>
+          prevTeachers.map((teacher) =>
+            teacher.uid === uid  // Check by 'uid' instead of 'id'
+              ? { ...teacher, teacherconfirm: "approved" }
+              : teacher
+          )
+        );
+        console.log("Teacher approved:", uid);
+      }
+    } catch (error) {
+      console.error("Error approving teacher:", error.response?.data || error.message);
+    }
+  };
 
-         <div className="teachersearchbarcontainer">
-                   {/* Search Bar */}
-                   <div className="teacherssearch-bar-container">
-                    <input
-                        type="text"
-                        placeholder="Search by Name, Location, Degree, or College"
-                        value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
-                        className="search-input"
-                    />
-                     <FaSearch className="teachersearch-icon" size={18} /> {/* Search Icon */}
-                </div>
-                
-         </div>
+  return (
+    <div className="teachermanagerbody">
+      <div className="teachermanagercontainer">
+        <h2>Teacher Management System</h2>
 
-                {/* Filter and display teachers based on selected tab and search query */}
-                <div className="teacher-list">
-                    {filteredTeachers.length > 0 ? (
-                        filteredTeachers.map((teacher) => (
-                            <div key={teacher.id} className="teacher-card">
-                                <img src={teacher.profile} alt={teacher.name} className="teacher-profile" />
-                                <h3>{teacher.name}</h3>
-                                <p><strong>Email:</strong> {teacher.email}</p>
-                                <p><strong>Location:</strong> {teacher.address}</p>
-                                <p><strong>Degree:</strong> {teacher.degree}</p>
-                                <p><strong>College:</strong> {teacher.school}</p> {/* Assuming school is college */}
-                                <p><strong>Current Grade:</strong> {teacher.currentGrade}</p>
-                                <p><strong>Requested at:</strong> {teacher.requestedforteacheron}</p>
-                                <div className="teacher-links">
-                                    <a href={teacher.cvFileUrl} target="_blank" rel="noopener noreferrer">📄 View CV</a>
-                                    <a href={teacher.identityFileUrl} target="_blank" rel="noopener noreferrer">🆔 View Identity</a>
-                                </div>
-                                <div className="approveteacherbutton">
-                                    <button>Approve</button>
-                                </div>
-                            </div>
-                        ))
-                    ) : (
-                        <p className="no-results">No teachers found matching your search.</p>
-                    )}
-                </div>
-            </div>
+        {/* Tabs for switching between Pending and Approved teachers */}
+        <div className="tuition-tabs">
+          {["Pending", "Approved"].map((status) => (
+            <button
+              key={status}
+              className={`tuition-tab ${tab === status ? "tuition-tab-active" : ""}`}
+              onClick={() => setTab(status)}
+            >
+              {status}
+            </button>
+          ))}
         </div>
-    );
+
+        {/* Search Bar */}
+        <div className="teachersearchbarcontainer">
+          <div className="teacherssearch-bar-container">
+            <input
+              type="text"
+              placeholder="Search by Name, Location, Degree, or College"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="search-input"
+            />
+            <FaSearch className="teachersearch-icon" size={18} /> {/* Search Icon */}
+          </div>
+        </div>
+
+        {/* Filter and display teachers based on selected tab and search query */}
+        <div className="teacher-list">
+          {filteredTeachers.length > 0 ? (
+            filteredTeachers.map((teacher) => (
+              <div key={teacher.uid} className="teacher-card"> {/* Use 'uid' as key */}
+                <img
+                  src={teacher.profile}
+                  alt={teacher.name}
+                  className="teacher-profile"
+                />
+                <h3>{teacher.name}</h3>
+                <p><strong>Email:</strong> {teacher.uid}</p>
+                <p><strong>Email:</strong> {teacher.email}</p>
+                <p><strong>Location:</strong> {teacher.address}</p>
+                <p><strong>Degree:</strong> {teacher.degree}</p>
+                <p><strong>College:</strong> {teacher.school}</p>
+                <p><strong>Current Grade:</strong> {teacher.currentGrade}</p>
+                <p><strong>Requested at:</strong> {teacher.requestedforteacheron}</p>
+                <div className="teacher-links">
+                  <a href={teacher.cvFileUrl} target="_blank" rel="noopener noreferrer">📄 View CV</a>
+                  <a href={teacher.identityFileUrl} target="_blank" rel="noopener noreferrer">🆔 View Identity</a>
+                </div>
+                {/* Approve button */}
+                {teacher.teacherconfirm !== "approved" && (
+                  <div className="approveteacherbutton">
+                    <button onClick={() => approveTeacher(teacher.uid)}>Approve</button> {/* Pass 'uid' */}
+                  </div>
+                )}
+                                {teacher.teacherconfirm === "approved" && (
+                  <div className="approveteacherbutton">
+                    <button onClick={() => approveTeacher(teacher.uid)}>Move to pending</button> {/* Pass 'uid' */}
+                  </div>
+                )}
+              </div>
+            ))
+          ) : (
+            <p className="no-results">No teachers found matching your search.</p>
+          )}
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default TeacherManager;
