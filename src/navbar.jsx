@@ -196,21 +196,46 @@ const Navbar = () => {
                 theme === 'dark' ? <CiLight /> : <MdDarkMode />
               )}
             </button>
-            {menuOpen && user && (
-               <>
-             <div style={{display:'flex', justifyContent:'center', alignItems:"center", gap:"10px"}} className="profileinsidemenubar">
-             <img
-                      className="profile-pic"
-                      src={myuser?.profile}
-                      alt="Profile"
-                      style={{ width: '35px', height: '35px', borderRadius: '50%', objectFit:"cover" }}
-                    />
-             <Link to="/profile" className="dropdown-item">Visit Profile</Link>
-             </div>
-                <Link to="/settings" className="dropdown-item">Settings</Link>
-                <button style={{backgroundColor:'transparent'}} onClick={handleLogout} className="dropdown-item">Logout</button>
-               </>
-            )}
+            {menuOpen && (
+  <>
+    <div 
+      style={{display:'flex', justifyContent:'center', alignItems:"center", gap:"10px"}} 
+      className="profileinsidemenubar"
+    >
+      <img
+        className="profile-pic"
+        src={myuser?.profile}
+        alt="Profile"
+        style={{ width: '35px', height: '35px', borderRadius: '50%', objectFit:"cover" }}
+      />
+      <Link 
+        to="/profile" 
+        className="dropdown-item" 
+        onClick={() => setMenuOpen(false)} // Close menu on click
+      >
+        Your Profile
+      </Link>
+    </div>
+    <Link 
+      to="/settings" 
+      className="dropdown-item" 
+      onClick={() => setMenuOpen(false)} // Close menu on click
+    >
+      Settings
+    </Link>
+    <button 
+      style={{backgroundColor:'transparent'}} 
+      onClick={() => {
+        handleLogout();
+        setMenuOpen(false); // Close menu on logout
+      }} 
+      className="dropdown-item"
+    >
+      Logout
+    </button>
+  </>
+)}
+
           </div>
 
           <div className="hamburger" onClick={toggleMenu}>

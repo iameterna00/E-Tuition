@@ -255,9 +255,20 @@ body.modal-open {
 
   .navlinks.active {
     display: flex; /* Show nav links when active */
-   position: absolute;
-   top: 0px;
-  }
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    border-radius: 0 0 20px 20px; /* Only bottom corners rounded */
+}
+[data-theme='dark'] .navlinks.active {
+  background-color: rgb(40, 45, 45);
+}
+
+[data-theme='light'] .navlinks.active{
+  background-color: rgb(255, 255, 255); /* Dark background color for dark theme */
+}
+
+
 
   .navbuttons {
     width: 100%; /* Make buttons full-width */

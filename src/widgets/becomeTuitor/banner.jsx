@@ -6,6 +6,7 @@ import heroimg from '../../assets/hero.png';
 import { Link, useNavigate } from 'react-router-dom';
 import { TbDashboardFilled } from "react-icons/tb";
 import { RiUserCommunityLine } from "react-icons/ri";
+import { SiGoogleclassroom } from "react-icons/si";
 
 function BetuitotBanner({ setopentuitorinitialmodal, user, tuitorlogin }) {
   const [isTuitors, setIsTuitors] = useState('')
@@ -57,8 +58,8 @@ function BetuitotBanner({ setopentuitorinitialmodal, user, tuitorlogin }) {
                 </div>
                 <div className='visitdashboard'>
                   <Link to="/dashboard">
-                  <TbDashboardFilled style={{color:"#0099ff"}} size={100} />
-                  <p style={{margin:"0px", fontSize:"20px"}}>Go to Dashboard</p>
+                  <SiGoogleclassroom  style={{color:"#0099ff"}} size={100} />
+                  <p style={{margin:"0px", fontSize:"20px"}}>Start Making Courses</p>
                   </Link>
                 </div>
                </div>
@@ -71,7 +72,7 @@ function BetuitotBanner({ setopentuitorinitialmodal, user, tuitorlogin }) {
                   <div className="getstartedbetuitor">
                   {user? (  <button onClick={() => setopentuitorinitialmodal(true)}>
                       Become a Tuitor
-                    </button>):(  <button onClick={() => tuitorlogin(true)}>
+                    </button>):(  <button onClick={tuitorlogin}>
                       Become a Tuitor
                     </button>)}
                   </div>
