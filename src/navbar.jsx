@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import { ThemeContext } from './utilities/themeprovider';
 import './css/nav.css';
 import LOGO from './assets/KUBE.png';
+import KUBE from './assets/newcube.png';
 import { CiLight } from "react-icons/ci";
 import { MdDarkMode } from "react-icons/md";
 import { FaBars, FaTimes } from 'react-icons/fa';
@@ -113,7 +114,7 @@ const Navbar = () => {
         <div className="navbarcontents">
           <div className="logoandclasses" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '20px' }}>
             <Link to='/'>
-              <img className="Logo" src={LOGO} alt="Logo" />
+              <img className="Logo" src={KUBE} alt="Logo" />
             </Link>
             <div className="Title">
               <Link to='/' style={{ textDecoration: 'none', color: 'inherit' }}>
