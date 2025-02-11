@@ -7,6 +7,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { TbDashboardFilled } from "react-icons/tb";
 import { RiUserCommunityLine } from "react-icons/ri";
 import { SiGoogleclassroom } from "react-icons/si";
+import { FaUserGear } from "react-icons/fa6";
 
 function BetuitotBanner({ setopentuitorinitialmodal, user, tuitorlogin }) {
   const [isTuitors, setIsTuitors] = useState('')
@@ -51,7 +52,7 @@ function BetuitotBanner({ setopentuitorinitialmodal, user, tuitorlogin }) {
             
             </div>
                 <div className='visitdashboard'>
-                  <Link to="/dashboard">
+                  <Link to="/profile">
                   <TbDashboardFilled style={{color:"#0099ff"}} size={100} />
                   <p style={{margin:"0px", fontSize:"20px"}}>Go to Dashboard</p>
                   </Link>
@@ -60,6 +61,12 @@ function BetuitotBanner({ setopentuitorinitialmodal, user, tuitorlogin }) {
                   <Link to="/dashboard">
                   <SiGoogleclassroom  style={{color:"#0099ff"}} size={100} />
                   <p style={{margin:"0px", fontSize:"20px"}}>Start Making Courses</p>
+                  </Link>
+                </div>
+                <div className='visitdashboard'>
+                  <Link to="/dashboard">
+                  <FaUserGear  style={{color:"#0099ff"}} size={100} />
+                  <p style={{margin:"0px", fontSize:"20px"}}>Settings</p>
                   </Link>
                 </div>
                </div>
