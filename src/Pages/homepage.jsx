@@ -6,65 +6,62 @@ import HomePageForm from "../widgets/homepage/homepageForm";
 import "../css/home.css";
 import Vaccancy from "../widgets/homepage/vaccancy";
 import { webApi } from "../api";
+import { FaUsersGear } from "react-icons/fa6"; // Ensure you're using the correct icon import
 
 function HomePage() {
-    const [user, setUser] = useState(null);
-    const [loading, setLoading] = useState(true); // Loading state
+    const [userChecked, setUserChecked] = useState(false); // Keeps track if the user is loaded and checked
     const navigate = useNavigate();
 
     useEffect(() => {
         const auth = getAuth();
 
         const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
-            if (firebaseUser) {
-                const uid = firebaseUser.uid;
+            if (!firebaseUser) {
+                setUserChecked(true); // If no user is logged in, stop the loading
+                return;
+            }
 
-                try {
-                    const response = await fetch(`${webApi}/api/user/${uid}`);
+            const uid = firebaseUser.uid;
+            try {
+                const response = await fetch(`${webApi}/api/user/${uid}`);
 
-                    if (!response.ok) {
-                        console.error(`Error fetching user: ${response.status}`);
-                        const errorText = await response.text(); // This should help you identify if HTML is returned
-                        console.error('Error response text:', errorText);
-                        setLoading(false); // Set loading to false even if there is an error
-                        return;
-                    }
-
-                    // If the response is successful, attempt to parse the JSON
-                    const data = await response.json();
-                    if (data.success) {
-                        setUser(data.data);
-                        if (data.data.purpose === "teacher") {
-                            navigate("/iamatuitor"); // Redirect teachers to their page
-                        } else {
-                            setLoading(false); // If it's a student, stop loading
-                        }
-                    } else {
-                        console.error("API returned an unsuccessful response:", data);
-                        setLoading(false); // Set loading to false on unsuccessful response
-                    }
-                } catch (error) {
-                    console.error("Error fetching user:", error); // Log fetch error
-                    setLoading(false); // Set loading to false on fetch error
+                if (!response.ok) {
+                    console.error(`Error fetching user: ${response.status}`);
+                    setUserChecked(true); // Still proceed if there's an error
+                    return;
                 }
-            } else {
-                setLoading(false); // Set loading to false if there's no firebaseUser
+
+                const data = await response.json();
+                if (data.success && data.data.teacherconfirm && data.data.purpose == 'teacher') {
+                    console.log('teacherstatus', data.data)
+                    navigate("/iamatuitor", { replace: true }); // Immediately navigate to the teacher's dashboard
+                } else {
+                    setUserChecked(true); // If it's not a teacher, show the homepage
+                }
+            } catch (error) {
+                console.error("Error fetching user:", error);
+                setUserChecked(true); // Handle error and stop loading
             }
         });
 
         return () => unsubscribe(); // Cleanup the listener on unmount
     }, [navigate]);
 
-    // Show loading spinner while data is being fetched
-    if (loading) {
+    // Show loading spinner while data is being fetched and user role is determined
+    if (!userChecked) {
         return (
-            <div className="loading-container">
-                <div className="loading-spinner">Loading...</div> {/* You can replace this with a real spinner */}
+            <div className="loading-modal">
+                <div className="switchinganimationcontainer">
+                    <div className="loading-animation">
+                        <FaUsersGear style={{ marginLeft: "-20px", fontSize: "100px" }} />
+                    </div>
+                    <p>Loading, please wait...</p>
+                </div>
             </div>
         );
     }
 
-    // Once data is loaded, display the home page content
+    // Once data is loaded and user is checked, display the home page content
     return (
         <>
             <HomeBanner />

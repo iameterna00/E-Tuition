@@ -9,6 +9,7 @@ import "../css/tuitorapply.css";
 import TeachingExperience from "../widgets/becomeTuitor/tuitorexperience";
 import { webApi } from "../api";
 import { useNavigate } from "react-router-dom";
+import { FaUsersGear } from "react-icons/fa6";
 
 function BecomeTuitor() {
   const [isAuthenticated, setIsAuthenticated] = useState(null);
@@ -19,61 +20,58 @@ function BecomeTuitor() {
   const [opentuitorinitialmodal, setopentuitorinitialmodal] = useState(false);
   const navigate = useNavigate(); // React Router hook for navigation
 
-  // Function to fetch user data
+  // Function to fetch user data and update purpose if necessary
   const fetchUserData = async (uid) => {
     if (!uid) return;
     try {
       const response = await fetch(`${webApi}/api/user/${uid}`);
       const result = await response.json(); // Parse JSON
-
+  
       console.log("Fetched User Data:", result); // Debugging
-
+  
       if (result.success && result.data) {
         setMYUsers(result.data); // Store only the `data` part
+  
+        // If the user's purpose is not 'teacher', update it
+        if (result.data.teacherconfirm && result.data.purpose !== 'teacher') {
+          const updateResponse = await fetch(`${webApi}/api/update-purpose`, {
+            method: 'POST', // POST request to update user
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ uid: result.data.uid, purpose: 'teacher' }),  // Update purpose to 'teacher'
+          });
+  
+          const updateResult = await updateResponse.json();
+          if (updateResult.success) {
+            console.log("User purpose updated to teacher.");
+            setMYUsers((prev) => ({ ...prev, purpose: 'teacher' }));  // Update local state
+            
+            // Reload the page after setting purpose to 'teacher'
+            window.location.reload();
+          } else {
+            console.warn("Failed to update user purpose:", updateResult);
+            window.location.reload();
+          }
+        }
       } else {
         console.warn("Unexpected API response structure:", result);
       }
     } catch (error) {
       console.error("Error fetching user data:", error);
     } finally {
-      setIsUserLoaded(true); 
+      setIsUserLoaded(true);
+     
     }
   };
-
-  // useEffect hook to update user purpose if needed
-  useEffect(() => {
-    if (user?.uid && myuser?.purpose !== 'teacher') {
-      const updateUserPurpose = async () => {
-        try {
-          const response = await fetch(`${webApi}/api/update-purpose`, {
-            method: 'POST',  // PUT request to update user
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ uid: myuser.uid, purpose: 'teacher' }),  // Update purpose to 'teacher'
-          });
-
-          const result = await response.json();
-          if (result.success) {
-            console.log("User purpose updated to teacher.");
-            setMYUsers((prev) => ({ ...prev, purpose: 'teacher' }));  // Update local state
-          } else {
-            console.warn("Failed to update user purpose:", result);
-          }
-        } catch (error) {
-          console.error("Error updating user purpose:", error);
-        }
-      };
-
-      updateUserPurpose();  // Call the function inside the useEffect
-    }
-  }, [user, myuser?.purpose]);
+  
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (authUser) => {
       if (authUser) {
         setUser(authUser);
         setIsAuthenticated(true);
+        fetchUserData(authUser.uid); // Fetch user data immediately
       } else {
         setIsAuthenticated(false);
         setUser(null);
@@ -85,16 +83,16 @@ function BecomeTuitor() {
     return () => unsubscribe();
   }, []);
 
-  useEffect(() => {
-    if (user?.uid) {
-      setIsUserLoaded(false);
-      fetchUserData(user.uid);
-    }
-  }, [user]);
-
-  // **Show loading until authentication & user data are fully loaded**
+  // Show loading until authentication & user data are fully loaded
   if (isAuthenticated === null || !isUserLoaded) {
-    return <div>Loading...</div>;
+    return <div className="loading-modal">
+       <div className="switchinganimationcontainer">
+       <div className="loading-animation">
+        <FaUsersGear style={{marginLeft:"-20px", fontSize:"100px"}} />
+        </div>
+        <p>Loading, please wait...</p>
+       </div>
+      </div>;
   }
 
   return (
@@ -106,6 +104,7 @@ function BecomeTuitor() {
       <BetuitotBanner 
         setopentuitorinitialmodal={setopentuitorinitialmodal} 
         user={myuser}
+        tuitorlogin={()=>setClosetuitorLogin(true)}
       />
       <BetuitotContent />
 
@@ -115,6 +114,7 @@ function BecomeTuitor() {
           setopentuitorinitialmodal={setopentuitorinitialmodal}
         />
       )}
+      
     </>
   );
 }

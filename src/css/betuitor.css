@@ -4,6 +4,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    
 
   }
   .betuitorfiltercontainer{
@@ -13,7 +14,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 620px;
+    height: auto;
+    margin-bottom: 10px;
     margin-top: -190px;
   }
 
@@ -33,13 +35,16 @@
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
   }
   .bannerinsiders{
+    margin-top: 100px;
     height: 100%;
+    padding-bottom: 50px;
     width: 100%;
     justify-content: center;
     align-items: center;
     display: flex;
     flex-direction: column;
     border-radius: 20px;
+    
   }
   [data-theme='dark'] .bannerinsiders {
     background: linear-gradient(to bottom, #1a2d26, #3a6459 60%, transparent);
@@ -81,6 +86,28 @@
     align-items: center;
     
   }
+  .bannerbuttons{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+  }
+/* Remove the repeated .bannerbuttons selector */
+.bannerbutton {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); /* Adjust for smaller screens */
+  gap: 20px 40px; /* Increase horizontal gap to 40px and vertical gap to 30px */
+  justify-content: center; /* Centers the grid items horizontally */
+  justify-items: center;  /* Centers each grid item within its grid cell */
+  width: 90%; /* Makes the grid take up full width of its parent */
+  max-width: 600px; 
+  margin: 0 auto; /* Centers the grid container itself */
+  padding: 10px; /* Add padding for smaller screens */
+}
+
+
   .getstartedbetuitorButton{
     margin: 10px;
     display: flex;

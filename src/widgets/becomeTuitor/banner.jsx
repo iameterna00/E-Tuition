@@ -7,7 +7,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { TbDashboardFilled } from "react-icons/tb";
 import { RiUserCommunityLine } from "react-icons/ri";
 
-function BetuitotBanner({ setopentuitorinitialmodal, user }) {
+function BetuitotBanner({ setopentuitorinitialmodal, user, tuitorlogin }) {
   const [isTuitors, setIsTuitors] = useState('')
   console.log("User data in BetuitotBanner:", user); // Log the user data
   const defaultOptions = {
@@ -40,15 +40,21 @@ function BetuitotBanner({ setopentuitorinitialmodal, user }) {
               </div>
                <p style={{marginTop:"-50px"}}>We are reviewing your doccuments<br/>this could take few moments...</p></div>
             ) : isTuitors === 'approved' ? (
-              <div className="bannertext">
+              <div className="bannerbuttons">
                 <h3 style={{fontSize:"25px"}}>🎉 You are now a Verified Tutor!</h3>
                 <p style={{ margin: '0px', fontSize:"20px" }}>Start teaching and earning today.</p>
-               <div className="bannerbuttons" style={{display:'flex', width:"90%", gap:"10px"}} >
+               <div className="bannerbutton" >
             <div className="visitteachercommunity">
            <Link> <RiUserCommunityLine style={{color:"#0099ff"}} size={100} />
            <p style={{margin:"0px", fontSize:"20px"}}>Join our tutors community</p></Link>
             
             </div>
+                <div className='visitdashboard'>
+                  <Link to="/dashboard">
+                  <TbDashboardFilled style={{color:"#0099ff"}} size={100} />
+                  <p style={{margin:"0px", fontSize:"20px"}}>Go to Dashboard</p>
+                  </Link>
+                </div>
                 <div className='visitdashboard'>
                   <Link to="/dashboard">
                   <TbDashboardFilled style={{color:"#0099ff"}} size={100} />
@@ -63,9 +69,11 @@ function BetuitotBanner({ setopentuitorinitialmodal, user }) {
                 <p style={{ margin: '0px' }}>Offer your knowledge</p>
                 <div className="getstartedbetuitorButton">
                   <div className="getstartedbetuitor">
-                    <button onClick={() => setopentuitorinitialmodal(true)}>
+                  {user? (  <button onClick={() => setopentuitorinitialmodal(true)}>
                       Become a Tuitor
-                    </button>
+                    </button>):(  <button onClick={() => tuitorlogin(true)}>
+                      Become a Tuitor
+                    </button>)}
                   </div>
                 </div>
               </div>

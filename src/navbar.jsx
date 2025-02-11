@@ -87,7 +87,7 @@ const Navbar = () => {
   
       if (purpose === 'student') {
         navigate('/'); 
-        window.location.reload(); // Ensures navigation completes before reloading
+         window.location.reload(); // Ensures navigation completes before reloading
       } else {
         navigate('/iamatuitor');
         window.location.reload();
