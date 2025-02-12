@@ -29,7 +29,7 @@
 
   --button-background: #1877f2; /* Facebook blue */
   --button-background-hover: #166fe5; /* Darker Facebook blue */
-  --button-text-color: white;
+  --button-text-color: rgb(0, 0, 0);
 }
 
 button {
@@ -42,7 +42,7 @@ button {
   background-color: var(--button-background);
   color: var(--button-text-color);
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
 }
 
   button:hover {

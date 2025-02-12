@@ -7,7 +7,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { TbDashboardFilled } from "react-icons/tb";
 import { RiUserCommunityLine } from "react-icons/ri";
 import { SiGoogleclassroom } from "react-icons/si";
-import { FaUserGear } from "react-icons/fa6";
+import { FaGear, FaUserGear } from "react-icons/fa6";
 
 function BetuitotBanner({ setopentuitorinitialmodal, user, tuitorlogin }) {
   const [isTuitors, setIsTuitors] = useState('')
@@ -51,24 +51,36 @@ function BetuitotBanner({ setopentuitorinitialmodal, user, tuitorlogin }) {
            <p style={{margin:"0px", fontSize:"20px"}}>Join our tutors community</p></Link>
             
             </div>
-                <div className='visitdashboard'>
-                  <Link to="/profile">
+         <div className="visitdashboard">
+         <Link to="/teacherdashboard">
+                <div className='visitdashboardcontents'>
+                 
                   <TbDashboardFilled style={{color:"#0099ff"}} size={100} />
                   <p style={{margin:"0px", fontSize:"20px"}}>Go to Dashboard</p>
-                  </Link>
+                
                 </div>
-                <div className='visitdashboard'>
-                  <Link to="/dashboard">
-                  <SiGoogleclassroom  style={{color:"#0099ff"}} size={100} />
-                  <p style={{margin:"0px", fontSize:"20px"}}>Start Making Courses</p>
-                  </Link>
+                </Link>
+         </div>
+         <div className="visitdashboard">
+         <Link to="/dashboard">
+                <div className='visitdashboardcontents'>
+                 
+                  <SiGoogleclassroom style={{color:"#0099ff"}} size={100} />
+                  <p style={{margin:"0px", fontSize:"20px"}}>Add <br/> Classes</p>
+                
                 </div>
-                <div className='visitdashboard'>
-                  <Link to="/dashboard">
-                  <FaUserGear  style={{color:"#0099ff"}} size={100} />
-                  <p style={{margin:"0px", fontSize:"20px"}}>Settings</p>
-                  </Link>
+                </Link>
+         </div>
+         <div className="visitdashboard">
+         <Link to="/profile">
+                <div className='visitdashboardcontents'>
+                 
+                  <FaUserGear style={{color:"#0099ff"}} size={100} />
+                  <p style={{margin:"0px", fontSize:"20px"}}>Go to Dashboard</p>
+                
                 </div>
+                </Link>
+         </div>
                </div>
               </div>
             ): (

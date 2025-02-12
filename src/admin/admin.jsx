@@ -533,6 +533,14 @@ const handleSubmit = async (e) => {
                 value={editingVacancy.salary || ""}
                 onChange={handleEditChange}
               />
+              <p style={{ margin: "0px" }}>Grade</p>
+
+                 <input
+                type="text"
+                name="grade"
+                value={editingVacancy.grade || ""}
+                onChange={handleEditChange}
+              />
       
               {/* New Fields */}
               <p style={{ margin: "0px" }}>Time</p>
@@ -551,12 +559,15 @@ const handleSubmit = async (e) => {
                 value={editingVacancy.tutorType || ""}
                 onChange={handleEditChange}
               />
+              <p style={{ margin: "0px" }}>duration</p>
+
                <input
                 type="text"
                 name="duration"
                 value={editingVacancy.duration || ""}
                 onChange={handleEditChange}
               />
+
       
               <button type="submit">Save</button>
               <button className="tuition-delete-button" style={{ marginLeft: "5px" }} type="button" onClick={() => setIsEditModalOpen(false)}>
