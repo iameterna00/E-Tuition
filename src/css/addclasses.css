@@ -1,0 +1,170 @@
+.addclassbody {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 40px 20px;
+    gap: 10px;
+  }
+  
+  .addclass-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 80%;
+    max-width: 1200px;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    margin-top: 30px;
+  }
+  
+  .left-sideaddclass {
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 400px;
+    border-radius: 20px;
+    padding: 20px;
+  }
+  
+  [data-theme='dark'] .left-sideaddclass {
+    background-color: rgb(24, 24, 24);
+  }
+  
+  [data-theme='light'] .left-sideaddclass {
+    background-color: rgba(242, 242, 242, 0.675);
+  }
+  
+  .poster-upload {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    height: 300px; 
+    border-radius: 20px;
+    cursor: pointer;
+  }
+  .file-name{
+    background-color: rgba(128, 128, 128, 0.197);
+    padding: 5px;
+    gap: 10px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .poster-upload input[type="file"] {
+    display: none; /* Hides the default file input */
+  }
+  .uploadcoursescontainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  
+  .upload-icon {
+    margin: 20px;
+    font-size: 50px;
+  }
+  
+  .poster-upload-text {
+    font-size: 16px;
+
+  }
+  
+  .poster-preview img {
+    max-width: 100%;
+    max-height: 250px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-top: 20px;
+  }
+  
+  .right-sideaddclass {
+    width: 60%; /* Increased width to accommodate the full form */
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 20px;
+    box-sizing: border-box; /* Ensures padding doesn't cause overflow */
+  }
+  
+  [data-theme='dark'] .right-sideaddclass {
+    background-color: rgb(24, 24, 24);
+  }
+  
+  [data-theme='light'] .right-sideaddclass {
+    background-color: rgba(242, 242, 242, 0.675);
+  }
+  
+  .right-side {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  
+  .form-group {
+    text-align: start;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid rgba(93, 93, 93, 0.431);
+    border-radius: 20px;
+    margin-top: 8px;
+    box-sizing: border-box; /* Ensures padding is included in width */
+  }
+  
+  .form-group textarea {
+    resize: vertical;
+    height: 150px;
+  }
+  
+  .submit-button {
+    padding: 12px 20px;
+    background-color: #0088FE;
+    color: white;
+    font-size: 18px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .submit-button:hover {
+    background-color: #45a049;
+  }
+  
+ 
+  @media (max-width: 600px) {
+    .addclassbody {
+    padding: 0px;
+     flex-direction: column;
+      }
+      .left-sideaddclass {
+        width: 100%;
+        margin: 0px;
+        border-radius: 0px;
+        padding: 0px;
+      }
+      .right-sideaddclass {
+        width: 100%;
+        margin: 0px;
+        border-radius: 0px;
+
+      }
+  }

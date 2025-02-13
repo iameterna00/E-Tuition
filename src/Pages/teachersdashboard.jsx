@@ -1,5 +1,8 @@
 import { Link } from 'react-router-dom';
 import '../css/teachersdashboard.css';
+import KUBE from '../assets/newcube.png';
+import Dictator from '../assets/Dictator.png';
+import Master from '../assets/Master.png';
 import { RadialBarChart, RadialBar, ResponsiveContainer, Tooltip, LineChart, Line, XAxis, YAxis, CartesianGrid, Legend, Tooltip as RechartsTooltip } from 'recharts';
 
 const hoursTaught = 120;
@@ -7,6 +10,8 @@ const studentsTaught = 15;
 
 const LEVEL_2_HOURS = 200;
 const LEVEL_2_STUDENTS = 50;
+const LEVEL_3_HOURS = 1000;
+const LEVEL_3_STUDENTS = 500;
 
 const hoursPercentage = Math.min((hoursTaught / LEVEL_2_HOURS) * 100, 100);
 const studentsPercentage = Math.min((studentsTaught / LEVEL_2_STUDENTS) * 100, 100);
@@ -25,9 +30,19 @@ const profileViewsData = [
   { month: 'Nov', views: 80 },
   { month: 'Dec', views: 90 },
 ];
+
 const averageProgress = (hoursPercentage + studentsPercentage) / 2;
 
-
+// Calculate level based on hours taught and students taught
+const getLevel = () => {
+    if (hoursTaught >= LEVEL_3_HOURS || studentsTaught >= LEVEL_3_STUDENTS) {
+      return { level: "Expert", image: Dictator };
+    }
+    if (hoursTaught >= LEVEL_2_HOURS || studentsTaught >= LEVEL_2_STUDENTS) {
+      return { level: "Master", image: Master };
+    }
+    return { level: "Beginner", image: KUBE };
+  };
 
 function GradientDefs() {
   return (
@@ -49,54 +64,72 @@ function GradientDefs() {
 const hoursData = [{ name: "Hours Taught", value: hoursPercentage }];
 const studentsData = [{ name: "Students Taught", value: studentsPercentage }];
 
-function TeacherDashboard({user}) {
-  const teacherLevel = hoursTaught >= LEVEL_2_HOURS || studentsTaught >= LEVEL_2_STUDENTS ? "Level 2" : "Level 1";
+function TeacherDashboard({ user }) {
+    const { level, image } = getLevel();
 
   return (
     <div className="teacherdashboardbody">
       <GradientDefs />
-<div className="teachersinformationscontainer">
-    
-<div className="teachersinformations">
-        <div className="teacherinformationinsiders">
-          <div className="teacherprofilecontainer">
-            <img className='teacherprofile' src={user.profile} alt="" />
-            <h3>{user.name}</h3>
-            <p>@{user.username}</p>
-            <Link to={'/profile'} style={{display:'flex', justifyContent:'center', width:'100%', maxWidth:"300px", backgroundColor:"transparent", border:"1px solid grey", borderRadius:"20px"}} ><button style={{display:'flex', justifyContent:'center', width:'100%', maxWidth:"300px", backgroundColor:"transparent"}}>View Profile</button></Link>
+      <div className="teachersinformationscontainer">
+        <div className="teachersinformations">
+          <div className="teacherinformationinsiders">
+            <div className="teacherprofilecontainer">
+              <img className="teacherprofile" src={user.profile} alt="" />
+              <div className="teachername" style={{ display: 'flex', gap: "5px" }}>
+                <h3>{user.name}</h3><img style={{ height: '20px', marginTop: '4px' }} src={KUBE} alt="" />
+              </div>
+              <p>@{user.username}</p>
+              <Link to={'/profile'} style={{ display: 'flex', justifyContent: 'center', width: '100%', maxWidth: "300px", backgroundColor: "transparent", border: "1px solid grey", borderRadius: "20px" }}>
+                <button style={{ display: 'flex', justifyContent: 'center', width: '100%', maxWidth: "300px", backgroundColor: "transparent" }}>
+                  View Profile
+                </button>
+              </Link>
+              <div style={{display:"flex", width:"100%", margin:'10px', flexDirection:"column", alignItems:'start'}} className="teacherqualificationcontainer">
+              <h3>Qualifications</h3>
+              <div className="yourdegree" style={{display:'flex'}}><p style={{fontWeight:"bold"}}>Degree:</p><p>{user.degree}</p></div>
+              <div className="yourdegree" style={{ textAlign: 'start' }}>
+  <p style={{ fontWeight: 'bold', margin: 0 }}>Studied at:</p>
+  <p style={{ margin: 0, whiteSpace: 'pre-wrap', wordBreak: 'break-all' }}>
+    {user.school}
+  </p>
+</div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-      <div className="teachersinformations">
-        <div className="teacherinformationinsiders">
-            <h3>Qualification Overview</h3>
-          <div className="teacherprofilecontainer" style={{alignItems:'start'}}>
-          <p style={{margin:'0px 10px'}}>Level</p>
-          <p style={{margin:'0px 10px'}}>Rating</p>
-          <div className="progress-container">
-  <div className="progress-bar">
-    <div className="progress-fill" style={{ width: `${averageProgress}%` }}></div>
-    {/* Diamond stops */}
-  </div>
-  <div className="diamond stop1">Lv 1 <br /> Beginner Tutor</div>
-    <div className="diamond stop2">Lv 2 <br /> Master Tutor</div>
-    <div className="diamond stop3">Lv 3 <br /> Dictator</div>
-</div>
 
-         
+        <div className="teachersinformations">
+          <div className="teacherinformationinsiders">
+            <h3>Kube Qualification</h3>
+            <div className="teacherprofilecontainer" style={{ alignItems: 'start' }}>
+            <p style={{margin:'0px 10px'}}>Level: <span>{level}</span> <img style={{ height: '20px', marginBottom: '-5px' }} src={image} alt="" /></p>
+              <p style={{ margin: '0px 10px' }}>Rating</p>
+              <p style={{ fontWeight: 'bold', margin: '0px 10px' }}>Your Progress:</p>
+              <div className="lineprogress-container">
+                <div className="progress-bar">
+                  <div className="progress-fill" style={{ width: `${averageProgress}%` }}></div>
+                </div>
+                <div className="diamond stop1">Lv 1 </div>
+                <div className="diamond stop2">Lv 2 </div>
+                <div className="diamond stop3">Lv 3</div>
+              </div>
+              <div className="level1" style={{ width: "90%", display: 'flex', flexDirection: 'column', alignItems: 'start' }}>
+                <p>Level 1: <img style={{ height: '20px', marginBottom: '-5px' }} src={KUBE} alt="" /> Beginner - &lt; 50 students &amp; 200 hours</p>
+                <p>Level 2: <img style={{ height: '20px', marginBottom: '-5px' }} src={Master} alt="" /> Master - 50 students &amp; 200 hours</p>
+                <p>Level 3: <img style={{ height: '20px', marginBottom: '-5px' }} src={Dictator} alt="" /> Dictator - 1000 hours &amp; 500 students</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-</div>
 
       <div className="techerdashboarddetails">
         <div className="teacherdashboardinsiders">
           <h3>Teaching Statistics</h3>
 
           <div className="progress-container">
-            {/* Hours Taught Progress */}
             <div className="progress-chart">
-            <h4 style={{margin:'5px'}}>Hours Taught</h4>
+              <h4 style={{ margin: '5px' }}>Hours Taught</h4>
               <div className="progress-circle">
                 <ResponsiveContainer width="100%" height={180}>
                   <RadialBarChart
@@ -121,9 +154,8 @@ function TeacherDashboard({user}) {
               <p>{hoursTaught} / {LEVEL_2_HOURS} hours</p>
             </div>
 
-            {/* Students Taught Progress */}
             <div className="progress-chart">
-              <h4 style={{margin:'5px'}}>Students Taught</h4>
+              <h4 style={{ margin: '5px' }}>Students Taught</h4>
               <div className="progress-circle">
                 <ResponsiveContainer width="100%" height={180}>
                   <RadialBarChart
@@ -149,7 +181,6 @@ function TeacherDashboard({user}) {
             </div>
           </div>
 
-          {/* Line Graph for Profile Views */}
           <div className="line-graph">
             <h4>Profile Views in the Past Year</h4>
             <ResponsiveContainer width="100%" height={300}>

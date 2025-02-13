@@ -17,6 +17,7 @@ import ADMIN from './admin/admin';
 import TeacherManager from './admin/teachermanager';
 import TeacherDashboard from './Pages/teachersdashboard';
 import TeacherDashboardWrapper from './widgets/routesmanagement';
+import AddClass from './Pages/addclasses';
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
             
             {/* Protect Teacher Dashboard */}
             <Route path="/teacherdashboard" element={<TeacherDashboardWrapper />} />
+            <Route path="/addclasses" element={<AddClass />} />
             
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/admin" element={<ADMIN />} />

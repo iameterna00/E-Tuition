@@ -62,7 +62,7 @@ function BetuitotBanner({ setopentuitorinitialmodal, user, tuitorlogin }) {
                 </Link>
          </div>
          <div className="visitdashboard">
-         <Link to="/dashboard">
+         <Link to="/addclasses">
                 <div className='visitdashboardcontents'>
                  
                   <SiGoogleclassroom style={{color:"#0099ff"}} size={100} />

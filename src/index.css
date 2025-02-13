@@ -73,6 +73,15 @@ button:focus-visible {
   background: rgba(29, 29, 29, 0.2);
   border-radius: 10px; 
 }
+[data-theme='dark'] .form-group textarea {
+  background-color: #1f1f1f; /* Dark background for dark theme */
+  color: white; /* White text for contrast */
+}
+
+[data-theme='light'] .form-group textarea {
+  background-color: white; /* Light background for light theme */
+  color: black; /* Black text for contrast */
+}
 
 
 * {
