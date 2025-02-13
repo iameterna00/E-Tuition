@@ -1,19 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FaLocationDot } from "react-icons/fa6";
-import gigsData from '../../JSON/gigdata.json';
 import Filters from '../filters/filter';
 
 function Vaccancy() {
+  const [gigsData, setGigsData] = useState([]);
   const [locationFilter, setLocationFilter] = useState('');
   const [genderFilter, setGenderFilter] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
   const [priceRange, setPriceRange] = useState([0, 25000]);
-  
+
+  // Fetch classes data from backend on component mount
+  useEffect(() => {
+    const fetchClasses = async () => {
+      try {
+        const response = await fetch('http://localhost:5001/api/classes');  // Assuming your Flask app is running on this URL
+        const data = await response.json();
+        setGigsData(data);
+      } catch (error) {
+        console.error('Error fetching class data:', error);
+      }
+    };
+
+    fetchClasses();
+  }, []);
+
   const handlePriceChange = (values) => {
     setPriceRange(values);
   };
-
 
   const filteredGigs = gigsData.filter((gig) => {
     const matchesLocation = locationFilter ? gig.location.includes(locationFilter) : true;
@@ -25,7 +39,6 @@ function Vaccancy() {
     const matchesPrice = gig.pricePerMonth >= priceRange[0] && gig.pricePerMonth <= priceRange[1];
     return matchesLocation && matchesGender && matchesSearch && matchesPrice;
   });
-
 
   return (
     <div className="home-vaccancy-page">
@@ -42,10 +55,12 @@ function Vaccancy() {
             <Link to={`/coursesdetails/${gig.id}`} className="vaccancydetail-link">
               <img src={gig.image} alt={gig.title} className="vaccancy-image" />
               <div className="vaccancy-details">
-             <div className="vaccancyprofilecontainer">
+              <div className="vaccancyprofilecontainer">
              <img className='vaccancyProfile' src={gig.profile} alt="" />
              <h3>{gig.name}</h3>
              </div>
+              <h3> {gig.title}</h3>
+      
                 <h3 className="vaccancy-location"><FaLocationDot /> {gig.location}</h3>
                 <h3 className="vaccancy-qualification">Qualification: {gig.qualification}</h3>
                 <h3 className="vaccancy-qualification">Exp: {gig.experience}</h3>

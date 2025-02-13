@@ -637,14 +637,18 @@
 }
 .vaccancyProfile{
   border-radius: 50%;
-  height: 30px;
-  width: 30px;
+  height: 20px;
+  width: 20px;
   object-fit: cover;
 }
 .vaccancyprofilecontainer{
   display: flex;
-  gap: 10px;
+  gap: 5px;
   font-size: 15px;
+}
+.vaccancyprofilecontainer h3{
+  font-size: 15px;
+  font-weight: 600;
 }
 .vaccancy-location {
   font-size: 14px;

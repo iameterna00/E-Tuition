@@ -4,6 +4,7 @@ import KUBE from '../assets/newcube.png';
 import Dictator from '../assets/Dictator.png';
 import Master from '../assets/Master.png';
 import { RadialBarChart, RadialBar, ResponsiveContainer, Tooltip, LineChart, Line, XAxis, YAxis, CartesianGrid, Legend, Tooltip as RechartsTooltip } from 'recharts';
+import { FaFile, FaIdCard } from 'react-icons/fa';
 
 const hoursTaught = 120;
 const studentsTaught = 15;
@@ -86,12 +87,23 @@ function TeacherDashboard({ user }) {
               </Link>
               <div style={{display:"flex", width:"100%", margin:'10px', flexDirection:"column", alignItems:'start'}} className="teacherqualificationcontainer">
               <h3>Qualifications</h3>
-              <div className="yourdegree" style={{display:'flex'}}><p style={{fontWeight:"bold"}}>Degree:</p><p>{user.degree}</p></div>
               <div className="yourdegree" style={{ textAlign: 'start' }}>
-  <p style={{ fontWeight: 'bold', margin: 0 }}>Studied at:</p>
+  <p style={{ fontWeight: '550', margin: 0 }}>Degree:</p>
+  <p style={{ margin: 0, whiteSpace: 'pre-wrap', wordBreak: 'break-all' }}>
+    {user.degree}
+  </p>
+</div>
+              <div className="yourdegree" style={{ textAlign: 'start' }}>
+  <p style={{ fontWeight: '550', margin: 0 }}>Studied at:</p>
   <p style={{ margin: 0, whiteSpace: 'pre-wrap', wordBreak: 'break-all' }}>
     {user.school}
   </p>
+</div>
+<div className="youridentuty" style={{display:"flex", flexDirection:"column", textAlign:"start"}}> <p style={{ fontWeight: '550', margin: '10px 0 0' }}>Your Documents:</p>
+<div className="teacher-links">
+                  <a href={user.cvFileUrl} target="_blank" rel="noopener noreferrer"><FaFile/> View CV</a>
+                  <a href={user.identityFileUrl} target="_blank" rel="noopener noreferrer"><FaIdCard/> View Identity</a>
+                </div>
 </div>
               </div>
             </div>
@@ -113,11 +125,11 @@ function TeacherDashboard({ user }) {
                 <div className="diamond stop2">Lv 2 </div>
                 <div className="diamond stop3">Lv 3</div>
               </div>
-              <div className="level1" style={{ width: "90%", display: 'flex', flexDirection: 'column', alignItems: 'start' }}>
+              {/* <div className="level1" style={{ width: "90%", display: 'flex', flexDirection: 'column', alignItems: 'start' }}>
                 <p>Level 1: <img style={{ height: '20px', marginBottom: '-5px' }} src={KUBE} alt="" /> Beginner - &lt; 50 students &amp; 200 hours</p>
                 <p>Level 2: <img style={{ height: '20px', marginBottom: '-5px' }} src={Master} alt="" /> Master - 50 students &amp; 200 hours</p>
                 <p>Level 3: <img style={{ height: '20px', marginBottom: '-5px' }} src={Dictator} alt="" /> Dictator - 1000 hours &amp; 500 students</p>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

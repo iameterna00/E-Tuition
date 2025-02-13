@@ -12,7 +12,7 @@
   font-size: 30px;
 }
 .course-details-page{
-  width: 100%;
+  width: 80%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -63,6 +63,10 @@
     flex-direction: column;
     align-items: start;
     padding: 10px;
+
+  }
+  .tuitorinfo h3{
+ font-weight: 500;
 
   }
   .toutorname{
@@ -368,6 +372,118 @@
 
 .cancel-button:hover {
   background-color: #bbb;
+}
+/* Mobile responsiveness */
+@media screen and (max-width: 768px) {
+  /* Course details page */
+  .course-details-page {
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .course-details-body {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .coursebodyone {
+    flex-direction: column;
+    background-color: #2e3b4563;
+    border-radius: 15px;
+    width: 100%;
+  }
+
+  .courseImage {
+    width: 100%;
+    height: auto;
+  }
+
+  .tutorsdetails, .tuitorinfo {
+    padding: 10px;
+  }
+
+  .course-description {
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  .enrollnowcontainer {
+    width: 90%;
+    margin-top: 20px;
+    padding: 15px;
+  }
+
+  .productdetails {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .subtotal {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .price-details {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .duration select {
+    width: 100%;
+    padding: 10px;
+  }
+
+  /* Offer banner */
+  .offer-banner {
+    width: 90%;
+    margin: 0px;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .dontmissout {
+    flex-direction: row;
+    padding: 10px;
+  }
+
+  .reviews-page {
+    width: 100%;
+  }
+
+  .tab-bar button {
+    padding: 8px 15px;
+    font-size: 14px;
+    margin: 5px;
+  }
+
+  .reviews-section {
+    padding: 15px;
+    width: 90%;
+  }
+
+  .reviewcontents {
+    gap: 10px;
+  }
+
+  .rating-popup {
+    width: 80%;
+    padding: 15px;
+  }
+
+  .popup-content .stars {
+    margin: 8px 0;
+  }
+
+  /* Button styles for mobile */
+  .submit-button, .cancel-button {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+  .enrollbutton{
+    width: 100%;
+  }
 }
 
 
