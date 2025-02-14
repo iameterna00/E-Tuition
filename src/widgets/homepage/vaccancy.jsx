@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FaLocationDot } from "react-icons/fa6";
 import Filters from '../filters/filter';
+import KUBE from '../../assets/newcube.png';
 
 function Vaccancy() {
   const [gigsData, setGigsData] = useState([]);
@@ -55,7 +56,9 @@ function Vaccancy() {
            <div className="vacancycardinsiders">
            <Link to={`/coursesdetails/${gig.id}`} className="vaccancydetail-link">
            <div className="vacancyimagecontainer">
-           <img src={gig.image} alt={gig.title} className="vaccancy-image" />
+          {gig.image ? ( <img src={gig.image} alt={gig.title} className="vaccancy-image" />):(<div className='gigsdefualtposter'>
+           <div className="kubegraphicscontainer"> <img src={KUBE} className='kubegraphics' alt="" /><h3>KUBE HOME TUTION</h3></div>
+          </div>)}
            <div className="vaccancyprofilecontainer">
              <img className='vaccancyProfile' src={gig.profile} alt="" />
              {/* <h3>{gig.name}</h3> */}

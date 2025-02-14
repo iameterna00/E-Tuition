@@ -606,29 +606,40 @@
 }
 
 .vaccancy-container {
-  cursor: pointer;
   display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Dynamic 3-column layout */
+  gap: 20px; /* Spacing between cards */
   width: 100%;
-  grid-template-columns: repeat(4, 1fr); /* Four cards per row */
-  gap: 10px;
-  margin: 10px auto;
+  max-width: 1200px;
+  margin-top: 20px;
 }
 
 .vacancycardinsiders{
-  border-radius: 0 0 10px 10px;
+  border-radius: 10px;
 }
 
 [data-theme='dark'] .vacancycardinsiders{
-  background-color: #1c1c1c;
+  background-color: rgb(25,25,25);
   
   }
   
   [data-theme='light'] .vacancycardinsiders{
     background-color: rgb(241, 241, 241);
   }
-.vaccancy-card {
-  transition: all 0.2s ease-in-out;
-}
+  .vaccancy-card {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+  }
+  [data-theme='dark']  .vaccancy-card {
+    background-color: rgb(25,25,25);
+    
+    }
+    
+    [data-theme='light']  .vaccancy-card {
+      background-color: rgb(236, 236, 236);
+    }
 .vaccancy-card:hover {
   transform: translateY(-5px);
 }
@@ -641,6 +652,33 @@
   height: 100px;
   object-fit: cover;
   border-radius: 10px 10px 0px 0px;
+}
+.gigsdefualtposter{
+  width: 400px;
+  position: relative;
+  height: 100px;
+  border-radius: 10px 10px 0px 0px;
+
+}
+[data-theme='dark'] .gigsdefualtposter{
+  background-color: rgb(35, 41, 41);
+  }
+  
+  [data-theme='light'] .gigsdefualtposter{
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgba(128, 128, 128, 0.345);
+  }
+  .kubegraphicscontainer{
+    display: flex;
+    position: absolute;
+    top: 40%;
+    left: 10%;
+    gap: 10px;
+  }
+.kubegraphics{
+  height: 40px;
+  margin-top: -5px;
+  width: 40px;
 }
 .vaccancyProfile{
   border-radius: 50%;

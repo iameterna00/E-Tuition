@@ -204,7 +204,7 @@ const AddClass = () => {
                   name="description"
                   value={classDetails.description}
                   onChange={handleChange}
-                  required
+                  
                   placeholder="Enter course description"
                 />
               </div>

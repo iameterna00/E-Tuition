@@ -14,6 +14,7 @@ const ADMIN = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isTeacherModalOpen, setIsTeacherModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [isEditteacherModalOpen, setIsteacherEditModalOpen] = useState(false);
   const [isCompleteTeacherModalOpen, setIsCompleteTeacherModalOpen] = useState(false);
   const [tab, setTab] = useState("available");
   const [editingVacancy, setEditingVacancy] = useState(null);
@@ -242,6 +243,10 @@ const handleSubmit = async (e) => {
     setEditingVacancy(vacancy);
     setIsEditModalOpen(true);
   };
+  const handleTeacherEditClick = (vacancy) => {
+    setEditingVacancy(vacancy);
+    setIsteacherEditModalOpen(true);
+  };
   
   const handleEditChange = (e) => {
     const { name, value } = e.target;
@@ -368,9 +373,14 @@ const handleSubmit = async (e) => {
                     Teacher: {teacher.teacherName} | Commission: {teacher.commission}
                   </p>
                 ))}
-              <div className="addteacher" style={{ display: 'flex', gap: '5px' }} onClick={() => setIsTeacherModalOpen(true)}>
+           <div className="teachersandcommission" style={{display:'flex', gap:'10px', cursor:'pointer' }} >
+           <div className="addteacher" style={{ display: 'flex', gap: '5px',}} onClick={() => setIsTeacherModalOpen(true)}>
                 Add More <IoIosAddCircle fontSize={25} />
               </div>
+              <div className="addteacher" style={{ display: 'flex', gap: '5px' }} onClick={() => handleTeacherEditClick(v)}>
+                Edit Teacher <FaEdit  fontSize={25} />
+              </div>
+           </div>
             </div>
           )}
           {tab === "complete" && (
@@ -578,6 +588,56 @@ const handleSubmit = async (e) => {
           </div>
         </div>
       )}
+       {isEditteacherModalOpen && editingVacancy && (
+  <div className="modal-overlay">
+    <div className="modal-content" style={{ textAlign: "start" }}>
+      <h2>Edit Vacancy</h2>
+      <form onSubmit={handleEditSubmit}>
+
+        {editingVacancy.teachers?.map((teacher, index) => (
+          <div key={index} style={{ marginBottom: "10px" }}>
+            <p style={{ margin: "0px" }}>Teacher {index + 1}</p>
+
+            {/* Editable Teacher Name */}
+            <input
+              type="text"
+              name={`teacherName-${index}`}
+              value={teacher.teacherName || ""}
+              onChange={(e) => {
+                const updatedTeachers = [...editingVacancy.teachers];
+                updatedTeachers[index] = {
+                  ...updatedTeachers[index],
+                  teacherName: e.target.value,
+                };
+                handleEditChange({ target: { name: "teachers", value: updatedTeachers } });
+              }}
+            />
+
+            {/* Editable Commission */}
+            <p style={{ margin: "0px" }}>Commission</p>
+            <input
+              type="number"
+              name={`commission-${index}`}
+              value={teacher.commission || ""}
+              onChange={(e) => {
+                const updatedTeachers = [...editingVacancy.teachers];
+                updatedTeachers[index] = {
+                  ...updatedTeachers[index],
+                  commission: e.target.value,
+                };
+                handleEditChange({ target: { name: "teachers", value: updatedTeachers } });
+              }}
+            />
+          </div>
+        ))}
+
+
+        <button type="submit">Save</button>
+        <button className="tuition-delete-button" style={{marginLeft:'10px'}} onClick={()=> setIsteacherEditModalOpen(false)} >Cancel</button>
+      </form>
+    </div>
+  </div>
+)}
 
 
     </div>
