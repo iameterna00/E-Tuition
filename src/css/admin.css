@@ -23,16 +23,26 @@
   
   .floating-button{
     position: fixed;
-    bottom: 50px;
+    bottom: 100px;
     right: 20px;
     border-radius: 50%;
     height: 60px;
     width: 60px;
     z-index: 10000;
     display: flex;
-    background-color: #2d96ff;
     justify-content: center;
     align-items: center;
+  }
+  .floating-searchbutton{
+    position: fixed;
+    bottom: 50px;
+    right: 20px;
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    z-index: 10000;
+    background-color: #2d96ff;
+
   }
   .tuition-search-bar{
     display: flex;

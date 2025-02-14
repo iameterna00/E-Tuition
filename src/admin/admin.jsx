@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import "../css/admin.css";
 import { IoIosAddCircle } from "react-icons/io";
 import DownloadImageButton from "../services/downloadimage";
-import { FaSpinner, FaEdit } from "react-icons/fa";  
+import { FaSpinner, FaEdit, FaSearch } from "react-icons/fa";  
 import { useNavigate } from "react-router-dom";
 const API_URL = window.location.hostname === "localhost"
   ? "http://localhost:5001/api/vacancies"  // Local development
@@ -48,6 +48,7 @@ const ADMIN = () => {
   const [isDeleting, setIsDeleting] = useState(false);
   const [progress, setProgress] = useState(0);
   const [searchQuery, setSearchQuery] = useState("");
+  const searchref = useRef(null);
 
 
 
@@ -281,6 +282,7 @@ const handleSubmit = async (e) => {
     }
   };
   
+  
 
   const filteredVacancies = vacancies.filter(
     (v) =>
@@ -299,6 +301,17 @@ const handleSubmit = async (e) => {
     .filter((v) => v.status === "complete")
     .reduce((total, vacancy) => total + parseFloat(vacancy.teacherCommission || 0), 0);
   
+    const searchclick = () => {
+      // Scroll to the top
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  
+      // Focus on the search input
+      setTimeout(() => {
+        if (searchref.current) {
+          searchref.current.focus();
+        }
+      }, 500); // Adding slight delay to ensure smooth focus
+    }
 
   return (
     <div className="tuition-container">
@@ -312,6 +325,7 @@ const handleSubmit = async (e) => {
       className="tuition-search-bar"
       placeholder="Search by Name or Location "
       value={searchQuery}
+      ref={searchref}
       onChange={(e) => setSearchQuery(e.target.value)}
     />
 
@@ -414,7 +428,9 @@ const handleSubmit = async (e) => {
     </div>
 
       {/* Add Vacancy Modal */}
-      <button className="floating-button" onClick={() => setIsModalOpen(!isModalOpen)}>{isModalOpen ? "X" : "Add"}</button>
+      
+      <button className="floating-button" style={{backgroundColor:isModalOpen? 'red':' #2d96ff'}} onClick={() => setIsModalOpen(!isModalOpen)}>{isModalOpen ? "X" : "Add"}  </button>
+      <button className="floating-searchbutton" onClick={searchclick} ><FaSearch style={{marginLeft:'-10px'}} fontSize={18}/></button>
       {isModalOpen && (
         <div className="modal-overlay">
           <div className="modal-content">
