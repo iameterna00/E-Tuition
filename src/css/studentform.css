@@ -67,9 +67,9 @@
   [data-theme='light'] .form-group input{
     color: black;
   }
-  [data-theme='dark'] .form-group select {
+  [data-theme='dark'] .form-group select:focus {
     color: white;
-    background-color: transparent;
+    background-color: rgb(35, 35, 35);
   }
   
   [data-theme='light'] .form-group select{

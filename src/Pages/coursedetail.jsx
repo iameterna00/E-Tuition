@@ -41,7 +41,7 @@ function CourseDetails() {
     <div className="coursebuypage">
       <HomeTuitorOffer/>
       <div className="coursestitle">
-          <h3>Your Online Tutor</h3>
+          <h3>Book Your Tutor</h3>
       </div>
     <div className="course-details-page">
     

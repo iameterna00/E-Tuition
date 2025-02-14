@@ -52,25 +52,31 @@ function Vaccancy() {
   <div className="vaccancy-container">
         {filteredGigs.map((gig) => (
           <div key={gig.id} className="vaccancy-card">
-            <Link to={`/coursesdetails/${gig.id}`} className="vaccancydetail-link">
-              <img src={gig.image} alt={gig.title} className="vaccancy-image" />
-              <div className="vaccancy-details">
-              <div className="vaccancyprofilecontainer">
+           <div className="vacancycardinsiders">
+           <Link to={`/coursesdetails/${gig.id}`} className="vaccancydetail-link">
+           <div className="vacancyimagecontainer">
+           <img src={gig.image} alt={gig.title} className="vaccancy-image" />
+           <div className="vaccancyprofilecontainer">
              <img className='vaccancyProfile' src={gig.profile} alt="" />
-             <h3>{gig.name}</h3>
+             {/* <h3>{gig.name}</h3> */}
              </div>
-              <h3> {gig.title}</h3>
+           </div>
+              <div className="vaccancy-details">
+            <div className="vacancydetailsinsiders">
+            <h3> {gig.title}</h3>
       
-                <h3 className="vaccancy-location"><FaLocationDot /> {gig.location}</h3>
-                <h3 className="vaccancy-qualification">Qualification: {gig.qualification}</h3>
-                <h3 className="vaccancy-qualification">Exp: {gig.experience}</h3>
-                <h3 className="vaccancy-qualification">gender: {gig.sex}</h3>
-                <h3 className="vaccancy-price">Salary: Rs.{Number(gig.pricePerMonth).toLocaleString()}</h3>
+      <h3 className="vaccancy-location"><FaLocationDot /> {gig.location}</h3>
+      <h3 className="vaccancy-qualification">Qualification: {gig.qualification}</h3>
+      <h3 className="vaccancy-qualification">Exp: {gig.experience}</h3>
+      <h3 className="vaccancy-qualification">gender: {gig.sex}</h3>
+      <h3 className="vaccancy-price">Salary: Rs.{Number(gig.pricePerMonth).toLocaleString()}</h3>
 
 
-                <button className='vaccancyapplybutton'>Apply</button>
+      <button className='vaccancyapplybutton'>Apply</button>
+            </div>
               </div>
             </Link>
+           </div>
           </div>
         ))}
       </div>

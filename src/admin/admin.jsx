@@ -286,6 +286,7 @@ const handleSubmit = async (e) => {
   
   // Calculate total vacancies, commissions, and revenue
   const availableVacancies = vacancies.filter((v) => v.status === "available").length;
+  const pendingvacancylength = vacancies.filter((v) => v.status === "pending").length;
   const pendingCommissions = vacancies
     .filter((v) => v.status === "pending")
     .reduce((total, vacancy) => total + vacancy.teachers.reduce((sum, teacher) => sum + parseFloat(teacher.commission || 0), 0), 0);
@@ -323,7 +324,7 @@ const handleSubmit = async (e) => {
       {/* Display calculated values below tabs */}
       <div className="tab-stats">
         {tab === "available" && <p>Total Vacancies: {availableVacancies}</p>}
-        {tab === "pending" && <p>Total Commissions: {pendingCommissions}</p>}
+        {tab === "pending" && <p>Total Commissions: ( {pendingvacancylength}) {pendingCommissions}</p>}
         {tab === "complete" && <p>Total Revenue: {completeRevenue}</p>}
       </div>
         {/* Loading screen */}

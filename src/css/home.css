@@ -614,44 +614,79 @@
   margin: 10px auto;
 }
 
-.vaccancy-card {
-  border-radius: 8px;
-  padding: 10px;
-  text-align: start;
-  transition: transform 0.2s ease;
-  background-color: transparent;
+.vacancycardinsiders{
+  border-radius: 0 0 10px 10px;
 }
 
-
-
-
+[data-theme='dark'] .vacancycardinsiders{
+  background-color: #1c1c1c;
+  
+  }
+  
+  [data-theme='light'] .vacancycardinsiders{
+    background-color: rgb(241, 241, 241);
+  }
+.vaccancy-card {
+  transition: all 0.2s ease-in-out;
+}
 .vaccancy-card:hover {
   transform: translateY(-5px);
 }
+.vacancyimagecontainer{
+  position: relative;
+}
 
 .vaccancy-image {
-  width: 100%;
-  height: 150px;
+  width: 400px;
+  height: 100px;
   object-fit: cover;
-  border-radius: 8px;
+  border-radius: 10px 10px 0px 0px;
 }
 .vaccancyProfile{
   border-radius: 50%;
-  height: 20px;
-  width: 20px;
+  height: 70px;
+  width: 70px;
   object-fit: cover;
 }
 .vaccancyprofilecontainer{
+  position: absolute;
   display: flex;
+  right: 20px;
+  border-radius: 50%;
+  padding: 8px;
+  bottom: -30px;
   gap: 5px;
-  font-size: 15px;
+  font-size: 25px;
+}
+[data-theme='dark'] .vaccancyprofilecontainer{
+  background-color: rgb(25, 25, 25);
+  }
+  
+  [data-theme='light'] .vaccancyprofilecontainer{
+    background-color: rgb(241, 241, 241);
+  }
+.vaccancy-details{
+  border-radius: 0 0 10px 10px;
+
+
+  
+}
+[data-theme='dark'] .vaccancy-details{
+  background-color: rgba(25, 25, 25, 0.97);
+  }
+  
+  [data-theme='light'] .vaccancy-details{
+    background-color: rgb(236, 236, 236);
+  }
+.vacancydetailsinsiders{
+  padding: 10px;
 }
 .vaccancyprofilecontainer h3{
   font-size: 15px;
   font-weight: 600;
 }
 .vaccancy-location {
-  font-size: 14px;
+  font-size: 18px;
   font-weight: 400;
   margin: 10px 10px 0px 0;
 }
@@ -718,7 +753,17 @@
   .vaccancy-container {
     grid-template-columns: repeat(2, 1fr); /* Two cards per row */
   }
-
+  .vaccancy-image {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+  .vaccancy-card{
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+  }
   
 }
 

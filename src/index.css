@@ -82,6 +82,15 @@ button:focus-visible {
   background-color: white; /* Light background for light theme */
   color: black; /* Black text for contrast */
 }
+select {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  transition: background-color 0.3s, color 0.3s;
+  cursor: pointer;
+}
+
 
 
 * {

@@ -12,6 +12,7 @@ const AddClass = () => {
     fee: "350", // Default hourly rate
     monthlyFee: "", // New state for monthly fee
     posterImage: null,
+    tuitionType: "Home Tuition",
     posterFileName: "",
   });
 
@@ -75,6 +76,7 @@ const AddClass = () => {
     formData.append("description", classDetails.description);
     formData.append("fee", classDetails.fee);
     formData.append("monthlyfee", classDetails.monthlyFee); // Include monthly fee in the data
+    formData.append("tuitiontype", classDetails.tuitionType);
 
     // Send class data to backend
     try {
@@ -137,10 +139,17 @@ const AddClass = () => {
       </div>
 
       <div className="right-sideaddclass">
-        <h2>Add New Class</h2>
+        <h2>Offer Your Class</h2>
         <form onSubmit={handleSubmit} className="addclass-form">
           <div className="classesform-container">
             <div className="right-side">
+            <div className="form-group">
+                <label>Tuition Type</label>
+                <select name="tuitionType" value={classDetails.tuitionType} onChange={handleChange} required>
+                  <option value="Home Tuition">Home Tuition</option>
+                  <option value="Online Tuition">Online Tuition</option>
+                </select>
+              </div>
               <div className="form-group">
                 <label>Fee (per hour)</label>
                 <input
