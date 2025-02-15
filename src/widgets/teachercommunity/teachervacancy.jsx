@@ -187,6 +187,7 @@ const VacancyCard = ({ vacancy, openModal }) => {
         <h4>Duration: {vacancy.duration}</h4>
         <h4>Salary: {vacancy.salary}</h4>
         <h4>No of students: {vacancy.grade}</h4>
+        <h4>Tuitor Type: {vacancy.tutorType}</h4>
         {vacancy.distance !== undefined && <h4>Distance: {(vacancy.distance / 1000).toFixed(2)} km</h4>}
         <p>{vacancy.description}</p>
         <p>Status: {vacancy.status === 'complete' ? '🔵Booked' : vacancy.status === 'pending' ? `🟡Pending (${vacancy.teachers.length} applicants)` : '🟢Available'}</p>
