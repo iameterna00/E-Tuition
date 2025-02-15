@@ -52,6 +52,10 @@
     width: 90%;
     border-radius: 120px;
   }
+  .uploadvacancycontainer{
+    display: flex;
+    gap: 5px;
+  }
   .modal-overlay {
     display: flex;
     justify-content: center;

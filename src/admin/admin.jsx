@@ -380,7 +380,9 @@ const handleSubmit = async (e) => {
           {tab === "available" && (
             <div className="uploadvacancycontainer">
               <DownloadImageButton vacancy={v} />
+              <div className="addtowebsite"><button>Add to website</button></div>
             </div>
+         
             
           )}
           {tab === "pending" && (
