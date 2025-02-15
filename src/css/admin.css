@@ -56,6 +56,14 @@
     display: flex;
     gap: 5px;
   }
+  .editformvacancy{
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
   .modal-overlay {
     display: flex;
     justify-content: center;

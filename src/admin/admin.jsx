@@ -6,6 +6,7 @@ import DownloadImageButton from "../services/downloadimage";
 import { FaSpinner, FaEdit, FaSearch } from "react-icons/fa";  
 import { useNavigate } from "react-router-dom";
 import MapSelector from "./mapselectoradmin";
+import EditableMapSelector from "./editablemaps";
 const API_URL = window.location.hostname === "localhost"
   ? "http://localhost:5001/api/vacancies"  // Local development
   : "https://kube-backend.onrender.com/api/vacancies"; 
@@ -546,7 +547,8 @@ const handleSubmit = async (e) => {
           <div className="modal-overlay">
           <div className="modal-content" style={{ textAlign: "start" }}>
             <h2>Edit Vacancy</h2>
-            <form onSubmit={handleEditSubmit}>
+            <form  className="editformvacancy"
+            onSubmit={handleEditSubmit}>
               <p style={{ margin: "0px" }}>Name</p>
               <input
                 type="text"
@@ -618,13 +620,17 @@ const handleSubmit = async (e) => {
                 value={editingVacancy.minRequirement || ""}
                 onChange={handleEditChange}
               />
+          <EditableMapSelector editingVacancy={editingVacancy} setEditingVacancy={setEditingVacancy} />
+
 
 
       
-              <button type="submit">Save</button>
+             <div className="editvacancybuttions" style={{margin:"10px"}}>
+             <button type="submit">Save</button>
               <button className="tuition-delete-button" style={{ marginLeft: "5px" }} type="button" onClick={() => setIsEditModalOpen(false)}>
                 Cancel
               </button>
+             </div>
             </form>
           </div>
         </div>

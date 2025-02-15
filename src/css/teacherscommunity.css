@@ -25,24 +25,123 @@
   
   .teachercommunitypage-tab-active {
     background-color: rgb(0, 80, 133);
-
     color: white;
   }
 
   
   /* Teachersvacancy */
+
+  .teachercommunitycontainer{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+   
+  }
   .teachervacancybody {
     padding: 20px;
+    width: 100%;
+    max-width: 1600px;
+  }
+  [data-theme='dark'] .gpsicon{
+    color: #0099ffca;;
+  }
+  [data-theme='light'] .gpsicon{
+    color: #ffffffca;;
+  }
+  .mapboxgl-ctrl-geocoder .suggestions{
+    background-color: #181818;
+    border: none;
+    font-family: "Raleway", sans-serif !important;
+    
+}
+[data-theme='dark']  .mapboxgl-ctrl-geocoder .suggestions{
+  background-color: rgb(29, 39, 39);
+  color: white;
+
+}
+
+[data-theme='light']  .mapboxgl-ctrl-geocoder .suggestions{
+  background-color: rgb(255, 255, 255);
+
+
+}
+
+
+  [data-theme='dark']  .mapboxgl-ctrl-geocoder .suggestions > li > a{
+    background-color: rgb(29, 39, 39);
+    border: 1px solid rgb(62, 62, 62);
+    color: white;
+
+  }
+  
+  [data-theme='light']  .mapboxgl-ctrl-geocoder .suggestions > li > a{
+    background-color: rgb(255, 255, 255);
+    border: 1px solid grey;
+  
+  }
+
+  [data-theme='dark']  .mapboxgl-ctrl-geocoder {
+    background-color: rgb(29, 39, 39);
+    border-radius: 20px;
+    box-shadow: none;
+    color: white;
+
+  }
+  
+  [data-theme='light']  .mapboxgl-ctrl-geocoder {
+    background-color: rgb(255, 255, 255);
+   box-shadow: none;
+  
+  }
+
+  [data-theme='light']  .mapboxgl-ctrl-geocoder--input{
+   color: rgb(255, 255, 255);
+    border: 1px solid grey;
+    border-radius: 20px;
+  
+  }
+
+  [data-theme='dark'] .mapboxgl-ctrl-geocoder--input{
+    color: white!important;
+    border-radius: 20px;
+     border: 1px solid rgba(128, 128, 128, 0.401);
+
   }
   
 
+
+
+  [data-theme='light'] .mapboxgl-ctrl-geocoder .suggestions > .active > a:hover,.mapboxgl-ctrl-geocoder .suggestions > li > a:hover{
+     background-color: #d5d5d5;
+   
+   }
+ 
+   [data-theme='dark'] .mapboxgl-ctrl-geocoder .suggestions > .active > a:hover,.mapboxgl-ctrl-geocoder .suggestions > li > a:hover{
+    background-color:#181818;
+     color: white!important;
+ 
+   }
   
+   
+
+.mapboxgl-ctrl-geocoder--button {
+  background-color: transparent !important;
+  padding: 5px;
+  display: none !important;
+  pointer-events: none;
+}
+  
+  .teachervacncytopbuttons{
+    display: flex;
+    justify-content: space-between;
+
+  }
   .vacancy-list {
     display: grid;
     grid-template-columns: repeat(3, 1fr); /* Exactly 3 columns */
     gap: 20px;
     width: 100%;
-    max-width: 1200px;
+    max-width: 1600px;
     margin: 20px auto;
   }
   
@@ -58,7 +157,7 @@
   }
   
   [data-theme='light'] .vacancycommunitycard {
-    background-color: rgb(215, 215, 215);
+    background-color: rgb(255, 255, 255);
     border: 1px solid grey;
   
   }
@@ -74,13 +173,13 @@
   }
   
   [data-theme='dark'] .vacancycommunitygraphics {
-    background-color: rgba(28, 33, 33, 0.783);
+    background: linear-gradient(to bottom, #1a2d26, #2c4d44 0%, transparent);
   }
   
   [data-theme='light'] .vacancycommunitygraphics {
-    background-color: rgb(255, 255, 255);
-    border: 1px solid rgba(128, 128, 128, 0.345);
-  }
+    background: linear-gradient(to bottom, #ffffff, #008ba3 0%, transparent);
+}
+
   .vacancycommunitydetails{
     text-align: start;
   }
@@ -103,6 +202,12 @@
   @media (max-width: 768px) {
     .vacancy-list {
       grid-template-columns: repeat(1, 1fr);
+    }
+    .teachervacncytopbuttons{
+      flex-direction: column;
+      display: flex;
+      margin-top: 10px;
+      gap: 8px;
     }
   }
   
