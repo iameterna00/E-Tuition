@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import mapboxgl from "mapbox-gl";
-
-// Mapbox CSS (required for rendering the map and markers)
-import "mapbox-gl/dist/mapbox-gl.css";
+import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder"; // Import the geocoder
+import "mapbox-gl/dist/mapbox-gl.css"; // Mapbox CSS
+import "@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css"; // Geocoder CSS
 
 const MapSelector = ({ formData, setFormData }) => {
   const mapContainerRef = useRef(null); // Ref for the map container
@@ -21,54 +21,63 @@ const MapSelector = ({ formData, setFormData }) => {
       zoom: 12, // Default zoom level
     });
 
-    // Debug: Log when the map is loaded
-    mapRef.current.on("load", () => {
-      console.log("Map loaded successfully");
+    // Initialize the geocoder with bounding box restriction for Kathmandu
+    const geocoder = new MapboxGeocoder({
+      accessToken: mapboxgl.accessToken,
+      mapboxgl: mapboxgl,
+      marker: false, // Disable default marker
+      bbox: [85.2, 27.65, 85.4, 27.75], // Restrict search to Kathmandu
+      placeholder: "Search in Kathmandu...",
     });
 
-    // Map click event to place or update marker
-    mapRef.current.on("click", (e) => {
-      const { lng, lat } = e.lngLat;
-      console.log("Clicked coordinates: ", lng, lat); // Debug: Log clicked coordinates
+    // Add geocoder to map
+    mapRef.current.addControl(geocoder);
 
-      // If a marker already exists, move it to the new location
+    // Handle geocoder result selection
+    geocoder.on("result", (e) => {
+      const { lng, lat } = e.result.center;
+
+      // Move existing marker or create a new one
       if (markerRef.current) {
-        console.log("Moving existing marker to new coordinates");
         markerRef.current.setLngLat([lng, lat]);
       } else {
-        // Create a new marker if none exists
-        console.log("Creating new marker");
-        markerRef.current = new mapboxgl.Marker({
-          draggable: false, // Marker is not draggable
-        })
-          .setLngLat([lng, lat])
-          .addTo(mapRef.current);
+        markerRef.current = new mapboxgl.Marker().setLngLat([lng, lat]).addTo(mapRef.current);
       }
 
-      // Update form data with new coordinates
-      setFormData((prev) => {
-        console.log("Updating form data with new coordinates:", { lat, lng });
-        return { ...prev, lat, lng };
-      });
+      // Update form data
+      setFormData((prev) => ({ ...prev, lat, lng }));
+
+      // Center map on selected location
+      mapRef.current.setCenter([lng, lat]);
     });
 
-    // Cleanup function to remove the map when the component unmounts
-    return () => {
-      if (mapRef.current) {
-        mapRef.current.remove();
+    // Map click event to place marker
+    mapRef.current.on("click", (e) => {
+      const { lng, lat } = e.lngLat;
+
+      if (markerRef.current) {
+        markerRef.current.setLngLat([lng, lat]);
+      } else {
+        markerRef.current = new mapboxgl.Marker().setLngLat([lng, lat]).addTo(mapRef.current);
       }
+
+      setFormData((prev) => ({ ...prev, lat, lng }));
+    });
+
+    // Cleanup on component unmount
+    return () => {
+      if (mapRef.current) mapRef.current.remove();
     };
-  }, []); // Empty dependency array to run only once
+  }, []);
 
   return (
     <div
       ref={mapContainerRef}
       style={{
         maxWidth: "600px",
-        height: "300px",
+        height: "400px",
         width: "100%",
-        borderRadius:'8px'
-      
+        borderRadius: "8px",
       }}
     />
   );

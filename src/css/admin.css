@@ -70,7 +70,9 @@
   [data-theme='dark'] .modal-overlay {
     background-color: black;
   }
-  
+  .mapboxgl-ctrl-geocoder--input{
+    color: black !important;
+  }
   .modal-content {
     display: flex;
     flex-direction: column;

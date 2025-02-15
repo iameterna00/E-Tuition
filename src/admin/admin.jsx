@@ -602,6 +602,21 @@ const handleSubmit = async (e) => {
                 value={editingVacancy.duration || ""}
                 onChange={handleEditChange}
               />
+               <p>subject</p>
+                  <input
+                type="text"
+                name="subject"
+                value={editingVacancy.subject || ""}
+                onChange={handleEditChange}
+              />
+              <p>Min-Requirement</p>
+                  <input
+                type="text"
+                name="minRequirement"
+                value={editingVacancy.minRequirement || ""}
+                onChange={handleEditChange}
+              />
+
 
       
               <button type="submit">Save</button>
