@@ -127,7 +127,7 @@ function TeacherVacancy() {
       <div className="teachervacncytopbuttons">
         <div className="Vacancytabs">
           <button className={activeTab === 'available' ? 'active' : ''} onClick={() => setActiveTab('available')}>
-            Available & Pending
+            Available Vacancies
           </button>
           <button className={activeTab === 'booked' ? 'active' : ''} onClick={() => setActiveTab('booked')}>
             Booked
