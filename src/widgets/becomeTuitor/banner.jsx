@@ -11,6 +11,15 @@ import { FaGear, FaUserGear } from "react-icons/fa6";
 
 function BetuitotBanner({ setopentuitorinitialmodal, user, tuitorlogin }) {
   const [isTuitors, setIsTuitors] = useState('')
+  const [isModalOpen, setIsModalOpen] = useState(false); // State to manage popup visibility
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
   console.log("User data in BetuitotBanner:", user); // Log the user data
   const defaultOptions = {
     loop: true,
@@ -51,15 +60,11 @@ function BetuitotBanner({ setopentuitorinitialmodal, user, tuitorlogin }) {
            <p style={{margin:"0px", fontSize:"20px"}}>Vacancies for You</p></Link>
             
             </div>
-         <div className="visitdashboard">
-         <Link to="/teacherdashboard">
-                <div className='visitdashboardcontents'>
-                 
-                  <TbDashboardFilled style={{color:"#0099ff"}} size={100} />
-                  <p style={{margin:"0px", fontSize:"20px"}}>Go to Dashboard</p>
-                
-                </div>
-                </Link>
+            <div className="visitdashboard">
+      <div className='visitdashboardcontents' onClick={openModal}>
+        <TbDashboardFilled style={{ color: "#0099ff" }} size={100} />
+        <p style={{ margin: "0px", fontSize: "20px" }}>Go to Dashboard</p>
+      </div>
          </div>
          <div className="visitdashboard">
          <Link to="/addclasses">
@@ -76,7 +81,7 @@ function BetuitotBanner({ setopentuitorinitialmodal, user, tuitorlogin }) {
                 <div className='visitdashboardcontents'>
                  
                   <FaUserGear style={{color:"#0099ff"}} size={100} />
-                  <p style={{margin:"0px", fontSize:"20px"}}>Go to Dashboard</p>
+                  <p style={{margin:"0px", fontSize:"20px"}}>Profile</p>
                 
                 </div>
                 </Link>
@@ -101,6 +106,15 @@ function BetuitotBanner({ setopentuitorinitialmodal, user, tuitorlogin }) {
           </div>
         </div>
       </div>
+      {isModalOpen && (
+        <div className="modal-overlay">
+          <div className="modal" style={{display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center"}}>
+            <h2>Dashboard is not available right now</h2>
+            <p>We apologize for the inconvenience. The dashboard will be available soon.</p>
+            <button onClick={closeModal}>Close</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

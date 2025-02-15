@@ -46,7 +46,6 @@
     margin: 10px;
     width: 60%;
     border-radius: 20px;
-    height: 90vh;
   }
   
   [data-theme='dark'] .techerdashboarddetails {
@@ -59,7 +58,8 @@
   
   .teacherdashboardinsiders {
     padding: 10px;
-    width: 100%;
+    width: 90%;
+    background-color: rgb(24, 24, 24);
   }
   
   .teacherprofilecontainer {

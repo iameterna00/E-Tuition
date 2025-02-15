@@ -14,6 +14,21 @@ function TeacherVacancy() {
   const [userLocation, setUserLocation] = useState(null);
   const [filteredVacancies, setFilteredVacancies] = useState([]);
   const geocoderRef = useRef(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedVacancy, setSelectedVacancy] = useState(null);
+
+  // Function to handle the modal toggle
+  const openModal = (vacancy) => {
+    setSelectedVacancy(vacancy); // Set selected vacancy
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => setIsModalOpen(false);
+
+  const generateWhatsappMessage = (vacancy) => {
+    const message = `Hi, I am interested in the vacancy for  ${vacancy.subject} (${vacancy.grade}) at ${vacancy.location}.`;
+    return `https://wa.me/9768771793?text=${encodeURIComponent(message)}`;
+  };
 
   // Fetch vacancies initially
   useEffect(() => {
@@ -34,29 +49,25 @@ function TeacherVacancy() {
   // Filter vacancies based on user location
   useEffect(() => {
     if (userLocation) {
-      // Calculate and add distance to each vacancy
       const updatedVacancies = vacancies.map((vacancy) => {
         if (vacancy.lat && vacancy.lng) {
           vacancy.distance = getDistance(userLocation, { lat: vacancy.lat, lng: vacancy.lng });
         }
         return vacancy;
       });
-  
-      // Sort vacancies by nearest distance, in ascending order
+
       const sortedVacancies = updatedVacancies.sort((a, b) => {
-        // Ensure vacancies with no distance value are placed at the end
         if (a.distance === undefined) return 1;
         if (b.distance === undefined) return -1;
         return a.distance - b.distance;
       });
-  
+
       setFilteredVacancies(sortedVacancies); // Set the filtered and sorted vacancies
     } else {
-      // If no user location, show all vacancies
       setFilteredVacancies(vacancies);
     }
   }, [userLocation, vacancies]);
-  
+
   // Calculate distance between two coordinates using Haversine formula
   const getDistance = (loc1, loc2) => {
     const R = 6371; // Radius of the Earth in km
@@ -95,7 +106,7 @@ function TeacherVacancy() {
       geocoderRef.current = new MapboxGeocoder({
         accessToken: mapboxgl.accessToken,
         mapboxgl: mapboxgl,
-        bbox: [85.2, 27.65, 85.4, 27.75],
+        bbox: [85.198611, 27.575000, 85.525556, 27.812222],
         placeholder: 'Search for a vacancy location...',
       });
 
@@ -113,35 +124,54 @@ function TeacherVacancy() {
       <h2>Teacher Vacancies</h2>
       <div id="geocoder" style={{margin:"10px 0", width:"100%"}}></div>
 
-   <div className="teachervacncytopbuttons">
-   <div className="Vacancytabs">
-        <button className={activeTab === 'available' ? 'active' : ''} onClick={() => setActiveTab('available')}>
-          Available & Pending
-        </button>
-        <button className={activeTab === 'booked' ? 'active' : ''} onClick={() => setActiveTab('booked')}>
-          Booked
-        </button>
-      </div>
+      <div className="teachervacncytopbuttons">
+        <div className="Vacancytabs">
+          <button className={activeTab === 'available' ? 'active' : ''} onClick={() => setActiveTab('available')}>
+            Available & Pending
+          </button>
+          <button className={activeTab === 'booked' ? 'active' : ''} onClick={() => setActiveTab('booked')}>
+            Booked
+          </button>
+        </div>
         <button style={{display:'flex', gap:"10px", alignItems:'center', justifyContent:'center'}} onClick={handleSearchNearMe}>Search Vacancies Near Me<MdGpsFixed className='gpsicon' fontSize={20} /></button>
-   </div>
+      </div>
+
       <div className="vacancy-list">
         {activeTab === 'available' && userLocation && filteredVacancies.length > 0
           ? filteredVacancies.filter((vacancy) => vacancy.status !== 'complete').map((vacancy) => (
-            <VacancyCard key={vacancy._id} vacancy={vacancy} />
+            <VacancyCard key={vacancy._id} vacancy={vacancy} openModal={openModal} />
           ))
           : activeTab === 'available'
           ? vacancies
               .filter((vacancy) => vacancy.status !== 'complete')
-              .map((vacancy) => <VacancyCard key={vacancy._id} vacancy={vacancy} />)
+              .map((vacancy) => <VacancyCard key={vacancy._id} vacancy={vacancy} openModal={openModal} />)
           : vacancies
               .filter((vacancy) => vacancy.status === 'complete')
-              .map((vacancy) => <VacancyCard key={vacancy._id} vacancy={vacancy} />)}
+              .map((vacancy) => <VacancyCard key={vacancy._id} vacancy={vacancy} openModal={openModal} />)}
       </div>
+
+      {/* Modal */}
+      {isModalOpen && selectedVacancy && (
+        <div className="modal">
+          <div className="modal-content">
+            <h2>{selectedVacancy.subject} ({selectedVacancy.grade})</h2>
+            <p>Location: {selectedVacancy.location}</p>
+            <p>{selectedVacancy.description}</p>
+           
+         <div className="contactwhatsappbutton">
+         <a href={generateWhatsappMessage(selectedVacancy)} target="_blank" rel="noopener noreferrer">
+              <button>Apply on WhatsApp</button>
+            </a>
+            <button className='tuition-delete-button' onClick={closeModal}>Close</button>
+         </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
 
-const VacancyCard = ({ vacancy }) => {
+const VacancyCard = ({ vacancy, openModal }) => {
   return (
     <div className="vacancycommunitycard">
       <div className="vacancycommunitygraphics">
@@ -157,12 +187,12 @@ const VacancyCard = ({ vacancy }) => {
         <h4>Duration: {vacancy.duration}</h4>
         <h4>Salary: {vacancy.salary}</h4>
         <h4>No of students: {vacancy.grade}</h4>
-        {vacancy.distance !== undefined && <h4>Distance: {(vacancy.distance / 1000).toFixed(2)} km</h4>} {/* Display distance in km */}
+        {vacancy.distance !== undefined && <h4>Distance: {(vacancy.distance / 1000).toFixed(2)} km</h4>}
         <p>{vacancy.description}</p>
         <p>Status: {vacancy.status === 'complete' ? '🔵Booked' : vacancy.status === 'pending' ? `🟡Pending (${vacancy.teachers.length} applicants)` : '🟢Available'}</p>
       </div>
       <div className="applybuttoncontainer">
-        <button style={{ width: '200px' }}>Apply</button>
+        <button style={{ width: '200px' }} onClick={() => openModal(vacancy)}>Apply</button>
       </div>
     </div>
   );
