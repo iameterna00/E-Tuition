@@ -26,7 +26,7 @@ function TeacherVacancy() {
   const closeModal = () => setIsModalOpen(false);
 
   const generateWhatsappMessage = (vacancy) => {
-    const message = `Hi, I am interested in the vacancy for  ${vacancy.subject} For Grade(${vacancy.grade}) at ${vacancy.location}.`;
+    const message = `Hi, I am interested in the vacancy for  ${vacancy.subject} For Grade ${vacancy.grade} at ${vacancy.location}.`;
     return `https://wa.me/9768771793?text=${encodeURIComponent(message)}`;
   };
 
