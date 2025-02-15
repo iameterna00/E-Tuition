@@ -13,6 +13,7 @@ function TeacherVacancy() {
   const [activeTab, setActiveTab] = useState('available');
   const [userLocation, setUserLocation] = useState(null);
   const [filteredVacancies, setFilteredVacancies] = useState([]);
+  const [locationSource, setLocationSource] = useState(null); // Track location source (current or search)
   const geocoderRef = useRef(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedVacancy, setSelectedVacancy] = useState(null);
@@ -91,6 +92,7 @@ function TeacherVacancy() {
         (position) => {
           const newLocation = { lat: position.coords.latitude, lng: position.coords.longitude };
           setUserLocation(newLocation);
+          setLocationSource('current'); // Track current location
         },
         (error) => console.error('Geolocation error:', error),
         { enableHighAccuracy: true }
@@ -113,6 +115,7 @@ function TeacherVacancy() {
       geocoderRef.current.on('result', (e) => {
         const newLocation = { lat: e.result.center[1], lng: e.result.center[0] };
         setUserLocation(newLocation);
+        setLocationSource('search'); // Track search location
       });
 
       document.getElementById('geocoder').appendChild(geocoderRef.current.onAdd());
@@ -122,7 +125,7 @@ function TeacherVacancy() {
   return (
     <div className="teachervacancybody">
       <h2>Teacher's Vacancies</h2>
-      <div id="geocoder" style={{margin:"10px 0", width:"100%"}}></div>
+      <div id="geocoder" style={{ margin: "10px 0", width: "100%" }}></div>
 
       <div className="teachervacncytopbuttons">
         <div className="Vacancytabs">
@@ -133,37 +136,38 @@ function TeacherVacancy() {
             Booked
           </button>
         </div>
-        <button style={{display:'flex', gap:"10px", alignItems:'center', justifyContent:'center'}} onClick={handleSearchNearMe}>Search Vacancies Near Me<MdGpsFixed className='gpsicon' fontSize={20} /></button>
+        <button style={{ display: 'flex', gap: "10px", alignItems: 'center', justifyContent: 'center' }} onClick={handleSearchNearMe}>
+          Search Vacancies Near Me <MdGpsFixed className='gpsicon' fontSize={20} />
+        </button>
       </div>
 
       <div className="vacancy-list">
         {activeTab === 'available' && userLocation && filteredVacancies.length > 0
           ? filteredVacancies.filter((vacancy) => vacancy.status !== 'complete').map((vacancy) => (
-            <VacancyCard key={vacancy._id} vacancy={vacancy} openModal={openModal} />
+            <VacancyCard key={vacancy._id} vacancy={vacancy} locationSource={locationSource} openModal={openModal} />
           ))
           : activeTab === 'available'
           ? vacancies
-              .filter((vacancy) => vacancy.status !== 'complete')
-              .map((vacancy) => <VacancyCard key={vacancy._id} vacancy={vacancy} openModal={openModal} />)
+            .filter((vacancy) => vacancy.status !== 'complete')
+            .map((vacancy) => <VacancyCard key={vacancy._id} vacancy={vacancy} locationSource={locationSource} openModal={openModal} />)
           : vacancies
-              .filter((vacancy) => vacancy.status === 'complete')
-              .map((vacancy) => <VacancyCard key={vacancy._id} vacancy={vacancy} openModal={openModal} />)}
+            .filter((vacancy) => vacancy.status === 'complete')
+            .map((vacancy) => <VacancyCard key={vacancy._id} vacancy={vacancy} locationSource={locationSource} openModal={openModal} />)}
       </div>
 
       {/* Modal */}
       {isModalOpen && selectedVacancy && (
         <div className="modal">
           <div className="modal-content">
-            <h2>{selectedVacancy.subject} ({selectedVacancy.grade})</h2>
+            <h2>{selectedVacancy.subject} For Grade {selectedVacancy.grade}</h2>
             <p>Location: {selectedVacancy.location}</p>
             <p>{selectedVacancy.description}</p>
-           
-         <div className="contactwhatsappbutton">
-         <a href={generateWhatsappMessage(selectedVacancy)} target="_blank" rel="noopener noreferrer">
-              <button>Apply on WhatsApp</button>
-            </a>
-            <button className='tuition-delete-button' onClick={closeModal}>Close</button>
-         </div>
+            <div className="contactwhatsappbutton">
+              <a href={generateWhatsappMessage(selectedVacancy)} target="_blank" rel="noopener noreferrer">
+                <button>Apply on WhatsApp</button>
+              </a>
+              <button className='tuition-delete-button' onClick={closeModal}>Close</button>
+            </div>
           </div>
         </div>
       )}
@@ -171,7 +175,7 @@ function TeacherVacancy() {
   );
 }
 
-const VacancyCard = ({ vacancy, openModal }) => {
+const VacancyCard = ({ vacancy, locationSource, openModal }) => {
   return (
     <div className="vacancycommunitycard">
       <div className="vacancycommunitygraphics">
@@ -188,9 +192,18 @@ const VacancyCard = ({ vacancy, openModal }) => {
         <h4>Salary: {vacancy.salary}</h4>
         <h4>No of students: {vacancy.grade}</h4>
         <h4>Tuitor Type: {vacancy.tutorType}</h4>
-        {vacancy.distance !== undefined && <h4>Distance: {(vacancy.distance / 1000).toFixed(2)} km</h4>}
+        {vacancy.distance !== undefined && (
+          <h4>
+           {locationSource === 'current' 
+              ? `Distance:${(vacancy.distance / 1000).toFixed(2)} km` 
+              : `Distance from searched location: ${(vacancy.distance / 1000).toFixed(2)} km`}
+          </h4>
+        )}
         <p>{vacancy.description}</p>
-        <p>Status: {vacancy.status === 'complete' ? '🔵Booked' : vacancy.status === 'pending' ? `🟡Pending (${vacancy.teachers.length} applicants)` : '🟢Available'}</p>
+        <div className="vacancystatuss" style={{padding:"10px 0px"}}>
+        <h4 style={{margin:"0px"}}>Status:</h4>
+        {vacancy.status === 'complete' ? '🔵Booked' : vacancy.status === 'pending' ? `🟡Assigned For Demo Class (${vacancy.teachers.length} applicants)` : '🟢Available'}
+        </div>
       </div>
       <div className="applybuttoncontainer">
         <button style={{ width: '200px' }} onClick={() => openModal(vacancy)}>Apply</button>
