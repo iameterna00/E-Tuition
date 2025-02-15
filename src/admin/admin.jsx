@@ -5,6 +5,7 @@ import { IoIosAddCircle } from "react-icons/io";
 import DownloadImageButton from "../services/downloadimage";
 import { FaSpinner, FaEdit, FaSearch } from "react-icons/fa";  
 import { useNavigate } from "react-router-dom";
+import MapSelector from "./mapselectoradmin";
 const API_URL = window.location.hostname === "localhost"
   ? "http://localhost:5001/api/vacancies"  // Local development
   : "https://kube-backend.onrender.com/api/vacancies"; 
@@ -31,6 +32,8 @@ const ADMIN = () => {
     tutorType: "", // New field
     tuitionType: "Home Tuition", // New field, default to Home Tuition
     teachers: [],
+    lat: null,
+    lng: null
   });
   const [teacherData, setTeacherData] = useState({ teacherName: "", commission: "" });
   const [vacancyId, setVacancyId] = useState(null);
@@ -109,6 +112,8 @@ const handleSubmit = async (e) => {
       tutorType: "", 
       tuitionType: "Home Tuition",
       teachers: [],
+      lat: null, 
+      lng: null
     });
 
     // Close the modal after successfully adding a vacancy
@@ -432,49 +437,51 @@ const handleSubmit = async (e) => {
       <button className="floating-button" style={{backgroundColor:isModalOpen? 'red':' #2d96ff'}} onClick={() => setIsModalOpen(!isModalOpen)}>{isModalOpen ? "X" : "Add"}  </button>
       <button className="floating-searchbutton" onClick={searchclick} ><FaSearch style={{marginLeft:'-10px'}} fontSize={18}/></button>
       {isModalOpen && (
-        <div className="modal-overlay">
-          <div className="modal-content">
-            <h2>Add Vacancy</h2>
-            <form className="tuition-form" onSubmit={handleSubmit}>
-              {["name", "grade", "location", "noofstudents", "subject", "duration", "salary", "time", "minRequirement"].map((field) => (
-                <input
-                  key={field}
-                  className="tuition-input"
-                  type={field === "noofstudents" ? "number" : "text"}
-                  placeholder={field.charAt(0).toUpperCase() + field.slice(1)}
-                  value={formData[field]}
-                  onChange={(e) => setFormData({ ...formData, [field]: e.target.value })}
-                  
-                />
-              ))}
-               <input
-                className="tuition-input"
-                type="text"
-                placeholder="Tutor Type"
-                value={formData.tutorType}
-                onChange={(e) => setFormData({ ...formData, tutorType: e.target.value })}
-                
-              />
-              {/* New Tuition Type Field */}
-              <select
-              style={{backgroundColor:'transparent'}}
-                className="tuition-input"
-                value={formData.tuitionType}
-                onChange={(e) => setFormData({ ...formData, tuitionType: e.target.value })}
-              >
-                <option value="Home Tuition">Home Tuition</option>
-                <option value="Online Tuition">Online Tuition</option>
-              </select>
-              <button className="tuition-button" type="submit">  {isSubmitting ? <FaSpinner className="newspinner" /> : "Add Vacancy"}</button>
-            </form>
-          </div>
-        </div>
-      )}
+  <div className="modal-overlay">
+    <div className="modal-content">
+      <div className="modalcontentinsiders">
+        <h2 className="tuition-heading">Add Vacancy</h2>
+        <form className="tuition-form" onSubmit={handleSubmit}>
+          {["name", "grade", "location", "noofstudents", "subject", "duration", "salary", "time", "minRequirement"].map((field) => (
+            <input
+              key={field}
+              className="tuition-input"
+              type={field === "noofstudents" ? "number" : "text"}
+              placeholder={field.charAt(0).toUpperCase() + field.slice(1)}
+              value={formData[field]}
+              onChange={(e) => setFormData({ ...formData, [field]: e.target.value })}
+            />
+          ))}
+          <input
+            className="tuition-input"
+            type="text"
+            placeholder="Tutor Type"
+            value={formData.tutorType}
+            onChange={(e) => setFormData({ ...formData, tutorType: e.target.value })}
+          />
+          <select
+            className="tuition-input"
+            style={{ backgroundColor: 'transparent' }}
+            value={formData.tuitionType}
+            onChange={(e) => setFormData({ ...formData, tuitionType: e.target.value })}
+          >
+            <option value="Home Tuition">Home Tuition</option>
+            <option value="Online Tuition">Online Tuition</option>
+          </select>
+          <MapSelector formData={formData} setFormData={setFormData} />
+          <button className="tuition-button" type="submit">
+            {isSubmitting ? <FaSpinner className="newspinner" /> : "Add Vacancy"}
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+)}
 
 
       {/* Assign Teacher Modal */}
       {isTeacherModalOpen && (
-        <div className="modal-overlay">
+        <div className="modal-overlay" style={{justifyContent:"center", alignItems:"center"}}>
           <div className="modal-content" style={{maxWidth:'500px', marginLeft:"-20px"}}>
             <h2>Assign Teacher</h2>
             <form className="tuition-form" onSubmit={handleTeacherSubmit}>
@@ -522,7 +529,7 @@ const handleSubmit = async (e) => {
         </div>
       )}
       {isDeleteModalOpen && (
-  <div className="modal-overlay">
+  <div className="modal-overlay" style={{justifyContent:"center", alignItems:"center"}}>
     <div className="modal-content">
       <h2>Are you sure you want to delete this vacancy?</h2>
       <div className="modal-actions" style={{display:"flex", gap:'10px'}}>

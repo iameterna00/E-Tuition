@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchUser, selectUser, selectLoading, selectError } from '../services/Redux/userSlice';
+import { fetchUser, selectUser, selectLoading, selectError } from '../Redux/userSlice';
 import { Navigate } from 'react-router-dom';  // Import Navigate for redirection
 import { getAuth } from 'firebase/auth';
-import TeacherDashboard from '../Pages/teachersdashboard';  // Import TeacherDashboard
+import TeacherDashboard from '../../Pages/teachersdashboard';  // Import TeacherDashboard
 
 const TeacherDashboardWrapper = () => {
   const dispatch = useDispatch();

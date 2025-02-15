@@ -604,6 +604,24 @@
   background-size: cover;
   cursor: pointer; /* Pointer cursor for interactivity */
 }
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgb(0, 157, 255);
+  border-top-color: white;
+  border-radius: 50%;
+  display: inline-block;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+      transform: rotate(0deg);
+  }
+  to {
+      transform: rotate(360deg);
+  }
+}
 
 .vaccancy-container {
   display: grid;

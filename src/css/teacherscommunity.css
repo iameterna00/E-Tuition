@@ -1,0 +1,108 @@
+
+.teachercommunitypage-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    margin-top: 50px;
+    font-size: 18px;
+    margin-bottom: 20px;
+   
+  }
+  
+  .teachercommunitypage-tab {
+    padding: 10px 20px;
+    display: flex;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background 0.3s;
+    font-weight: bold;
+    background-color: rgb(0,153,255);
+  }
+  
+  .teachercommunitypage-tab:hover {
+    background-color: #bdc3c7;
+  }
+  
+  .teachercommunitypage-tab-active {
+    background-color: rgb(0, 80, 133);
+
+    color: white;
+  }
+
+  
+  /* Teachersvacancy */
+  .teachervacancybody {
+    padding: 20px;
+  }
+  
+
+  
+  .vacancy-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Exactly 3 columns */
+    gap: 20px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 20px auto;
+  }
+  
+  .vacancycommunitycard {
+    border-radius: 10px;
+    padding: 15px;
+   
+  }
+  [data-theme='dark'] .vacancycommunitycard {
+    background-color: rgb(29, 39, 39);
+    border: 1px solid rgb(62, 62, 62);
+
+  }
+  
+  [data-theme='light'] .vacancycommunitycard {
+    background-color: rgb(215, 215, 215);
+    border: 1px solid grey;
+  
+  }
+  
+  .vacancycommunitygraphics {
+    width: 100%;
+    height: 100px;
+    border-radius: 10px 10px 0 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+  }
+  
+  [data-theme='dark'] .vacancycommunitygraphics {
+    background-color: rgba(28, 33, 33, 0.783);
+  }
+  
+  [data-theme='light'] .vacancycommunitygraphics {
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgba(128, 128, 128, 0.345);
+  }
+  .vacancycommunitydetails{
+    text-align: start;
+  }
+  .vacancycommunitydetails h4{
+   margin: 5px;
+  }
+  .Vacancytabs{
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+  }
+  
+  /* Responsive: 2 columns on medium screens, 1 column on small */
+  @media (max-width: 1024px) {
+    .vacancy-list {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .vacancy-list {
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+  

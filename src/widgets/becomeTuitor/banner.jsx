@@ -47,8 +47,8 @@ function BetuitotBanner({ setopentuitorinitialmodal, user, tuitorlogin }) {
                 <p style={{ margin: '0px', fontSize:"20px" }}>Start teaching and earning today.</p>
                <div className="bannerbutton" >
             <div className="visitteachercommunity">
-           <Link> <RiUserCommunityLine style={{color:"#0099ff"}} size={100} />
-           <p style={{margin:"0px", fontSize:"20px"}}>Join our tutors community</p></Link>
+           <Link to={'/teacherscommunity'} > <RiUserCommunityLine style={{color:"#0099ff"}} size={100} />
+           <p style={{margin:"0px", fontSize:"20px"}}>Vacancies for You</p></Link>
             
             </div>
          <div className="visitdashboard">

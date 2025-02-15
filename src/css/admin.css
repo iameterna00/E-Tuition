@@ -55,17 +55,15 @@
   .modal-overlay {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     z-index: 1000;
     position: fixed; /* Use fixed positioning to cover the entire viewport */
     top: 0; /* Position the overlay at the top of the viewport */
     left: 0; /* Position the overlay at the left of the viewport */
     height: 100vh; /* Full viewport height */
     width: 100vw; /* Full viewport width */
-    overflow-y: auto; /* Allow vertical scrolling if necessary */
     background-color: rgba(0, 0, 0, 0.5); /* Optional: semi-transparent background for the overlay */
-}
-
+  }
   [data-theme='light'] .modal-overlay {
     background-color: rgb(255, 255, 255);
   }
@@ -73,14 +71,19 @@
     background-color: black;
   }
   
-  .modal-content{ 
+  .modal-content {
     display: flex;
-    gap: 10px;
-    justify-content: center;
-    align-items: center;
     flex-direction: column;
-    width: 100%;
+    justify-content: flex-start; /* Align content to the top */
+    align-items: center;
+    max-height: 90vh; /* Limit modal height to 90% of the viewport */
+    width: 90%; /* Limit modal width to 90% of the viewport */
+    overflow-y: auto; /* Enable vertical scrolling */
+    border-radius: 10px; /* Rounded corners */
+    padding: 20px; /* Padding inside the modal */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Add a shadow */
   }
+  
   .teachermodal-content{
     padding: 10px;
   }
@@ -88,6 +91,13 @@
     text-align: center;
     color: #2d96ff;
     font-size: 20px;
+  }
+  .modalcontentinsiders {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px; /* Space between elements */
   }
   
   /* Form Styles */

@@ -16,8 +16,9 @@ import { fetchUser, selectUser } from './services/Redux/userSlice'; // Import fe
 import ADMIN from './admin/admin';
 import TeacherManager from './admin/teachermanager';
 import TeacherDashboard from './Pages/teachersdashboard';
-import TeacherDashboardWrapper from './widgets/routesmanagement';
 import AddClass from './Pages/addclasses';
+import TeacherDashboardWrapper from './services/ProtectedRoutes/routesmanagement';
+import TeacherCommunityPage from './Pages/teacherscommunitypage';
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
             
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/admin" element={<ADMIN />} />
+            <Route path="/teacherscommunity" element={<TeacherCommunityPage />} />
             <Route path="/admin/teacher" element={<TeacherManager />} />
           </Routes>
         </ThemeProvider>

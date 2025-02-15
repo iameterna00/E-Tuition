@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { FaLocationDot } from "react-icons/fa6";
 import Filters from '../filters/filter';
 import KUBE from '../../assets/newcube.png';
+import { webApi } from '../../api';
 
 function Vaccancy() {
   const [gigsData, setGigsData] = useState([]);
@@ -10,16 +11,19 @@ function Vaccancy() {
   const [genderFilter, setGenderFilter] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
   const [priceRange, setPriceRange] = useState([0, 25000]);
+  const [loading, setLoading] = useState(true);
 
   // Fetch classes data from backend on component mount
   useEffect(() => {
     const fetchClasses = async () => {
       try {
-        const response = await fetch('http://localhost:5001/api/classes');  // Assuming your Flask app is running on this URL
+        const response = await fetch(`${webApi}/api/classes`);  // Assuming your Flask app is running on this URL
         const data = await response.json();
         setGigsData(data);
+        setLoading(false);
       } catch (error) {
         console.error('Error fetching class data:', error);
+        setLoading(false);
       }
     };
 
@@ -50,40 +54,48 @@ function Vaccancy() {
 
 <Filters setLocationFilter={setLocationFilter} handlePriceChange={handlePriceChange} setGenderFilter={setGenderFilter} setSearchTerm={setSearchTerm} priceRange={priceRange} />
 
-  <div className="vaccancy-container">
-        {filteredGigs.map((gig) => (
-          <div key={gig.id} className="vaccancy-card">
-           <div className="vacancycardinsiders">
-           <Link to={`/coursesdetails/${gig.id}`} className="vaccancydetail-link">
-           <div className="vacancyimagecontainer">
-          {gig.image ? ( <img src={gig.image} alt={gig.title} className="vaccancy-image" />):(<div className='gigsdefualtposter'>
-           <div className="kubegraphicscontainer"> <img src={KUBE} className='kubegraphics' alt="" /><h3>KUBE HOME TUTION</h3></div>
-          </div>)}
-           <div className="vaccancyprofilecontainer">
-             <img className='vaccancyProfile' src={gig.profile} alt="" />
-             {/* <h3>{gig.name}</h3> */}
-             </div>
-           </div>
-              <div className="vaccancy-details">
-            <div className="vacancydetailsinsiders">
-            <h3> {gig.title}</h3>
-      
-      <h3 className="vaccancy-location"><FaLocationDot /> {gig.location}</h3>
-      <h3 className="vaccancy-qualification">Qualification: {gig.qualification}</h3>
-      <h3 className="vaccancy-qualification">Exp: {gig.experience}</h3>
-      <h3 className="vaccancy-qualification">gender: {gig.sex}</h3>
-      <h3 className="vaccancy-price">Salary: Rs.{Number(gig.pricePerMonth).toLocaleString()}</h3>
-
-
-      <button className='vaccancyapplybutton'>Apply</button>
-            </div>
+<div className="vaccancy-container">
+          {/* Loading Screen */}
+          {loading ? (
+           <div className="spinner"></div>
+          ) : (
+            filteredGigs.map((gig) => (
+              <div key={gig.id} className="vaccancy-card">
+                <div className="vacancycardinsiders">
+                  <Link to={`/coursesdetails/${gig.id}`} className="vaccancydetail-link">
+                    <div className="vacancyimagecontainer">
+                      {gig.image ? (
+                        <img src={gig.image} alt={gig.title} className="vaccancy-image" />
+                      ) : (
+                        <div className='gigsdefualtposter'>
+                          <div className="kubegraphicscontainer">
+                            <img src={KUBE} className='kubegraphics' alt="" />
+                            <h3>{gig.tuitiontype === 'Home Tuition' ? 'KUBE HOME TUTION' : 'KUBE ONLINE TUITION'}</h3>
+                          </div>
+                        </div>
+                      )}
+                      <div className="vaccancyprofilecontainer">
+                        <img className='vaccancyProfile' src={gig.profile} alt="" />
+                      </div>
+                    </div>
+                    <div className="vaccancy-details">
+                      <div className="vacancydetailsinsiders">
+                        <h3> {gig.title}</h3>
+                        <h3 className="vaccancy-location"><FaLocationDot /> {gig.location}</h3>
+                        <h3 className="vaccancy-qualification">Qualification: {gig.qualification}</h3>
+                        <h3 className="vaccancy-qualification">Exp: {gig.experience}</h3>
+                        <h3 className="vaccancy-qualification">Gender: {gig.sex}</h3>
+                        <h3 className="vaccancy-price">Salary: Rs.{Number(gig.pricePerMonth).toLocaleString()}</h3>
+                        <button className='vaccancyapplybutton'>Apply</button>
+                      </div>
+                    </div>
+                  </Link>
+                </div>
               </div>
-            </Link>
-           </div>
-          </div>
-        ))}
+            ))
+          )}
+        </div>
       </div>
-  </div>
     </div>
   );
 }
