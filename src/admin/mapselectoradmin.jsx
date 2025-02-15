@@ -67,6 +67,7 @@ const MapSelector = ({ formData, setFormData }) => {
         maxWidth: "600px",
         height: "300px",
         width: "100%",
+        borderRadius:'8px'
       
       }}
     />

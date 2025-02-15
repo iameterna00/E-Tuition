@@ -468,6 +468,7 @@ const handleSubmit = async (e) => {
             <option value="Home Tuition">Home Tuition</option>
             <option value="Online Tuition">Online Tuition</option>
           </select>
+          <h4 style={{margin:"0px"}}>Tap the location of student</h4>
           <MapSelector formData={formData} setFormData={setFormData} />
           <button className="tuition-button" type="submit">
             {isSubmitting ? <FaSpinner className="newspinner" /> : "Add Vacancy"}
