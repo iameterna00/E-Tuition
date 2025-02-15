@@ -8,7 +8,7 @@ function TeacherCommunityPage(){
     return(
         <div className="teachercommunitybody">
               <div className="teachercommunitypage-tabs">
-      {["vacancy", "socials"].map((status) => (
+      {/* {["vacancy", "socials"].map((status) => (
         <button
           key={status}
           className={`teachercommunitypage-tab ${TeacherVacancyTab === status ? "teachercommunitypage-tab-active" : ""}`}
@@ -16,7 +16,7 @@ function TeacherCommunityPage(){
         >
           {status.charAt(0).toUpperCase() + status.slice(1)}
         </button>
-      ))}
+      ))} */}
     </div>
            <div className="teachercommunitycontainer">
             {TeacherVacancyTab === 'vacancy'?<TeacherVacancy/>:<TeacherSocials/>}

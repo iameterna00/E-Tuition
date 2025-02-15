@@ -121,7 +121,7 @@ function TeacherVacancy() {
 
   return (
     <div className="teachervacancybody">
-      <h2>Teacher Vacancies</h2>
+      <h2>Teacher's Vacancies</h2>
       <div id="geocoder" style={{margin:"10px 0", width:"100%"}}></div>
 
       <div className="teachervacncytopbuttons">
