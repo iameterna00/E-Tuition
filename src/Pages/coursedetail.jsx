@@ -49,7 +49,7 @@ function CourseDetails() {
           <div className="course-details-body">
      <div className="coursebodyone">
      <div className="course-profile">
-                {gigDetails.image ? ( <img src={gigDetails.image} alt={gigDetails.title} className="vaccancy-image" />):(<div style={{height:"250px"}}  className='gigsdefualtposter'>
+                {gigDetails.image ? ( <img src={gigDetails.image} alt={gigDetails.title} className="course-image" />):(<div style={{height:"250px"}}  className='gigsdefualtposter'>
                        <div  className="kubegraphicscontainer"> < img src={KUBE}  className='kubegraphics' alt="" /><h3>KUBE HOME TUTION</h3></div>
                       </div>)}
               </div>

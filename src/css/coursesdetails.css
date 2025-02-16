@@ -39,17 +39,19 @@
     display: flex;
     justify-content: center;
     padding: 10px;
-    
-
 
   }
-  .courseImage{
-    width: 400px;
-    height: 250px;
-    border-radius: 8px;
+
+
+  .course-image{
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+    height: 300px;
     object-fit: cover;
-
   }
+
   .tutorsdetails{
     display: flex;
     flex-direction: column;
@@ -395,10 +397,7 @@
     width: 100%;
   }
 
-  .courseImage {
-    width: 100%;
-    height: auto;
-  }
+
 
   .tutorsdetails, .tuitorinfo {
     padding: 10px;
