@@ -158,7 +158,7 @@ function TeacherVacancy() {
       {/* Modal */}
       {isModalOpen && selectedVacancy && (
         <div className="modal">
-          <div className="modal-content">
+          <div className="modal-contents">
             <h2>{selectedVacancy.subject} For Grade {selectedVacancy.grade}</h2>
             <p>Location: {selectedVacancy.location}</p>
             <p>{selectedVacancy.description}</p>

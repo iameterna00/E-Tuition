@@ -108,7 +108,6 @@ function TeacherManager() {
                 <p><strong>College:</strong> {teacher.school}</p>
                 <p><strong>Current Grade:</strong> {teacher.currentGrade}</p>
                 <p><strong>Requested at:</strong> {teacher.requestedforteacheron}</p>
-                
                 <div className="teacher-links">
                   <a href={teacher.cvFileUrl} target="_blank" rel="noopener noreferrer">📄 View CV</a>
                   <a href={teacher.identityFileUrl} target="_blank" rel="noopener noreferrer">🆔 View Identity</a>
