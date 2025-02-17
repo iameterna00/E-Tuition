@@ -1,7 +1,7 @@
 
 .tuitorlogincontainer {
     position: fixed;
-    height: 100vh; 
+    height: 100%; 
     width: 100%; 
     top: 50%;
     transform: translateY(-50%); 
@@ -18,7 +18,8 @@
     border-radius: 20px;
     height: 80%;
     display: flex;
-    width: 60%;
+    width: 100%;
+    max-width: 1200px;
     z-index: 2;
     overflow: hidden; 
   }
@@ -170,6 +171,14 @@
         min-width: 100px;
 
     }
+    .back-button{
+      cursor: pointer;
+      padding: 0 10px;
+      left: 50%;
+      top: 10px;
+      position: absolute;
+
+    }
     .spinner {
         border: 4px solid #f3f3f3; /* Light gray */
         border-top: 4px solid #3498db; /* Blue */
@@ -234,4 +243,25 @@
       .iAmStudent:hover {
         background-color: rgba(33, 150, 243, 0.1);
       }
-      
+      @media screen and (max-width: 768px) {
+   
+        .back-button{
+          cursor: pointer;
+          padding: 0 10px;
+          left: 10px;
+          top: 10px;
+          position: absolute;
+    
+        }
+        .tuitorlogincontents {
+          width: 90%;
+        }
+        .tuitorgraphics{
+          display: none;
+        }
+        .tuitorloginform{
+          width: 100%;
+          justify-content: center;
+          align-items: center;
+        }
+      }

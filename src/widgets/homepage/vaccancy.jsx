@@ -46,6 +46,7 @@ function Vaccancy() {
   });
 
   return (
+  <div className='homevacancybody'>
     <div className="home-vaccancy-page">
         <div className="title">
         <h2>Available Tuitors</h2>
@@ -57,7 +58,10 @@ function Vaccancy() {
 <div className="vaccancy-container">
           {/* Loading Screen */}
           {loading ? (
-           <div className="spinner"></div>
+        <div className="spinner-container">
+        <div className="spinner"></div>
+        Loading
+      </div>
           ) : (
             filteredGigs.map((gig) => (
               <div key={gig.id} className="vaccancy-card">
@@ -80,7 +84,9 @@ function Vaccancy() {
                     </div>
                     <div className="vaccancy-details">
                       <div className="vacancydetailsinsiders">
-                        <h3> {gig.title}</h3>
+                       <div style={{width:'80%'}} className="vacancytitle">
+                       <h3> {gig.title}</h3>
+                       </div>
                         <h3 className="vaccancy-location"><FaLocationDot /> {gig.location}</h3>
                         <h3 className="vaccancy-qualification">Qualification: {gig.qualification}</h3>
                         <h3 className="vaccancy-qualification">Exp: {gig.experience}</h3>
@@ -96,7 +102,7 @@ function Vaccancy() {
           )}
         </div>
       </div>
-    </div>
+    </div></div>
   );
 }
 

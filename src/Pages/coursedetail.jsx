@@ -4,6 +4,7 @@ import '../css/coursesdetails.css';
 import HomeTuitorOffer from '../widgets/coursedetail/hometuitoroffer';
 import ReviewsPage from '../widgets/coursedetail/interactions';
 import KUBE from '../assets/newcube.png';
+import { webApi } from '../api';
 
 function CourseDetails() {
   const { id } = useParams(); 
@@ -13,7 +14,7 @@ function CourseDetails() {
   useEffect(() => {
     const fetchGigDetails = async () => {
       try {
-        const response = await fetch(`http://localhost:5001/api/classes/${id}`); // Fetch the specific gig data by ID
+        const response = await fetch(`${webApi}/api/classes/${id}`); // Fetch the specific gig data by ID
         const data = await response.json();
         setGigDetails(data);
       } catch (error) {

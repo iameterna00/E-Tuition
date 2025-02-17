@@ -411,6 +411,11 @@
   /* Vaccancy */
   
 /* ONNLINE CLASS RESULTS */
+.homevacancybody{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
 .home-vaccancy-page {
   width: 100%;
   justify-content: center;
@@ -604,7 +609,18 @@
   background-size: cover;
   cursor: pointer; /* Pointer cursor for interactivity */
 }
+.spinner-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  /* Full height of the viewport */
+}
+
 .spinner {
+  justify-content: center;
+  align-items: center;
   width: 16px;
   height: 16px;
   border: 2px solid rgb(0, 157, 255);
@@ -616,19 +632,19 @@
 
 @keyframes spin {
   from {
-      transform: rotate(0deg);
+    transform: rotate(0deg);
   }
   to {
-      transform: rotate(360deg);
+    transform: rotate(360deg);
   }
 }
 
+
 .vaccancy-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Dynamic 3-column layout */
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); /* Dynamic 3-column layout */
   gap: 20px; /* Spacing between cards */
   width: 100%;
-  max-width: 1200px;
   margin-top: 20px;
 }
 
@@ -787,7 +803,11 @@
 @media (max-width: 1000px) {
 
   .vaccancy-container {
-    grid-template-columns: repeat(3, 1fr); /* Two cards per row */
+    grid-template-columns: repeat(2, 1fr); /* Two cards per row */
+  }
+  .tuitorpngbanner{
+    width: 100%;
+    max-width: 350px;
   }
   .vaccancyfilters {
     display: flex;
@@ -806,14 +826,19 @@
 }
 
 @media (max-width: 768px) {
+  .tuitorpngbanner{
+    width: 100%;
+    max-width: 300px;
+  }
 
   .home-vaccancy-page {
     padding: 0px;
+    width: 100%;
     text-align: center;
   }
 
   .vaccancy-container {
-    grid-template-columns: repeat(2, 1fr); /* Two cards per row */
+    grid-template-columns: repeat(1, 1fr); /* Two cards per row */
   }
   .vaccancy-image {
     width: 100%;

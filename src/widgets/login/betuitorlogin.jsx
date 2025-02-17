@@ -2,13 +2,15 @@ import React, { useState, useEffect } from "react";
 import { IoMail } from "react-icons/io5";
 import joinus from "../../assets/onlineclasses.jpg";
 import google from "../../assets/google.png";
-import { getAuth, GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
+import { getAuth, GoogleAuthProvider,fetchSignInMethodsForEmail , signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import { useNavigate } from "react-router-dom"; // For navigation after login
 import { webApi } from "../../api";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 
 
 function TuitorLogin({ close }) {
+  const [showPassword, setShowPassword] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [emailLogin, setEmailLogin] = useState(false);
   const [isSignUp, setIsSignUp] = useState(false);  
@@ -37,62 +39,77 @@ function TuitorLogin({ close }) {
 
   const ActivateEmailLogin = () => {
     setEmailLogin(true);
+    setSendOTP(false);
   };
-
+  useEffect(() => {
+    if(isLoggedIn){
+      close();
+    }
+  })
   const handleGoogleLogin = async () => {
     const provider = new GoogleAuthProvider();
-  
+    const auth = getAuth(); // Initialize Firebase auth instance
+
     try {
-      // Step 1: Sign in with Google
-      const result = await signInWithPopup(auth, provider);
-      const user = result.user;
-  
-      console.log("User signed in with Google:", user);
-  
-      // Get the user's ID token from Firebase Authentication
-      const idToken = await user.getIdToken();
-      
-  
-      // Step 2: Send user data to the backend
-      const response = await fetch("http://localhost:5001/api/create-user", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-       
-        },
-        body: JSON.stringify({
-          email: user.email,
-          name: user.displayName,
-          photoURL: user.photoURL, 
-          uid: user.uid, 
-          idToken: idToken
-        }),
-      });
-  
-      const responseData = await response.json();
-  
-      if (response.ok) {
-        console.log("User successfully logged in:", responseData);
-        setIsLoggedIn(true); // Update login state
-      } else {
-        console.error("Error logging in:", responseData.message);
-        setIsLoggedIn(true);
-      }
+        // Step 1: Sign in with Google
+        const result = await signInWithPopup(auth, provider);
+        const user = result.user;
+
+        console.log("User signed in with Google:", user);
+
+        // Step 2: Get the Firebase ID token
+        const idToken = await user.getIdToken(); // Get the Firebase ID token
+
+        // Step 3: Send the ID token and user data to the backend
+        const response = await fetch(`${webApi}/api/create-user`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                idToken: idToken,  // Send the ID token instead of user data like email, name, etc.
+            }),
+        });
+
+        const responseData = await response.json();
+
+        if (response.ok) {
+            console.log("User successfully logged in:", responseData);
+            setIsLoggedIn(true); // Update login state
+        } else {
+            console.error("Error logging in:", responseData.message);
+            setIsLoggedIn(false);
+        }
     } catch (error) {
-      console.error("Error signing in with Google:", error);
-      alert(error.message);
-      alert("An error occurred while signing in with Google.");
+        console.error("Error signing in with Google:", error);
+        alert(error.message);
+        alert("An error occurred while signing in with Google.");
     }
-  };
-  
+};
   
   const handleEmailSignUp = async () => { 
+    if(password.length < 6){
+      alert("Password must be at least 6 characters long.");
+      return;
+    }
     setLoading(true);
   
     
-    try {
+    
+  try {
+    // Step 1: Check if email already exists in Firebase
+    const auth = getAuth();
+    const methods = await fetchSignInMethodsForEmail(auth, email);
+
+    // If methods are returned, the email already exists
+    if (methods.length > 0) {
+      alert("Email already exists. Please try logging in.");
+      setLoading(false);
+      return;
+    }
+
       // Step 1: Send OTP
-      const otpResponse = await fetch("http://localhost:5001/api/send-otp", {
+      const otpResponse = await fetch(`${webApi}/api/send-otp`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -101,6 +118,7 @@ function TuitorLogin({ close }) {
           email,  // The email address to send OTP
         }),
       });
+      
   
       const otpData = await otpResponse.json();
       if (!otpResponse.ok) {
@@ -126,7 +144,7 @@ function TuitorLogin({ close }) {
   
     try {
       // Step 2: Verify OTP
-      const verifyOtpResponse = await fetch("http://localhost:5001/api/verify-otp", {
+      const verifyOtpResponse = await fetch(`${webApi}/api/verify-otp`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -149,20 +167,18 @@ function TuitorLogin({ close }) {
       // Step 3: Create user in Firebase Authentication after OTP verification
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       user = userCredential.user;  // Get the Firebase user
-  
       const token = await user.getIdToken();  // Get Firebase token
       const uid = user.uid;  // Firebase UID
   
       // Step 4: Create user in MongoDB
-      const response = await fetch("http://localhost:5001/api/create-user", {
+      const response = await fetch(`${webApi}/api/create-user`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
           email,
-          name,
-          firebase_token: token,
+          idToken: token,
           uid,
         }),
       });
@@ -211,37 +227,6 @@ function TuitorLogin({ close }) {
   };
   
 
-  const handleUserType = async (purpose) => {
-    console.log(user.uid, purpose)
-    try {
-      setLoading(true);
-      
-    
-      const response = await fetch(`${webApi}/api/update-purpose`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          uid: user.uid, 
-          purpose,
-        }),
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        alert(`Your purpose has been updated to "${purpose}"!`);
-      } else {
-        alert(data.message || "Failed to update purpose.");
-      }
-    } catch (error) {
-      console.error("Error updating purpose:", error);
-      alert("An error occurred. Please try again later.");
-    } finally {
-      setLoading(false);
-    }
-  };
 
   return (
     <div className="tuitorlogincontainer">
@@ -285,44 +270,72 @@ function TuitorLogin({ close }) {
             </div>
           )}
 
-          {emailLogin && !isLoggedIn && !sendOTP &&(
+{emailLogin && !isLoggedIn && !sendOTP &&(
+ <>
+  <div onClick={()=> setEmailLogin(false)} className="back-button"> Back</div>
             <div className="loginmethods">
-              <h2>{isSignUp ? "Create Your Account" : "Login With Your Email"}</h2>
-              {emailerror && (
-                <p style={{color:"red"}}>Email not found! Try signing up</p>
-              )}
-              <div className="loginemailform">
+            <h2>{isSignUp ? "Register Your Account!" : "Login With Your Email"}</h2>
+            {emailerror && <p style={{ color: "red" }}>Email not found! Try signing up</p>}
+    
+            <div className="loginemailform">
+             <div style={{ position: "relative", width: "100%" , display:"flex", justifyContent:"center", alignItems:"center"}}>
+             <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                style={{ borderRadius: "10px" }}
+                placeholder="Email"
+              />
+             </div>
+    
+              {/* Password Input with Eye Button */}
+              <div style={{ position: "relative", width: "100%" , display:"flex", justifyContent:"center", alignItems:"center"}}>
                 <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  style={{ borderRadius: "10px" }}
-                  placeholder="Email"
-                />
-                <input
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Password"
+                  placeholder= {isSignUp? "Create Password":"Password"}
+                  style={{ width: "100%", padding: "10px", paddingRight: "40px" }}
                 />
-                <button className="LoginButton" onClick={isSignUp ? handleEmailSignUp : handleEmailLogin} disabled={loading}>
-                  {loading ? (
-                    <div className="spinner"></div> // Loading spinner
-                  ) : (
-                    isSignUp ? "Sign Up" : "Login"
-                  )}
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  style={{
+                    position: "absolute",
+                    right: "10px",
+                    top: "40%",
+                    color:"black",
+                    transform: "translateY(-50%)",
+                    background: "none",
+                    border: "none",
+                    cursor: "pointer",
+                  }}
+                >
+                  {showPassword ? <FaEyeSlash size={20} /> : <FaEye size={20} />}
                 </button>
-                <p>
-                  {isSignUp ? "Already have an account?" : "Don't have an account?"}{" "}
-                  <span style={{cursor:"pointer"}} onClick={() => setIsSignUp(!isSignUp)}>
-                    {isSignUp ? "Login" : "Sign Up"}
-                  </span>
-                </p>
               </div>
+    
+              <button
+                className="LoginButton"
+                onClick={isSignUp ? handleEmailSignUp : handleEmailLogin}
+                disabled={loading}
+              >
+                {loading ? <div className="spinner"></div> : isSignUp ? "Sign Up" : "Login"}
+              </button>
+    
+              <p>
+                {isSignUp ? "Already have an account?" : "Don't have an account?"}{" "}
+                <span style={{ cursor: "pointer", color:"#3498db" }} onClick={() => setIsSignUp(!isSignUp)}>
+                  {isSignUp ? "Login" : "Sign Up"}
+                </span>
+              </p>
             </div>
+          </div></>
           )}
        {sendOTP && (
-  <div className="loginmethods">
+<>
+<div onClick={ActivateEmailLogin} className="back-button"> Back</div>
+<div className="loginmethods">
     <h2>OTP sent to your email. Please check your inbox.</h2>
     <div className="loginemailform">
       <input
@@ -341,33 +354,13 @@ function TuitorLogin({ close }) {
         )}
       </button>
     </div>
-  </div>
+  </div></>
 )}
 
 
           
 
-          {isLoggedIn && (
-            <div className="selectYourPurpose">
-              <div className="purposseheader">
-                <h2>Your account has been created! <br /> What brings you here?</h2>
-              </div>
-              <div className="purposecards">
-                <div className="card iAmTutor" onClick={() => handleUserType("teacher")}>
-                  <div className="iconContainer">
-                    <i className="fas fa-chalkboard-teacher"></i>
-                  </div>
-                  <h3>I am a Tutor</h3>
-                </div>
-                <div className="card iAmStudent" onClick={() => handleUserType("student")}>
-                  <div className="iconContainer">
-                    <i className="fas fa-user-graduate"></i>
-                  </div>
-                  <h3>I am a Student</h3>
-                </div>
-              </div>
-            </div>
-          )}
+        
         </div>
       </div>
     </div>
