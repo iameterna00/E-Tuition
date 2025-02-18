@@ -213,8 +213,8 @@ const VacancyCard = ({ vacancy, locationSource, openModal }) => {
       
       </div>
       <h3 style={{margin:"10px", display:"flex", gap:"10px", justifyContent:"center", alignItems:'center'}}><FaMoneyBillWave color='rgb(0, 200, 0)' size={30}/>Salary: {vacancy.salary}</h3>
-      <div className="applybuttoncontainer" style={{display:"flex", justifyContent:'center', width:'100%'}}>
-        <button style={{ width: '100%', display:'flex', alignItems:"center", gap:"5px", justifyContent:"center" }} onClick={() => openModal(vacancy)}><IoIosSend size={20}/>Apply</button>
+      <div className="applybuttoncontainer" style={{display:"flex", justifyContent:'center', alignItems:"center", width:'100%'}}>
+        <button style={{ width: '100%', maxWidth:"300px", display:'flex', alignItems:"center", gap:"5px", justifyContent:"center" }} onClick={() => openModal(vacancy)}><IoIosSend size={30}/><h3>Apply</h3></button>
       </div>
     </div>
   );
