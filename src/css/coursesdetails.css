@@ -41,7 +41,16 @@
       background-color: rgba(241, 241, 241, 0.103);
       border: 1px solid rgba(128, 128, 128, 0.273);
     }
-
+    [data-theme='dark'] .modal-contentsform{
+      background-color: #2e3b45;
+      
+      }
+      
+      [data-theme='light'] .modal-contentsform{
+        background-color: rgb(241, 241, 241);
+        border: 1px solid rgba(128, 128, 128, 0.273);
+      }
+  
   .course-profile {
     border-radius: 8px;
     display: flex;

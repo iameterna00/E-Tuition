@@ -208,13 +208,13 @@ function CourseDetails() {
       overflowY: 'auto',  // Allows vertical scrolling
       maxHeight: '100%',   // Keeps the modal within the screen size
       padding: '10px',
+      maxWidth:"700px",
       minHeight:"160px",
       flexDirection:"column",
       display:"flex",
       alignItems:"center",
       gap:"20px",
       justifyContent:'center',
-      backgroundColor: 'white',
       borderRadius: '10px',
       width: '100%',       // Adjust width as necessary
     }}>

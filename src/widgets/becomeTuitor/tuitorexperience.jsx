@@ -2,11 +2,12 @@ import { useEffect, useRef, useState } from "react";
 import KUBE from "../../assets/KUBE.png";
 import Teacher from "../../assets/teach.png";
 import collegeData from "../../JSON/kathmandu_college.json";
-import { FaCloudUploadAlt } from "react-icons/fa";
+import { FaCloudUploadAlt, FaFilePdf } from "react-icons/fa";
 import { IoMdMale } from "react-icons/io";
 import { IoMdFemale } from "react-icons/io";
 import { webApi } from "../../api";
 import { FaSpinner } from "react-icons/fa";  
+import TapLocationMap from "../maps/taplocationmap";
 
 function TeachingExperience({ setopentuitorinitialmodal, user }) {
     const [step, setStep] = useState(1);
@@ -26,6 +27,7 @@ function TeachingExperience({ setopentuitorinitialmodal, user }) {
     const suggestionsRef = useRef(null);
     const degreeRef = useRef(null);
     const [loading, setLoading] = useState(false);
+    const [latLng, setLatLng] = useState(null);
 
     // Handles selection based on current step
 
@@ -83,6 +85,10 @@ function TeachingExperience({ setopentuitorinitialmodal, user }) {
         setSelectedDegree(degree);
         setShowDegreeSuggestion(false);
     };
+    const handleLatLngChange = (latLng) => {
+        setLatLng(latLng);
+        console.log("Received latLng:", latLng); // For debugging
+    };
     
 
     // Click outside to close suggestions
@@ -110,12 +116,11 @@ function TeachingExperience({ setopentuitorinitialmodal, user }) {
     }, []);
     const handleCvUpload = (event) => {
         const file = event.target.files[0];
-        if (file && file.type.startsWith("image/")) {
-            setCvFile(file);
-            console.log('this is cv ', cvFile)
-        } else {
-            alert("Please upload a valid image file.");
+        if (file && file.type !== "application/pdf") {
+            alert("Please upload a PDF file.");
+            return;
         }
+        setCvFile(file);
     };
     
     const handleIdentityUpload = (event) => {
@@ -144,6 +149,7 @@ function TeachingExperience({ setopentuitorinitialmodal, user }) {
         formData.append("identityFile", identityFile, identityFile.name);
         formData.append("teachergender", gender);
         formData.append("teacherconfirm", "pending");
+        formData.append("latlng", JSON.stringify(latLng));
         formData.append("uid", user.uid);
     
         fetch(`${webApi}/api/update-teacher-details`, {
@@ -180,7 +186,7 @@ function TeachingExperience({ setopentuitorinitialmodal, user }) {
                                 <img src={KUBE} className="Kubelogo" alt="KUBE Logo" />
                             </div>
                             <div className="teacherexperiencestepscounts">
-                                <h3>Step {step} of 4</h3>
+                                <h3>Step {step} of 5</h3>
                             </div>
                         </div>
                         <div className="tuitorinitialnavcontainerright">
@@ -282,16 +288,16 @@ function TeachingExperience({ setopentuitorinitialmodal, user }) {
     <input
     className="cvfileinput"
     type="file"
-    accept=".jpg, .jpeg, .png"
+    accept=".pdf"
     onChange={handleCvUpload}
 />
 
         <span className="upload-icon">
             {cvFile ? (
-                <img src={URL.createObjectURL(cvFile)} alt="CV Preview" className="cv-preview" />
+                <div style={{display:"flex", flexDirection:"column", justifyContent:"center", alignItems:"center"}}><FaFilePdf/><p style={{fontSize:"20px"}}>Pdf uploaded</p></div>
             ) : (
                 <>
-                    <FaCloudUploadAlt fontSize={50} /> Upload
+                    <FaCloudUploadAlt fontSize={50} /> <p style={{fontSize:"20px"}}>Upload</p>
                 </>
             )}
         </span>
@@ -325,7 +331,8 @@ function TeachingExperience({ setopentuitorinitialmodal, user }) {
                 <img src={URL.createObjectURL(identityFile)} alt="CV Preview" className="cv-preview" />
             ) : (
                 <>
-                    <FaCloudUploadAlt fontSize={50} /> Upload
+                    <FaCloudUploadAlt fontSize={50} /> <p style={{fontSize:"20px"}}>Upload</p>
+               
                 </>
             )}
         </span>
@@ -335,6 +342,15 @@ function TeachingExperience({ setopentuitorinitialmodal, user }) {
     </>
 )}
                             {step === 4 && (        
+                            <div className="step4">
+                                <h2>Select Your Location </h2>
+                                <p>Tap or Search to select location</p>
+                               
+                              
+                                <TapLocationMap user={user} handleLatLngChange={handleLatLngChange} />
+                            </div>
+                        )}
+                              {step === 5 && (        
                             <>
                                 <h2>One Last Step Before We Begin?</h2>
                                 <h3>Please Select Your Gender.</h3>
@@ -345,6 +361,7 @@ function TeachingExperience({ setopentuitorinitialmodal, user }) {
                                     <div className="maleoption" style={{border: gender==='Female'? '1px solid #0099ffca':'transparent' }} onClick={()=>setTeachergender('Female')}>
                                           <IoMdFemale   fontSize={60} /> Female</div>
                                 </div>
+                       
                             </>
                         )}
 
@@ -377,7 +394,11 @@ function TeachingExperience({ setopentuitorinitialmodal, user }) {
                                 {step === 3 && cvFile && identityFile && (
                                     <button onClick={handleNext} >Next</button>
                                 )}
-                                  {step === 4 && gender && (
+                                 {step === 4 && latLng && (
+                                    <button onClick={handleNext} >Next</button>
+                                    
+                                )}
+                                  {step === 5 && gender && (
                                     <button onClick={handleTeacherxp} >{loading? <FaSpinner className="newspinner"/>:'Finish'}</button>
                                 )}
                             </div>

@@ -5,6 +5,10 @@ import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import { webApi } from '../../api'; 
 import KUBE from '../../assets/newcube.png';
 import { MdGpsFixed } from "react-icons/md";
+import { IoIosSend } from 'react-icons/io';
+import { FaUserGroup } from "react-icons/fa6";
+import { FaMoneyBill, FaMoneyBillWave } from 'react-icons/fa';
+import { RiFocus2Line } from "react-icons/ri";
 
 mapboxgl.accessToken = "pk.eyJ1IjoiYW5pc2hoLWpvc2hpIiwiYSI6ImNrdWo5d2lhdDFkb2oybnJ1MDB4OG1oc2EifQ.pLrp8FmZSLVfT3pAVVPBPg";
 
@@ -177,36 +181,40 @@ function TeacherVacancy() {
 
 const VacancyCard = ({ vacancy, locationSource, openModal }) => {
   return (
-    <div className="vacancycommunitycard">
+    <div className="vacancycommunitycard"
+    >
       <div className="vacancycommunitygraphics">
-        <div className="vacancycommunitygraphicsinsiders">
-          <img src={KUBE} className="kubegraphics" alt="" />
-          <h3>{vacancy.tuitionType === 'Home Tuition' ? 'KUBE HOME TUITION' : 'KUBE ONLINE TUITION'}</h3>
+        
+      <div className="vacancystatuss">
+        <h4 style={{margin:"0px"}}>Status:</h4>
+        {vacancy.status === 'complete' ? (<div className='Assignedcontainer'>🔵Booked</div>) : vacancy.status === 'pending' ?  (<div className='Assignedcontainer'>🟡Assigned <FaUserGroup/>{vacancy.teachers.length}/3 Applicants</div>) : (<div className='Assignedcontainer'>🟢Available</div>)}
         </div>
       </div>
+      {vacancy.distance !== undefined && (
+          <h3>
+           {locationSource === 'current' 
+              ? `Distance:${(vacancy.distance / 1000).toFixed(2)} km` 
+              : `Distance from searched location: ${(vacancy.distance / 1000).toFixed(2)} km`}
+          </h3>
+        )}
       <div className="vacancycommunitydetails">
         <h4>Grade: {vacancy.grade}</h4>
         <h4>Location: {vacancy.location}</h4>
         <h4>Subject: {vacancy.subject}</h4>
         <h4>Duration: {vacancy.duration}</h4>
-        <h4>Salary: {vacancy.salary}</h4>
         <h4>No of students: {vacancy.grade}</h4>
         <h4>Tuitor Type: {vacancy.tutorType}</h4>
-        {vacancy.distance !== undefined && (
-          <h4>
-           {locationSource === 'current' 
-              ? `Distance:${(vacancy.distance / 1000).toFixed(2)} km` 
-              : `Distance from searched location: ${(vacancy.distance / 1000).toFixed(2)} km`}
-          </h4>
-        )}
+       <div className="minrequirements">
+       <h4 style={{display:"flex", alignItems:'center', gap:"5px", fontSize:"18px"}}><RiFocus2Line size={25}/>Requirement:</h4>
+       <p style={{marginLeft:"10px", fontWeight:"600"}}> {vacancy.minRequirement}</p>
+       </div>
+       
         <p>{vacancy.description}</p>
-        <div className="vacancystatuss" style={{padding:"10px 0px"}}>
-        <h4 style={{margin:"0px"}}>Status:</h4>
-        {vacancy.status === 'complete' ? '🔵Booked' : vacancy.status === 'pending' ? `🟡Assigned For Demo Class (${vacancy.teachers.length} applicants)` : '🟢Available'}
-        </div>
+      
       </div>
-      <div className="applybuttoncontainer">
-        <button style={{ width: '200px' }} onClick={() => openModal(vacancy)}>Apply</button>
+      <h3 style={{margin:"10px", display:"flex", gap:"10px", justifyContent:"center", alignItems:'center'}}><FaMoneyBillWave color='rgb(0, 200, 0)' size={30}/>Salary: {vacancy.salary}</h3>
+      <div className="applybuttoncontainer" style={{display:"flex", justifyContent:'center', width:'100%'}}>
+        <button style={{ width: '100%', display:'flex', alignItems:"center", gap:"5px", justifyContent:"center" }} onClick={() => openModal(vacancy)}><IoIosSend size={20}/>Apply</button>
       </div>
     </div>
   );

@@ -383,6 +383,9 @@
   gap: 10px;
 }
 
+.step4{
+  width: 600px;
+}
 .identity-selection select{
   border-radius: 10px;
   padding: 5px 10px;
@@ -469,6 +472,10 @@
 @media (max-width: 600px) {
   .teachersforms{
     width: 100%;
+  }
+  .step4{
+    width: 100%;
+    min-width: 300px;
   }
   
 
