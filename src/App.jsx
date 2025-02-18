@@ -17,6 +17,7 @@ import AddClass from './Pages/addclasses';
 import TeacherDashboardWrapper from './services/ProtectedRoutes/routesmanagement';
 import TeacherCommunityPage from './Pages/teacherscommunitypage';
 import TeachersCommunity from './services/ProtectedRoutes/protectioncommunity';
+import ADMINROUTE from './services/ProtectedRoutes/adminprotection';
 
 function App() {
   return (
@@ -37,9 +38,9 @@ function App() {
             <Route path="/addclasses" element={<AddClass />} />
             
             <Route path="/profile" element={<ProfilePage />} />
-            <Route path="/admin" element={<ADMIN />} />
+            <Route path="/adminxyzkubecom" element={<ADMIN />} />
             <Route path="/teacherscommunity" element={<TeachersCommunity />} />
-            <Route path="/admin/teacher" element={<TeacherManager />} />
+            <Route path="/adminxyzkubecom/teacher/" element={<TeacherManager />} />
           </Routes>
         </ThemeProvider>
       </Router>
