@@ -3,6 +3,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import "../css/addclasses.css";
 import { FaUpload } from "react-icons/fa";
 import { webApi } from "../api";
+import { useNavigate } from "react-router-dom";
 
 const AddClass = () => {
   const [classDetails, setClassDetails] = useState({
@@ -12,11 +13,12 @@ const AddClass = () => {
     fee: "350", // Default hourly rate
     monthlyFee: "", // New state for monthly fee
     posterImage: null,
-    tuitionType: "Home Tuition",
+    tuitionType: "Online Tuition",
     posterFileName: "",
   });
 
   const [user, setUser] = useState(null); // Store Firebase user
+  const navigate = useNavigate();
 
   // Listen for user authentication state
   useEffect(() => {
@@ -88,6 +90,7 @@ const AddClass = () => {
       const result = await response.json();
       if (response.ok) {
         alert("Class added successfully!");
+        navigate('/iamatuitor')
       } else {
         alert(`Error: ${result.error}`);
       }
@@ -139,16 +142,16 @@ const AddClass = () => {
       </div>
 
       <div className="right-sideaddclass">
-        <h2>Offer Your Class</h2>
+        <h2>Teach One-on-One Sessions</h2>
         <form onSubmit={handleSubmit} className="addclass-form">
           <div className="classesform-container">
             <div className="right-side">
             <div className="form-group">
-                <label>Tuition Type</label>
+                {/* <label>Tuition Type</label>
                 <select name="tuitionType" value={classDetails.tuitionType} onChange={handleChange} required>
                   <option value="Home Tuition">Home Tuition</option>
                   <option value="Online Tuition">Online Tuition</option>
-                </select>
+                </select> */}
               </div>
               <div className="form-group">
                 <label>Fee (per hour)</label>

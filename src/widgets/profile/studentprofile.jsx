@@ -22,6 +22,7 @@ function StudentProfile() {
     const [purposemodal, setpurposemodal] = useState('')
     const [purpose, setpurpose ] = useState('')
     const [loading, setLoading] = useState(false); 
+    const [suggestions, setsuggestions] = useState(false); 
     const navigate = useNavigate();
 
 
@@ -112,6 +113,17 @@ function StudentProfile() {
         const totalPercentage = purposePercentage + remainingFieldsPercentage;
         return totalPercentage;
     };
+    useEffect(() => {
+        // Only calculate the percentage if `myuser` is available
+        if (myuser) {
+            const totalPercentage = calculatePersonalizationPercentage();
+    
+            if (totalPercentage !== 100) {
+                setsuggestions(true);
+            }
+        }
+    }, [myuser]);  // Only run when `myuser` changes
+    
     
     // Render loading or fallback UI if myuser is not yet loaded
     if (!myuser) {
@@ -145,17 +157,19 @@ function StudentProfile() {
                 </div>
 
                 <div className="profileedits">
-                    <div className="suggestions">
-                        <div className="suggestioninsides">
-                            <IoInformationCircle fontSize={25} style={{ margin: '4px' }} />
-                            <p>
-                                This is how your profile is seen by other people.
-                                <br />
-                                To preview, click <a style={{ textDecoration: "underline" }} href="">here</a>.
-                            </p>
-                        </div>
-                        <div className="closesuggestions">X</div>
-                    </div>
+                  {suggestions &&(
+                      <div className="suggestions">
+                      <div className="suggestioninsides">
+                          <IoInformationCircle fontSize={25} style={{ margin: '4px' }} />
+                          <p>
+                              To get best out of KUBE please complete your profile
+                              <br />
+                              {/* To preview, click <a style={{ textDecoration: "underline" }} href="">here</a>. */}
+                          </p>
+                      </div>
+                      <div className="closesuggestions" onClick={()=>setsuggestions(false)} >X</div>
+                  </div>
+                  )}
                     <div className="profileeditcontainer">
                         <h2>Hi👋 Let's help tutors get to know you</h2>
                         <p style={{marginTop:'-10px'}}>Get the most out of Kube by sharing a bit more about yourself and your preferences for finding the best tutors.</p>
@@ -196,7 +210,7 @@ function StudentProfile() {
                         </div>
                         <div className="reviewsfromteachers">
                             <div className="reviewfromteacherinsiders">
-                                <h3>Reviews from teacher</h3>
+                                <h3>Reviews</h3>
                             </div>
                             <img className='reviewimage' src={review} alt="" />
                             <div className="reviewinsiders">

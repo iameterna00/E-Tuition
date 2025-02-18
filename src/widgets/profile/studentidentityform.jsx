@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import '../../css/studentform.css';
 import { webApi } from '../../api';
 
-function StudentForm({ studentdetails }) {
+function StudentForm({ studentdetails, close }) {
     const [formData, setFormData] = useState({
         fullName: studentdetails.name || '',
         username: studentdetails.username || '',
@@ -28,6 +28,11 @@ function StudentForm({ studentdetails }) {
             setFormData({ ...formData, [name]: value });
         }
     };
+    // Inside StudentForm component
+const handleClose = () => {
+    setLoading(false);  // Reset the loading state when closing
+    close();            // Close the modal
+};
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -202,12 +207,19 @@ function StudentForm({ studentdetails }) {
                 </div>
 
 
-              <div className="loadingbutton" style={{width:'100%', display:'flex', justifyContent:'center'}}>
+          <div className="buttoncontainer" style={{width:'100%', display:'flex', justifyContent:'center'}}>
+          <div className="loadingbutton" style={{width:'100%', display:'flex', justifyContent:'center'}}>
               <button type="submit" disabled={loading} className="submit-btn">
     {loading ? <span className="spinner"></span> : "Submit"}
 </button>
 
               </div>
+              
+              <div onClick={close} style={{width:"100%", display:"flex", justifyContent:"center"}} className="tuition-delete-button">
+              Close
+              </div>
+             
+          </div>
             </form>
         </div>
     );

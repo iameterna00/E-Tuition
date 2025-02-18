@@ -32,16 +32,21 @@ const Navbar = () => {
   const handleLoginclick = () => setTuitorLogin(!tuitorLogin);
   const navigate = useNavigate();
 
+  const handleLinkClick = () => {
+    setMenuOpen(false); // Close the navbar when a link is clicked
+  };
+
   const handleLogout = async () => {
     try {
       await signOut(auth);
       setUser(null);
       setDropdownVisible(false);
+      window.location.reload(); // This will refresh the page
     } catch (error) {
       console.error("Error signing out:", error);
     }
   };
-
+  
 
 
   // Handle Firebase authentication and fetch user details
@@ -113,20 +118,20 @@ const Navbar = () => {
       <nav className={`navbar ${isScrolled ? 'solid' : ''}`}>
         <div className="navbarcontents">
           <div className="logoandclasses" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '20px' }}>
-            <Link to='/'>
+            <Link to='/'onClick={handleLinkClick}>
               <img className="Logo" src={KUBE} alt="Logo" />
             </Link>
             <div className="Title">
-              <Link to='/' style={{ textDecoration: 'none', color: 'inherit' }}>
+              <Link onClick={handleLinkClick} to='/' style={{ textDecoration: 'none', color: 'inherit' }}>
                 <h2>KUBE</h2>
               </Link>
             </div>
-            {!menuOpen && (
+            {/* {!menuOpen && (
               <div style={{ marginRight: "100px" }} className={`navlinks ${menuOpen ? 'active' : ''}`}>
          
                 <Link to={'/admin'}><button className="navbuttons">About</button></Link>
               </div>
-            )}
+            )} */}
           </div>
 
           <div className="search-container-navbar">
@@ -135,12 +140,12 @@ const Navbar = () => {
           </div>
 
           <div className={`navlinks ${menuOpen ? 'active' : ''}`}>
-            {menuOpen && (
+            {/* {menuOpen && (
               <>
                 <button className="navbuttons">About</button>
             
               </>
-            )}
+            )} */}
        {myuser?.teacherconfirm === 'pending' || myuser?.teacherconfirm === 'approved' ? (
   <>
     {myuser.purpose === 'student' ? (
@@ -158,18 +163,27 @@ const Navbar = () => {
     )}
   </>
 ) : (
-  <Link to='/iamatuitor' style={{ textDecoration: 'none', color: 'inherit' }}>
+  <Link onClick={handleLinkClick} to='/iamatuitor' style={{ textDecoration: 'none', color: 'inherit' }}>
     <button className="navbuttons">Become a Tutor</button>
   </Link>
 )}
 
-            <Link to='/onlineclasses' style={{ textDecoration: 'none', color: 'inherit' }}>
+            {/* <Link to='/onlineclasses' style={{ textDecoration: 'none', color: 'inherit' }}>
               <button className="navbuttons">Online Classes</button>
-            </Link>
+            </Link> */}
            {!menuOpen &&(
             <>
              {!user ? (
-              <button className="navbuttons" onClick={handleLoginclick}>Login</button>
+             <button
+             className="navbuttons"
+             onClick={() => {
+               handleLoginclick();  // Handle login logic
+               handleLinkClick();   // Close the navbar
+             }}
+           >
+             Login
+           </button>
+           
             ) : (
               <div className="profile-container" onClick={toggleDropdown} style={{ position: 'relative' }}>
                 <img
@@ -180,17 +194,18 @@ const Navbar = () => {
                 />
                 {dropdownVisible && (
                   <div className="dropdown-menu" style={{ position: 'absolute', top: '50px', right: '0', backgroundColor: isScrolled ? "rgb(40,45,45)" : "transparent", padding: '10px', display: 'flex', flexDirection: 'column', boxShadow: '0px 8px 16px rgba(0,0,0,0.2)', zIndex: 1 }}>
-                    <Link to="/profile" className="dropdown-item">Profile</Link>
-                    <Link to="/settings" className="dropdown-item">Settings</Link>
+                    <Link onClick={handleLinkClick} to="/profile" className="dropdown-item">Profile</Link>
+                    <Link onClick={handleLinkClick} to="/settings" className="dropdown-item">Settings</Link>
                     <button onClick={handleLogout} className="dropdown-item">Logout</button>
                   </div>
                 )}
               </div>
             )}</>
            )}
-            <button className="navbuttons" style={{ display: 'flex', gap: '10px' }} onClick={toggleTheme}>
+            <button className="navbuttons" style={{ display: 'flex', gap: '10px' }} onClick={()=>{toggleTheme(); handleLinkClick();}}>
               {menuOpen ? (
                 <>
+                
                   Change Theme {theme === 'dark' ? <CiLight /> : <MdDarkMode />}
                 </>
               ) : (
@@ -203,37 +218,40 @@ const Navbar = () => {
       style={{display:'flex', justifyContent:'center', alignItems:"center", gap:"10px"}} 
       className="profileinsidemenubar"
     >
-      <img
-        className="profile-pic"
-        src={myuser?.profile}
-        alt="Profile"
-        style={{ width: '35px', height: '35px', borderRadius: '50%', objectFit:"cover" }}
-      />
-      <Link 
+      {!user ?(
+         <button
+         className="navbuttons"
+         onClick={() => {
+           handleLoginclick();  // Handle login logic
+           handleLinkClick();   // Close the navbar
+         }}
+       >
+         Login
+       </button>
+       
+      ):(
+        <Link 
         to="/profile" 
         className="dropdown-item" 
         onClick={() => setMenuOpen(false)} // Close menu on click
       >
         Your Profile
       </Link>
+      )}
     </div>
-    <Link 
-      to="/settings" 
-      className="dropdown-item" 
-      onClick={() => setMenuOpen(false)} // Close menu on click
-    >
-      Settings
-    </Link>
-    <button 
-      style={{backgroundColor:'transparent'}} 
+{user?(
+      <div style={{padding:"10px"}}
+      
       onClick={() => {
         handleLogout();
+      handleLinkClick();
         setMenuOpen(false); // Close menu on logout
       }} 
       className="dropdown-item"
     >
       Logout
-    </button>
+    </div>
+):(null)}
   </>
 )}
 
@@ -247,9 +265,9 @@ const Navbar = () => {
 
       {/* Modal */}
       {tuitorLogin && (
-        <div className="loginModal">
+      
           <TuitorLogin close={handleLoginclick} />
-        </div>
+       
       )}
    {tuitorsloacing && (
   <div className="loading-modal">

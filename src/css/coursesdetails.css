@@ -29,10 +29,18 @@
   }
   .coursebodyone{
    display: flex;
-   background-color: #2e3b4563;
    border-radius: 20px;
 
   }
+  [data-theme='dark'] .coursebodyone{
+    background-color: #2e3b4563;
+    
+    }
+    
+    [data-theme='light'] .coursebodyone{
+      background-color: rgba(241, 241, 241, 0.103);
+      border: 1px solid rgba(128, 128, 128, 0.273);
+    }
 
   .course-profile {
     border-radius: 8px;
@@ -77,9 +85,18 @@
     justify-content: start;
     width: 100%;
     border-radius: 5px;
-    background-color: #3d4c5878;
 
   }
+  [data-theme='dark'] .toutorname{
+    background-color: #2e3b4563;
+    
+    }
+    
+    [data-theme='light'] .toutorname{
+      background-color: rgba(241, 241, 241, 0.103);
+      border: 1px solid rgba(128, 128, 128, 0.273);
+    }
+  
   .tuitornamedetails{
     display: flex;
     justify-content: start;
@@ -116,6 +133,7 @@
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
+
   
   .course-description h3 {
     font-size: 24px;
@@ -128,12 +146,21 @@
   }
   .enrollnowcontainer{
     width: 30%;
-    background-color: #2e3b4563;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 20px;
     padding: 20px;
    
   }
+  [data-theme='dark'] .enrollnowcontainer{
+    background-color: #2e3b4563;
+    
+    }
+    
+    [data-theme='light'] .enrollnowcontainer{
+      background-color: rgba(241, 241, 241, 0.103);
+      border: 1px solid rgba(128, 128, 128, 0.273);
+    }
+
   .productdetails{
     width: 100%;
     justify-content: start;
@@ -199,7 +226,6 @@
 
 /* OFFER HOME TUITOR OFFER */
 .offer-banner {
-  background-color: #2e3b4563;
   text-align: center;
   display: flex;
   justify-content: center;
@@ -211,6 +237,15 @@
   width: 80%;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
+[data-theme='dark'] .offer-banner {
+  background-color: #2e3b4563;
+  
+  }
+  
+  [data-theme='light'] .offer-banner {
+    background-color: rgba(241, 241, 241, 0.103);
+    border: 1px solid rgba(128, 128, 128, 0.273);
+  }
 
 .dontmissout{
  display: flex;

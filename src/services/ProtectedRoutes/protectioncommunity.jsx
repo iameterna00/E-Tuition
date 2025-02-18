@@ -4,8 +4,9 @@ import { fetchUser, selectUser, selectLoading, selectError } from '../Redux/user
 import { Navigate } from 'react-router-dom';  // Import Navigate for redirection
 import { getAuth } from 'firebase/auth';
 import TeacherDashboard from '../../Pages/teachersdashboard';  // Import TeacherDashboard
+import TeacherCommunityPage from '../../Pages/teacherscommunitypage';
 
-const IAmTuitorWrapper = () => {
+const TeachersCommunity = () => {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);  // Get the current user from Redux store
   const loading = useSelector(selectLoading);  // Check loading status from Redux
@@ -50,12 +51,12 @@ const IAmTuitorWrapper = () => {
   console.log('Teacher Confirmation Status:', user.teacherConfirm);
 
   // Check the teacherConfirm status before rendering the TeacherDashboard
-  if (user.purpose !== 'teacher') {
+  if (user.teacherconfirm !== 'approved') {
     console.log('Redirecting to profile because teacher is not approved');
     return <Navigate to="/" />;  // Redirect to profile if teacherConfirm is not approved
   }
 
-  return <TeacherDashboard user={user}  />;  // Render TeacherDashboard if approved
+  return <TeacherCommunityPage user={user}  />;  // Render TeacherDashboard if approved
 };
 
-export default IAmTuitorWrapper;
+export default TeachersCommunity;

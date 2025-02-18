@@ -184,9 +184,10 @@ function TeachingExperience({ setopentuitorinitialmodal, user }) {
                             </div>
                         </div>
                         <div className="tuitorinitialnavcontainerright">
-                            <button onClick={setopentuitorinitialmodal}>
-                                <h3>Exit</h3>
-                            </button>
+                        <button onClick={() => setopentuitorinitialmodal(false)}>
+    <h3>Exit</h3>
+</button>
+
                         </div>
                     </div>
                 </nav>

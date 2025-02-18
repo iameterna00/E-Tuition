@@ -189,6 +189,12 @@
     display: flex;
     padding: 10px;
   }
+  .informationofwork{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 700px;
+  }
   .step {
     display: flex;
     align-items: center;
@@ -258,20 +264,7 @@
   /* BETUITOR LOGIN */
 
   
-  .tuitorlogincontainer {
-    position: fixed;
-    height: 100vh; 
-    width: 100%; 
-    top: 50%;
-    transform: translateY(-50%); 
-    display: flex; 
-    background-color: rgb(12,12,12,0.4);
-    align-items: center; 
-    z-index: 100;
-    justify-content: center; 
-  }
 
-  
   .tuitorlogincontents {
     position: relative;
     border-radius: 20px;
@@ -384,6 +377,24 @@
     height: 40px;
     border-radius: 12px;
   }
+  @media (max-width: 1120px) {
+    .learnfromus{
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .learnfromuscontainer{
+      width: 100%;
+      display: flex;
+      padding: 0px;
+      border-radius: 0px;
+      flex-direction: column;
+    
+  
+    }
+  }
   @media (max-width: 600px) {
     .learnfromus{
       width: 100%;
@@ -412,5 +423,6 @@
     .informationofwork{
       padding: 0px;
     }
+    
   
   }

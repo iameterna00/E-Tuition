@@ -244,7 +244,11 @@
         background-color: rgba(33, 150, 243, 0.1);
       }
       @media screen and (max-width: 768px) {
-   
+        .tuitorlogincontainer{
+        width: 100%;
+        padding: 0px;
+        margin: 0px;
+        }
         .back-button{
           cursor: pointer;
           padding: 0 10px;
@@ -254,7 +258,9 @@
     
         }
         .tuitorlogincontents {
-          width: 90%;
+          width: 100%;
+          margin: 0px;
+          
         }
         .tuitorgraphics{
           display: none;
