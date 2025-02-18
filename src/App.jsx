@@ -38,9 +38,9 @@ function App() {
             <Route path="/addclasses" element={<AddClass />} />
             
             <Route path="/profile" element={<ProfilePage />} />
-            <Route path="/adminxyzkubecom" element={<ADMIN />} />
+            <Route path="/admin" element={<ADMIN />} />
             <Route path="/teacherscommunity" element={<TeachersCommunity />} />
-            <Route path="/adminxyzkubecom/teacher/" element={<TeacherManager />} />
+            <Route path="/admin/teacher/" element={<TeacherManager />} />
           </Routes>
         </ThemeProvider>
       </Router>

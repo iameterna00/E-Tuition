@@ -7,7 +7,7 @@ import TeacherDashboard from '../../Pages/teachersdashboard';  // Import Teacher
 import TeacherCommunityPage from '../../Pages/teacherscommunitypage';
 import ADMIN from '../../admin/admin';
 
-const TeachersCommunity = () => {
+const ADMINROUTE = () => {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);  // Get the current user from Redux store
   const loading = useSelector(selectLoading);  // Check loading status from Redux
@@ -63,4 +63,4 @@ const TeachersCommunity = () => {
   return <ADMIN />;  // Render the admin page if the user is approved
 };
 
-export default TeachersCommunity;
+export default ADMINROUTE;
