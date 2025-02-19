@@ -1,4 +1,4 @@
 
-  export const webApi = window.location.hostname === "localhost"
-  ? "http://localhost:5001"  // Local development
-  : "https://kube-backend.onrender.com"; 
+export const webApi = window.location.hostname === "localhost"
+  ? import.meta.env.VITE_API_URL_LOCAL  // Local development URL
+  : import.meta.env.VITE_API_URL_PRO;   // Production URL

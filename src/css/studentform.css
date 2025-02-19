@@ -76,7 +76,25 @@
     color: black;
     background-color: white;
   }
-  
+  [data-theme='dark'] .form-group select{
+    color: white;
+    background-color: rgb(35, 35, 35);
+  }
+  .changeprofilebutton{
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+  }
+  [data-theme='light'] .changeprofilebutton{
+    color: black;
+    background-color: rgb(236, 236, 236);
+  }
+  [data-theme='dark'] .changeprofilebutton{
+    color: white;
+    background-color: rgb(35, 35, 35);
+  }
 
 
   

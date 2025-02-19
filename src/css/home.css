@@ -443,7 +443,6 @@
 }
 .vaccancyfilters {
   width: 100%;
-  padding: 20px;
   display: flex;
   justify-content: space-between;
 }
@@ -833,13 +832,22 @@
   .filterboxs {
     display: flex;
     justify-content: center;
-    flex-wrap: wrap; /* Allows wrapping if there's not enough space in the row */
+   
     gap: 20px; /* Adds spacing between the individual filters */
     align-items: center; /* Vertically centers the items */
   }
 }
 
 @media (max-width: 768px) {
+  .filterbox select {
+    width: 150px;
+    padding: 8px;
+  }
+  .price-slider-container {
+    width: 150px;
+    margin: 0 auto;
+    border-radius: 8px;
+  }
   .tuitorpngbanner{
     width: 100%;
     max-width: 300px;
@@ -880,8 +888,8 @@
   .filterboxs {
     display: flex;
     justify-content: center;
-    flex-wrap: wrap; /* Allows wrapping if there's not enough space in the row */
-    gap: 20px; /* Adds spacing between the individual filters */
+    
+
     align-items: center; /* Vertically centers the items */
 
   }

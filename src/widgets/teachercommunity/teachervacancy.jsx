@@ -9,6 +9,7 @@ import { IoIosSend } from 'react-icons/io';
 import { FaUserGroup } from "react-icons/fa6";
 import { FaMoneyBill, FaMoneyBillWave } from 'react-icons/fa';
 import { RiFocus2Line } from "react-icons/ri";
+import { getAuth } from 'firebase/auth';
 
 mapboxgl.accessToken = "pk.eyJ1IjoiYW5pc2hoLWpvc2hpIiwiYSI6ImNrdWo5d2lhdDFkb2oybnJ1MDB4OG1oc2EifQ.pLrp8FmZSLVfT3pAVVPBPg";
 
@@ -35,22 +36,33 @@ function TeacherVacancy() {
     return `https://wa.me/9768771793?text=${encodeURIComponent(message)}`;
   };
 
-  // Fetch vacancies initially
-  useEffect(() => {
-    const fetchVacancies = () => {
+  const fetchVacancies = async () => {
+    const auth = getAuth();
+    const user = auth.currentUser;
+  
+    if (user) {
+      // Get Firebase ID token
+      const idToken = await user.getIdToken();
+  
+      // Send token with the request to your backend
       axios
-        .get(`${webApi}/api/vacancies`)
+        .get(`${webApi}/api/vacancyforteachers`, {
+          headers: {
+            Authorization: `Bearer ${idToken}`  // Attach Firebase ID token
+          }
+        })
         .then((response) => {
           setVacancies(response.data); // Update vacancies
         })
         .catch((error) => console.error('Error fetching vacancies:', error));
-    };
-
-    fetchVacancies(); // Initial fetch
+    }
+  };
+  
+  useEffect(() => {
+    fetchVacancies();
     const intervalId = setInterval(fetchVacancies, 10000); // Polling every 10 seconds
     return () => clearInterval(intervalId); // Cleanup
   }, []);
-
   // Filter vacancies based on user location
   useEffect(() => {
     if (userLocation) {
@@ -95,8 +107,9 @@ function TeacherVacancy() {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const newLocation = { lat: position.coords.latitude, lng: position.coords.longitude };
+          console.log("User Location:", newLocation); // Debugging step
           setUserLocation(newLocation);
-          setLocationSource('current'); // Track current location
+          setLocationSource('current');
         },
         (error) => console.error('Geolocation error:', error),
         { enableHighAccuracy: true }
@@ -105,6 +118,7 @@ function TeacherVacancy() {
       console.error('Geolocation is not supported by this browser.');
     }
   };
+  
 
   // Initialize Mapbox Geocoder
   useEffect(() => {

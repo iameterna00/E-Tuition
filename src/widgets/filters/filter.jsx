@@ -3,20 +3,8 @@ import ReactSlider from 'react-slider';
 function Filters({setLocationFilter, setGenderFilter, setSearchTerm, priceRange, handlePriceChange}) {
     return (
         <div className="vaccancyfilters">
-        <div className="filterboxs">
-       {setLocationFilter === 'no need' ? null : (
-           <div className="filterbox">
-           <h3>Location</h3>
-           <select 
-            onChange={(e) => setLocationFilter(e.target.value)}
-           name="location" id="location">
-             <option value="">Select Location</option>
-             <option value="Kathmandu">Kathmandu</option>
-             <option value="Lalitpur">Lalitpur</option>
-             <option value="Bhaktapur">Bhaktapur</option>
-           </select>
-         </div>
-       )}
+     <div className="filtercomponents" style={{display:"flex", width:"100%"}}>
+     <div className="filterboxs">
           <div className="filterbox">
             <h3>Gender</h3>
             <select
@@ -55,13 +43,14 @@ function Filters({setLocationFilter, setGenderFilter, setSearchTerm, priceRange,
                  
                 </div>
          </div>
+     </div>
       
           
         </div>
           <div className="search-container-vaccancy">
                 <input
                  onChange={(e) => setSearchTerm(e.target.value)}
-                 type="text" placeholder="Search Anything..." className="search-vaccancy" />
+                 type="text" placeholder="Search location, Subjects..." className="search-vaccancy" />
                 <div className="search-vaccancyiconcontainer"><div className="search_vaccancyicon"></div></div>
               </div>
       </div>

@@ -115,7 +115,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className={`navbar ${isScrolled ? 'solid' : ''}`}>
+      <nav className={`navbar ${isScrolled || menuOpen ? 'solid' : ''}`}>
         <div className="navbarcontents">
           <div className="logoandclasses" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '20px' }}>
             <Link to='/'onClick={handleLinkClick}>
@@ -139,7 +139,7 @@ const Navbar = () => {
             <div className="search-iconContainer"><div className="search_icon"></div></div>
           </div>
 
-          <div className={`navlinks ${menuOpen ? 'active' : ''}`}>
+          <div  className={`navlinks ${menuOpen ? 'active' : ''}`}>
             {/* {menuOpen && (
               <>
                 <button className="navbuttons">About</button>
@@ -193,7 +193,7 @@ const Navbar = () => {
                   style={{ width: '35px', height: '35px', borderRadius: '50%', objectFit:"cover" }}
                 />
                 {dropdownVisible && (
-                  <div className="dropdown-menu" style={{ position: 'absolute', top: '50px', right: '0', backgroundColor: isScrolled ? "rgb(40,45,45)" : "transparent", padding: '10px', display: 'flex', flexDirection: 'column', boxShadow: '0px 8px 16px rgba(0,0,0,0.2)', zIndex: 1 }}>
+                  <div className="dropdown-menu" style={{ position: 'absolute', top: '50px', right: '0', backgroundColor: isScrolled ? "rgb(40,45,45)" : "transparent", padding: '10px 20px', display: 'flex', flexDirection: 'column', boxShadow: '0px 8px 16px rgba(0,0,0,0.2)', zIndex: 1 }}>
                     <Link onClick={handleLinkClick} to="/profile" className="dropdown-item">Profile</Link>
                     <Link onClick={handleLinkClick} to="/settings" className="dropdown-item">Settings</Link>
                     <button onClick={handleLogout} className="dropdown-item">Logout</button>

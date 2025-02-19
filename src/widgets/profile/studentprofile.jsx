@@ -162,16 +162,21 @@ function StudentProfile() {
                       <div className="suggestioninsides">
                           <IoInformationCircle fontSize={25} style={{ margin: '4px' }} />
                           <p>
-                              To get best out of KUBE please complete your profile
-                              <br />
-                              {/* To preview, click <a style={{ textDecoration: "underline" }} href="">here</a>. */}
-                          </p>
+  To get the best out of KUBE, please complete your profile,<br />
+  <span 
+    onClick={() => openpurposemodal('identity')} 
+    style={{ cursor: 'pointer', textDecoration: 'underline' }}
+  >
+    click here to complete your profile!
+  </span>
+</p>
+
                       </div>
                       <div className="closesuggestions" onClick={()=>setsuggestions(false)} >X</div>
                   </div>
                   )}
                     <div className="profileeditcontainer">
-                        <h2>Hi👋 Let's help tutors get to know you</h2>
+                       {myuser.purpose === 'teacher'?( <h2>Hi👋 Let's help Students get to know you</h2>):( <h2>Hi👋 Let's help tutors get to know you</h2>)}
                         <p style={{marginTop:'-10px'}}>Get the most out of Kube by sharing a bit more about yourself and your preferences for finding the best tutors.</p>
                         <div className="completeyourprofile">
                             <div className="profilechecklist">
@@ -251,7 +256,7 @@ function StudentProfile() {
                         <div className="close-modal" onClick={() => closepurposemodal('')}>X</div>
                         <h2>Share a bit about yourself</h2>
                         <div className="modal-contentstudentform">
-                            <StudentForm studentdetails={myuser} />
+                            <StudentForm close={()=>closepurposemodal('')} studentdetails={myuser} />
                         </div>
                     </div>
                 </div>

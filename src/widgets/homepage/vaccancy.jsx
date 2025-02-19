@@ -87,7 +87,10 @@ function Vaccancy() {
                        <div style={{width:'80%'}} className="vacancytitle">
                        <h3> {gig.title}</h3>
                        </div>
-                        <h3 className="vaccancy-location"><FaLocationDot /> {gig.location}</h3>
+                       <h3 className="vaccancy-location">
+  <FaLocationDot /> {gig.location.replace(/baneshwar/gi, "Baneshwor")}
+</h3>
+
                         <h3 className="vaccancy-qualification">Qualification: {gig.qualification}</h3>
                         <h3 className="vaccancy-qualification">Exp: {gig.experience}</h3>
                         <h3 className="vaccancy-qualification">Gender: {gig.sex}</h3>

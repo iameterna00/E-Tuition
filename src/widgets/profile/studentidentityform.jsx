@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import '../../css/studentform.css';
 import { webApi } from '../../api';
+import { FaEdit } from 'react-icons/fa';
+import TapLocationMap from '../maps/taplocationmap';
 
 function StudentForm({ studentdetails, close }) {
     const [formData, setFormData] = useState({
@@ -13,11 +15,23 @@ function StudentForm({ studentdetails, close }) {
         subjects: studentdetails.subjects || '',
         tuitionPreference: '',
         address: studentdetails.address||'',
-        locationRadius: studentdetails.locationRadius || '',
-        parentContact: '',
+        parentContact: studentdetails.parentContact || '',
+
     });
     const [previewImage, setPreviewImage] = useState(null);
     const [loading, setLoading] = useState(false); 
+    const [isMapOpen, setIsMapOpen] = useState(false);
+
+    const handleLatLngChange = (location) => {
+        setFormData(prevFormData => ({
+            ...prevFormData,
+            address: location.name,
+            latitude: location.lat,  // Correct key: "latitude"
+            longitude: location.lng  // Correct key: "longitude"
+        }));
+        
+    };
+    
 
     const handleChange = (e) => {
         const { name, value, type, files } = e.target;
@@ -52,8 +66,11 @@ const handleClose = () => {
         if (formData.subjects) formDataToSend.append('subjects', formData.subjects);
         if (formData.tuitionPreference) formDataToSend.append('tuitionPreference', formData.tuitionPreference);
         if (formData.address) formDataToSend.append('address', formData.address);
-        if (formData.locationRadius) formDataToSend.append('locationRadius', formData.locationRadius);
         if (formData.parentContact) formDataToSend.append('parentContact', formData.parentContact);
+        if (formData.latitude) formDataToSend.append('latitude', formData.latitude);
+        if (formData.longitude) formDataToSend.append('longitude', formData.longitude);
+        
+        
     
         console.log('Form Data to Send:', formDataToSend);
     
@@ -74,7 +91,9 @@ const handleClose = () => {
             alert('An error occurred while saving the student details.');
         } finally {
             setLoading(false); // Hide loading after submission
+            alert('Profile updated sucessfully')
             window.location.reload();
+
         }
     };
     return (
@@ -88,7 +107,7 @@ const handleClose = () => {
                             alt="Profile"
                         />
                         <label htmlFor="profilePicture" className="changeprofilebutton">
-                         <button type="button" onClick={() => document.getElementById('profilePicture').click()} >   Change your Profile Picture</button>
+                         <button className='changeprofilebutton' type="button" onClick={() => document.getElementById('profilePicture').click()} > <FaEdit size={20} />   Change your Profile Picture</button>
                         </label>
                         <input
                             type="file"
@@ -100,6 +119,20 @@ const handleClose = () => {
                         />
                     </div>
                 </div>
+                {studentdetails.purpose ==='student' && (
+                       <div className="form-group">
+                       <label>
+                           Parents Phone Number:
+                       </label>
+                       <input
+                           type="tel"
+                           name="parentContact"
+                           value={formData.parentContact}
+                           onChange={handleChange}
+                           placeholder="Enter phone number"
+                       />
+                   </div>
+                )}
 
                 <div className="form-group">
                     <label>Full Name:</label>
@@ -120,6 +153,7 @@ const handleClose = () => {
                         value={formData.username}
                         onChange={handleChange}
                         placeholder="Enter username"
+                        disabled
                     />
                 </div>
 
@@ -135,8 +169,8 @@ const handleClose = () => {
 
                 <div className="form-group">
                     <label>
-                        Phone Number:
-                        <p style={{ margin: '0px', fontWeight: '100' }}>
+                        Your Phone Number:
+                        <p style={{ margin: '0px', fontWeight: '100',  color:"grey"}}>
                             This is personal and we won't share it.
                         </p>
                     </label>
@@ -192,35 +226,35 @@ const handleClose = () => {
                         value={formData.address}
                         onChange={handleChange}
                         placeholder="Enter address"
+                        onClick={() => setIsMapOpen(true)}
                     />
                 </div>
+                {isMapOpen && (
+                
+                      <div style={{padding:"10px"}}>
+                        <div className="close-btn" style={{backgroundColor:"transparent",fontSize:"18px", cursor:"pointer"}} onClick={() => setIsMapOpen(false)}>close</div>
+                        <TapLocationMap user={true} handleLatLngChange={handleLatLngChange} />
+                  </div>
+            )}
 
-                <div className="form-group">
-                    <label>Preferred Tutor's Location Radius:</label>
-                    <input
-                        type="text"
-                        name="locationRadius"
-                        value={formData.locationRadius}
-                        onChange={handleChange}
-                        placeholder="Enter location radius"
-                    />
-                </div>
+              
 
 
-          <div className="buttoncontainer" style={{width:'100%', display:'flex', justifyContent:'center'}}>
-          <div className="loadingbutton" style={{width:'100%', display:'flex', justifyContent:'center'}}>
+          <div className="buttoncontainer" style={{width:'100%',gap:"10px", display:'flex', justifyContent:'center', alignItems:"center"}}>
+          <div className="loadingbutton" style={{ display:'flex', justifyContent:'center'}}>
               <button type="submit" disabled={loading} className="submit-btn">
     {loading ? <span className="spinner"></span> : "Submit"}
 </button>
 
               </div>
               
-              <div onClick={close} style={{width:"100%", display:"flex", justifyContent:"center"}} className="tuition-delete-button">
+              <div className='closemodalbutton' onClick={close}>
               Close
               </div>
              
           </div>
             </form>
+            
         </div>
     );
 }
