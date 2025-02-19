@@ -34,7 +34,7 @@ function HomePage() {
                 const data = await response.json();
                 if (data.success && data.data.teacherconfirm && data.data.purpose == 'teacher') {
                     console.log('teacherstatus', data.data)
-                    navigate("/iamatuitor", { replace: true }); // Immediately navigate to the teacher's dashboard
+                    navigate("/tutorhome", { replace: true }); // Immediately navigate to the teacher's dashboard
                 } else {
                     setUserChecked(true); // If it's not a teacher, show the homepage
                 }

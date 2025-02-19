@@ -29,7 +29,7 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/onlineclasses" element={<OnlineClasses />} />
             <Route path="/coursesdetails/:id" element={<CourseDetails />} />
-            <Route path="/iamatuitor" element={<BecomeTuitor />} />
+            <Route path="/tutorhome" element={<BecomeTuitor />} />
            =
             
             {/* Protect Teacher Dashboard */}

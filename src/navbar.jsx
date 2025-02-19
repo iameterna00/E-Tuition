@@ -95,7 +95,7 @@ const Navbar = () => {
         navigate('/'); 
          window.location.reload(); // Ensures navigation completes before reloading
       } else {
-        navigate('/iamatuitor');
+        navigate('/tutorhome');
         window.location.reload();
       }
   
@@ -163,7 +163,7 @@ const Navbar = () => {
     )}
   </>
 ) : (
-  <Link onClick={handleLinkClick} to='/iamatuitor' style={{ textDecoration: 'none', color: 'inherit' }}>
+  <Link onClick={handleLinkClick} to='/tutorhome' style={{ textDecoration: 'none', color: 'inherit' }}>
     <button className="navbuttons">Become a Tutor</button>
   </Link>
 )}

@@ -90,7 +90,7 @@ const AddClass = () => {
       const result = await response.json();
       if (response.ok) {
         alert("Class added successfully!");
-        navigate('/iamatuitor')
+        navigate('/tutorhome')
       } else {
         alert(`Error: ${result.error}`);
       }
