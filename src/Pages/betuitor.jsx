@@ -10,6 +10,7 @@ import TeachingExperience from "../widgets/becomeTuitor/tuitorexperience";
 import { webApi } from "../api";
 import { useNavigate } from "react-router-dom";
 import { FaUsersGear } from "react-icons/fa6";
+import DemoVacancy from "../widgets/becomeTuitor/demovacancies";
 
 function BecomeTuitor() {
   const [isAuthenticated, setIsAuthenticated] = useState(null);
@@ -107,6 +108,9 @@ function BecomeTuitor() {
         tuitorlogin={()=>setClosetuitorLogin(true)}
       />
       <BetuitotContent />
+     {!isAuthenticated && (
+       <DemoVacancy  login={()=>setClosetuitorLogin(true)}/>
+     )}
 
       {opentuitorinitialmodal && (
         <TeachingExperience 

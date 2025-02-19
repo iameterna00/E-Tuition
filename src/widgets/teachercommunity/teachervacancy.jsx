@@ -82,6 +82,7 @@ function TeacherVacancy() {
       setFilteredVacancies(sortedVacancies); // Set the filtered and sorted vacancies
     } else {
       setFilteredVacancies(vacancies);
+      console.log('vacanctteachers', vacancies.teacher)
     }
   }, [userLocation, vacancies]);
 
@@ -201,7 +202,7 @@ const VacancyCard = ({ vacancy, locationSource, openModal }) => {
         
       <div className="vacancystatuss">
         <h4 style={{margin:"0px"}}>Status:</h4>
-        {vacancy.status === 'complete' ? (<div className='Assignedcontainer'>🔵Booked</div>) : vacancy.status === 'pending' ?  (<div className='Assignedcontainer'>🟡Assigned <FaUserGroup/>{vacancy.teachers.length}/3 Applicants</div>) : (<div className='Assignedcontainer'>🟢Available</div>)}
+        {vacancy.status === 'complete' ? (<div className='Assignedcontainer'>🔵Booked</div>) : vacancy.status === 'pending' ?  (<div className='Assignedcontainer'>🟡Assigned <FaUserGroup/>{vacancy.teachers_count}/3 Applicants</div>) : (<div className='Assignedcontainer'>🟢Available</div>)}
         </div>
       </div>
       {vacancy.distance !== undefined && (

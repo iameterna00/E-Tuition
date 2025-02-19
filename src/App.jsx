@@ -5,7 +5,6 @@ import OnlineClasses from './Pages/onlineclass';
 import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import HomePage from './Pages/homepage';
 import BecomeTuitor from './Pages/betuitor';
-import ApplyForTuitor from './Pages/applyfortuitot';
 import CourseDetails from './Pages/coursedetail';
 import ProfilePage from './Pages/profile';
 import ScrollToTop from './services/scrolltotop';
@@ -31,7 +30,7 @@ function App() {
             <Route path="/onlineclasses" element={<OnlineClasses />} />
             <Route path="/coursesdetails/:id" element={<CourseDetails />} />
             <Route path="/iamatuitor" element={<BecomeTuitor />} />
-            <Route path="/tuitorform" element={<ApplyForTuitor />} />
+           =
             
             {/* Protect Teacher Dashboard */}
             <Route path="/teacherdashboard" element={<TeacherDashboardWrapper />} />
