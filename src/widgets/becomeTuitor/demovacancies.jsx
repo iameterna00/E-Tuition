@@ -22,9 +22,9 @@ const DemoVacancy = ({login}) => {
   }, []);
 
   return (
-    <div className="vacancy-grid-container">
+    <div className="vacancy-grid-container" style={{display:"flex", width:"100%", justifyContent:"center", alignItems:'center', flexDirection:"column"}}>
       <h2>Available Vacancies</h2>
-      <div className="vacancy-grid" style={{display:'flex', overflowX:"auto", width:"100%", flexWrap:"wrap", gap:"10px"}}>
+      <div className="vacancy-grid" style={{display:'flex', justifyContent:"center", alignItems:"center", width:"100%", flexWrap:"wrap", gap:"10px"}}>
         {vacancies.map((vacancy) => (
            <div style={{width:"100%", maxWidth:"400px"}} key={vacancy.id} className="vaccancydemocard">
             <div className="vacancycommunitycard"
