@@ -641,7 +641,7 @@
 
 .vaccancy-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); /* Dynamic 3-column layout */
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px; /* Spacing between cards */
   width: 100%;
   margin-top: 20px;
@@ -664,7 +664,7 @@
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease-in-out;
-    height: 380px;
+    height: 400px; 
   }
   [data-theme='dark']  .vaccancy-card {
     background-color: rgb(25,25,25);
