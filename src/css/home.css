@@ -102,7 +102,9 @@
 
 .getstartedbuttos{
   margin: 10px;
+  justify-content: center;
   display: flex;
+  align-items: center;
   gap: 10px;
 }
 .getstartedbuttos button:hover{
@@ -664,7 +666,7 @@
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease-in-out;
-    height: 400px; 
+    height: 420px; 
   }
   [data-theme='dark']  .vaccancy-card {
     background-color: rgb(25,25,25);
@@ -758,6 +760,7 @@
   }
 .vaccancy-details{
   border-radius: 0 0 10px 10px;
+  
 
 
   
@@ -780,12 +783,6 @@
   font-size: 18px;
   font-weight: 400;
   margin: 10px 10px 0px 0;
-}
-.vaccancy-rating{
-  display: flex;
-  gap: 8px;
-
-  font-weight: bold;
 }
 .vaccancy-price{
   font-size: 0.9rem;

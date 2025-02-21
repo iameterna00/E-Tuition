@@ -11,6 +11,7 @@ import { FaUsersGear } from "react-icons/fa6"; // Ensure you're using the correc
 function HomePage() {
     const [userChecked, setUserChecked] = useState(false); // Keeps track if the user is loaded and checked
     const navigate = useNavigate();
+    const [user, setUser] = useState(null);
 
     useEffect(() => {
         const auth = getAuth();
@@ -22,6 +23,7 @@ function HomePage() {
             }
 
             const uid = firebaseUser.uid;
+            setUser(firebaseUser);
             try {
                 const response = await fetch(`${webApi}/api/user/${uid}`);
 
@@ -64,8 +66,10 @@ function HomePage() {
     // Once data is loaded and user is checked, display the home page content
     return (
         <>
-            <HomeBanner />
+            <HomeBanner user={user} />
+            <div id="vacancy-section">
             <Vaccancy />
+        </div>
             <HomePageForm />
         </>
     );

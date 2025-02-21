@@ -6,8 +6,8 @@ import { webApi } from '../../api';
 import KUBE from '../../assets/newcube.png';
 import { MdGpsFixed } from "react-icons/md";
 import { IoIosSend } from 'react-icons/io';
-import { FaUserGroup } from "react-icons/fa6";
-import { FaMoneyBill, FaMoneyBillWave } from 'react-icons/fa';
+import { FaBook, FaGraduationCap, FaLocationDot, FaUser, FaUserGroup } from "react-icons/fa6";
+import { FaChalkboardTeacher, FaClock, FaMoneyBill, FaMoneyBillWave } from 'react-icons/fa';
 import { RiFocus2Line } from "react-icons/ri";
 import { getAuth } from 'firebase/auth';
 
@@ -213,12 +213,12 @@ const VacancyCard = ({ vacancy, locationSource, openModal }) => {
           </h3>
         )}
       <div className="vacancycommunitydetails">
-        <h4>Grade: {vacancy.grade}</h4>
-        <h4>Location: {vacancy.location}</h4>
-        <h4>Subject: {vacancy.subject}</h4>
-        <h4>Duration: {vacancy.duration}</h4>
-        <h4>No of students: {vacancy.grade}</h4>
-        <h4>Tuitor Type: {vacancy.tutorType}</h4>
+        <h4><FaChalkboardTeacher/> Grade: {vacancy.grade}</h4>
+        <h4><FaLocationDot/> Location: {vacancy.location}</h4>
+        <h4><FaBook/> Subject: {vacancy.subject}</h4>
+        <h4><FaClock/> Duration: {vacancy.duration}</h4>
+        <h4><FaGraduationCap/> No of students: {vacancy.grade}</h4>
+        <h4><FaUser/> Tutor Type: {vacancy.tutorType}</h4>
        <div className="minrequirements">
        <h4 style={{display:"flex", alignItems:'center', gap:"5px", fontSize:"18px"}}><RiFocus2Line size={25}/>Requirement:</h4>
        <p style={{marginLeft:"10px", fontWeight:"600"}}> {vacancy.minRequirement}</p>
