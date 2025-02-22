@@ -7,9 +7,8 @@ import { FaSpinner, FaEdit, FaSearch } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import MapSelector from "./mapselectoradmin";
 import EditableMapSelector from "./editablemaps";
-const API_URL = window.location.hostname === "localhost"
-  ? "http://localhost:5001/api/vacancies"  // Local development
-  : "https://kube-backend.onrender.com/api/vacancies"; 
+import { webApi } from "../api";
+
 
 const ADMIN = () => {
   const [vacancies, setVacancies] = useState([]);
@@ -59,7 +58,7 @@ const ADMIN = () => {
   useEffect(() => {
     const fetchVacancies = async () => {
       try {
-        const response = await axios.get(API_URL, {
+        const response = await axios.get(`${webApi}/api/vacancies`, {
           // Example: you can specify progress updates if your API supports it
           onDownloadProgress: (progressEvent) => {
             const totalLength = progressEvent.total;
@@ -139,7 +138,7 @@ const handleSubmit = async (e) => {
         setVacancyId(id);
         setIsCompleteTeacherModalOpen(true);
       } else {
-        await axios.put(`${API_URL}/${id}`, updateData);
+        await axios.put(`${webApi}/api/vacancies/${id}`, updateData);
         setVacancies(vacancies.map((v) => (v._id === id ? { ...v, ...updateData } : v)));
       }
     } catch (err) {
@@ -170,7 +169,7 @@ const handleSubmit = async (e) => {
         return vacancy;
       });
 
-      await axios.put(`${API_URL}/${vacancyId}`, {
+      await axios.put(`${webApi}/api/vacancies/${vacancyId}`, {
         status: "pending",
         teachers: updatedVacancies.find((v) => v._id === vacancyId).teachers,
       });
@@ -191,7 +190,7 @@ const handleSubmit = async (e) => {
     setIsDeleting(true);
     try {
       if (vacancyToDelete) {
-        await axios.delete(`${API_URL}/${vacancyToDelete}`);
+        await axios.delete(`${webApi}/api/vacancies/${vacancyToDelete}`);
         setVacancies(vacancies.filter((v) => v._id !== vacancyToDelete));
       }
       setIsDeleteModalOpen(false); // Close the modal after deletion
@@ -221,7 +220,7 @@ const handleSubmit = async (e) => {
     setIsCompleting(true);
     if (selectedTeacher) {
       try {
-        await axios.put(`${API_URL}/${vacancyId}`, {
+        await axios.put(`${webApi}/api/vacancies/${vacancyId}`, {
           status: "complete",
           selectedTeacher,
           teacherCommission: selectedTeacherCommission
@@ -270,7 +269,7 @@ const handleSubmit = async (e) => {
     console.log("Submitting Edit:", editingVacancy);
   
     try {
-      const res = await axios.put(`${API_URL}/data/${editingVacancy._id}`, editingVacancy);
+      const res = await axios.put(`${webApi}/api/vacancies/data/${editingVacancy._id}`, editingVacancy);
       console.log('this is res ', res)
   
       if (res.status === 200) {
