@@ -24,13 +24,16 @@ function HomeBanner({ user }) {
             <div className="homebannertext">
                <h1>Professional <br /> And Life Long Learning <br />Comes Here</h1>
                <div className="getstartedbuttos">
-                  {!user && (
+                  {/* {!user && (
                      <div className="getstarted" onClick={handleLoginclick}>
                         <button>Get Started</button>
                      </div>
-                  )}
-                 <Link to={'/tutorhome'}> <div className="Explore">
+                  )} */}
+                 <Link to={'/tutorhome'}> <div className="getstarted">
                      <button >Be a Tutor</button>
+                  </div></Link>
+                  <Link to={'/teacherscommunity'}> <div className="Explore">
+                     <button >Explore Vacncies</button>
                   </div></Link>
                </div>
             </div>
