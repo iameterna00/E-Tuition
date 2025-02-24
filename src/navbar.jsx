@@ -119,7 +119,7 @@ const Navbar = () => {
         <div className="navbarcontents">
           <div className="logoandclasses" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '20px' }}>
             <Link to='/'onClick={handleLinkClick}>
-              <img className="Logo" src={KUBE} alt="Logo" />
+              <img className="Logo" style={{objectFit:"cover"}} src={KUBE} alt="Logo" />
             </Link>
             <div className="Title">
               <Link onClick={handleLinkClick} to='/' style={{ textDecoration: 'none', color: 'inherit' }}>

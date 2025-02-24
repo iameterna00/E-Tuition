@@ -18,7 +18,9 @@
 }
 
 
-
+.Logo{
+  object-fit: cover;
+}
 .navbarcontents{
   display: flex;
   justify-content: space-between;

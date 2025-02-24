@@ -73,7 +73,7 @@ function Vaccancy() {
                       ) : (
                         <div className='gigsdefualtposter'>
                           <div className="kubegraphicscontainer">
-                            <img src={KUBE} className='kubegraphics' alt="" />
+                            <img src={KUBE} style={{objectFit:"cover"}} className='kubegraphics' alt="" />
                             <h3>{gig.tuitiontype === 'Home Tuition' ? 'KUBE HOME TUITION' : 'KUBE ONLINE TUITION'}</h3>
                           </div>
                         </div>

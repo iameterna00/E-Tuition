@@ -105,7 +105,7 @@ const handleSubmit = async (e) => {
   setIsSubmitting(true); // Set the submitting state to true to disable the button
   try {
     // Send the POST request to the API
-    const res = await axios.post(API_URL, { ...formData, status: "available" });
+    const res = await axios.post(`${webApi}/api/vacancies`, { ...formData, status: "available" });
 
     // Ensure that a valid response is received before updating state
     if (res.data && res.data.id) {
