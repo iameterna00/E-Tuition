@@ -5,7 +5,7 @@ import LOGO from './assets/KUBE.png';
 import KUBE from './assets/newcube.png';
 import { CiLight } from "react-icons/ci";
 import { MdDarkMode } from "react-icons/md";
-import { FaBars, FaTimes } from 'react-icons/fa';
+import { FaBars, FaSignOutAlt, FaTimes, FaUser } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
 import { getAuth, signOut } from "firebase/auth"; 
 import { auth } from './firebase_config'; 
@@ -119,7 +119,7 @@ const Navbar = () => {
         <div className="navbarcontents">
           <div className="logoandclasses" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '20px' }}>
             <Link to='/'onClick={handleLinkClick}>
-              <img className="Logo" style={{objectFit:"cover"}} src={KUBE} alt="Logo" />
+              <img className="Logo"  src={KUBE} alt="Logo" />
             </Link>
             <div className="Title">
               <Link onClick={handleLinkClick} to='/' style={{ textDecoration: 'none', color: 'inherit' }}>
@@ -133,11 +133,11 @@ const Navbar = () => {
               </div>
             )} */}
           </div>
-
+{/* 
           <div className="search-container-navbar">
             <input type="text" placeholder="Search Anything..." className="search-input" />
             <div className="search-iconContainer"><div className="search_icon"></div></div>
-          </div>
+          </div> */}
 
           <div  className={`navlinks ${menuOpen ? 'active' : ''}`}>
             {/* {menuOpen && (
@@ -256,10 +256,30 @@ const Navbar = () => {
 )}
 
           </div>
+         
 
-          <div className="hamburger" onClick={toggleMenu}>
+
+     <div className='hamburger'>
+        <div className="profile-containermobile" onClick={toggleDropdown} style={{ position: 'relative' }}>
+                <img
+                  className="profile-pic"
+                  src={myuser?.profile}
+                  alt="Profile"
+                  style={{ width: '40px', height: '40px', borderRadius: '50%', objectFit:"cover" }}
+                />
+                {dropdownVisible && (
+                  <div className={`dropdown-menu ${isScrolled ? "scrolled" : ""}`} style={{ position: 'absolute', top: '50px', right: '0', padding: '10px 20px', display: 'flex', gap:"10px", flexDirection: 'column', boxShadow: '0px 8px 16px rgba(0,0,0,0.2)', zIndex: 1 }}>
+                    <Link onClick={handleLinkClick} to="/profile" className="dropdown-item"> <FaUser size={15}/> Profile</Link>
+                    {/* <Link onClick={handleLinkClick} to="/settings" className="dropdown-item">Settings</Link> */}
+                    <button style={{backgroundColor:'transparent'}} onClick={handleLogout} className="dropdown-item"> <FaSignOutAlt/> Logout</button>
+                  </div>
+                )}
+              </div>
+          
+        <div className="hamburger" onClick={toggleMenu}>
             {menuOpen ? <FaTimes /> : <FaBars />}
           </div>
+        </div>
         </div>
       </nav>
 
