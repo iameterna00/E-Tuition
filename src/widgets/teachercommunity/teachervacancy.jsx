@@ -220,7 +220,7 @@ const VacancyCard = ({ vacancy, locationSource, openModal }) => {
         <h4><FaLocationDot/> Location: {vacancy.location}</h4>
         <h4><FaBook/> Subject: {vacancy.subject}</h4>
         <h4><FaClock/> Duration: {vacancy.duration}</h4>
-        <h4><FaGraduationCap/> No of students: {vacancy.grade}</h4>
+        <h4><FaGraduationCap/> No of students: {vacancy.noofstudents}</h4>
         <h4><FaUser/> Tutor Type: {vacancy.tutorType}</h4>
        <div className="minrequirements">
        <h4 style={{display:"flex", alignItems:'center', gap:"5px", fontSize:"18px"}}><RiFocus2Line size={25}/>Requirement:</h4>
