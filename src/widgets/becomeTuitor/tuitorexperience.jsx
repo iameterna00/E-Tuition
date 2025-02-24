@@ -231,7 +231,10 @@ function TeachingExperience({ setopentuitorinitialmodal, user }) {
                                     <input
                                         type="text"
                                         value={searchSchool}
-                                        onChange={handleSchoolSearch}
+                                        onChange={(e) => {
+                                            handleSchoolSearch(e);
+                                            setSelectedSchool(e.target.value); // ✅ Update manually typed value
+                                        }}
                                         placeholder="Enter school name"
                                         onFocus={() => {setShowSuggestions(true), setShowDegreeSuggestion(false)}}
                                     />
@@ -256,7 +259,10 @@ function TeachingExperience({ setopentuitorinitialmodal, user }) {
                                     <input
                                         type="text"
                                         value={searchDegree}
-                                        onChange={handleDegreeSearch}
+                                        onChange={(e) => {
+                                            handleDegreeSearch(e);
+                                            setSelectedDegree(e.target.value); // ✅ Update manually typed value
+                                        }}
                                         placeholder="Enter degree or course"
                                         onFocus={() => setShowDegreeSuggestion(true)}
                                     />
@@ -266,7 +272,9 @@ function TeachingExperience({ setopentuitorinitialmodal, user }) {
                                                 <div
                                                     className="suggestionsdropdown"
                                                     key={index}
-                                                    onClick={() => handleSelectDegree(degree)}
+                                                    onClick={() => 
+                                                        
+                                                        (degree)}
                                                 >
                                                     {degree}
                                                 </div>
