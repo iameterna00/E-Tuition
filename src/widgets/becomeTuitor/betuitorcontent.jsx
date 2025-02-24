@@ -36,7 +36,7 @@ function BetuitotContent() {
         </div>
  </div>
       </div>
-   <div className="learnfromus">
+   {/* <div className="learnfromus">
    <div className="learnfromuscontainer">
   <div className="learfromusText">
     <h3>Learn From KUBE</h3>
@@ -47,7 +47,7 @@ function BetuitotContent() {
 
   </div>
   
-  {/* <div className="learfromusVideo">
+  <div className="learfromusVideo">
     <iframe 
       src="https://www.youtube.com/embed/rokmLmpiG9k" 
       title="YouTube video player" 
@@ -55,10 +55,10 @@ function BetuitotContent() {
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
       allowFullScreen>
     </iframe>
-  </div> */}
+  </div>
 </div>
 
-   </div>
+   </div> */}
     </div>
   );
 }

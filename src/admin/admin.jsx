@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import MapSelector from "./mapselectoradmin";
 import EditableMapSelector from "./editablemaps";
 import { webApi } from "../api";
+import { auth } from '../firebase_config'; 
 
 
 const ADMIN = () => {
@@ -58,19 +59,34 @@ const ADMIN = () => {
   useEffect(() => {
     const fetchVacancies = async () => {
       try {
-        const response = await axios.get(`${webApi}/api/vacancies`, {
-          // Example: you can specify progress updates if your API supports it
-          onDownloadProgress: (progressEvent) => {
-            const totalLength = progressEvent.total;
-            if (totalLength) {
-              const progressPercentage = Math.round((progressEvent.loaded * 100) / totalLength);
-              setProgress(progressPercentage); // Update progress state
-            }
-          },
+        // Wait until auth state is available
+        const unsubscribe = auth.onAuthStateChanged(async (user) => {
+          if (user) {
+            const token = await user.getIdToken();
+
+            const response = await axios.get(`${webApi}/api/vacancies`, {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+              onDownloadProgress: (progressEvent) => {
+                const totalLength = progressEvent.total;
+                if (totalLength) {
+                  const progressPercentage = Math.round(
+                    (progressEvent.loaded * 100) / totalLength
+                  );
+                  setProgress(progressPercentage);
+                }
+              },
+            });
+
+            setVacancies(response.data);
+          } else {
+            console.warn("⚠️ No user logged in.");
+          }
+          setLoading(false);
         });
 
-        setVacancies(response.data);
-        setLoading(false);
+        return () => unsubscribe(); // Cleanup
       } catch (err) {
         console.error("Error fetching vacancies:", err);
         setLoading(false);
@@ -79,6 +95,7 @@ const ADMIN = () => {
 
     fetchVacancies();
   }, []);
+  
 
 const handleSubmit = async (e) => {
   e.preventDefault(); // Prevent default form submission behavior

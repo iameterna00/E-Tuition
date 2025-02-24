@@ -17,7 +17,7 @@ function BecomeTuitor() {
   const [user, setUser] = useState(null);
   const [myuser, setMYUsers] = useState(null);
   const [isUserLoaded, setIsUserLoaded] = useState(false);
-  const [closetuitorlogin, setClosetuitorLogin] = useState(true);
+  const [closetuitorlogin, setClosetuitorLogin] = useState(false);
   const [opentuitorinitialmodal, setopentuitorinitialmodal] = useState(false);
   const navigate = useNavigate(); // React Router hook for navigation
 
@@ -98,7 +98,7 @@ function BecomeTuitor() {
 
   return (
     <>
-      {!isAuthenticated && closetuitorlogin && (
+      {closetuitorlogin && (
         <TuitorLogin close={() => setClosetuitorLogin(false)} />
       )}
 

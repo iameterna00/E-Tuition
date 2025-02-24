@@ -46,47 +46,52 @@ function TuitorLogin({ close }) {
       close();
     }
   })
+
+
   const handleGoogleLogin = async () => {
-    const provider = new GoogleAuthProvider();
-    const auth = getAuth(); // Initialize Firebase auth instance
-
-    try {
-        // Step 1: Sign in with Google
-        const result = await signInWithPopup(auth, provider);
-        const user = result.user;
-
-        console.log("User signed in with Google:", user);
-
-        // Step 2: Get the Firebase ID token
-        const idToken = await user.getIdToken(); // Get the Firebase ID token
-
-        // Step 3: Send the ID token and user data to the backend
-        const response = await fetch(`${webApi}/api/create-user`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                idToken: idToken,  // Send the ID token instead of user data like email, name, etc.
-            }),
-        });
-
-        const responseData = await response.json();
-
-        if (response.ok) {
-            console.log("User successfully logged in:", responseData);
-            setIsLoggedIn(true); // Update login state
-        } else {
-            console.error("Error logging in:", responseData.message);
-            setIsLoggedIn(false);
-        }
-    } catch (error) {
-        console.error("Error signing in with Google:", error);
-        alert(error.message);
-        alert("An error occurred while signing in with Google.");
-    }
-};
+      const provider = new GoogleAuthProvider();
+      const auth = getAuth(); // Initialize Firebase auth instance
   
+      try {
+          // Step 1: Sign in with Google
+          const result = await signInWithPopup(auth, provider);
+          const user = result.user;
+  
+          console.log("User signed in with Google:", user);
+  
+          // Step 2: Get the Firebase ID token
+          const idToken = await user.getIdToken(); // Get the Firebase ID token
+  
+          // Step 3: Send the ID token to the backend
+          const response = await fetch(`${webApi}/api/create-user`, {
+              method: "POST",
+              headers: {
+                  "Content-Type": "application/json",
+                  "Authorization": `Bearer ${idToken}` // Secure authorization header
+              },
+            
+          });
+  
+          const responseData = await response.json();
+  
+          if (response.ok) {
+              localStorage.setItem("token", idToken);  // Store token for future API calls
+              localStorage.setItem("isAdmin", responseData.isAdmin);  // Fix: Correct variable name
+              console.log("User successfully logged in:", responseData);
+              setIsLoggedIn(true); // Update login state
+          } else {
+              console.error("Error logging in:", responseData.message);
+              setIsLoggedIn(false);
+          }
+      } catch (error) {
+          console.error("Error signing in with Google:", error);
+          alert("An error occurred while signing in with Google.");
+      }
+  };
+  
+
+
+
   const handleEmailSignUp = async () => { 
     if(password.length < 6){
       alert("Password must be at least 6 characters long.");
@@ -175,10 +180,10 @@ function TuitorLogin({ close }) {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
         },
         body: JSON.stringify({
           email,
-          idToken: token,
           uid,
         }),
       });

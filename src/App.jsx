@@ -16,7 +16,7 @@ import AddClass from './Pages/addclasses';
 import TeacherDashboardWrapper from './services/ProtectedRoutes/routesmanagement';
 import TeacherCommunityPage from './Pages/teacherscommunitypage';
 import TeachersCommunity from './services/ProtectedRoutes/protectioncommunity';
-import ADMINROUTE from './services/ProtectedRoutes/adminprotection';
+import AdminRoute from './services/ProtectedRoutes/adminprotection';
 
 function App() {
   return (
@@ -30,16 +30,19 @@ function App() {
             <Route path="/onlineclasses" element={<OnlineClasses />} />
             <Route path="/coursesdetails/:id" element={<CourseDetails />} />
             <Route path="/tutorhome" element={<BecomeTuitor />} />
-           =
+           
             
             {/* Protect Teacher Dashboard */}
             <Route path="/teacherdashboard" element={<TeacherDashboardWrapper />} />
             <Route path="/addclasses" element={<AddClass />} />
             
             <Route path="/profile" element={<ProfilePage />} />
-            <Route path="/admin" element={<ADMIN />} />
-            <Route path="/teacherscommunity" element={<TeachersCommunity />} />
-            <Route path="/admin/teacher/" element={<TeacherManager />} />
+            <Route element={<AdminRoute />}>
+          <Route path="/admin" element={<ADMIN />} />
+          <Route path="/admin/teacher/" element={<TeacherManager />} />
+        </Route>
+            <Route path="/teacherscommunity" element={<TeacherCommunityPage />} />
+           
           </Routes>
         </ThemeProvider>
       </Router>

@@ -90,14 +90,14 @@ function BetuitotBanner({ setopentuitorinitialmodal, user, tuitorlogin }) {
               </div>
             ): (
               <div className="bannertext">
-                <h3>Be A Tuitor With KUBE</h3>
+                <h3>Be A Tutor With KUBE</h3>
                 <p style={{ margin: '0px' }}>Offer your knowledge</p>
                 <div className="getstartedbetuitorButton">
                   <div className="getstartedbetuitor">
                   {user? (  <button onClick={() => setopentuitorinitialmodal(true)}>
-                      Become a Tuitor
+                      Become a Tutor
                     </button>):(  <button onClick={tuitorlogin}>
-                      Become a Tuitor
+                      Become a Tutor
                     </button>)}
                   </div>
                 </div>

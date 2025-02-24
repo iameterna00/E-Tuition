@@ -14,6 +14,7 @@ import { getAuth } from 'firebase/auth';
 mapboxgl.accessToken = "pk.eyJ1IjoiYW5pc2hoLWpvc2hpIiwiYSI6ImNrdWo5d2lhdDFkb2oybnJ1MDB4OG1oc2EifQ.pLrp8FmZSLVfT3pAVVPBPg";
 
 function TeacherVacancy() {
+  const[loading, setLoading] = useState(true);
   const [vacancies, setVacancies] = useState([]);
   const [activeTab, setActiveTab] = useState('available');
   const [userLocation, setUserLocation] = useState(null);
@@ -37,26 +38,27 @@ function TeacherVacancy() {
   };
 
   const fetchVacancies = async () => {
-    const auth = getAuth();
-    const user = auth.currentUser;
+    setLoading(true);
+    // const auth = getAuth();
+    // const user = auth.currentUser;
   
-    if (user) {
-      // Get Firebase ID token
-      const idToken = await user.getIdToken();
-  
-      // Send token with the request to your backend
-      axios
-        .get(`${webApi}/api/vacancyforteachers`, {
+    // if (user) {
+      try {
+        // const idToken = await user.getIdToken();
+        const response = await axios.get(`${webApi}/api/vacancyforteachers`, {
           headers: {
-            Authorization: `Bearer ${idToken}`  // Attach Firebase ID token
+            // Authorization: `Bearer ${idToken}`
           }
-        })
-        .then((response) => {
-          setVacancies(response.data); // Update vacancies
-        })
-        .catch((error) => console.error('Error fetching vacancies:', error));
-    }
+        });
+        setVacancies(response.data); // Update vacancies
+      } catch (error) {
+        console.error('Error fetching vacancies:', error);
+      } finally {
+        setLoading(false); // Stop loading
+      }
+    // }
   };
+
   
   useEffect(() => {
     fetchVacancies();
@@ -145,6 +147,7 @@ function TeacherVacancy() {
     <div className="teachervacancybody">
       <h2>Teacher's Vacancies</h2>
       <div id="geocoder" style={{ margin: "10px 0", width: "100%" }}></div>
+  
 
       <div className="teachervacncytopbuttons">
         <div className="Vacancytabs">
