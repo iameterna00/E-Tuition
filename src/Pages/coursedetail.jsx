@@ -166,30 +166,15 @@ function CourseDetails() {
 
     {/* User Form Modal */}
     {showUserFormModal && (
-  <div className="modalform" style={{
-    position: 'fixed',
-    top: 0,
-    left: 0,
-    width: '100%',
-    height: '100%',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    zIndex: 1000,
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',  // Centers the modal vertically and horizontally
-  }}>
-    <div className="modal-contentsform" style={{
-      overflowY: 'auto',  // Allows vertical scrolling
-      maxHeight: '100%',   // Keeps the modal within the screen size
-      padding: '10px',
-      backgroundColor: 'white',
-      borderRadius: '10px',
-      width: '100%',       // Adjust width as necessary
-    }}>
-      {/* Add your User Form Modal here */}
-      <StudentForm studentdetails={myuser} close={() => setShowUserFormModal(false)} />
-    </div>
-  </div>
+   <div className="modal-backdrop" onClick={() => closepurposemodal('')}>
+   <div className="identitymodal" onClick={(e) => e.stopPropagation()}>
+       <div className="close-modal" onClick={() => closepurposemodal('')}>X</div>
+       <h2>Share a bit about yourself</h2>
+       <div className="modal-contentstudentform">
+           <StudentForm close={()=>setShowUserFormModal(false)} studentdetails={myuser} />
+       </div>
+   </div>
+</div>
 )}
   {showSUccessful && (
   <div className="modalform" style={{
