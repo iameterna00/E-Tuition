@@ -273,9 +273,7 @@ function TeachingExperience({ setopentuitorinitialmodal, user }) {
                                                 <div
                                                     className="suggestionsdropdown"
                                                     key={index}
-                                                    onClick={() => 
-                                                        
-                                                        (degree)}
+                                                    onClick={() => handleSelectDegree(degree)}
                                                 >
                                                     {degree}
                                                 </div>
