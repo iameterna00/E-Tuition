@@ -258,7 +258,35 @@
     height: 315px;
   }
 
+.termsandcondition{
+  height: 100%;
+  overflow-y: auto;
+  width: 100%;
+}
+[data-theme='light'] .termsandcondition, 
+[data-theme='light'] .termsandconditioncontainer {
+  background-color: rgb(242, 242, 242);
+  color: rgb(0, 0, 0); /* Set text color to black */
+}
 
+[data-theme='dark'] .termsandcondition, 
+[data-theme='dark'] .termsandconditioncontainer {
+  background-color: rgb(49, 49, 49);
+  color: rgb(255, 255, 255); /* Set text color to white */
+}
+.termsandconditioncontainer{
+  border-radius: 20px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin: 10px;
+  height: 400px;
+  width: 90%;
+  max-width: 700px;
+}
 
 
   /* BETUITOR LOGIN */

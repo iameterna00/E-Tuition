@@ -28,6 +28,7 @@ function TeachingExperience({ setopentuitorinitialmodal, user }) {
     const degreeRef = useRef(null);
     const [loading, setLoading] = useState(false);
     const [latLng, setLatLng] = useState(null);
+    const [isAgreed, setIsAgreed] = useState(false);
 
     // Handles selection based on current step
 
@@ -186,7 +187,7 @@ function TeachingExperience({ setopentuitorinitialmodal, user }) {
                                 <img src={KUBE} className="Kubelogo" alt="KUBE Logo" />
                             </div>
                             <div className="teacherexperiencestepscounts">
-                                <h3>Step {step} of 5</h3>
+                                <h3>Step {step} of 6</h3>
                             </div>
                         </div>
                         <div className="tuitorinitialnavcontainerright">
@@ -291,7 +292,7 @@ function TeachingExperience({ setopentuitorinitialmodal, user }) {
 
         {/* CV Upload */}
         <div className="CVfile-upload">
-    <label>Upload CV (Image only):</label>
+    <label>Upload CV:</label>
     <div className="file-upload-container">
     <input
     className="cvfileinput"
@@ -373,9 +374,58 @@ function TeachingExperience({ setopentuitorinitialmodal, user }) {
                             </>
                         )}
 
+
+
+
+{step === 6 && (
+  <div className="termsandconditioncontainer">
+    <h3>Terms and Conditions</h3>
+
+    <div className="termsandcondition">
+      <p>
+        1. This is a contract between the teacher and Cube. By agreeing to these terms, the teacher acknowledges and agrees to the following conditions:
+      </p>
+      <p>
+        2. The teacher agrees to pay any required prepayments as outlined in this agreement. Failure to comply with payment obligations will result in strict legal action.
+      </p>
+      <p>
+        3. Any violation of the terms and conditions outlined in this agreement will lead to strict enforcement of laws and policies applicable to this contract.
+      </p>
+      <p>
+        4. The teacher agrees to abide by all policies, rules, and regulations set forth by Cube. This includes but is not limited to payment terms, conduct, and any other obligations specified in this agreement.
+      </p>
+      <p>
+        5. Cube reserves the right to take appropriate legal action in case of any breach of this agreement.
+      </p>
+      <p>
+        6. By proceeding, the teacher confirms that they have read, understood, and agreed to all the terms and conditions stated herein.
+      </p>
+
+    {/* Checkbox and "I agree" text on the same line */}
+<div style={{ display: "flex", alignItems: "center", gap: "8px", marginTop: "20px" }}>
+  <input
+  style={{height:"20px", marginTop:"15px", cursor:"pointer"}}
+    type="checkbox"
+    checked={isAgreed}
+    onChange={(e) => setIsAgreed(e.target.checked)}
+    id="termsCheckbox"
+  />
+  <label htmlFor="termsCheckbox" style={{ whiteSpace: "nowrap", cursor: "pointer", marginRight:"10px" }}>
+    Agree to terms and conditions
+  </label>
+</div>
+
+    </div>
+  </div>
+)}
+
+
+
+
+
                     </div>
 
-                 {step !=4 &&(   <div className="teacherimagecontainer">
+                 {step !=4 && step !==6 &&(   <div className="teacherimagecontainer">
                         <img className="teachimage" src={Teacher} alt="Teacher" />
                     </div>)}
                 </div>
@@ -407,6 +457,9 @@ function TeachingExperience({ setopentuitorinitialmodal, user }) {
                                     
                                 )}
                                   {step === 5 && gender && (
+                                    <button onClick={handleNext} >Next</button>
+                                )}
+                                {step === 6 && isAgreed && (
                                     <button onClick={handleTeacherxp} >{loading? <FaSpinner className="newspinner"/>:'Finish'}</button>
                                 )}
                             </div>
