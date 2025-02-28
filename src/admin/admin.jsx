@@ -3,7 +3,7 @@ import axios from "axios";
 import "../css/admin.css";
 import { IoIosAddCircle } from "react-icons/io";
 import DownloadImageButton from "../services/downloadimage";
-import { FaSpinner, FaEdit, FaSearch } from "react-icons/fa";  
+import { FaSpinner, FaEdit, FaSearch, FaTimes, FaClock } from "react-icons/fa";  
 import { useNavigate } from "react-router-dom";
 import MapSelector from "./mapselectoradmin";
 import EditableMapSelector from "./editablemaps";
@@ -311,7 +311,8 @@ const handleSubmit = async (e) => {
       (v.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
         v.location.toLowerCase().includes(searchQuery.toLowerCase())) &&
       v.status === tab
-  );
+  )
+  .sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
   
   // Calculate total vacancies, commissions, and revenue
   const availableVacancies = vacancies.filter((v) => v.status === "available").length;
@@ -392,7 +393,16 @@ const handleSubmit = async (e) => {
           </p>
           <p className="tuition-vacancy-info">Salary: {v.salary} | Time: {v.time}</p>
           {v.minRequirement && <p className="tuition-vacancy-info">Requirement: {v.minRequirement}</p>}
-          <p className="tuition-vacancy-info">UploadDate: {v.created_at}</p>
+          <p className="tuition-vacancy-info" style={{display:"flex", justifyContent:"center", alignItems:'center', gap:"5px"}} >
+  UploadDate: <FaClock/> {new Date(v.created_at).toLocaleString("en-US", {
+    month: "short",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: true, // Set to true for 12-hour format with AM/PM
+  })}
+</p>
+
 
           {tab === "available" && (
             <div className="uploadvacancycontainer">
