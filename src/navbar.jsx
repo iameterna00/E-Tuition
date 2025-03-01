@@ -5,7 +5,7 @@ import LOGO from './assets/KUBE.png';
 import KUBE from './assets/newcube.png';
 import { CiLight, CiLogout } from "react-icons/ci";
 import { MdDarkMode } from "react-icons/md";
-import { FaBars, FaBook, FaChalkboardTeacher, FaSignOutAlt, FaSun, FaTimes, FaUser } from 'react-icons/fa';
+import { FaBars, FaBook, FaChalkboardTeacher, FaSignInAlt, FaSignOutAlt, FaSun, FaTimes, FaUser } from 'react-icons/fa';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { getAuth, signOut } from "firebase/auth"; 
 import { auth } from './firebase_config'; 
@@ -191,8 +191,8 @@ const Navbar = () => {
     )}
   </>
 ) : (
-  <Link onClick={handleLinkClick} to='/tutorhome' style={{ textDecoration: 'none', color: 'inherit' }}>
-    <button className="navbuttons">Become a Tutor</button>
+  <Link className='navbuttons' onClick={handleLinkClick} to='/tutorhome' style={{ textDecoration: 'none', color: 'inherit' }}>
+   {menuOpen && (<FaChalkboardTeacher/> )}<div> Become a Tutor</div>
   </Link>
 )}
 
@@ -209,7 +209,7 @@ const Navbar = () => {
                handleLinkClick();   // Close the navbar
              }}
            >
-             Login
+            Login
            </button>
            
             ) : (
@@ -244,15 +244,15 @@ const Navbar = () => {
     <
     >
       {!user ?(
-         <button
+         <div
          className="navbuttons"
          onClick={() => {
            handleLoginclick();  // Handle login logic
            handleLinkClick();   // Close the navbar
          }}
        >
-         Login
-       </button>
+         <FaSignInAlt/> Login
+       </div>
        
       ):(
         <Link 
