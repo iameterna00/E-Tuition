@@ -20,7 +20,9 @@
 
 .Logo{
   object-fit: cover;
+  margin-left: 0px;
 }
+
 .navbarcontents{
   display: flex;
   justify-content: space-between;
@@ -37,13 +39,51 @@
   gap: 10px;
   font-size: 15px
 }
+.dropdown-menu {
+  position: absolute;
+  left: 0px;
+  margin-left: -20px;
+  padding: 10px;
+  height: 100dvh;
+  top: 50px;
+  width: 200px;
+  backdrop-filter: blur(10px); 
+  -webkit-backdrop-filter: blur(10px); 
+  border-radius: 10px;
+  transform: translateX(-100%);
+  padding: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out, opacity 0.4s ease-in-out;
+  opacity: 0;
 
-[data-theme='dark'] .dropdown-menu.scrolled {
+}
+.dropdown-menu.show {
+  transform: translateX(0);
+  opacity: 1;
+}
+.dropdownmenucontents{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.dropdown-item {
+  border-bottom: 1px solid rgba(130, 130, 130, 0.464);
+  display: flex;
+  text-align: start;
+  justify-content: start;
+  gap: 10px;
+  padding: 10px;
+ 
+}
+
+
+
+[data-theme='dark'] .dropdown-menu {
   background-color: rgb(40, 45, 45);
   color: white; /* Ensure text is visible */
 }
 
-[data-theme='light'] .dropdown-menu.scrolled {
+[data-theme='light'] .dropdown-menu {
   background-color: rgb(255, 255, 255);
   color: black;
 }
@@ -255,20 +295,28 @@ body.modal-open {
     border: 1px solid grey;
     display: none;
   }
+  .Logo{
+    object-fit: cover;
+    margin-left: -20px;
+  }
 
 
   .navlinks {
-    flex-direction: column;
-    gap: 10px;
-    background-color: white;
-    position: absolute;
-    width: 100%;
-    justify-content: center;
-    align-items: center;
-    z-index: 100 !important;
-    margin-top: 80px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    display: none; /* Hide nav links by default */
+  position: absolute;
+  padding: 10px;
+  height: 100dvh;
+  
+  top: 75px;
+  width: 250px;
+  backdrop-filter: blur(10px); 
+  -webkit-backdrop-filter: blur(10px); 
+  padding: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: opacity 0.3s ease-in-out;
+  opacity: 0;
+  transform: translateY(100%);
+
+
   }
   [data-theme="dark"] .navlinks {
     background-color: #242424;
@@ -279,10 +327,14 @@ body.modal-open {
   }
 
   .navlinks.active {
+    flex-direction: column;
     display: flex; /* Show nav links when active */
     position: absolute;
-    top: -10px;
-    left: 0px;
+    top: 70px;
+    opacity: 1;
+  transform: translateY(0%);
+   
+    right: 0px;
     border-radius: 0 0 20px 20px; /* Only bottom corners rounded */
 }
 [data-theme='dark'] .navlinks.active {
@@ -304,12 +356,18 @@ body.modal-open {
 
 
   .navbuttons {
-    width: 100%; /* Make buttons full-width */
+    width: 90%; /* Make buttons full-width */
     text-align: left;
     padding: 12px;
+    margin-left: 20px;
+    border-bottom: 1px solid rgba(130, 130, 130, 0.464);
+    gap: 10px;
     display: flex;
-    justify-content: center;
+    justify-content: start;
 
+  }
+  .navbuttons:hover{
+    background-color: #3333335d;
   }
 
   .themeButton {

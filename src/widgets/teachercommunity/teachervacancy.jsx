@@ -164,18 +164,28 @@ function TeacherVacancy() {
       </div>
 
       <div className="vacancy-list">
-        {activeTab === 'available' && userLocation && filteredVacancies.length > 0
-          ? filteredVacancies.filter((vacancy) => vacancy.status !== 'complete').map((vacancy) => (
-            <VacancyCard key={vacancy._id} vacancy={vacancy} locationSource={locationSource} openModal={openModal} />
-          ))
-          : activeTab === 'available'
-          ? vacancies
-            .filter((vacancy) => vacancy.status !== 'complete')
-            .map((vacancy) => <VacancyCard key={vacancy._id} vacancy={vacancy} locationSource={locationSource} openModal={openModal} />)
-          : vacancies
-            .filter((vacancy) => vacancy.status === 'complete')
-            .map((vacancy) => <VacancyCard key={vacancy._id} vacancy={vacancy} locationSource={locationSource} openModal={openModal} />)}
-      </div>
+  {activeTab === 'available' && userLocation && filteredVacancies.length > 0
+    ? filteredVacancies
+        .filter((vacancy) => vacancy.status !== 'complete')
+        .sort((a, b) => new Date(b.created_at) - new Date(a.created_at)) // Sort here
+        .map((vacancy) => (
+          <VacancyCard key={vacancy._id} vacancy={vacancy} locationSource={locationSource} openModal={openModal} />
+        ))
+    : activeTab === 'available'
+    ? vacancies
+        .filter((vacancy) => vacancy.status !== 'complete')
+        .sort((a, b) => new Date(b.created_at) - new Date(a.created_at)) // Sort here
+        .map((vacancy) => (
+          <VacancyCard key={vacancy._id} vacancy={vacancy} locationSource={locationSource} openModal={openModal} />
+        ))
+    : vacancies
+        .filter((vacancy) => vacancy.status === 'complete')
+        .sort((a, b) => new Date(b.created_at) - new Date(a.created_at)) // Sort here
+        .map((vacancy) => (
+          <VacancyCard key={vacancy._id} vacancy={vacancy} locationSource={locationSource} openModal={openModal} />
+        ))}
+</div>
+
 
       {/* Modal */}
       {isModalOpen && selectedVacancy && (
@@ -222,12 +232,19 @@ const VacancyCard = ({ vacancy, locationSource, openModal }) => {
         <h4><FaClock/> Duration: {vacancy.duration}</h4>
         <h4><FaGraduationCap/> No of students: {vacancy.noofstudents}</h4>
         <h4><FaUser/> Tutor Type: {vacancy.tutorType}</h4>
+        <h4><FaClock/> {new Date(vacancy.created_at).toLocaleString("en-US", {
+            month: "short",
+            day: "2-digit",
+            hour: "2-digit",
+            minute: "2-digit",
+            hour12: true, // Set to true for 12-hour format with AM/PM
+          })}
+        </h4>
        <div className="minrequirements">
        <h4 style={{display:"flex", alignItems:'center', gap:"5px", fontSize:"18px"}}><RiFocus2Line size={25}/>Requirement:</h4>
        <p style={{marginLeft:"10px", fontWeight:"600"}}> {vacancy.minRequirement}</p>
        </div>
        
-        <p>{vacancy.description}</p>
       
       </div>
       <h3 style={{margin:"10px", display:"flex", gap:"10px", justifyContent:"center", alignItems:'center'}}><FaMoneyBillWave color='rgb(0, 200, 0)' size={30}/>Salary: {vacancy.salary}</h3>

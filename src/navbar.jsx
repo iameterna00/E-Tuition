@@ -3,10 +3,10 @@ import { ThemeContext } from './utilities/themeprovider';
 import './css/nav.css';
 import LOGO from './assets/KUBE.png';
 import KUBE from './assets/newcube.png';
-import { CiLight } from "react-icons/ci";
+import { CiLight, CiLogout } from "react-icons/ci";
 import { MdDarkMode } from "react-icons/md";
-import { FaBars, FaSignOutAlt, FaTimes, FaUser } from 'react-icons/fa';
-import { Link, useNavigate } from 'react-router-dom';
+import { FaBars, FaBook, FaChalkboardTeacher, FaSignOutAlt, FaSun, FaTimes, FaUser } from 'react-icons/fa';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { getAuth, signOut } from "firebase/auth"; 
 import { auth } from './firebase_config'; 
 import TuitorLogin from './widgets/login/betuitorlogin';
@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchUser, selectUser } from './services/Redux/userSlice';
 import { webApi } from './api';
 import { FaUsersGear } from "react-icons/fa6";
+import { FiLogOut } from "react-icons/fi";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -27,8 +28,8 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [tuitorsloacing, settuitotsLoading] = useState(false); 
 
-  const toggleMenu = () => setMenuOpen(!menuOpen);
-  const toggleDropdown = () => setDropdownVisible(!dropdownVisible);
+  const toggleMenu = () => {setMenuOpen(!menuOpen); setDropdownVisible(false); }
+  const toggleDropdown = () =>{ setDropdownVisible(!dropdownVisible); setMenuOpen(false);}
   const handleLoginclick = () => setTuitorLogin(!tuitorLogin);
   const navigate = useNavigate();
 
@@ -115,8 +116,49 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className={`navbar ${isScrolled || menuOpen ? 'solid' : ''}`}>
+      <nav className={`navbar ${isScrolled || dropdownVisible || menuOpen ? 'solid' : ''}`}>
         <div className="navbarcontents">
+        {user && (
+         <div className="profile-containermobile" onClick={toggleDropdown} style={{ position: 'relative', cursor:"pointer" }}>
+         <img
+           className="profile-pic"
+           src={myuser?.profile}
+           style={{ width: '40px', height: '40px', borderRadius: '50%', objectFit:"cover" }}
+         />
+ 
+   <div className={`dropdown-menu ${dropdownVisible ? "show" : ""}`}>
+    <div className="dropdownmenucontents">
+      <Link onClick={handleLinkClick} to="/profile" className="dropdown-item">
+        <FaUser size={15}/> Profile
+      </Link>
+      {myuser?.teacherconfirm === 'pending' || myuser?.teacherconfirm === 'approved' && (
+  <div>
+    {myuser.purpose === 'student' ? (
+  
+  <div className='dropdown-item' onClick={() => updateUserType('teacher')}>
+  <FaChalkboardTeacher size={15} /> Switch as Tutor
+</div>
+    
+    ) : (
+     
+      <div className='dropdown-item' onClick={() => updateUserType('student')} >
+     <FaBook/> Switch as student
+    </div>
+
+    )}
+  </div>
+)}
+
+      <div style={{ backgroundColor: "transparent" , borderRadius:"0px"}} onClick={handleLogout} className="dropdown-item">
+        <FaSignOutAlt /> Logout
+      </div>
+    </div>
+  </div>
+
+
+       </div>
+       )}
+          
           <div className="logoandclasses" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '20px' }}>
             <Link to='/'onClick={handleLinkClick}>
               <img className="Logo" style={{marginTop:"5px"}}  src={KUBE} alt="Logo" />
@@ -126,39 +168,25 @@ const Navbar = () => {
                 <h2>KUBE</h2>
               </Link>
             </div>
-            {/* {!menuOpen && (
-              <div style={{ marginRight: "100px" }} className={`navlinks ${menuOpen ? 'active' : ''}`}>
-         
-                <Link to={'/admin'}><button className="navbuttons">About</button></Link>
-              </div>
-            )} */}
           </div>
-{/* 
-          <div className="search-container-navbar">
-            <input type="text" placeholder="Search Anything..." className="search-input" />
-            <div className="search-iconContainer"><div className="search_icon"></div></div>
-          </div> */}
+
+      
 
           <div  className={`navlinks ${menuOpen ? 'active' : ''}`}>
-            {/* {menuOpen && (
-              <>
-                <button className="navbuttons">About</button>
-            
-              </>
-            )} */}
+       
        {myuser?.teacherconfirm === 'pending' || myuser?.teacherconfirm === 'approved' ? (
   <>
     {myuser.purpose === 'student' ? (
   
-  <button onClick={() => updateUserType('teacher')} className="navbuttons">
-  Switch as Tutor
-</button>
+  <div onClick={() => updateUserType('teacher')} className="navbuttons">
+ <FaChalkboardTeacher/> Switch as Tutor
+</div>
     
     ) : (
      
-      <button onClick={() => updateUserType('student')} className="navbuttons">
-      Switch as student
-    </button>
+      <div onClick={() => updateUserType('student')} className="navbuttons">
+     <FaBook/> Switch as student
+    </div>
 
     )}
   </>
@@ -189,11 +217,10 @@ const Navbar = () => {
                 <img
                   className="profile-pic"
                   src={myuser?.profile}
-                  alt="Profile"
                   style={{ width: '35px', height: '35px', borderRadius: '50%', objectFit:"cover" }}
                 />
                 {dropdownVisible && (
-                  <div className="dropdown-menu" style={{ position: 'absolute', top: '50px', right: '0', backgroundColor: isScrolled ? "rgb(40,45,45)" : "transparent", padding: '10px 20px', display: 'flex', flexDirection: 'column', boxShadow: '0px 8px 16px rgba(0,0,0,0.2)', zIndex: 1 }}>
+                  <div className="dropdown-menupc" style={{ position: 'absolute', top: '50px', right: '0', backgroundColor: isScrolled ? "rgb(40,45,45)" : "transparent", padding: '10px 20px', display: 'flex', flexDirection: 'column', boxShadow: '0px 8px 16px rgba(0,0,0,0.2)', zIndex: 1 }}>
                     <Link onClick={handleLinkClick} to="/profile" className="dropdown-item">Profile</Link>
                     <Link onClick={handleLinkClick} to="/settings" className="dropdown-item">Settings</Link>
                     <button onClick={handleLogout} className="dropdown-item">Logout</button>
@@ -202,21 +229,19 @@ const Navbar = () => {
               </div>
             )}</>
            )}
-            <button className="navbuttons" style={{ display: 'flex', gap: '10px' }} onClick={()=>{toggleTheme(); handleLinkClick();}}>
+            <div className="navbuttons" style={{ display: 'flex', gap: '10px' }} onClick={()=>{toggleTheme(); handleLinkClick();}}>
               {menuOpen ? (
                 <>
                 
-                  Change Theme {theme === 'dark' ? <CiLight /> : <MdDarkMode />}
+                {theme === 'dark' ? <FaSun /> : <MdDarkMode />} Change Theme 
                 </>
               ) : (
                 theme === 'dark' ? <CiLight /> : <MdDarkMode />
               )}
-            </button>
+            </div>
             {menuOpen && (
   <>
-    <div 
-      style={{display:'flex', justifyContent:'center', alignItems:"center", gap:"10px"}} 
-      className="profileinsidemenubar"
+    <
     >
       {!user ?(
          <button
@@ -232,13 +257,13 @@ const Navbar = () => {
       ):(
         <Link 
         to="/profile" 
-        className="dropdown-item" 
+        className="navbuttons" 
         onClick={() => setMenuOpen(false)} // Close menu on click
       >
-        Your Profile
+       <FaUser/> Your Profile
       </Link>
       )}
-    </div>
+    </>
 {user?(
       <div style={{padding:"10px"}}
       
@@ -247,9 +272,9 @@ const Navbar = () => {
       handleLinkClick();
         setMenuOpen(false); // Close menu on logout
       }} 
-      className="dropdown-item"
+      className="navbuttons"
     >
-      Logout
+     <FiLogOut /> Logout
     </div>
 ):(null)}
   </>
@@ -260,24 +285,7 @@ const Navbar = () => {
 
 
      <div className='hamburger'>
-       {user && (
-         <div className="profile-containermobile" onClick={toggleDropdown} style={{ position: 'relative' }}>
-         <img
-           className="profile-pic"
-           src={myuser?.profile}
-           alt="Profile"
-           style={{ width: '40px', height: '40px', borderRadius: '50%', objectFit:"cover" }}
-         />
-         {dropdownVisible && (
-           <div className={`dropdown-menu ${isScrolled ? "scrolled" : ""}`} style={{ position: 'absolute', top: '50px', right: '0', padding: '10px 20px', display: 'flex', gap:"10px", flexDirection: 'column', boxShadow: '0px 8px 16px rgba(0,0,0,0.2)', zIndex: 1 }}>
-             <Link onClick={handleLinkClick} to="/profile" className="dropdown-item"> <FaUser size={15}/> Profile</Link>
-             {/* <Link onClick={handleLinkClick} to="/settings" className="dropdown-item">Settings</Link> */}
-             <button style={{backgroundColor:'transparent'}} onClick={handleLogout} className="dropdown-item"> <FaSignOutAlt/> Logout</button>
-           </div>
-         )}
-       </div>
-       )}
-          
+   
         <div className="hamburger" onClick={toggleMenu}>
             {menuOpen ? <FaTimes /> : <FaBars />}
           </div>
