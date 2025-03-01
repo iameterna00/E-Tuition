@@ -227,12 +227,13 @@ const handleClose = () => {
                         onChange={handleChange}
                         placeholder="Enter address"
                         onClick={() => setIsMapOpen(true)}
+                        disabled
                     />
                 </div>
                 {isMapOpen && (
                 
-                      <div style={{padding:"10px"}}>
-                        <div className="close-btn" style={{backgroundColor:"transparent",fontSize:"18px", cursor:"pointer"}} onClick={() => setIsMapOpen(false)}>close</div>
+                      <div style={{marginBottom:"10px"}}>
+                       <h3>Search or tap your location on map:</h3>
                         <TapLocationMap user={true} handleLatLngChange={handleLatLngChange} />
                   </div>
             )}
@@ -250,6 +251,7 @@ const handleClose = () => {
               
               <div className='closemodalbutton' onClick={close}>
               Close
+              
               </div>
              
           </div>

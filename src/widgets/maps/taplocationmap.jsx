@@ -33,7 +33,7 @@ const TapLocationMap = ({ user, handleLatLngChange }) => {
     const geocoder = new MapboxGeocoder({
       accessToken: mapboxgl.accessToken,
       mapboxgl: mapboxgl,
-      placeholder: "Add property address...",
+      placeholder: "Add your address...",
       countries: "np",
       bbox: [85.265, 27.591, 85.575, 27.858],
     });
