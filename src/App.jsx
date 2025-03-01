@@ -17,6 +17,7 @@ import TeacherDashboardWrapper from './services/ProtectedRoutes/routesmanagement
 import TeacherCommunityPage from './Pages/teacherscommunitypage';
 import TeachersCommunity from './services/ProtectedRoutes/protectioncommunity';
 import AdminRoute from './services/ProtectedRoutes/adminprotection';
+import Chatbot from './Pages/chatpot';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
             <Route path="/onlineclasses" element={<OnlineClasses />} />
             <Route path="/coursesdetails/:id" element={<CourseDetails />} />
             <Route path="/tutorhome" element={<BecomeTuitor />} />
+            <Route path="/chat" element={<Chatbot />} />
            
             
             {/* Protect Teacher Dashboard */}

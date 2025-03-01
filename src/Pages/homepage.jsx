@@ -7,10 +7,13 @@ import "../css/home.css";
 import Vaccancy from "../widgets/homepage/vaccancy";
 import { webApi } from "../api";
 import { FaUsersGear } from "react-icons/fa6"; // Ensure you're using the correct icon import
+import Chatbot from "./chatpot";
+import { IoChatbubbles } from "react-icons/io5";
 
 function HomePage() {
     const [userChecked, setUserChecked] = useState(false); // Keeps track if the user is loaded and checked
     const navigate = useNavigate();
+    const [isModalOpen, setIsModalOpen] = useState(false); // Keeps track if the user is loaded and checked
     const [user, setUser] = useState(null);
 
     useEffect(() => {
@@ -71,6 +74,13 @@ function HomePage() {
             <Vaccancy />
         </div>
             <HomePageForm />
+      <button className="floating-button" style={{ bottom:'50px', backgroundColor:' #2d96ff'}} onClick={() => setIsModalOpen(!isModalOpen)}>{isModalOpen ? "X" : <IoChatbubbles size={30} /> }  </button>
+
+           {isModalOpen && (
+            <div className="chatbot">
+                 <Chatbot/>
+            </div>
+           )}
         </>
     );
 }

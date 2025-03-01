@@ -10,6 +10,8 @@ import { FaBook, FaGraduationCap, FaLocationDot, FaUser, FaUserGroup } from "rea
 import { FaChalkboardTeacher, FaClock, FaMoneyBill, FaMoneyBillWave } from 'react-icons/fa';
 import { RiFocus2Line } from "react-icons/ri";
 import { getAuth } from 'firebase/auth';
+import { IoChatbubbles } from 'react-icons/io5';
+import Chatbot from '../../Pages/chatpot';
 
 mapboxgl.accessToken = "pk.eyJ1IjoiYW5pc2hoLWpvc2hpIiwiYSI6ImNrdWo5d2lhdDFkb2oybnJ1MDB4OG1oc2EifQ.pLrp8FmZSLVfT3pAVVPBPg";
 
@@ -23,6 +25,8 @@ function TeacherVacancy() {
   const geocoderRef = useRef(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedVacancy, setSelectedVacancy] = useState(null);
+  const [isChatBotOpen, setIsChatBotOpen] = useState(false); // Keeps track if the user is loaded and checked
+
 
   // Function to handle the modal toggle
   const openModal = (vacancy) => {
@@ -203,6 +207,13 @@ function TeacherVacancy() {
           </div>
         </div>
       )}
+      <button className="floating-button" style={{ bottom:'50px', backgroundColor:' #2d96ff'}} onClick={() => setIsChatBotOpen(!isChatBotOpen)}>{isChatBotOpen ? "X" : <IoChatbubbles size={30} /> }  </button>
+
+{isChatBotOpen && (
+ <div className="chatbot">
+      <Chatbot/>
+ </div>
+)}
     </div>
   );
 }
@@ -251,6 +262,7 @@ const VacancyCard = ({ vacancy, locationSource, openModal }) => {
       <div className="applybuttoncontainer" style={{display:"flex", justifyContent:'center', alignItems:"center", width:'100%'}}>
         <button style={{ width: '100%', maxWidth:"300px", display:'flex', alignItems:"center", gap:"5px", justifyContent:"center" }} onClick={() => openModal(vacancy)}><IoIosSend size={30}/><h3>Apply</h3></button>
       </div>
+      
     </div>
   );
 };
