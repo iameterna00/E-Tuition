@@ -4,7 +4,7 @@ import mapboxgl from 'mapbox-gl';
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder'; 
 import { webApi } from '../../api'; 
 import KUBE from '../../assets/newcube.png';
-import { MdGpsFixed } from "react-icons/md";
+import { MdDateRange, MdGpsFixed } from "react-icons/md";
 import { IoIosSend } from 'react-icons/io';
 import { FaBook, FaGraduationCap, FaLocationDot, FaUser, FaUserGroup } from "react-icons/fa6";
 import { FaChalkboardTeacher, FaClock, FaMoneyBill, FaMoneyBillWave } from 'react-icons/fa';
@@ -231,8 +231,8 @@ const VacancyCard = ({ vacancy, locationSource, openModal }) => {
         <h4><FaBook/> Subject: {vacancy.subject}</h4>
         <h4><FaClock/> Duration: {vacancy.duration}</h4>
         <h4><FaGraduationCap/> No of students: {vacancy.noofstudents}</h4>
-        <h4><FaUser/> Tutor Type: {vacancy.tutorType}</h4>
-        <h4><FaClock/> {new Date(vacancy.created_at).toLocaleString("en-US", {
+        <h4><FaUser/> Tutor Type: {vacancy.tutorType? vacancy.tutorType : 'Any'}</h4>
+        <h4><MdDateRange /> {new Date(vacancy.created_at).toLocaleString("en-US", {
             month: "short",
             day: "2-digit",
             hour: "2-digit",
