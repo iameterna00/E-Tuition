@@ -123,7 +123,7 @@ const Navbar = () => {
          <img
            className="profile-pic"
            src={myuser?.profile}
-           style={{ width: '40px', height: '40px', borderRadius: '50%', objectFit:"cover" }}
+           style={{ width: '35px', height: '35px', borderRadius: '50%', objectFit:"cover" }}
          />
  
    <div className={`dropdown-menu ${dropdownVisible ? "show" : ""}`}>

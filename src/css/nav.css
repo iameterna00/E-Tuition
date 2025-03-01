@@ -346,11 +346,12 @@ body.modal-open {
 }
 .profile-containermobile{
   display: block;
-  width: 40px;
-  height: 40px;
+  width: 35px;
+  height: 35px;
+  margin-top: -5px;
   border-radius: 50%;
   object-fit: cover;
-  background-color: white;
+  background-color: rgb(1, 140, 204);
   background-image: url('https://res.cloudinary.com/dbxx2qxxw/image/upload/v1735804900/user_gusmci.png');
 }
 
