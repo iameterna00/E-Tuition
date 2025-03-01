@@ -167,7 +167,7 @@ function TeacherVacancy() {
   {activeTab === 'available' && userLocation && filteredVacancies.length > 0
     ? filteredVacancies
         .filter((vacancy) => vacancy.status !== 'complete')
-        .sort((a, b) => new Date(b.created_at) - new Date(a.created_at)) // Sort here
+      
         .map((vacancy) => (
           <VacancyCard key={vacancy._id} vacancy={vacancy} locationSource={locationSource} openModal={openModal} />
         ))
