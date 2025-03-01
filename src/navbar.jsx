@@ -179,13 +179,13 @@ const Navbar = () => {
     {myuser.purpose === 'student' ? (
   
   <div onClick={() => updateUserType('teacher')} className="navbuttons">
- <FaChalkboardTeacher/> Switch as Tutor
+ {menuOpen && <FaChalkboardTeacher/>} Switch as Tutor
 </div>
     
     ) : (
      
       <div onClick={() => updateUserType('student')} className="navbuttons">
-     <FaBook/> Switch as student
+   { menuOpen &&  <FaBook/>} Switch as student
     </div>
 
     )}
