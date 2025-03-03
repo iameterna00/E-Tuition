@@ -7,7 +7,7 @@ import KUBE from '../../assets/newcube.png';
 import { MdDateRange, MdGpsFixed } from "react-icons/md";
 import { IoIosSend } from 'react-icons/io';
 import { FaBook, FaGraduationCap, FaLocationDot, FaUser, FaUserGroup } from "react-icons/fa6";
-import { FaChalkboardTeacher, FaClock, FaMoneyBill, FaMoneyBillWave } from 'react-icons/fa';
+import { FaChalkboardTeacher, FaChevronDown, FaClock, FaMoneyBill, FaMoneyBillWave } from 'react-icons/fa';
 import { RiFocus2Line } from "react-icons/ri";
 import { getAuth } from 'firebase/auth';
 import { IoChatbubbles } from 'react-icons/io5';
@@ -207,13 +207,13 @@ function TeacherVacancy() {
           </div>
         </div>
       )}
-      <button className="floating-button" style={{ bottom:'50px', backgroundColor:' #2d96ff'}} onClick={() => setIsChatBotOpen(!isChatBotOpen)}>{isChatBotOpen ? "X" : <IoChatbubbles size={30} /> }  </button>
+      <button className="floating-button" style={{ bottom:'50px', backgroundColor:' #2d96ff'}} onClick={() => setIsChatBotOpen(!isChatBotOpen)}>{isChatBotOpen ? <FaChevronDown/> : <IoChatbubbles size={30} /> }  </button>
 
-{isChatBotOpen && (
+
  <div className="chatbot">
-      <Chatbot/>
+      <Chatbot isOpen={isChatBotOpen} />
  </div>
-)}
+
     </div>
   );
 }
