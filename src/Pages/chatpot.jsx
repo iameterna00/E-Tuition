@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { webApi } from "../api";
 import '../css/chatbot.css'
@@ -6,17 +6,24 @@ import { IoIosSend } from "react-icons/io";
 import Guru from '../assets/kubelogo.png';
 import { FaSortDown } from "react-icons/fa6";
 
-function Chatbot() {
+function Chatbot({isOpen}) {
     const [messages, setMessages] = useState([
         { role: "bot", content: "Hi, I am Guru! How can I help you?" }
     ]);
     const [input, setInput] = useState("");
-    const [isOpen, setIsOpen] = useState(true); // State for chatbot visibility
+    const chatBoxRef = useRef(null); // Ref to track the chat box
+
+    useEffect(() => {
+        if (chatBoxRef.current) {
+            chatBoxRef.current.scrollTop = chatBoxRef.current.scrollHeight;
+        }
+    }, [messages]); // Runs every time messages update
 
     const sendMessage = async () => {
         if (!input) return;
         const userMessage = { role: "user", content: input };
         setMessages([...messages, userMessage]);
+        setInput("");
 
         try {
             const res = await axios.post(`${webApi}/api/chat`, { message: input });
@@ -30,20 +37,18 @@ function Chatbot() {
     };
 
     // Toggle chatbot visibility
-    const toggleChatbot = () => {
-        setIsOpen(!isOpen);
-    };
+
 
     return (
         <div className={`chat-container ${isOpen ? "open" : "closed"}`}>
-            <div className="titleofbot" onClick={toggleChatbot}>
+            <div className="titleofbot">
                 <h2 className="chat-title">Chat With Guru!</h2>
-                <FaSortDown size={30} className={`toggle-icon ${isOpen ? "rotate-up" : "rotate-down"}`} />
+            
             </div>
             <div className="chat-content">
                 {isOpen && (
                     <>
-                        <div className="chat-box">
+                        <div className="chat-box" ref={chatBoxRef}>
                             {messages.map((msg, index) => (
                                 <div key={index} className={`message-wrapper ${msg.role === "user" ? "user-wrapper" : "bot-wrapper"}`}>
                                     {msg.role === "bot" && <img src={Guru} alt="Guru Avatar" className="bot-avatar" />}

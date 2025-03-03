@@ -33,6 +33,7 @@ function App() {
             <Route path="/tutorhome" element={<BecomeTuitor />} />
             <Route path="/chat" element={<Chatbot />} />
            
+           
             
             {/* Protect Teacher Dashboard */}
             <Route path="/teacherdashboard" element={<TeacherDashboardWrapper />} />
