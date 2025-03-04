@@ -11,7 +11,7 @@ import { FaChalkboardTeacher, FaChevronDown, FaClock, FaMoneyBill, FaMoneyBillWa
 import { RiFocus2Line } from "react-icons/ri";
 import { getAuth } from 'firebase/auth';
 import { IoChatbubbles } from 'react-icons/io5';
-import Chatbot from '../../Pages/chatpot';
+import Chatbot from '../../chatbot/chatbot';
 
 mapboxgl.accessToken = "pk.eyJ1IjoiYW5pc2hoLWpvc2hpIiwiYSI6ImNrdWo5d2lhdDFkb2oybnJ1MDB4OG1oc2EifQ.pLrp8FmZSLVfT3pAVVPBPg";
 

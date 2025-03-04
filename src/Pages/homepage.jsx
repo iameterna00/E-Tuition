@@ -7,14 +7,13 @@ import "../css/home.css";
 import Vaccancy from "../widgets/homepage/vaccancy";
 import { webApi } from "../api";
 import { FaUsersGear } from "react-icons/fa6"; // Ensure you're using the correct icon import
-import Chatbot from "./chatpot";
+import Chatbot from "../chatbot/chatbot";
 import { IoChatbubbles } from "react-icons/io5";
 import { FaChevronCircleDown, FaChevronDown } from "react-icons/fa";
 
 function HomePage() {
-    const [userChecked, setUserChecked] = useState(false); // Keeps track if the user is loaded and checked
+    const [userChecked, setUserChecked] = useState(false); 
     const navigate = useNavigate();
-    const [isModalOpen, setIsModalOpen] = useState(false); // Keeps track if the user is loaded and checked
     const [user, setUser] = useState(null);
 
     useEffect(() => {
@@ -75,12 +74,6 @@ function HomePage() {
             <Vaccancy />
         </div>
             <HomePageForm />
-      <button className="floating-button" style={{ bottom:'50px', backgroundColor:' #2d96ff'}} onClick={() => setIsModalOpen(!isModalOpen)}>{isModalOpen ? <FaChevronDown/> : <IoChatbubbles size={30} /> }  </button>
-
-
-            <div className="chatbot">
-                 <Chatbot isOpen={isModalOpen} />
-            </div>
          
         </>
     );

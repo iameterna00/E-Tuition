@@ -17,7 +17,7 @@ import TeacherDashboardWrapper from './services/ProtectedRoutes/routesmanagement
 import TeacherCommunityPage from './Pages/teacherscommunitypage';
 import TeachersCommunity from './services/ProtectedRoutes/protectioncommunity';
 import AdminRoute from './services/ProtectedRoutes/adminprotection';
-import Chatbot from './Pages/chatpot';
+import ConditionalChatbot from './chatbot/condition_bot';
 
 function App() {
   return (
@@ -25,25 +25,22 @@ function App() {
       <Router>
         <ThemeProvider>
           <Navbar />
+          <ConditionalChatbot/>
           <ScrollToTop />
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/onlineclasses" element={<OnlineClasses />} />
             <Route path="/coursesdetails/:id" element={<CourseDetails />} />
             <Route path="/tutorhome" element={<BecomeTuitor />} />
-            <Route path="/chat" element={<Chatbot />} />
-           
            
             
-            {/* Protect Teacher Dashboard */}
             <Route path="/teacherdashboard" element={<TeacherDashboardWrapper />} />
             <Route path="/addclasses" element={<AddClass />} />
-            
             <Route path="/profile" element={<ProfilePage />} />
             <Route element={<AdminRoute />}>
-          <Route path="/admin" element={<ADMIN />} />
-          <Route path="/admin/teacher/" element={<TeacherManager />} />
-        </Route>
+           <Route path="/admin" element={<ADMIN />} />
+           <Route path="/admin/teacher/" element={<TeacherManager />} />
+         </Route>
             <Route path="/teacherscommunity" element={<TeacherCommunityPage />} />
            
           </Routes>
