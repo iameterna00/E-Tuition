@@ -210,7 +210,7 @@ function CourseDetails() {
     </div>
   </div>
 )}
-
+<ReviewsPage/>
 
     </div>
   );

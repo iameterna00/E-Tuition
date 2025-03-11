@@ -196,8 +196,8 @@ const Navbar = () => {
   </Link>
 )}
 
-            {/* <Link to='/onlineclasses' style={{ textDecoration: 'none', color: 'inherit' }}>
-              <button className="navbuttons">Online Classes</button>
+            {/* <Link to='/academicclasses' style={{ textDecoration: 'none', color: 'inherit' }}>
+              <button className="navbuttons">Academic Classes</button>
             </Link> */}
            {!menuOpen &&(
             <>

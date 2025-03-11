@@ -176,6 +176,18 @@ const AddClass = () => {
                   placeholder="Enter course monthly fee"
                 />
               </div>
+              
+              <div className="form-group">
+                <label>Course Title</label>
+                <input
+                  type="text"
+                  name="courseTitle"
+                  value={classDetails.courseTitle}
+                  onChange={handleChange}
+                  required
+                  placeholder="Enter course title"
+                />
+              </div>
 
               <div className="form-group">
                 <label>Subject</label>
@@ -189,17 +201,6 @@ const AddClass = () => {
                 />
               </div>
 
-              <div className="form-group">
-                <label>Course Title</label>
-                <input
-                  type="text"
-                  name="courseTitle"
-                  value={classDetails.courseTitle}
-                  onChange={handleChange}
-                  required
-                  placeholder="Enter course title"
-                />
-              </div>
 
               <div className="form-group">
                 <label>Description</label>
