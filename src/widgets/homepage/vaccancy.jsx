@@ -38,7 +38,7 @@ function Vaccancy() {
     const matchesLocation = locationFilter ? gig.location.includes(locationFilter) : true;
     const matchesGender = genderFilter ? gig.sex === genderFilter : true;
     const matchesSearch = searchTerm
-      ? gig.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      ? gig.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
         gig.subjects.toLowerCase().includes(searchTerm.toLowerCase())
       : true;
     const matchesPrice = gig.pricePerMonth >= priceRange[0] && gig.pricePerMonth <= priceRange[1];
