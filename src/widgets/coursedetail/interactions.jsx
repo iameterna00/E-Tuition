@@ -36,32 +36,48 @@ function ReviewsPage({ gigsData, user }) {
       ? (reviews.reduce((sum, review) => sum + review.rating, 0) / reviews.length).toFixed(1)
       : 0;
 
-  const handleRatingSubmit = async () => {
-    if (!gigsData?.id) {
-      alert("Unable to submit review. Please refresh and try again.");
-      return;
-    }
-
-    if (rating > 0 && comment.trim() !== "") {
-      try {
-        const response = await axios.post(`${webApi}/api/classes/${gigsData.id}/reviews`, {
-          rating,
-          content: comment,
-          userid: user?.uid,
-        });
-
-        setReviews([...reviews, response.data]); // Add the new review to the UI
-        setRating(0);
-        setComment("");
-        setShowRatingPopup(false);
-      } catch (error) {
-        console.error("Error submitting review:", error);
-        alert("Failed to submit review. Please try again.");
-      }
-    } else {
-      alert("Please provide both a comment and a rating.");
-    }
-  };
+      const handleRatingSubmit = async () => {
+        if (!gigsData?.id) {
+          alert("Unable to submit review. Please refresh and try again.");
+          return;
+        }
+      
+        if (rating > 0 && comment.trim() !== "") {
+          try {
+            const response = await axios.post(`${webApi}/api/classes/${gigsData.id}/reviews`, {
+              rating,
+              content: comment,
+              userid: user?.uid,
+            });
+      
+            // Get current user's name and profile from the 'user' object
+            const username = user?.name || "Unknown";  // Default to "Unknown" if no name is available
+            const profile = user?.profile || "default-profile.jpg";  // Default profile image
+      
+            // Create the new review object with the necessary fields
+            const newReview = {
+              id: response.data.id,   // Assuming 'id' is returned from the server in the response
+              rating: response.data.rating,
+              content: response.data.content,
+              username,               // Add the username
+              profile,                // Add the profile image
+            };
+      
+            // Update the reviews state by adding the new review
+            setReviews((prevReviews) => [...prevReviews, newReview]);
+      
+            setRating(0);
+            setComment("");
+            setShowRatingPopup(false);
+          } catch (error) {
+            console.error("Error submitting review:", error);
+            alert("Failed to submit review. Please try again.");
+          }
+        } else {
+          alert("Please provide both a comment and a rating.");
+        }
+      };
+      
 
   return (
     <div className="reviews-page">
