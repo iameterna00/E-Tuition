@@ -117,22 +117,25 @@ function ReviewsPage({ gigsData, user }) {
               ))}
             </div>
             <textarea
+            className="ratingtextarea"
               placeholder="Write a review..."
               value={comment}
               onChange={(e) => setComment(e.target.value)}
               rows="4"
               style={{
-                width: "100%",
                 margin: "10px 0",
                 padding: "10px",
-                border: "1px solid #ddd",
-                borderRadius: "5px",
+                border:"none",
+                borderRadius: "10px",
               }}
             />
-            <button onClick={handleRatingSubmit} className="submit-button">
+            <button 
+            style={{borderRadius:'10px'}}
+            onClick={handleRatingSubmit} className="submit-button">
               Submit Review
             </button>
             <button
+             style={{borderRadius:'10px'}}
               onClick={() => setShowRatingPopup(false)}
               className="cancel-button"
             >
@@ -151,13 +154,12 @@ function ReviewsPage({ gigsData, user }) {
           reviews.map((review) => (
             <div key={review.id} className="review">
               <div className="reviewer-details" style={{display:'flex'}}>
-                <img
+                <img 
                   src={
-                    review.profile ||
-                    "https://s3.eu-central-1.amazonaws.com/uploads.mangoweb.org/shared-prod/visegradfund.org/uploads/2021/08/placeholder-male.jpg"
+                    review.profile 
                   }
                   alt="Reviewer's profile"
-                  style={{ width: "30px", height: "30px", borderRadius: "50%" }}
+                  style={{ width: "30px", height: "30px", borderRadius: "50%", objectFit:'cover' }}
                 />
                 <p>{review.username}</p>
               </div>

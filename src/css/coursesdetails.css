@@ -391,11 +391,27 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: rgb(40,45,45);
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   z-index: 1000;
+}
+
+[data-theme='dark'] .rating-popup {
+  background-color: rgb(40,45,45);
+
+}
+[data-theme='light'] .rating-popup {
+  background-color: rgb(241, 241, 241);
+
+}
+[data-theme='dark'] .ratingtextarea{
+  background-color: rgb(45, 50, 50);
+  width: 90%;
+}
+[data-theme='light'] .ratingtextarea{
+  background-color: rgb(255, 255, 255);
+  width: 90%;
 }
 
 .popup-content {
@@ -411,7 +427,7 @@
 }
 
 .submit-button {
-   background-color: #0099ffca;
+  background-color: #0099ffca;
   color: white;
   padding: 10px 20px;
   border: none;
