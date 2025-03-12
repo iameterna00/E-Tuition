@@ -208,7 +208,7 @@ function CourseDetails() {
     </div>
   </div>
 )}
-<ReviewsPage gigsData={gigDetails}
+<ReviewsPage loginmodal={setShowLoginModal}  gigsData={gigDetails}
 user={myuser}/>
 
     </div>

@@ -220,7 +220,8 @@ const Navbar = () => {
                   style={{ width: '35px', height: '35px', borderRadius: '50%', objectFit:"cover" }}
                 />
                 {dropdownVisible && (
-                  <div className="dropdown-menupc" style={{ position: 'absolute', top: '50px', right: '0', backgroundColor: isScrolled ? "rgb(40,45,45)" : "transparent", padding: '10px 20px', display: 'flex', flexDirection: 'column', boxShadow: '0px 8px 16px rgba(0,0,0,0.2)', zIndex: 1 }}>
+                  <div className="dropdown-menupc" style={{
+                     position: 'absolute', top: '50px', right: '0', backgroundColor: isScrolled ? "rgb(40,45,45)" : "transparent", padding: '10px 20px', display: 'flex', flexDirection: 'column', boxShadow: '0px 8px 16px rgba(0,0,0,0.2)', zIndex: 1 }}>
                     <Link onClick={handleLinkClick} to="/profile" className="dropdown-item">Profile</Link>
                     <Link onClick={handleLinkClick} to="/settings" className="dropdown-item">Settings</Link>
                     <button onClick={handleLogout} className="dropdown-item">Logout</button>
