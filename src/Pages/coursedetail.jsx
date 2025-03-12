@@ -154,8 +154,6 @@ function CourseDetails() {
           </div>
         </div>
       </div>
-      {/* Popup Message */}
-      {/* Popup Message */}
    
 
     {/* Login Modal */}
@@ -210,7 +208,8 @@ function CourseDetails() {
     </div>
   </div>
 )}
-<ReviewsPage/>
+<ReviewsPage gigsData={gigDetails}
+user={myuser}/>
 
     </div>
   );

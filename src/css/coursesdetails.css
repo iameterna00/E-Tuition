@@ -50,7 +50,9 @@
         background-color: rgb(241, 241, 241);
         border: 1px solid rgba(128, 128, 128, 0.273);
       }
-  
+
+    
+   
   .course-profile {
     border-radius: 8px;
     display: flex;
@@ -340,6 +342,21 @@
   text-align: start;
   flex-direction: column;
   
+}
+[data-theme='dark']   .review-contents{
+  background-color: #3d4c5829;
+  width: 100%;
+  border-radius: 10px;
+}
+
+
+[data-theme='light']   .review-contents{
+  background-color: rgb(241, 241, 241);
+  border-radius: 10px;
+  width: 100%;
+}
+.reviewcontent_insiders{
+  padding: 10px;
 }
 
 .review {

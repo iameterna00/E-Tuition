@@ -1,36 +1,65 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { FaRegHeart, FaHeart, FaStar, FaCommentDots } from "react-icons/fa";
+import { webApi } from "../../api";
 
-function ReviewsPage({ gigsData }) {
+function ReviewsPage({ gigsData, user }) {
   const [activeTab, setActiveTab] = useState("Reviews"); // Default tab
   const [showRatingPopup, setShowRatingPopup] = useState(false);
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
-  const [reviews, setReviews] = useState([]); // Set an empty array to start with
+  const [reviews, setReviews] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  // Initialize reviews with gigsData.reviews in useEffect
+  // Fetch reviews if gigsData is available
   useEffect(() => {
-    if (gigsData && gigsData.reviews) {
-      setReviews(gigsData.reviews); // Set reviews from gigsData
+    if (gigsData?.id) {
+      setLoading(true);
+      console.log("Fetching reviews for class ID:", gigsData.id);
+      axios
+        .get(`${webApi}/api/classes/${gigsData.id}/reviews`)
+        .then((response) => {
+          console.log("Fetched reviews:", response.data);
+          setReviews(response.data);  // Assuming the data is an array of reviews
+        })
+        .catch((error) => {
+          console.error("Error fetching reviews:", error);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
     }
-  }, [gigsData]); // Run effect when gigsData changes
+  }, [gigsData]);
 
   const averageRating =
     reviews.length > 0
       ? (reviews.reduce((sum, review) => sum + review.rating, 0) / reviews.length).toFixed(1)
       : 0;
 
-  const handleRatingSubmit = () => {
+  const handleRatingSubmit = async () => {
+    if (!gigsData?.id) {
+      alert("Unable to submit review. Please refresh and try again.");
+      return;
+    }
+
     if (rating > 0 && comment.trim() !== "") {
-      setReviews([
-        ...reviews,
-        { id: reviews.length + 1, content: comment, rating: rating },
-      ]);
-      setRating(0);
-      setComment("");
-      setShowRatingPopup(false);
+      try {
+        const response = await axios.post(`${webApi}/api/classes/${gigsData.id}/reviews`, {
+          rating,
+          content: comment,
+          userid: user?.uid,
+        });
+
+        setReviews([...reviews, response.data]); // Add the new review to the UI
+        setRating(0);
+        setComment("");
+        setShowRatingPopup(false);
+      } catch (error) {
+        console.error("Error submitting review:", error);
+        alert("Failed to submit review. Please try again.");
+      }
     } else {
-      alert("Please provide both a comment and a rating."); // You can replace this alert with a toast or notification.
+      alert("Please provide both a comment and a rating.");
     }
   };
 
@@ -38,9 +67,9 @@ function ReviewsPage({ gigsData }) {
     <div className="reviews-page">
       <div className="tab-bar">
         {/* Likes Icon */}
-        <button className="icon-button" onClick={() => setActiveTab("Likes")}>
+        {/* <button className="icon-button">
           <FaRegHeart size={20} />
-        </button>
+        </button> */}
 
         {/* Reviews Icon */}
         <button
@@ -60,7 +89,7 @@ function ReviewsPage({ gigsData }) {
       </div>
 
       {/* Average Rating Section */}
-      {/* {activeTab === "Reviews" && (
+      {activeTab === "Reviews" && (
         <div className="average-rating-section">
           <h3>Rating: {averageRating} / 5 ({reviews.length})</h3>
           <div className="stars">
@@ -69,7 +98,7 @@ function ReviewsPage({ gigsData }) {
             ))}
           </div>
         </div>
-      )} */}
+      )}
 
       {/* Rating Popup */}
       {showRatingPopup && (
@@ -115,29 +144,39 @@ function ReviewsPage({ gigsData }) {
 
       {/* Reviews Section */}
       <div className="reviews-section">
-  <h3>Reviews</h3>
-  {reviews.map((review) => (
-    <div key={review.id} className="review">
-      <div className="Reviewerdetails">
-      <img
-  src={review.Profile || "https://s3.eu-central-1.amazonaws.com/uploads.mangoweb.org/shared-prod/visegradfund.org/uploads/2021/08/placeholder-male.jpg"} // Updated field name
-  alt="Reviewer's profile"
-  style={{ width: "30px", height: "30px", borderRadius: "50%" }}
-/>
-<p>{review.name}</p>
+        <h3>Reviews</h3>
+        {loading ? (
+          <p>Loading reviews...</p>
+        ) : reviews.length > 0 ? (
+          reviews.map((review) => (
+            <div key={review.id} className="review">
+              <div className="reviewer-details" style={{display:'flex'}}>
+                <img
+                  src={
+                    review.profile ||
+                    "https://s3.eu-central-1.amazonaws.com/uploads.mangoweb.org/shared-prod/visegradfund.org/uploads/2021/08/placeholder-male.jpg"
+                  }
+                  alt="Reviewer's profile"
+                  style={{ width: "30px", height: "30px", borderRadius: "50%" }}
+                />
+                <p>{review.username}</p>
+              </div>
+              <div className="review-contents">
+                <div className="reviewcontent_insiders">
+                <div className="stars">
+                  {Array.from({ length: 5 }, (_, i) => (
+                    <FaStar key={i} color={i < review.rating ? "#FFD700" : "#ddd"} />
+                  ))}
+                </div>
+                <p>{review.content}</p>
+              </div>
+                </div>
+            </div>
+          ))
+        ) : (
+          <p>No reviews yet.</p>
+        )}
       </div>
-   <div className="reviewcontents">
-
-<div className="stars">
-        {Array.from({ length: 5 }, (_, i) => (
-          <FaStar key={i} color={i < review.rating ? "#FFD700" : "#ddd"} />
-        ))}
-      </div>
-      <p>{review.content}</p>
-   </div>
-    </div>
-  ))}
-</div>
     </div>
   );
 }
