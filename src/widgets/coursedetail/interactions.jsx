@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { FaRegHeart, FaHeart, FaStar, FaCommentDots } from "react-icons/fa";
 import { webApi } from "../../api";
 
-function ReviewsPage({ gigsData, user }) {
+function ReviewsPage({ loginmodal, gigsData, user }) {
   const [activeTab, setActiveTab] = useState("Reviews"); // Default tab
   const [showRatingPopup, setShowRatingPopup] = useState(false);
   const [rating, setRating] = useState(0);
@@ -35,11 +35,10 @@ function ReviewsPage({ gigsData, user }) {
     reviews.length > 0
       ? (reviews.reduce((sum, review) => sum + review.rating, 0) / reviews.length).toFixed(1)
       : 0;
-
-      const handleRatingSubmit = async () => {
-        if (!gigsData?.id) {
-          alert("Unable to submit review. Please refresh and try again.");
-          return;
+ const handleRatingSubmit = async () => {
+        if (!user) {
+      window.alert('please login')
+      return
         }
       
         if (rating > 0 && comment.trim() !== "") {
@@ -50,17 +49,17 @@ function ReviewsPage({ gigsData, user }) {
               userid: user?.uid,
             });
       
-            // Get current user's name and profile from the 'user' object
-            const username = user?.name || "Unknown";  // Default to "Unknown" if no name is available
-            const profile = user?.profile || "default-profile.jpg";  // Default profile image
+         
+            const username = user?.name || "Unknown"; 
+            const profile = user?.profile || "default-profile.jpg";  
       
-            // Create the new review object with the necessary fields
+          
             const newReview = {
-              id: response.data.id,   // Assuming 'id' is returned from the server in the response
+              id: response.data.id,  
               rating: response.data.rating,
               content: response.data.content,
-              username,               // Add the username
-              profile,                // Add the profile image
+              username,      
+              profile,                
             };
       
             // Update the reviews state by adding the new review
