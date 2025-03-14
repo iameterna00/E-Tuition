@@ -10,6 +10,7 @@ import { webApi } from '../api';
 import { useDispatch, useSelector } from 'react-redux';
 import StudentForm from '../widgets/profile/studentidentityform';
 import TuitorLogin from '../widgets/login/betuitorlogin';
+import ApplyCourse from '../widgets/coursedetail/applycourse';
 
 function CourseDetails() {
   const { id } = useParams(); 
@@ -174,40 +175,8 @@ function CourseDetails() {
    </div>
 </div>
 )}
-  {showSUccessful && (
-  <div className="modalform" style={{
-    position: 'fixed',
-    top: 0,
-    left: 0,
-    width: '100%',
-    height: '100%',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    zIndex: 1000,
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',  // Centers the modal vertically and horizontally
-  }}>
-    <div className="modal-contentsform" style={{
-      overflowY: 'auto',  // Allows vertical scrolling
-      maxHeight: '100%',   // Keeps the modal within the screen size
-      padding: '10px',
-      maxWidth:"700px",
-      minHeight:"160px",
-      flexDirection:"column",
-      display:"flex",
-      alignItems:"center",
-      gap:"20px",
-      justifyContent:'center',
-      borderRadius: '10px',
-      width: '100%',       // Adjust width as necessary
-    }}>
-    <h3>Successfully applied for the course!</h3>
-    <button onClick={()=> setShowSucessful(false)} style={{width:"100%", display:"flex", justifyContent:"center", maxWidth:"100px", alignItems:"center"}}>
-              Close,
-              </button>
-    </div>
-  </div>
-)}
+<ApplyCourse studentid={myuser} classid={gigDetails.id} showSUccessful={showSUccessful} setShowSucessful={setShowSucessful} />
+ 
 <ReviewsPage loginmodal={setShowLoginModal}  gigsData={gigDetails}
 user={myuser}/>
 

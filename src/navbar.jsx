@@ -199,6 +199,9 @@ const Navbar = () => {
             {/* <Link to='/academicclasses' style={{ textDecoration: 'none', color: 'inherit' }}>
               <button className="navbuttons">Academic Classes</button>
             </Link> */}
+             <Link to='/chat' style={{ textDecoration: 'none', color: 'inherit' }}>
+              <button className="navbuttons">Chat</button>
+            </Link>
            {!menuOpen &&(
             <>
              {!user ? (

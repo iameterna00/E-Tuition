@@ -19,6 +19,9 @@ import AdminRoute from './services/ProtectedRoutes/adminprotection';
 import ConditionalChatbot from './chatbot/condition_bot';
 import { webApi } from './api';
 import { useEffect, useRef } from 'react';
+import Chats from './widgets/classroom/chats';
+import ClassChatRoom from './widgets/classroom/classroom';
+
 
 function App() {
   const PING_URL = `${webApi}/api/ping`; // Replace with your Render URL
@@ -63,6 +66,8 @@ function App() {
             <Route path="/teacherdashboard" element={<TeacherDashboardWrapper />} />
             <Route path="/addclasses" element={<AddClass />} />
             <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/chat" element={<Chats />} />
+            <Route path="/class/:classId/chat" element={<ClassChatRoom />} />
             <Route element={<AdminRoute />}>
               <Route path="/admin" element={<ADMIN />} />
               <Route path="/admin/teacher/" element={<TeacherManager />} />

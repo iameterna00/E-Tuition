@@ -9,6 +9,9 @@ function ConditionalChatbot() {
       return null;
     }
   
+    if (location.pathname.startsWith("/chat")) {
+      return null;
+    }
     return <ChatBotButton />;
   }
   export default ConditionalChatbot;
