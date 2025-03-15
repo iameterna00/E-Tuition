@@ -249,6 +249,13 @@
         background-color: transparent;
        
     }
+    [data-theme='dark']    .backchatbutton{
+        color: white; 
+      }
+      
+      [data-theme='light']    .backchatbutton{
+        color: #333;
+      }
     
     .desktopchatscreen{
         display: none;
