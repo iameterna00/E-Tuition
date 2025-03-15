@@ -29,7 +29,9 @@ function ApplyCourse({showSUccessful, setShowSucessful, classid, studentid}){
         } catch (error) {
           setMessage("An error occurred. Please try again.");
         } finally {
+          setShowSucessful(false)
           setLoading(false);
+          alert('Class Joined Sucessfully!')
         }
       };
     
@@ -65,7 +67,7 @@ function ApplyCourse({showSUccessful, setShowSucessful, classid, studentid}){
     <h3>Apply for course!</h3>
     <div className="applycoursebuttons" style={{display:'flex', gap:"10px"}} >
     <button onClick={handleJoinClass} disabled={loading} style={{width:"100%", display:"flex", justifyContent:"center", maxWidth:"100px", alignItems:"center"}}>
-              Apply
+    {loading ? <span className="spinner"></span> : "Apply"}
               </button>
     <button onClick={()=> setShowSucessful(false)} className="closebuttonapplycourse" style={{ width:"100%", display:"flex", justifyContent:"center", maxWidth:"100px", alignItems:"center"}}>
               Close

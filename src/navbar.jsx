@@ -150,9 +150,7 @@ const Navbar = () => {
   </div>
   
 )}
-  <Link to='/chat' style={{ textDecoration: 'none', color: 'inherit' }}>
-              <button className="navbuttons">Chat</button>
-            </Link>
+
 
       <div style={{ backgroundColor: "transparent" , borderRadius:"0px"}} onClick={handleLogout} className="dropdown-item">
         <FaSignOutAlt /> Logout
