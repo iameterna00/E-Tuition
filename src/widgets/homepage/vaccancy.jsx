@@ -52,8 +52,8 @@ function Vaccancy() {
         <h2>Available Tuitors</h2>
     </div>
   <div className="vaccancymainCntainer">
-
-<Filters setLocationFilter={setLocationFilter} handlePriceChange={handlePriceChange} setGenderFilter={setGenderFilter} setSearchTerm={setSearchTerm} priceRange={priceRange} />
+{/* 
+<Filters setLocationFilter={setLocationFilter} handlePriceChange={handlePriceChange} setGenderFilter={setGenderFilter} setSearchTerm={setSearchTerm} priceRange={priceRange} /> */}
 
 <div className="vaccancy-container">
           {/* Loading Screen */}

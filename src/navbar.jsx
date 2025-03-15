@@ -13,7 +13,7 @@ import TuitorLogin from './widgets/login/betuitorlogin';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUser, selectUser } from './services/Redux/userSlice';
 import { webApi } from './api';
-import { FaUsersGear } from "react-icons/fa6";
+import { FaMessage, FaUsersGear } from "react-icons/fa6";
 import { FiLogOut } from "react-icons/fi";
 
 const Navbar = () => {
@@ -146,8 +146,13 @@ const Navbar = () => {
     </div>
 
     )}
+
   </div>
+  
 )}
+  <Link to='/chat' style={{ textDecoration: 'none', color: 'inherit' }}>
+              <button className="navbuttons">Chat</button>
+            </Link>
 
       <div style={{ backgroundColor: "transparent" , borderRadius:"0px"}} onClick={handleLogout} className="dropdown-item">
         <FaSignOutAlt /> Logout
@@ -199,8 +204,8 @@ const Navbar = () => {
             {/* <Link to='/academicclasses' style={{ textDecoration: 'none', color: 'inherit' }}>
               <button className="navbuttons">Academic Classes</button>
             </Link> */}
-             <Link to='/chat' style={{ textDecoration: 'none', color: 'inherit' }}>
-              <button className="navbuttons">Chat</button>
+             <Link to='/chat' className='navbuttons' style={{ textDecoration: 'none', color: 'inherit' }}>
+             {menuOpen && (<FaMessage/> )}<div> Chats</div>
             </Link>
            {!menuOpen &&(
             <>
