@@ -8,6 +8,7 @@
   --button-background-hover:  rgba(43, 53, 53, 0.624); /* Darker Facebook blue */
   --button-text-color: white;
 
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   --primary-text-color: white;
   font-weight: 400;

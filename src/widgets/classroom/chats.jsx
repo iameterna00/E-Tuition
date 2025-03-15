@@ -52,6 +52,9 @@ function Chats() {
             fetchClasses();
         }
     }, [myuser]);
+    const handlebackclick = () => { 
+        setSelectedClass(null);
+    }
 
     useEffect(() => {
         // Update selectedClass when classId from URL changes
@@ -96,9 +99,17 @@ function Chats() {
             </div>
             
             {/* Show chat room only if a class is selected */}
-            {selectedClass ?  <ClassChatRoom classtitle={selectedClass.courseTitle} classId={selectedClass._id} />:  <div className='welcometomessages'><img className='wecomemessagepic' src={messagepic} alt="" />
+            <div className="desktopchatscreen">
+            {selectedClass ?  <ClassChatRoom  classtitle={selectedClass.courseTitle} classId={selectedClass._id} />:  <div className='welcometomessages'><img className='wecomemessagepic' src={messagepic} alt="" />
             <h3 style={{marginTop:'10px'}}>Welcome To Message</h3></div>
             }
+            </div>
+           {selectedClass && (
+             <div className="mobilechatscreen">
+         <ClassChatRoom handlebackclick={handlebackclick} classtitle={selectedClass.courseTitle} classId={selectedClass._id} />
+       </div>
+         
+           )}
         </div>
     );
 }

@@ -6,10 +6,11 @@ import { getAuth } from 'firebase/auth';
 import { webApi } from '../../api';
 import io from 'socket.io-client';
 import './classroom.css';
+import { FaArrowLeft, FaBackward } from 'react-icons/fa';
 
 const socket = io(webApi, { transports: ['websocket'] });
 
-function ClassChatRoom({ classId, classtitle }) {
+function ClassChatRoom({ classId, classtitle, handlebackclick }) {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const myuser = useSelector(selectUser);
@@ -122,7 +123,9 @@ function ClassChatRoom({ classId, classtitle }) {
         <div className="chatcontainerbody">
             <div className="classchat-container">
               <div className="classroomtitle">
+              <button className='backchatbutton' onClick={handlebackclick} > <FaArrowLeft/> </button>
               <h2>{classtitle}</h2>
+            
                 {error && <p>Error: {error}</p>}
               </div>
 
