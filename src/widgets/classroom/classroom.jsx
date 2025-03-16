@@ -6,11 +6,14 @@ import { getAuth } from 'firebase/auth';
 import { webApi } from '../../api';
 import io from 'socket.io-client';
 import './classroom.css';
-import { FaArrowLeft, FaBackward } from 'react-icons/fa';
+import { FaArrowLeft } from 'react-icons/fa';
+import { SiGooglemeet } from "react-icons/si";
+import { IoSend } from "react-icons/io5";
+import MeetModal from './meetmodal';
 
 const socket = io(webApi, { transports: ['websocket'] });
 
-function ClassChatRoom({ classId, classtitle, handlebackclick }) {
+function ClassChatRoom({ classId, classtitle, handlebackclick, adminId  }) {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const myuser = useSelector(selectUser);
@@ -19,13 +22,14 @@ function ClassChatRoom({ classId, classtitle, handlebackclick }) {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const messagesEndRef = useRef(null);
+    const [isAdmin, setIsAdmin] = useState(false);
+    const[openMeetModal, setMeetModalOpen] = useState(false);
 
-    // Update socket room on classId change
+
     useEffect(() => {
-        // Clear previous messages when classId changes
         setMessages([]);
-
         if (classId) {
+         
             console.log('Joining room:', classId);
             socket.emit('joinRoom', { classId });
         }
@@ -36,9 +40,9 @@ function ClassChatRoom({ classId, classtitle, handlebackclick }) {
                 socket.emit('leaveRoom', { classId });
             }
         };
-    }, [classId]); // Join/Leave room on classId change
+    }, [classId]); 
 
-    // Fetch user data on authentication change
+
     useEffect(() => {
         const authInstance = getAuth();
         const unsubscribe = authInstance.onAuthStateChanged((firebaseUser) => {
@@ -49,6 +53,13 @@ function ClassChatRoom({ classId, classtitle, handlebackclick }) {
 
         return () => unsubscribe();
     }, [dispatch]);
+
+    useEffect(() => {
+        if(adminId && myuser.uid === adminId){
+            setIsAdmin(true)
+            console.log('Admin is true:', adminId, isAdmin, myuser.uid);
+        }
+    },[isAdmin])
 
     // Handle receiving new messages
     useEffect(() => {
@@ -95,6 +106,11 @@ function ClassChatRoom({ classId, classtitle, handlebackclick }) {
 
     }, [classId, myuser?.uid, navigate]);
 
+    const handlemeetmodalclick = () => {
+        setMeetModalOpen(!openMeetModal);
+
+    }
+
     // Scroll to the bottom when new messages are added
     useEffect(() => {
         messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -108,6 +124,8 @@ function ClassChatRoom({ classId, classtitle, handlebackclick }) {
             class_id: classId,
             student_uid: myuser.uid,
             message: newMessage,
+            adminId: adminId,
+            student_name: myuser.fullName,
             timestamp: new Date().toISOString(),
         };
 
@@ -130,10 +148,14 @@ function ClassChatRoom({ classId, classtitle, handlebackclick }) {
               </div>
 
                 <div className="messages-container">
-                    {messages.map((msg, index) => (
-                        <div key={index} className={`chatmessages `}>
-                            <small className={`${msg.student_uid === myuser.uid ? 'sendername' : 'receivername'}`}>{msg.student_name}</small>
-                            <div className={`messagedetail ${msg.student_uid === myuser.uid ? 'sentmessage' : 'received'}`}>
+                    {messages.map((msg, index) => ( 
+                         <div
+                                 key={index}
+                            className={`chatmessages`}
+                            >
+                            <small className={`${msg.student_uid === msg._id ? 'adminname' : msg.student_uid === myuser.uid ? 'sendername' : 'receivername' }`}>{msg.student_name}</small>
+                            <div className={`messagedetail ${msg.student_uid === msg._id ? 'admin_message' : msg.student_uid === myuser.uid ? 'sentmessage' : 'received'}`}>
+
                                 <p>{msg.message}</p>
                             </div>
                         </div>
@@ -149,9 +171,14 @@ function ClassChatRoom({ classId, classtitle, handlebackclick }) {
                         onChange={(e) => setNewMessage(e.target.value)}
                         placeholder="Type a message..."
                     />
-                    <button style={{ maxHeight: "40px" }} onClick={handleSendMessage}>Send</button>
+                    <button onClick={handlemeetmodalclick} style={{  maxHeight:"40px"}}><SiGooglemeet/> </button>
+                    <button style={{ maxHeight: "40px" }} onClick={handleSendMessage}><IoSend/> </button>
                 </div>
             </div>
+            {openMeetModal && (
+                <MeetModal classId={classId} myuser={myuser} />
+            )}
+
         </div>
     );
 }

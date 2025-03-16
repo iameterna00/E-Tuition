@@ -6,8 +6,8 @@ import { selectUser, fetchUser } from '../../services/Redux/userSlice';
 import { getAuth } from 'firebase/auth';
 import './classroom.css';
 import ClassChatRoom from './classroom';
-import messagepic from '../../assets/chat.png'
-import emptyclass from '../../assets/empty.png'
+import messagepic from '../../assets/chat.png';
+import emptyclass from '../../assets/empty.png';
 
 function Chats() {
     const { classId } = useParams(); // Get classId from URL
@@ -52,9 +52,10 @@ function Chats() {
             fetchClasses();
         }
     }, [myuser]);
-    const handlebackclick = () => { 
+
+    const handlebackclick = () => {
         setSelectedClass(null);
-    }
+    };
 
     useEffect(() => {
         // Update selectedClass when classId from URL changes
@@ -74,42 +75,65 @@ function Chats() {
                 {error && <p className="error-text">Error: {error}</p>}
 
                 <div className="class-list">
-                    {classes.length === 0  ? (
-                       <div className="emptyclasssituation" style={{ marginTop:'100px', display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center'}}>
-                         <img style={{width:'80px'}} src={emptyclass} alt="" />
+                    {classes.length === 0 ? (
+                        <div
+                            className="emptyclasssituation"
+                            style={{
+                                marginTop: '100px',
+                                display: 'flex',
+                                flexDirection: 'column',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                            }}
+                        >
+                            <img style={{ width: '80px' }} src={emptyclass} alt="" />
                             <h3>No Class Found</h3>
-                       </div>
+                        </div>
                     ) : (
                         classes.map((classItem) => (
-                            <div
+                            <button
                                 key={classItem._id}
                                 className={`class-card ${selectedClass === classItem._id ? 'active' : ''}`}
                                 onClick={() => handleClassClick(classItem)}
                             >
                                 <img
-                                    src={classItem.image || '/default-class.jpg'} 
+                                    src={classItem.image || '/default-class.jpg'}
                                     alt={classItem.courseTitle}
                                     className="class-image"
                                 />
                                 <p className="class-title">{classItem.courseTitle}</p>
-                            </div>
+                            </button>
                         ))
                     )}
                 </div>
             </div>
-            
+
             {/* Show chat room only if a class is selected */}
             <div className="desktopchatscreen">
-            {selectedClass ?  <ClassChatRoom  classtitle={selectedClass.courseTitle} classId={selectedClass._id} />:  <div className='welcometomessages'><img className='wecomemessagepic' src={messagepic} alt="" />
-            <h3 style={{marginTop:'10px'}}>Welcome To Message</h3></div>
-            }
+                {selectedClass ? (
+                    <ClassChatRoom
+                        adminId={selectedClass.admin_id}  // Pass adminId to ClassChatRoom
+                        classtitle={selectedClass.courseTitle}
+                        classId={selectedClass._id}
+                    />
+                ) : (
+                    <div className="welcometomessages">
+                        <img className="wecomemessagepic" src={messagepic} alt="" />
+                        <h3 style={{ marginTop: '10px' }}>Welcome To Message</h3>
+                    </div>
+                )}
             </div>
-           {selectedClass && (
-             <div className="mobilechatscreen">
-         <ClassChatRoom handlebackclick={handlebackclick} classtitle={selectedClass.courseTitle} classId={selectedClass._id} />
-       </div>
-         
-           )}
+
+            {selectedClass && (
+                <div className="mobilechatscreen">
+                    <ClassChatRoom
+                        adminId={selectedClass.admin_id}  // Pass adminId to ClassChatRoom
+                        handlebackclick={handlebackclick}
+                        classtitle={selectedClass.courseTitle}
+                        classId={selectedClass._id}
+                    />
+                </div>
+            )}
         </div>
     );
 }

@@ -36,6 +36,8 @@
     box-shadow: 0 1px 3px rgba(0,0,0,0.1);
     transition: all 0.2s ease;
 }
+
+
 [data-theme='dark'] .class-card {
     background-color: rgb(26, 26, 26);
     color: white; 
@@ -142,6 +144,11 @@
     align-self: flex-start; 
     margin-left:5px;
 }
+.adminname{
+    align-self: flex-start; 
+    margin-left:5px;
+    font-weight: bold;
+}
 .sendername{
     margin-right: 5px;
     align-self: flex-end; 
@@ -156,7 +163,16 @@
     max-width: 60%; /* Keeps messages from being too wide */
     word-wrap: break-word;
 }
-
+.admin_message {
+    align-self: flex-start;
+    background: #5597a4;
+    color: white;
+    border-radius: 10px;
+    border-top-left-radius: 0;
+    padding: 10px;
+    max-width: 60%;
+    word-wrap: break-word;
+}
 .received {
     align-self: flex-start;
     background: #e0e0e0;
@@ -228,6 +244,20 @@
     position: absolute;
     width: 100%;
 }
+.meetmodalBody {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
 
 @media (max-width: 600px) {
     .classroomtitle {
