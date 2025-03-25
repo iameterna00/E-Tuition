@@ -20,6 +20,7 @@ function MeetModal({ classId, myuser }) {
                 message: `A meeting has been scheduled at ${selectedTime}`,
                 adminId: myuser.uid,
                 student_name: myuser.fullName,
+                meetinglink: 'https://meet.google.com/abc-xyz',
                 timestamp: new Date().toISOString(),
             };
             console.log('Sending meeting message:', meetMessage);

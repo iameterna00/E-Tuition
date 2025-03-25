@@ -170,8 +170,13 @@ function ClassChatRoom({ classId, classtitle, handlebackclick, adminId  }) {
                         value={newMessage}
                         onChange={(e) => setNewMessage(e.target.value)}
                         placeholder="Type a message..."
+                        onKeyDown={(e) => {
+                            if (e.key === 'Enter') handleSendMessage();
+                        }}
                     />
-                    <button onClick={handlemeetmodalclick} style={{  maxHeight:"40px"}}><SiGooglemeet/> </button>
+                 {isAdmin && (
+                       <button onClick={handlemeetmodalclick} style={{  maxHeight:"40px"}}><SiGooglemeet/> </button>
+                 )}
                     <button style={{ maxHeight: "40px" }} onClick={handleSendMessage}><IoSend/> </button>
                 </div>
             </div>

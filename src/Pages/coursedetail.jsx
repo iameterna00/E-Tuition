@@ -80,6 +80,10 @@ function CourseDetails() {
     }
   };
   
+  const handleChatButtonClick = () => {
+    navigate(`/chat/${id}`); // Redirect to the ChatRoom component with classid
+  };
+
   
 
   return (
@@ -179,6 +183,7 @@ function CourseDetails() {
  
 <ReviewsPage loginmodal={setShowLoginModal}  gigsData={gigDetails}
 user={myuser}/>
+
 
     </div>
   );
