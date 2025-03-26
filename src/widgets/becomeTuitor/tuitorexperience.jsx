@@ -381,7 +381,7 @@ function TeachingExperience({ setopentuitorinitialmodal, user }) {
 
     <div className="termsandcondition">
       <p>
-        1. This is a contract between the teacher and Cube. By agreeing to these terms, the teacher acknowledges and agrees to the following conditions:
+        1. This is a contract between the teacher and Kube. By agreeing to these terms, the teacher acknowledges and agrees to the following conditions:
       </p>
       <p>
         2. The teacher agrees to pay any required prepayments as outlined in this agreement. Failure to comply with payment obligations will result in strict legal action.
@@ -390,10 +390,10 @@ function TeachingExperience({ setopentuitorinitialmodal, user }) {
         3. Any violation of the terms and conditions outlined in this agreement will lead to strict enforcement of laws and policies applicable to this contract.
       </p>
       <p>
-        4. The teacher agrees to abide by all policies, rules, and regulations set forth by Cube. This includes but is not limited to payment terms, conduct, and any other obligations specified in this agreement.
+        4. The teacher agrees to abide by all policies, rules, and regulations set forth by kube. This includes but is not limited to payment terms, conduct, and any other obligations specified in this agreement.
       </p>
       <p>
-        5. Cube reserves the right to take appropriate legal action in case of any breach of this agreement.
+        5. kube reserves the right to take appropriate legal action in case of any breach of this agreement.
       </p>
       <p>
         6. By proceeding, the teacher confirms that they have read, understood, and agreed to all the terms and conditions stated herein.
@@ -416,12 +416,7 @@ function TeachingExperience({ setopentuitorinitialmodal, user }) {
     </div>
   </div>
 )}
-
-
-
-
-
-                    </div>
+               </div>
 
                  {step !=4 && step !==6 &&(   <div className="teacherimagecontainer">
                         <img className="teachimage" src={Teacher} alt="Teacher" />
