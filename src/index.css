@@ -124,10 +124,8 @@ input{
 body {
   margin: 0;
   font-family: 'Raleway', sans-serif;
-  overflow-x: hidden; /* Prevents horizontal scroll */
   display: flex;
   flex-direction: column; /* Ensures a natural stacking layout */
-  min-height: 100vh; /* Ensures the body takes up the full viewport height */
 }
 
 

@@ -301,19 +301,15 @@
 
   .navlinks {
   position: absolute;
-  padding: 10px;
   height: 100dvh;
-  
   top: 75px;
-  width: 250px;
+  width: 0px;
   backdrop-filter: blur(10px); 
   -webkit-backdrop-filter: blur(10px); 
   padding: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: opacity 0.3s ease-in-out;
+  transition: opacity 0.0s ease-in-out;
   opacity: 0;
-  transform: translateY(100%);
-
 
   }
   [data-theme="dark"] .navlinks {
@@ -326,12 +322,12 @@
 
   .navlinks.active {
     flex-direction: column;
-    display: flex; /* Show nav links when active */
+    display: flex; 
     position: absolute;
+    width: auto;
     top: 70px;
     opacity: 1;
-  transform: translateY(0%);
-   
+    transform: translateY(0%);
     right: 0px;
     border-radius: 0 0 20px 20px; /* Only bottom corners rounded */
 }
