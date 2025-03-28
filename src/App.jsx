@@ -21,6 +21,7 @@ import { webApi } from './api';
 import { useEffect, useRef } from 'react';
 import Chats from './widgets/classroom/chats';
 import ClassChatRoom from './widgets/classroom/classroom';
+import StudyAbroad from './Pages/studyabroad';
 
 
 
@@ -68,6 +69,7 @@ function App() {
             <Route path="/addclasses" element={<AddClass />} />
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/chat" element={<Chats />} />
+            <Route path="/studyabroad" element={<StudyAbroad />} />
             <Route path="/class/:classId/chat" element={<ClassChatRoom />} />
             <Route element={<AdminRoute />}>
               <Route path="/admin" element={<ADMIN />} />

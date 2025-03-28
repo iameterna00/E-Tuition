@@ -5,7 +5,7 @@ import LOGO from './assets/KUBE.png';
 import KUBE from './assets/newcube.png';
 import { CiLight, CiLogout } from "react-icons/ci";
 import { MdDarkMode } from "react-icons/md";
-import { FaBars, FaBook, FaChalkboardTeacher, FaSignInAlt, FaSignOutAlt, FaSun, FaTimes, FaUser } from 'react-icons/fa';
+import { FaBars, FaBook, FaChalkboardTeacher, FaPlane, FaSignInAlt, FaSignOutAlt, FaSun, FaTimes, FaUser } from 'react-icons/fa';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { getAuth, signOut } from "firebase/auth"; 
 import { auth } from './firebase_config'; 
@@ -15,6 +15,8 @@ import { fetchUser, selectUser } from './services/Redux/userSlice';
 import { webApi } from './api';
 import { FaMessage, FaUsersGear } from "react-icons/fa6";
 import { FiLogOut } from "react-icons/fi";
+import { IoIosNotifications } from 'react-icons/io';
+
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -27,7 +29,7 @@ const Navbar = () => {
   const [tuitorLogin, setTuitorLogin] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [tuitorsloacing, settuitotsLoading] = useState(false); 
-
+  const [notificationmodalopen, setnotificationmodalopen] = useState(false);
   const toggleMenu = () => {setMenuOpen(!menuOpen); setDropdownVisible(false); }
   const toggleDropdown = () =>{ setDropdownVisible(!dropdownVisible); setMenuOpen(false);}
   const handleLoginclick = () => setTuitorLogin(!tuitorLogin);
@@ -47,6 +49,11 @@ const Navbar = () => {
       console.error("Error signing out:", error);
     }
   };
+  const handlenotification = () => {
+    setnotificationmodalopen(!notificationmodalopen);
+    setDropdownVisible(false);
+    console.log("Notification clicked");
+  }
   
 
 
@@ -176,6 +183,9 @@ const Navbar = () => {
       
 
           <div  className={`navlinks ${menuOpen ? 'active' : ''}`}>
+          <Link onClick={handleLinkClick} to='/studyabroad' className='navbuttons' style={{ textDecoration: 'none', color: 'inherit' }}>
+             {menuOpen && (<FaPlane/> )}<div> Study Abroad</div>
+            </Link>
        
        {myuser?.teacherconfirm === 'pending' || myuser?.teacherconfirm === 'approved' ? (
   <>
@@ -205,6 +215,24 @@ const Navbar = () => {
              <Link onClick={handleLinkClick} to='/chat' className='navbuttons' style={{ textDecoration: 'none', color: 'inherit' }}>
              {menuOpen && (<FaMessage/> )}<div> Chats</div>
             </Link>
+            {/* {user && (
+                 <div className="navbuttons" style={{ position:"relative", display: 'flex', gap: '10px' }} onClick={handlenotification} >
+                 {menuOpen ? (
+                   <>
+                   
+                   <IoIosNotifications fontSize={20} /> notifications
+                   </>
+                 ) : (
+                   <IoIosNotifications fontSize={20} /> 
+                 )}
+                   {notificationmodalopen && (
+                  <div className="dropdown-menupc" style={{
+                     position: 'absolute', top: '50px', right: '0',  padding: '10px 20px', display: 'flex', flexDirection: 'column', boxShadow: '0px 8px 16px rgba(0,0,0,0.2)', zIndex: 1 }}>
+                   <Notification/>
+                  </div>
+                )}
+               </div>
+               )} */}
            {!menuOpen &&(
             <>
              {!user ? (
@@ -227,7 +255,7 @@ const Navbar = () => {
                 />
                 {dropdownVisible && (
                   <div className="dropdown-menupc" style={{
-                     position: 'absolute', top: '50px', right: '0', backgroundColor: isScrolled ? "rgb(40,45,45)" : "transparent", padding: '10px 20px', display: 'flex', flexDirection: 'column', boxShadow: '0px 8px 16px rgba(0,0,0,0.2)', zIndex: 1 }}>
+                     position: 'absolute', top: '50px', right: '0',  padding: '10px 20px', display: 'flex', flexDirection: 'column', boxShadow: '0px 8px 16px rgba(0,0,0,0.2)', zIndex: 1 }}>
                     <Link onClick={handleLinkClick} to="/profile" className="dropdown-item">Profile</Link>
                     <Link onClick={handleLinkClick} to="/settings" className="dropdown-item">Settings</Link>
                     <button onClick={handleLogout} className="dropdown-item">Logout</button>
@@ -236,16 +264,18 @@ const Navbar = () => {
               </div>
             )}</>
            )}
+           
             <div className="navbuttons" style={{ display: 'flex', gap: '10px' }} onClick={()=>{toggleTheme(); handleLinkClick();}}>
               {menuOpen ? (
                 <>
                 
-                {theme === 'dark' ? <FaSun /> : <MdDarkMode />} Change Theme 
+                {theme === 'dark' ? <CiLight /> : <MdDarkMode />} Change Theme 
                 </>
               ) : (
                 theme === 'dark' ? <CiLight /> : <MdDarkMode />
               )}
             </div>
+       
             {menuOpen && (
   <>
     <

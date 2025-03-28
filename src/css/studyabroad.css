@@ -1,0 +1,107 @@
+/* Full-width banner */
+.studyabroadbanner {
+    width: 100%;
+    background: linear-gradient(to right, #193232, #0f2027);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  }
+  .studyabroadbannertext{
+    position: absolute;
+  }
+  
+  /* Layout */
+  .content-container {
+    display: flex;
+    padding: 20px;
+  }
+  
+  /* Filter section */
+  .filter-container {
+    width: 25%;
+    padding: 20px;
+    background: #eaeaea;
+    border-radius: 10px;
+  }
+  [data-theme = 'dark'] .filter-container {
+    background: #2c2c2c;
+  }
+  
+  .filter-container input, .filter-container select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+  }
+  
+  /* University list */
+  .university-list {
+    width: 75%;
+    padding: 20px;
+  }
+  
+  .university-card {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    background: #eaeaea;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  [data-theme = 'dark']  .university-card {
+    background: #262626;
+  }
+  .university-logo {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-right: 15px;
+  }
+  
+  .university-info h4 {
+    margin: 0;
+    color: #333;
+  }
+  
+  .university-info p {
+    margin: 5px 0;
+    color: #666;
+  }
+  .filter-container {
+    text-align: center;
+    padding: 20px;
+  }
+  /* Country Filter Container */
+.country-filter {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+  }
+  
+  /* Country Option */
+  .country-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 20px;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .country-option img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid transparent;
+  }
+  
+  /* Highlight Selected Country */
+  .country-option.selected {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+  

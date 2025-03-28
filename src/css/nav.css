@@ -89,8 +89,12 @@
   color: black;
 }
 
-
-
+[data-theme='dark'] .dropdown-menupc{
+  background-color: rgb(40, 45, 45);
+}
+[data-theme='light'] .dropdown-menupc{
+  background-color: rgb(255, 255, 255);
+}
 .Logo {
   height: 30px;
   width:30px;
