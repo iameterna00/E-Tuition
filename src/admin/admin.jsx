@@ -30,8 +30,8 @@ const ADMIN = () => {
     salary: "",
     time: "",
     minRequirement: "",
-    tutorType: "", // New field
-    tuitionType: "Home Tuition", // New field, default to Home Tuition
+    tutorType: "", 
+    tuitionType: "Home Tuition", 
     teachers: [],
     lat: null,
     lng: null
