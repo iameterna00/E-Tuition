@@ -44,7 +44,10 @@
   .university-card {
     display: flex;
     align-items: center;
+    justify-content: start;
+    text-align: start;
     padding: 15px;
+    cursor: pointer;
     border-radius: 10px;
     margin-bottom: 15px;
     background: #eaeaea;
@@ -52,6 +55,12 @@
   }
   [data-theme = 'dark']  .university-card {
     background: #262626;
+  }
+  [data-theme = 'dark'] .university-list :hover {
+    background: #2c2c2c;
+  }
+  [data-theme = 'light'] .university-list :hover {
+    background: #d0d0d0;
   }
   .university-logo {
     width: 60px;
@@ -72,10 +81,13 @@
   .filter-container {
     text-align: center;
     padding: 20px;
+    height: 600px;
+    overflow-y: auto;
   }
   /* Country Filter Container */
 .country-filter {
     display: flex;
+   
     flex-direction: column;
     gap: 15px;
 
@@ -90,6 +102,12 @@
     padding: 5px 10px;
     border-radius: 20px;
     transition: all 0.2s ease-in-out;
+  }
+  [data-theme = 'dark'] .country-filter :hover {
+    background: #232323;
+  }
+  [data-theme = 'light'] .country-filter :hover {
+    background: #d0d0d0;
   }
   
   .country-option img {

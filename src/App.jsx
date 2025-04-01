@@ -22,6 +22,7 @@ import { useEffect, useRef } from 'react';
 import Chats from './widgets/classroom/chats';
 import ClassChatRoom from './widgets/classroom/classroom';
 import StudyAbroad from './Pages/studyabroad';
+import UniversityDetail from "./widgets/studyabroad/universitydetail.jsx";
 
 
 
@@ -62,6 +63,7 @@ function App() {
           <ScrollToTop />
           <Routes>
             <Route path="/" element={<HomePage />} />
+            <Route path="/university/:id" element={<UniversityDetail />} />
             <Route path="/academicclasses" element={<OnlineClasses />} />
             <Route path="/coursesdetails/:id" element={<CourseDetails />} />
             <Route path="/tutorhome" element={<BecomeTuitor />} />

@@ -3,12 +3,11 @@ import "../../css/studyabroad.css";
 
 // List of countries with flag URLs
 const countries = [
+  { name: "", flag: "https://theglobalcollege.com/wp-content/uploads/2020/03/what-is-global-at-college.jpg" },
   { name: "USA", flag: "https://flagcdn.com/w40/us.png" },
-  { name: "UK", flag: "https://flagcdn.com/w40/gb.png" },
   { name: "Canada", flag: "https://flagcdn.com/w40/ca.png" },
   { name: "China", flag: "https://flagcdn.com/w40/cn.png" },
   { name: "Japan", flag: "https://flagcdn.com/w40/jp.png" },
-  { name: "Germany", flag: "https://flagcdn.com/w40/de.png" },
 ];
 
 const Filter = ({ searchTerm, setSearchTerm, selectedCountry, setSelectedCountry }) => {
@@ -34,7 +33,7 @@ const Filter = ({ searchTerm, setSearchTerm, selectedCountry, setSelectedCountry
             onClick={() => setSelectedCountry(country.name)}
           >
             <img src={country.flag} alt={country.name} />
-            <p>{country.name}</p>
+            <p>{country.name ===''? 'All': country.name}</p>
           </div>
         ))}
       </div>

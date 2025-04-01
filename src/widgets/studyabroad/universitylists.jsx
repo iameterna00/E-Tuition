@@ -1,9 +1,12 @@
 import React from "react";
-import universitiesData from "./universitydata.js"; // Assuming you have a JSON file with university data
+import { useNavigate } from "react-router-dom";
+import universitiesData from "./universitydata.js";
 import "../../css/studyabroad.css";
 
 const UniversityList = ({ searchTerm, selectedCountry }) => {
-  const filteredUniversities = universitiesData.filter((university) => 
+  const navigate = useNavigate();
+
+  const filteredUniversities = universitiesData.filter((university) =>
     university.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
     (selectedCountry === "" || university.country === selectedCountry)
   );
@@ -14,12 +17,22 @@ const UniversityList = ({ searchTerm, selectedCountry }) => {
       
       {filteredUniversities.length > 0 ? (
         filteredUniversities.map((university) => (
-          <div key={university.id} className="university-card">
-            <img src={university.logo} alt={university.name} className="university-logo" />
+          <div
+            key={university.id}
+            className="university-card"
+            onClick={() => navigate(`/university/${university.id}`)}
+            style={{ cursor: "pointer" }}
+          >
+            <img
+              style={{ objectFit: "cover" }}
+              src={university.logo}
+              alt={university.name}
+              className="university-logo"
+            />
             <div className="university-info">
-              <h4>{university.name}</h4>
+              <h3>{university.name}</h3>
               <p>{university.address}, {university.country}</p>
-              <p>💰 Estimated Cost of Living: {university.costOfLiving}/month</p>
+              <p>Estimated Cost of Living: {university.costOfLiving}/month</p>
             </div>
           </div>
         ))

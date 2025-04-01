@@ -43,15 +43,15 @@ function TeacherVacancy() {
 
   const fetchVacancies = async () => {
     setLoading(true);
-    // const auth = getAuth();
-    // const user = auth.currentUser;
+    const auth = getAuth();
+    const user = auth.currentUser;
   
-    // if (user) {
+    if (user) {
       try {
-        // const idToken = await user.getIdToken();
+        const idToken = await user.getIdToken();
         const response = await axios.get(`${webApi}/api/vacancyforteachers`, {
           headers: {
-            // Authorization: `Bearer ${idToken}`
+            Authorization: `Bearer ${idToken}`
           }
         });
         setVacancies(response.data); // Update vacancies
@@ -60,7 +60,7 @@ function TeacherVacancy() {
       } finally {
         setLoading(false); // Stop loading
       }
-    // }
+    }
   };
 
   
