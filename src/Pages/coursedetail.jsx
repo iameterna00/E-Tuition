@@ -159,6 +159,11 @@ function CourseDetails() {
           </div>
         </div>
       </div>
+      {gigDetails.description && (<div className="classDescriptioncontainer"> Description:
+    <div className="classdescriptioninsiders">
+    <p>{gigDetails.description}</p>
+    </div>
+      </div>)}
    
 
     {/* Login Modal */}

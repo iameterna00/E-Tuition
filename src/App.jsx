@@ -23,15 +23,20 @@ import Chats from './widgets/classroom/chats';
 import ClassChatRoom from './widgets/classroom/classroom';
 import StudyAbroad from './Pages/studyabroad';
 import UniversityDetail from "./widgets/studyabroad/universitydetail.jsx";
+import { generateToken } from './firebase_config.js';
 
 
 
 function App() {
-  const PING_URL = `${webApi}/api/ping`; // Replace with your Render URL
+  const PING_URL = `${webApi}/api/ping`;
   const intervalRef = useRef(null);
 
+  useEffect(()=>{
+    generateToken();
+  },[])
+
   useEffect(() => {
-    // Only create interval if it doesn't exist
+   
     if (!intervalRef.current) {
       intervalRef.current = setInterval(async () => {
         try {

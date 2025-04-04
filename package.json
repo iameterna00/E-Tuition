@@ -26,6 +26,7 @@
     "js-cookie": "^3.0.5",
     "lottie-web": "^5.12.2",
     "mapbox-gl": "^3.10.0",
+    "marked": "^15.0.7",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-draggable": "^4.4.6",

@@ -7,10 +7,11 @@ import { useNavigate } from "react-router-dom";
 
 const AddClass = () => {
   const [classDetails, setClassDetails] = useState({
+    classtype:"Academic",
     subject: "",
     courseTitle: "",
     description: "",
-    fee: "350", // Default hourly rate
+    fee: "350", 
     monthlyFee: "", // New state for monthly fee
     posterImage: null,
     tuitionType: "Online Tuition",
@@ -73,6 +74,7 @@ const AddClass = () => {
     const formData = new FormData();
     formData.append("posterImage", document.getElementById("course-poster").files[0]); // Add image file
     formData.append("uid", uid);
+    formData.append("classtype", classDetails.classtype); // Include class type in the data
     formData.append("subject", classDetails.subject);
     formData.append("courseTitle", classDetails.courseTitle);
     formData.append("description", classDetails.description);
@@ -146,36 +148,43 @@ const AddClass = () => {
         <form onSubmit={handleSubmit} className="addclass-form">
           <div className="classesform-container">
             <div className="right-side">
-            <div className="form-group">
-                {/* <label>Tuition Type</label>
-                <select name="tuitionType" value={classDetails.tuitionType} onChange={handleChange} required>
-                  <option value="Home Tuition">Home Tuition</option>
-                  <option value="Online Tuition">Online Tuition</option>
-                </select> */}
-              </div>
               <div className="form-group">
-                <label>Fee (per hour)</label>
-                <input
-                  type="number"
-                  name="fee"
-                  value={classDetails.fee}
-                  onChange={handleChange}
-                  required
-                  placeholder="Enter course fee per hour"
-                />
+                <label>Class Type</label>
+               <select name="classtype" id="" value={classDetails.classtype} onChange={handleChange} required>
+                <option value="Academic">
+                  Academic
+                </option>
+                <option value="Abroad_cPreparation">
+                Abroad Preparation
+                </option>
+                
+               </select>
               </div>
+            
+  <div className="form-group">
+    <label>Fee (per hour)</label>
+    <input
+      type="number"
+      name="fee"
+      value={classDetails.fee}
+      onChange={handleChange}
+      placeholder="Enter course fee per hour"
+      disabled={classDetails.monthlyFee} // Disable if monthlyFee is filled
+    />
+  </div>
+  <div className="form-group">
+    <label>Monthly Fee</label>
+    <input
+      type="number"
+      name="monthlyFee"
+      value={classDetails.monthlyFee}
+      onChange={handleChange}
+      placeholder="Enter course monthly fee"
+      disabled={classDetails.fee} // Disable if fee is filled
+    />
+  </div>
 
-              <div className="form-group">
-                <label>Monthly Fee</label>
-                <input
-                  type="number"
-                  name="monthlyFee"
-                  value={classDetails.monthlyFee}
-                  onChange={handleChange}
-                  required
-                  placeholder="Enter course monthly fee"
-                />
-              </div>
+
               
               <div className="form-group">
                 <label>Course Title</label>
@@ -189,16 +198,25 @@ const AddClass = () => {
                 />
               </div>
 
+             {classDetails.classtype == "Academic" && (
+               <div className="form-group">
+               <label>Subject</label>
+               <input
+                 type="text"
+                 name="subject"
+                 value={classDetails.subject}
+                 onChange={handleChange}
+                 required
+                 placeholder="Enter subject"
+               />
+             </div>
+             )}
               <div className="form-group">
-                <label>Subject</label>
-                <input
-                  type="text"
-                  name="subject"
-                  value={classDetails.subject}
-                  onChange={handleChange}
-                  required
-                  placeholder="Enter subject"
-                />
+                <label>Teaching Type</label>
+                <select name="tuitionType" value={classDetails.tuitionType} onChange={handleChange} required>
+                  <option value="Home Tuition">Home Classes</option>
+                  <option value="Online Tuition">Online Classes</option>
+                </select>
               </div>
 
 

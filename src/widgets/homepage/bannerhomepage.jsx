@@ -29,9 +29,9 @@ function HomeBanner({ user }) {
                         <button>Get Started</button>
                      </div>
                   )}
-                 {/* <Link to={'/tutorhome'}> <div className="getstarted">
-                     <button >Be a Tutor</button>
-                  </div></Link> */}
+                 <Link to={'/studyabroad'}> <div className="getstarted">
+                     <button >Study Abroad</button>
+                  </div></Link>
                   <div className="Explore">
                      <button onClick={handleExploreClick} >Explore Courses</button>
                   </div>

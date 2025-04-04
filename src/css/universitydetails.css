@@ -1,0 +1,66 @@
+.university-detail {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .university-header {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin-bottom: 30px;
+  }
+  
+  .university-logo {
+    width: 150px;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .university-info h2 {
+    font-size: 2rem;
+    margin: 0;
+  }
+  
+  .university-info p {
+    font-size: 1rem;
+  }
+  
+  .website a {
+    font-size: 1rem;
+    color: #1e90ff;
+    text-decoration: none;
+  }
+  
+  .website a:hover {
+    text-decoration: underline;
+  }
+  
+  .university-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    font-size: 1rem;
+    margin-bottom: 30px;
+  }
+  
+  .university-description {
+    margin-top: 20px;
+    text-align: start;
+  }
+  
+
+  .university-not-found {
+    text-align: center;
+    margin-top: 50px;
+  }
+  
+  .university-not-found h2 {
+    font-size: 1.5rem;
+    color: #d9534f;
+  }
+  
+  

@@ -32,6 +32,29 @@
    border-radius: 20px;
 
   }
+  .classDescriptioncontainer{
+    width: 75%;
+    padding: 20px;
+    text-align: start;
+    border-radius: 20px;
+    margin: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    
+  }
+  .classdescriptioninsiders{
+    display: flex;
+    width: 100%;
+    max-width: 600px;
+    justify-content: start;
+    align-items: start;
+    gap: 10px;
+    margin-bottom: 20px;
+    text-align: start;
+  }
+  [data-theme='dark'] .classDescriptioncontainer{
+    background-color: #2e3b4563;
+
+  }
   [data-theme='dark'] .coursebodyone{
     background-color: #2e3b4563;
     
@@ -468,6 +491,8 @@
     flex-direction: column;
     align-items: flex-start;
   }
+  .classDescriptioncontainer{
+    width: 90%;}
 
   .course-details-body {
     flex-direction: column;
