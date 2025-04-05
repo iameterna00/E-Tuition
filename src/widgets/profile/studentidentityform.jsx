@@ -227,7 +227,7 @@ const handleClose = () => {
                         onChange={handleChange}
                         placeholder="Enter address"
                         onClick={() => setIsMapOpen(true)}
-                        disabled
+                     
                     />
                 </div>
                 {isMapOpen && (
