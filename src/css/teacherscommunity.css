@@ -85,7 +85,7 @@
     border-radius: 20px;
     box-shadow: none;
     color: white;
-    width: 90%;
+    width: 100%;
 
 
   }
@@ -197,6 +197,29 @@
     border-radius: 20px;
    
   }
+/* Dark theme for the banner */
+[data-theme='dark'] .teacherscommunitybanner {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  height: 300px;
+  border-radius: 20px;
+  background: linear-gradient(to right, #3d464b, #02345d);  /* Original dark gradient */
+}
+
+/* Light theme for the banner */
+[data-theme='light'] .teacherscommunitybanner {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  height: 300px;
+  border-radius: 20px;
+  background: linear-gradient(to right, #e0f7fa, #80deea);  /* Light gradient for light theme */
+}
+
+  .teacherscommunityimage{
+    height: 300px;
+  }
   
   
   .vacancycommunitygraphics {
@@ -217,7 +240,12 @@
   [data-theme='light'] .vacancycommunitygraphics {
   background-color: rgb(247, 252, 255);
 }
-
+.teacherscommunitytext{
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
   .vacancycommunitydetails{
     text-align: start;
   }
@@ -302,6 +330,20 @@
       display: flex;
       margin-top: 10px;
       gap: 8px;
+    }
+    .teacherscommunityimage{
+      height: 180px;
+    }
+    .teacherscommunitytext{
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+    }
+    .teachervacancybody {
+      padding: 5px;
+      width: 100%;
+      max-width: 1600px;
     }
   }
   

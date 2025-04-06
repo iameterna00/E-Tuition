@@ -13,6 +13,7 @@ import { getAuth } from 'firebase/auth';
 import { IoChatbubbles } from 'react-icons/io5';
 import Chatbot from '../../chatbot/chatbot';
 import { TailSpin } from 'react-loader-spinner';
+import teacherscommunity from '../../assets/teacherscommunity.png';
 
 mapboxgl.accessToken = "pk.eyJ1IjoiYW5pc2hoLWpvc2hpIiwiYSI6ImNrdWo5d2lhdDFkb2oybnJ1MDB4OG1oc2EifQ.pLrp8FmZSLVfT3pAVVPBPg";
 
@@ -152,7 +153,18 @@ function TeacherVacancy() {
 
   return (
     <div className="teachervacancybody">
-      <h2>Teacher's Vacancies</h2>
+     <div className="teacherscommunitybanner">
+     <div className="teacherscommunitytext">
+     <h2 style={{margin:'0px'}} >Welcome to <br/>Teacher's Community</h2>
+     <p style={{padding:'0px', margin:'0px'}} >Earn 5% reward by referring candidates for open vacancies!</p>
+    <div className="getstarted" style={{maxWidth:"200px", marginTop:'10px'}}>
+    <button >Refer a teacher</button>
+    </div>
+     </div>
+     <img src={teacherscommunity} className='teacherscommunityimage' alt="" />
+   
+     </div>
+    
       <div id="geocoder" style={{ margin: "10px 0", width: "100%" }}></div>
   
 
