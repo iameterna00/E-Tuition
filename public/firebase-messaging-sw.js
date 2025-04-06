@@ -26,7 +26,7 @@ messaging.onBackgroundMessage((payload) => {
   const notificationTitle = payload.data.title || 'New Notification';
   const notificationOptions = {
     body: payload.data.body || 'You have a new message',
-    icon: '/etuitor/src/assets/newcube.png',  // Ensure this path is correct
+    icon: 'https://www.kubenp.com/assets/newcube-CA76bIr8.png',  // Ensure this path is correct
     data: payload.data || {}  // Additional data passed with the notification
   };
 
