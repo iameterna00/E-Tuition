@@ -12,6 +12,7 @@ import { RiFocus2Line } from "react-icons/ri";
 import { getAuth } from 'firebase/auth';
 import { IoChatbubbles } from 'react-icons/io5';
 import Chatbot from '../../chatbot/chatbot';
+import { TailSpin } from 'react-loader-spinner';
 
 mapboxgl.accessToken = "pk.eyJ1IjoiYW5pc2hoLWpvc2hpIiwiYSI6ImNrdWo5d2lhdDFkb2oybnJ1MDB4OG1oc2EifQ.pLrp8FmZSLVfT3pAVVPBPg";
 
@@ -147,6 +148,8 @@ function TeacherVacancy() {
     }
   }, []);
 
+ 
+
   return (
     <div className="teachervacancybody">
       <h2>Teacher's Vacancies</h2>
@@ -166,8 +169,18 @@ function TeacherVacancy() {
           Search Vacancies Near Me <MdGpsFixed className='gpsicon' fontSize={20} />
         </button>
       </div>
-
+      {loading && ( <div className="vacancy-loader-container" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '400px',  width: '100%', flexDirection: 'column'}}>
+        <TailSpin
+  height="40"
+  width="40"
+  color="#00bcd4"
+  ariaLabel="loading"
+/>
+      <p>loading vacancies..</p>
+    </div>)}
       <div className="vacancy-list">
+     
+        
   {activeTab === 'available' && userLocation && filteredVacancies.length > 0
     ? filteredVacancies
         .filter((vacancy) => vacancy.status !== 'complete')
