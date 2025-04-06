@@ -12,7 +12,7 @@ const countries = [
 ];
 
 const Filter = ({ searchTerm, setSearchTerm, selectedCountry, setSelectedCountry }) => {
-  const [filterVisible, setFilterVisible] = useState(true); // Track filter visibility
+  const [filterVisible, setFilterVisible] = useState(false); // Track filter visibility
   
   // Toggle filter visibility
   const toggleFilter = () => {

@@ -29,9 +29,9 @@ function HomeBanner({ user }) {
                         <button>Get Started</button>
                      </div>
                   )}
-                 <Link to={'/studyabroad'}> <div className="getstarted">
+                 {user && (<Link to={'/studyabroad'}> <div className="getstarted">
                      <button >Study Abroad</button>
-                  </div></Link>
+                  </div></Link>)}
                   <div className="Explore">
                      <button onClick={handleExploreClick} >Explore Courses</button>
                   </div>
