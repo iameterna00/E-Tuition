@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import '../css/teachersdashboard.css';
 import KUBE from '../assets/newcube.png';
-import Dictator from '../assets/Dictator.png';
+import Dictator from '../assets/newcube.png';
 import Master from '../assets/Master.png';
 import { RadialBarChart, RadialBar, ResponsiveContainer, Tooltip, LineChart, Line, XAxis, YAxis, CartesianGrid, Legend, Tooltip as RechartsTooltip } from 'recharts';
 import { FaFile, FaIdCard } from 'react-icons/fa';

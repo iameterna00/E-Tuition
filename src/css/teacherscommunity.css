@@ -37,6 +37,34 @@
     justify-content: center;
    
   }
+  .refer  {
+    border-radius: 30px;
+    padding: 5px 10px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+  }
+  [data-theme='light'] .refer button {
+   color: #000000;
+  }
+  .referafriend{
+    background-color: #00b336;
+  }
+
+  .refer button{
+    background-color: transparent;
+    font-size: 16px;
+    padding: 10px;
+    display: block;
+    width: 100%;
+    
+  
+  }
+  .refer:hover {
+    background-color: rgb(0, 162, 255);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    
+  }
   .teachervacancybody {
     padding: 20px;
     width: 100%;
@@ -313,6 +341,63 @@
   [data-theme='light']   .minrequirements{
     background: rgb(233, 233, 233);
 }
+.vacancy-detail-body{
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+.vacancydetailscontents{
+  width: 80%;
+  gap: 40px;
+  justify-content: space-between;
+  display: flex;
+}
+.vacancybodybanner{
+  display: flex;
+
+}
+.importantvacacnynote{
+  text-align: start;
+  width: 100%;
+  max-width: 500px ;
+  padding: 10px;
+  border-radius: 20px;
+  background-color: rgba(154, 154, 154, 0.065);
+}
+.vacancy_detail_leftside{
+  width: 50%;
+}
+.vacancy_detal_rightside{
+  width: 50%;
+  border-radius: 20px;
+}
+.vacancydetailinformation{
+  height: auto;
+  justify-content: center;
+  text-align: start;
+  padding: 20px;
+  margin: 20px;
+  border-radius: 20px;
+  background-color: rgba(182, 182, 182, 0.065);
+}
+.vacancy_detail_salary p {
+  margin: 6px 0;
+  font-size: 18px;
+}
+.refersuggestions{
+  background-color: #0099ff17;
+  padding: 10px;
+  margin: 20px 0px;
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid  #0099ffca;
+  border-radius: 10px;
+  text-align: start;
+}
+
+
+
   
   /* Responsive: 2 columns on medium screens, 1 column on small */
   @media (max-width: 1024px) {
@@ -344,6 +429,44 @@
       padding: 5px;
       width: 100%;
       max-width: 1600px;
+    }
+    .vacancydetailscontents{
+      flex-direction: column;
+      width: 100%;
+      justify-content: center;
+    
+
+    }
+    .vacancy_detail_leftside{
+      width: 100%;
+    }
+    .vacancy_detal_rightside{
+      width: 100%;
+      padding: 0px;
+    }
+    .importantvacacnynote{
+      padding: 0px;
+    }
+    .importantvacancynoteinside{
+      padding: 10px;
+    }
+    .vacancydetailinside{
+      padding: 10px;
+    }
+    .vacancydetailinformation{
+      width: 100%;
+      margin: 10px 0px;
+      padding: 10px 0px;
+    }
+    .refersuggestions{
+      background-color: #0099ff17;
+      padding: 10px;
+      display: flex;
+      margin: 20px 0px;
+      justify-content: space-between;
+      border: 1px solid  #0099ffca;
+      border-radius: 10px;
+      text-align: start;
     }
   }
   

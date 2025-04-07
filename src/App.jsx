@@ -24,6 +24,7 @@ import ClassChatRoom from './widgets/classroom/classroom';
 import StudyAbroad from './Pages/studyabroad';
 import UniversityDetail from "./widgets/studyabroad/universitydetail.jsx";
 import { generateToken } from './firebase_config.js';
+import VacancyDetail from './widgets/teachercommunity/vacancydetailpage.jsx';
 
 
 
@@ -77,6 +78,10 @@ function App() {
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/chat" element={<Chats />} />
             <Route path="/studyabroad" element={<StudyAbroad />} />
+      
+            <Route path="/vacancy/:vacancyId/referral/:referralCode" element={<VacancyDetail />} />
+            <Route path="/vacancy/:vacancyId" element={<VacancyDetail />} />
+
             <Route path="/class/:classId/chat" element={<ClassChatRoom />} />
             <Route element={<AdminRoute />}>
               <Route path="/admin" element={<ADMIN />} />

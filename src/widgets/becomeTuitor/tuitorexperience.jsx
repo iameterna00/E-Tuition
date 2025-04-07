@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import KUBE from "../../assets/KUBE.png";
+import KUBE from "../../assets/newcube.png";
 import Teacher from "../../assets/teach.png";
 import collegeData from "../../JSON/kathmandu_college.json";
 import { FaCloudUploadAlt, FaFilePdf } from "react-icons/fa";

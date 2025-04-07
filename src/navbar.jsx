@@ -1,7 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { ThemeContext } from './utilities/themeprovider';
 import './css/nav.css';
-import LOGO from './assets/KUBE.png';
 import KUBE from './assets/newcube.png';
 import { CiLight, CiLogout } from "react-icons/ci";
 import { MdDarkMode } from "react-icons/md";
@@ -15,7 +14,7 @@ import { fetchUser, selectUser } from './services/Redux/userSlice';
 import { webApi } from './api';
 import { FaMessage, FaUsersGear } from "react-icons/fa6";
 import { FiLogOut } from "react-icons/fi";
-import { IoIosNotifications } from 'react-icons/io';
+
 
 
 const Navbar = () => {
