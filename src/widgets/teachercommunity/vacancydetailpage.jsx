@@ -9,16 +9,18 @@ import ReferalProces from "../../assets/referalprocess.png";
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUser, selectUser } from '../../services/Redux/userSlice';
 import { getAuth } from 'firebase/auth';
+import TuitorLogin from '../login/betuitorlogin';
 
 const VacancyDetail = () => {
   const { vacancyId, referralCode: urlReferralCode } = useParams(); 
   const [vacancy, setVacancy] = useState(null);
   const [loading, setLoading] = useState(true);
   const [openreferalmodal, setopenreferalmodal] = useState(false);
-  const [referralCode, setReferralCode] = useState('');
+  const [openlogin, setopenlogin] = useState(false);
   const dispatch = useDispatch();
   const myuser = useSelector(selectUser);
   const [generatedReferralCode, setGeneratedReferralCode] = useState('');
+  const handleLoginclick = () => setopenlogin(!openlogin);
   const activeReferralCode = urlReferralCode || generatedReferralCode || (myuser?.referralCode || '');
 
 
@@ -49,6 +51,15 @@ const VacancyDetail = () => {
 
     fetchVacancy();
   }, [vacancyId]);
+
+  const handlereferclick = () => {
+    if (myuser) {
+      setopenreferalmodal(true); // Open referral modal if logged in
+    } else {
+      console.log('loginopen')
+      setopenlogin(true); // Open login modal if not logged in
+    }
+  }
 
   const closeModal = () => setopenreferalmodal(false);
 
@@ -149,7 +160,7 @@ const VacancyDetail = () => {
           </a>
                 </div>
                 <div className="refer" style={{ width: '100%', backgroundColor: "transparent", border: "1px solid grey", borderRadius: "20px" }}>
-                  <button onClick={() => setopenreferalmodal(true)}>Refer a tutor</button>
+                  <button onClick= {handlereferclick}>Refer a tutor</button>
                 </div>
               </div>
             </div>
@@ -187,7 +198,7 @@ const VacancyDetail = () => {
 
             {myuser.referralCode ? (
               <div>
-                <p>Your referral code: {myuser.referralCode}</p>
+                <p>Copy and share your referal link</p>
                 <div className="contactwhatsappbutton">
                 <a href={`${window.location.origin}/vacancy/${vacancyId}/referral/${myuser.referralCode}`} target="_blank" rel="noopener noreferrer">
                 <button>Copy Code</button>
@@ -213,6 +224,11 @@ const VacancyDetail = () => {
           </div>
         </div>
       )}
+       {openlogin && (
+      
+      <TuitorLogin close={handleLoginclick} />
+   
+  )}
     </div>
   );
 };
