@@ -95,18 +95,33 @@ const VacancyDetail = () => {
   };
 
   const handleGenerateReferralCode = async () => {
+    if (myuser?.referralCode) {
+      toast.info('Referral code already exists!');
+      return; 
+    }
+  
     try {
       const response = await fetch(`${webApi}/api/generate-referral-code`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ userId: myuser.uid }),
+        body: JSON.stringify({ userId: myuser.uid }), // Ensure userId is sent
       });
+  
       const data = await response.json();
-      setGeneratedReferralCode(data.referralCode);
+  
+      if (data.referralCode) {
+        setGeneratedReferralCode(data.referralCode); 
+        dispatch(fetchUser(myuser.uid)); 
+        toast.success('Referral code generated successfully!');
+      } else {
+        toast.error('Error generating referral code.');
+      }
     } catch (error) {
       console.error('Error generating referral code:', error);
+      toast.error('Failed to generate referral code.');
     }
   };
+  
 
   if (loading) {
     return (
@@ -216,7 +231,7 @@ const VacancyDetail = () => {
 
             <p>Refer a teacher for {vacancy.subject}</p>
 
-            {myuser.referralCode ? (
+            {myuser.referralCode || generatedReferralCode ? (
               <div>
                   <p style={{marginTop:'-5px'}}>Copy and share your referal link</p>
                 <input type="text"

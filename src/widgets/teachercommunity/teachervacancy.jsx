@@ -30,6 +30,8 @@ function TeacherVacancy() {
   const [selectedVacancy, setSelectedVacancy] = useState(null);
   const [referalmodal, setreferalmodal] = useState(false);
   const navigate = useNavigate();
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+
   const [isChatBotOpen, setIsChatBotOpen] = useState(false); // Keeps track if the user is loaded and checked
 
 
@@ -59,7 +61,7 @@ function TeacherVacancy() {
     // Set up Firebase auth listener
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
-        // Only fetch vacancies if user is authenticated
+        setIsUserLoggedIn(true);
         setLoading(true);
         try {
           const idToken = await user.getIdToken();
@@ -193,7 +195,7 @@ function TeacherVacancy() {
           Search Vacancies Near Me <MdGpsFixed className='gpsicon' fontSize={20} />
         </button>
       </div>
-      {loading && ( <div className="vacancy-loader-container" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '400px',  width: '100%', flexDirection: 'column'}}>
+      {isUserLoggedIn && loading && ( <div className="vacancy-loader-container" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '400px',  width: '100%', flexDirection: 'column'}}>
         <TailSpin
   height="40"
   width="40"
@@ -202,6 +204,11 @@ function TeacherVacancy() {
 />
       <p>loading vacancies..</p>
     </div>)}
+    {!isUserLoggedIn && (
+        <div style={{ textAlign: 'center', marginTop: '20px' }}>
+          <p>Please <Link to="/login">Login</Link> to join the Teacher's Community and view available vacancies.</p>
+        </div>
+      )}
       <div className="vacancy-list">
      
         
