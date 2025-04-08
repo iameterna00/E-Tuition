@@ -10,6 +10,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchUser, selectUser } from '../../services/Redux/userSlice';
 import { getAuth } from 'firebase/auth';
 import TuitorLogin from '../login/betuitorlogin';
+import { ToastContainer, toast, Zoom } from 'react-toastify';
+
 
 const VacancyDetail = () => {
   const { vacancyId, referralCode: urlReferralCode } = useParams(); 
@@ -51,6 +53,24 @@ const VacancyDetail = () => {
 
     fetchVacancy();
   }, [vacancyId]);
+
+
+
+  const handleCopy = () => {
+    const referralLink = `${window.location.origin}/vacancy/${vacancyId}/ref/${myuser.referralCode}`;
+    navigator.clipboard.writeText(referralLink);
+    toast.success("Link copied!", {
+      position: "top-center",
+      autoClose: 1000,
+      transition: Zoom, // or Slide, Bounce, Flip
+      hideProgressBar: false,
+      theme: "colored",
+      style: {
+        background: '#007bff',  // Bootstrap primary blue
+        color: '#fff',
+      },
+    });
+  };
 
   const handlereferclick = () => {
     if (myuser) {
@@ -198,11 +218,16 @@ const VacancyDetail = () => {
 
             {myuser.referralCode ? (
               <div>
-                <p>Copy and share your referal link</p>
+                  <p style={{marginTop:'-5px'}}>Copy and share your referal link</p>
+                <input type="text"
+                disabled
+                style={{borderRadius:'20px'}}
+                value={`${window.location.origin}/vacancy/${vacancyId}/ref/${myuser.referralCode}`} />
+              
                 <div className="contactwhatsappbutton">
-                <a href={`${window.location.origin}/vacancy/${vacancyId}/referral/${myuser.referralCode}`} target="_blank" rel="noopener noreferrer">
-                <button>Copy Code</button>
-              </a>
+                <button onClick={handleCopy}>Copy Code</button>
+                <ToastContainer />
+              
 
 
               

@@ -49,6 +49,9 @@
   .referafriend{
     background-color: #00b336;
   }
+  [data-theme='light'] .refers {
+    color: #000000;
+   }
 
   .refer button{
     background-color: transparent;
@@ -395,6 +398,7 @@
   border-radius: 10px;
   text-align: start;
 }
+
 
 
 

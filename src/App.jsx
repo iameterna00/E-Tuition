@@ -79,7 +79,7 @@ function App() {
             <Route path="/chat" element={<Chats />} />
             <Route path="/studyabroad" element={<StudyAbroad />} />
       
-            <Route path="/vacancy/:vacancyId/referral/:referralCode" element={<VacancyDetail />} />
+            <Route path="/vacancy/:vacancyId/ref/:referralCode" element={<VacancyDetail />} />
             <Route path="/vacancy/:vacancyId" element={<VacancyDetail />} />
 
             <Route path="/class/:classId/chat" element={<ClassChatRoom />} />

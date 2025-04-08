@@ -9,10 +9,11 @@ import { FaBook, FaGraduationCap, FaLocationDot, FaUser, FaUserGroup } from "rea
 import { FaChalkboardTeacher, FaChevronDown, FaClock, FaLink, FaMoneyBill, FaMoneyBillWave } from 'react-icons/fa';
 import { RiFocus2Line } from "react-icons/ri";
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import {IoSparkles } from 'react-icons/io5';
+import { IoSparkles } from 'react-icons/io5';
+
 import { TailSpin } from 'react-loader-spinner';
 import teacherscommunity from '../../assets/teacherscommunity.png';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 mapboxgl.accessToken = "pk.eyJ1IjoiYW5pc2hoLWpvc2hpIiwiYSI6ImNrdWo5d2lhdDFkb2oybnJ1MDB4OG1oc2EifQ.pLrp8FmZSLVfT3pAVVPBPg";
@@ -266,24 +267,12 @@ function TeacherVacancy() {
         Refer a teacher for {selectedVacancy.subject} For Grade {selectedVacancy.grade}
       </h3>
 
-      <p>
-        {selectedVacancy.location ? (
-          <>Location: {selectedVacancy.location}</>
-        ) : (
-          'Online Class'
-        )}
-      </p>
-
-      <p>{selectedVacancy.description}</p>
-
       <div className="contactwhatsappbutton">
-        <a
-          href={generateWhatsappMessage(selectedVacancy)}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <button>Copy Code</button>
-        </a>
+      
+         <Link to={`/vacancy/${selectedVacancy._id}`}>
+     <button>Refer a tutor</button>
+         </Link>
+     
         <button className="tuition-delete-button" onClick={closeModal}>
           Close
         </button>
@@ -360,16 +349,37 @@ const VacancyCard = ({ vacancy, locationSource, openModal, openreferalmodal, nav
         >
           <IoIosSend size={25} /><h3>Apply</h3>
         </button>
+        
         <button
-          className='referafriend'
-          style={{ width: '100%', maxWidth: "150px", display: 'flex', alignItems: "center", gap: "5px", justifyContent: "center" }}
-          onClick={(e) => {
-            e.stopPropagation();
-            openreferalmodal(vacancy);
-          }}
-        >
-          <IoSparkles size={25} /><h3>Refer</h3>
-        </button>
+        onClick={(e) => {
+          e.stopPropagation();
+          openreferalmodal(vacancy);
+        }}
+  className="refers" 
+  style={{ 
+    width: '60%', 
+    backgroundColor: "transparent", 
+    border: "1px solid grey", 
+    borderRadius: "10px", 
+    display: "flex", 
+    justifyContent: "center", 
+    alignItems: "center",  // Ensures vertical alignment
+    padding: "5px"
+  }}
+>
+  <IoSparkles size={25} />
+  <div
+    style={{
+      backgroundColor:"transparent",
+      padding: "6px 12px",  // Adjust button padding if needed
+      display: "flex", 
+      alignItems: "center", // Ensures that the text and icon are vertically aligned
+    }}
+  > 
+    Refer 
+  </div>
+</button>
+
       </div>
     </div>
   );
