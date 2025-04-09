@@ -60,22 +60,31 @@ function TeacherVacancy() {
     
     // Set up Firebase auth listener
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
-      if (user) {
+      if (user || !user) {
         setIsUserLoggedIn(true);
         setLoading(true);
         try {
-          const idToken = await user.getIdToken();
+          // Commented out token generation - uncomment if needed later
+          // const idToken = await user.getIdToken();
+          
           const response = await axios.get(`${webApi}/api/vacancyforteachers`, {
-            headers: { Authorization: `Bearer ${idToken}` },
+            // headers: { Authorization: `Bearer ${idToken}` },
           });
+          
           setVacancies(response.data);
+          console.log('Fetched vacancies:', response.data);
         } catch (error) {
           console.error("Error fetching vacancies:", error);
         } finally {
           setLoading(false);
         }
+      } else {
+        setIsUserLoggedIn(false);
+        setVacancies([]);
       }
     });
+
+
   
     return () => unsubscribe(); // Cleanup on unmount
   }, []); // Runs only once on mount
@@ -204,11 +213,11 @@ function TeacherVacancy() {
 />
       <p>loading vacancies..</p>
     </div>)}
-    {!isUserLoggedIn && (
+    {/* {!isUserLoggedIn && (
         <div style={{ textAlign: 'center', marginTop: '20px' }}>
           <p>Please <Link to="/login">Login</Link> to join the Teacher's Community and view available vacancies.</p>
         </div>
-      )}
+      )} */}
       <div className="vacancy-list">
      
         

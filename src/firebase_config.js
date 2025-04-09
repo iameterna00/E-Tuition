@@ -25,6 +25,12 @@ onMessage(messaging, (payload) => {
 });
 
 export const generateToken = async () => {
+  // Check if user is authenticated first
+  const user = auth.currentUser;
+  if (!user) {
+    console.log("No authenticated user - skipping token generation");
+    return null;
+  }
   try {
     const permission = await Notification.requestPermission();
     if (permission === 'granted') {
