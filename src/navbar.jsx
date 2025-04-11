@@ -21,7 +21,6 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const myuser = useSelector(selectUser);
   const { theme, toggleTheme } = useContext(ThemeContext);
-
   const [menuOpen, setMenuOpen] = useState(false);
   const [user, setUser] = useState(null);
   const [dropdownVisible, setDropdownVisible] = useState(false);

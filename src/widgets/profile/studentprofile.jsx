@@ -15,6 +15,8 @@ import { webApi } from '../../api';
 import { TiTick } from "react-icons/ti";
 import { IoMdSchool } from "react-icons/io";
 import { useNavigate } from 'react-router-dom';
+import { RiNotification2Fill, RiNotificationOffFill } from 'react-icons/ri';
+import { delete_fmcToken, generateToken } from '../../firebase_config';
 
 function StudentProfile() {
     const dispatch = useDispatch();
@@ -24,6 +26,7 @@ function StudentProfile() {
     const [loading, setLoading] = useState(false); 
     const [suggestions, setsuggestions] = useState(false); 
     const navigate = useNavigate();
+    const [notificationStatus, setNotificationStatus] = useState("");
 
 
     useEffect(() => {
@@ -53,6 +56,20 @@ function StudentProfile() {
         const date = new Date(dateString); // Convert string to Date object
         return date.toLocaleDateString("en-GB", options);
     };
+    useEffect(() => {
+        // Check notification permission status on load
+        const checkNotificationPermission = () => {
+          if (Notification.permission === 'granted') {
+            setNotificationStatus('enabled');
+          } else if (Notification.permission === 'denied') {
+            setNotificationStatus('blocked');
+          } else if (myuser.fcm_token==='') {
+            setNotificationStatus('off'); // Or 'loading' if you want to show a loading state
+          }
+        };
+    console.log(notificationStatus);
+        checkNotificationPermission();
+      }, []);
 
 
      const handleUserType = async (purpose) => {
@@ -95,6 +112,61 @@ function StudentProfile() {
         }
       };
 
+      const deletefmctoken = async () => {
+        if (!myuser) return;
+      
+        try {
+          setNotificationStatus('disabling');
+          await delete_fmcToken(); // ✅ Correct usage of await
+          setNotificationStatus('off');
+        } catch (err) {
+          console.error("Failed to delete FCM token:", err);
+          setNotificationStatus('error'); // optional: handle error state
+        }
+      };
+      
+      const handleEnableNotifications = async () => {        
+        if (!myuser) return;
+        
+        try {
+          setNotificationStatus("loading");
+          
+          if (Notification.permission === 'granted') {
+            const token = await generateToken();
+            if (token) {
+              setNotificationStatus("madeenabled");
+            } else {
+              console.log("Token generation failed or returned empty");
+              setNotificationStatus("error");
+            }
+          } else if (Notification.permission === 'denied') {
+            console.log("Notification permission is denied. Please enable notifications manually in browser settings.");
+            setNotificationStatus("error");
+            alert("Notifications are disabled. Please enable notifications in your browser settings.");
+          } else {
+            const permission = await Notification.requestPermission();
+            
+            if (permission === 'granted') {
+              const token = await generateToken();
+              if (token) {
+                setNotificationStatus("enabled");
+              } else {
+                console.log("Token generation failed or returned empty");
+                setNotificationStatus("error");
+              }
+            } else {
+              console.log("Notification permission denied.");
+              setNotificationStatus("error");
+              alert("Notifications permission was denied. Please enable notifications in your browser settings.");
+            }
+          }
+        } catch (error) {
+          console.error("Failed to enable notifications:", error);
+          setNotificationStatus("error");
+        }
+      };
+      
+
     const calculatePersonalizationPercentage = () => {
         let filledFields = 0;
     
@@ -114,7 +186,6 @@ function StudentProfile() {
         return totalPercentage;
     };
     useEffect(() => {
-        // Only calculate the percentage if `myuser` is available
         if (myuser) {
             const totalPercentage = calculatePersonalizationPercentage();
     
@@ -154,6 +225,7 @@ function StudentProfile() {
                      <IoMdSchool /> <p>{myuser.currentGrade}</p>
                      </div>
                    )}
+                   
                 </div>
 
                 <div className="profileedits">
@@ -212,6 +284,49 @@ function StudentProfile() {
                                  <h3 className='purposebutton'>Add</h3>
                                )}
                             </div>
+                            <div className="yourpurposeonkube" onClick={() => openpurposemodal('notification')}>
+  <div className="iconcontainer">
+    <RiNotification2Fill />
+  </div>
+
+  <div className="purposeonkubeinsiders">
+    <h3>Allow Notification</h3>
+    <p>Turn on notification to get instant alerts</p>
+  </div>
+
+  {notificationStatus === "loading" && (
+    <h3 className="purposebutton">Enabling...</h3>
+  )}
+    {notificationStatus === "disabling" && (
+    <h3 className="purposebutton">disabling...</h3>
+  )}
+
+{(notificationStatus !== "off" && (notificationStatus === "madeenabled" || !!myuser?.fcm_token)) && (
+  <TiTick className="purposebutton" fontSize={30} />
+)}
+
+
+
+
+{notificationStatus === "blocked" && (
+  <p style={{ color: "red", fontSize: "0.9rem", marginTop: "5px" }}>
+   blocked.
+  </p>
+)}
+
+
+  {notificationStatus === "error" && (
+    <h3 className="purposebutton" style={{ color: "orange" }}>
+      Error
+    </h3>
+  )}
+
+{(!myuser.fcm_token || notificationStatus === 'loading' || notificationStatus === 'off') && (
+  <h3 className="purposebutton">Off</h3>
+)}
+
+</div>
+
                         </div>
                         <div className="reviewsfromteachers">
                             <div className="reviewfromteacherinsiders">
@@ -250,6 +365,49 @@ function StudentProfile() {
                     </div>
                 </div>
             )}
+           {purposemodal === 'notification' && (
+  <div className="modal-backdrop" onClick={() => closepurposemodal('')}>
+    <div className="purposemodal" onClick={(e) => e.stopPropagation()}>
+      <div className="close-modal" onClick={() => closepurposemodal('')}>X</div>
+      <h2 style={{marginBottom:'0px'}}>Enable Notification?</h2>
+      {myuser.purpose === 'student' ? (
+        <p style={{marginTop:'0px'}}>Sends notification for class updates</p>
+      ) : (
+        <p style={{marginTop:'0px'}}>Sends notification for Vacancy updates, Classes etc.</p>
+      )}
+      <div className="purpose-options">
+        <div
+          style={{
+            border: (notificationStatus !== 'off' && (myuser.fcm_token || notificationStatus === 'madeenabled')) ? '1px solid #0099ffca' : 'transparent',
+            cursor: 'pointer'
+          }}
+          className="option"
+          onClick={() => {handleEnableNotifications(); closepurposemodal('')}}
+        >
+          <RiNotification2Fill fontSize={40} />
+          <h3>Enable</h3>
+          <p>I'd like to get notification..</p>
+        </div>
+        <div
+          style={{
+            border: (!myuser.fcm_token || notificationStatus === 'off') 
+            ? '1px solid #0099ffca' 
+            : 'transparent',
+          
+            cursor: 'pointer'
+          }}
+          className="option"
+          onClick={() =>{ deletefmctoken(); closepurposemodal('')}}
+        >
+          <RiNotificationOffFill fontSize={40} />
+          <h3>Disable</h3>
+          <p>I'd like to disable notification.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+)}
+
             {purposemodal === 'identity' && (
                 <div className="modal-backdrop" onClick={() => closepurposemodal('')}>
                     <div className="identitymodal" onClick={(e) => e.stopPropagation()}>
