@@ -58,7 +58,6 @@ export const generateToken = async () => {
       });
 
       if (token) {
-        console.log('FCM Token:', token);
         await saveTokenToBackend(token);
         return token; 
       }
