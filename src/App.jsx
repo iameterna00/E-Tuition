@@ -37,19 +37,6 @@ function App() {
   const auth = getAuth();
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        generateToken(); 
-      } else {
-
-      }
-    });
-
-    // Cleanup on component unmount
-    return () => unsubscribe();
-  }, []);
-
-  useEffect(() => {
     const generateGuestId = () => {
       let guestId = localStorage.getItem("guest_id");
       if (!guestId) {
@@ -58,13 +45,13 @@ function App() {
       }
       return guestId;
     };
-  
+
     const sendPingRequest = async (user) => {
       const isLoggedIn = !!user;
       const payload = isLoggedIn
         ? { user_id: user.uid }
         : { guest_id: generateGuestId() };
-  
+
       try {
         const response = await fetch(PING_URL, {
           method: "POST",
@@ -76,23 +63,36 @@ function App() {
         console.error("Ping error:", err);
       }
     };
-  
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      sendPingRequest(user);
-      if (!intervalRef.current) {
-        intervalRef.current = setInterval(() => sendPingRequest(auth.currentUser), 60000);
+
+    const handleAuthChange = (user) => {
+      // For logged in users
+      if (user) {
+        generateToken();
       }
-    });
-  
+      
+      // Clear any existing interval
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+      
+      // Send immediate ping
+      sendPingRequest(user);
+      
+      // Set up new interval
+      intervalRef.current = setInterval(() => sendPingRequest(user), 60000);
+    };
+
+    const unsubscribe = onAuthStateChanged(auth, handleAuthChange);
+
+    // Cleanup function
     return () => {
       unsubscribe();
       if (intervalRef.current) {
         clearInterval(intervalRef.current);
-        intervalRef.current = null;
       }
     };
-  }, []);
-  
+  }, []); // Empty dependency array means this runs once on mount
+
   
 
   return (
