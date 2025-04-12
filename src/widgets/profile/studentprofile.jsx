@@ -117,11 +117,11 @@ function StudentProfile() {
       
         try {
           setNotificationStatus('disabling');
-          await delete_fmcToken(); // ✅ Correct usage of await
+          await delete_fmcToken(); 
           setNotificationStatus('off');
         } catch (err) {
           console.error("Failed to delete FCM token:", err);
-          setNotificationStatus('error'); // optional: handle error state
+          setNotificationStatus('error'); 
         }
       };
       

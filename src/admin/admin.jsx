@@ -338,9 +338,14 @@ const handleSubmit = async (e) => {
 
   return (
     <div className="tuition-container">
-         <button onClick={() => navigate('teacher/')}>
+       <div className="topbuttons" style={{gap:"10px", display:"flex"}} >
+       <button onClick={() => navigate('teacher/')}>
       Go to Teacher Page
     </button>
+    <button onClick={() => navigate('useractivity')}>
+      User Anlytics
+    </button>
+       </div>
     <h1 className="tuition-heading">Tuition Vacancy Management</h1>
     {/* 🔍 Search Bar for Vacancy Name & Location */}
     <input

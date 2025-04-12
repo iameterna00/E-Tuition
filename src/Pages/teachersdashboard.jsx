@@ -81,7 +81,7 @@ function TeacherDashboard({ user }) {
               </div>
               <p>@{user.username}</p>
               <Link to={'/profile'} style={{ display: 'flex', justifyContent: 'center', width: '100%', maxWidth: "300px", backgroundColor: "transparent", border: "1px solid grey", borderRadius: "20px" }}>
-                <button style={{ display: 'flex', justifyContent: 'center', width: '100%', maxWidth: "300px", backgroundColor: "transparent" }}>
+                <button className='viewprofile' style={{ display: 'flex', justifyContent: 'center', width: '100%', maxWidth: "300px", backgroundColor: "transparent" }}>
                   View Profile
                 </button>
               </Link>
@@ -125,11 +125,6 @@ function TeacherDashboard({ user }) {
                 <div className="diamond stop2">Lv 2 </div>
                 <div className="diamond stop3">Lv 3</div>
               </div>
-              {/* <div className="level1" style={{ width: "90%", display: 'flex', flexDirection: 'column', alignItems: 'start' }}>
-                <p>Level 1: <img style={{ height: '20px', marginBottom: '-5px' }} src={KUBE} alt="" /> Beginner - &lt; 50 students &amp; 200 hours</p>
-                <p>Level 2: <img style={{ height: '20px', marginBottom: '-5px' }} src={Master} alt="" /> Master - 50 students &amp; 200 hours</p>
-                <p>Level 3: <img style={{ height: '20px', marginBottom: '-5px' }} src={Dictator} alt="" /> Dictator - 1000 hours &amp; 500 students</p>
-              </div> */}
             </div>
           </div>
         </div>

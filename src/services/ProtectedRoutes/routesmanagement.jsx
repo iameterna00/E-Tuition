@@ -1,61 +1,61 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUser, selectUser, selectLoading, selectError } from '../Redux/userSlice';
-import { Navigate } from 'react-router-dom';  // Import Navigate for redirection
+import { Navigate } from 'react-router-dom';
 import { getAuth } from 'firebase/auth';
-import TeacherDashboard from '../../Pages/teachersdashboard';  // Import TeacherDashboard
+import TeacherDashboard from '../../Pages/teachersdashboard';
 
 const TeacherDashboardWrapper = () => {
   const dispatch = useDispatch();
-  const user = useSelector(selectUser);  // Get the current user from Redux store
-  const loading = useSelector(selectLoading);  // Check loading status from Redux
-  const error = useSelector(selectError);  // Check for any error in fetching user data
-  const [firebaseUser, setFirebaseUser] = useState(null);  // Local state to hold Firebase user data
+  const user = useSelector(selectUser);
+  const loading = useSelector(selectLoading);
+  const error = useSelector(selectError);
+  const [firebaseUser, setFirebaseUser] = useState(null);
 
   useEffect(() => {
     const authInstance = getAuth();
     const unsubscribe = authInstance.onAuthStateChanged((firebaseUser) => {
-      console.log('Firebase User:', firebaseUser);  // Debug Firebase user
-
       if (firebaseUser) {
-        setFirebaseUser(firebaseUser);  // Set the Firebase user in local state
-        dispatch(fetchUser(firebaseUser.uid));  // Fetch user data from Redux using Firebase UID
+        setFirebaseUser(firebaseUser);
+        dispatch(fetchUser(firebaseUser.uid));
       } else {
-        setFirebaseUser(null);  // Clear user data if not logged in
+        setFirebaseUser(null);
       }
     });
 
-    return () => unsubscribe();  // Cleanup the subscription on unmount
+    return () => unsubscribe();
   }, [dispatch]);
 
-  // Debug Redux state
+  // Debug logs
+  console.log('Firebase User:', firebaseUser);
   console.log('Redux User:', user);
   console.log('Loading:', loading);
   console.log('Error:', error);
 
-  if (loading) {
-    return <p>Loading...</p>;  // Show loading message while user data is being fetched
+  // Loading state
+  if (loading || !firebaseUser) {
+    return <p>Loading...</p>;
   }
 
+  // Error state
   if (error) {
-    return <p>Error: {error}</p>;  // Show error message if there was an issue fetching user data
+    return <p>Error: {error}</p>;
   }
 
-  // Ensure user is loaded and check teacherConfirm value
+  // No user data after loading
   if (!user) {
     console.log('No user data found');
-    return <Navigate to="/" />  // Handle loading state if user data isn't available
+    return <Navigate to="/" />;
   }
 
-  console.log('Teacher Confirmation Status:', user.teacherConfirm);
-
-  // Check the teacherConfirm status before rendering the TeacherDashboard
+  // Check teacher approval status
   if (user.teacherconfirm !== 'approved') {
     console.log('Redirecting to profile because teacher is not approved');
-    return <Navigate to="/" />;  // Redirect to profile if teacherConfirm is not approved
+    return <Navigate to="/" />;
   }
 
-  return <TeacherDashboard user={user}  />;  // Render TeacherDashboard if approved
+  // All checks passed - render dashboard
+  return <TeacherDashboard user={user} />;  
 };
 
 export default TeacherDashboardWrapper;

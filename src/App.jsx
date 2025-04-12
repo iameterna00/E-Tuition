@@ -25,40 +25,75 @@ import StudyAbroad from './Pages/studyabroad';
 import UniversityDetail from "./widgets/studyabroad/universitydetail.jsx";
 import { generateToken } from './firebase_config.js';
 import VacancyDetail from './widgets/teachercommunity/vacancydetailpage.jsx';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { v4 as uuidv4 } from 'uuid'; 
+import UsersActivity from './admin/useractivity.jsx';
 
 
 
 function App() {
   const PING_URL = `${webApi}/api/ping`;
   const intervalRef = useRef(null);
-
-  useEffect(()=>{
-    generateToken();
-  },[])
+  const auth = getAuth();
 
   useEffect(() => {
-   
-    if (!intervalRef.current) {
-      intervalRef.current = setInterval(async () => {
-        try {
-          const response = await fetch(PING_URL);
-          if (response.ok) {
-            console.log("Server is alive:", response.status);
-          }
-        } catch (error) {
-          console.error("Ping failed:", error);
-        }
-      }, 300000); // Every 5 minutes
-    }
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        generateToken(); 
+      } else {
 
-    // Cleanup interval when component unmounts
+      }
+    });
+
+    // Cleanup on component unmount
+    return () => unsubscribe();
+  }, []);
+
+  useEffect(() => {
+    const generateGuestId = () => {
+      let guestId = localStorage.getItem("guest_id");
+      if (!guestId) {
+        guestId = uuidv4();
+        localStorage.setItem("guest_id", guestId);
+      }
+      return guestId;
+    };
+  
+    const sendPingRequest = async (user) => {
+      const isLoggedIn = !!user;
+      const payload = isLoggedIn
+        ? { user_id: user.uid }
+        : { guest_id: generateGuestId() };
+  
+      try {
+        const response = await fetch(PING_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+        console.log("Ping response status:", response.status);
+      } catch (err) {
+        console.error("Ping error:", err);
+      }
+    };
+  
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      sendPingRequest(user);
+      if (!intervalRef.current) {
+        intervalRef.current = setInterval(() => sendPingRequest(auth.currentUser), 60000);
+      }
+    });
+  
     return () => {
+      unsubscribe();
       if (intervalRef.current) {
         clearInterval(intervalRef.current);
         intervalRef.current = null;
       }
     };
-  }, []); // Run only once when the component mounts
+  }, []);
+  
+  
 
   return (
     <Provider store={store}>
@@ -86,6 +121,7 @@ function App() {
             <Route element={<AdminRoute />}>
               <Route path="/admin" element={<ADMIN />} />
               <Route path="/admin/teacher/" element={<TeacherManager />} />
+              <Route path="/admin/useractivity" element={<UsersActivity />} />
             </Route>
             <Route path="/teacherscommunity" element={<TeacherCommunityPage />} />
           </Routes>
