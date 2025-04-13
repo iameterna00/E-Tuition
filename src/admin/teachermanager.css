@@ -126,3 +126,144 @@
     flex-direction: column;
     align-items: center;
 }
+
+/* USER ACTIVITY */
+.user-activity-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .section-title {
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+  
+  .live-stats-section {
+    background: rgb(255, 255, 255);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  }
+  [data-theme="dark"] .live-stats-section {
+    background: rgb(30, 30, 30);
+  }
+  
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .stat-card {
+    padding: 1rem;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+  
+  .stat-card.total {
+    background-color: #e8f5e9;
+
+  }
+  [data-theme="dark"] .stat-card.total {
+    background-color: #262926;
+  }
+  
+  
+  .stat-card.logged-in {
+    background-color: #e3f2fd;
+  }
+
+  [data-theme="dark"] .stat-card.logged-in {
+    background-color: #273036;
+  }
+  
+  
+  .stat-card.guests {
+    background-color: #ffebee;
+  }
+  [data-theme="dark"] .stat-card.guests {
+    background-color: #372e30;
+  }
+  
+  
+  
+  .stat-value {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 0.5rem 0 0;
+  }
+  
+  .active-users-list {
+  
+    border-radius: 8px;
+    padding: 1rem;
+    margin-top: 1rem;
+  }
+  
+  .active-users-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 0.5rem;
+  }
+  
+  .active-users-list li {
+    padding: 0.5rem;
+    background: white;
+    border-radius: 4px;
+    font-size: 0.9rem;
+  }
+  [data-theme="dark"] .active-users-list li {
+    background: #2a2a2a;
+  }
+  
+  .no-users {
+    text-align: center;
+    padding: 1rem;
+  }
+  
+  .charts-section {
+
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  }
+  
+  .chart-container {
+    margin-bottom: 2rem;
+  }
+  
+  .chart-container h3 {
+    color: #555;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+  }
+  
+  .loading, .error-message {
+    text-align: center;
+    padding: 2rem;
+    font-size: 1.2rem;
+  }
+  
+  .error-message {
+    color: #d32f2f;
+  }
+  
+  @media (max-width: 768px) {
+    .stats-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .user-activity-container {
+      padding: 1rem;
+    }
+  }
