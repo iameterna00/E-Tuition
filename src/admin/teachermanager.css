@@ -232,11 +232,10 @@
   }
   
   .charts-section {
-
     border-radius: 12px;
-    padding: 1.5rem;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
   }
+
   
   .chart-container {
     margin-bottom: 2rem;
@@ -253,6 +252,9 @@
     padding: 2rem;
     font-size: 1.2rem;
   }
+  .daily-stats-section{
+    padding: 1.5rem;
+  }
   
   .error-message {
     color: #d32f2f;
@@ -264,6 +266,9 @@
     }
     
     .user-activity-container {
-      padding: 1rem;
+      padding: 0px;
+    }
+    .recharts-responsive-container{
+      margin-left: -30px;
     }
   }
