@@ -9,18 +9,8 @@ const UsersActivity = () => {
     guest_users: 0,
     users: []
   });
-  
-  const [dailyActivity, setDailyActivity] = useState({
-    date: '',
-    unique_users: 0,
-    logged_in_users: 0,
-    guest_users: 0,
-    user_breakdown: {
-      logged_in: [],
-      guests: []
-    }
-  });
-  
+
+  const [dailyActivity, setDailyActivity] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -48,10 +38,11 @@ const UsersActivity = () => {
   useEffect(() => {
     const fetchDailyActivity = async () => {
       try {
-        const response = await fetch(`${webApi}/api/daily-activity`);
+        const response = await fetch(`${webApi}/api/weekly-activity`);
         if (!response.ok) throw new Error("Failed to fetch daily activity");
         const data = await response.json();
         setDailyActivity(data);
+        console.log('daily activity', data)
         setIsLoading(false);
       } catch (err) {
         console.error("Error fetching daily activity:", err);
@@ -63,31 +54,27 @@ const UsersActivity = () => {
     fetchDailyActivity();
   }, []);
 
-  // Prepare weekly data for the chart
   const prepareWeeklyData = () => {
     const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-    const today = new Date().getDay();
-    
-    return days.map((day, index) => {
-      if (index === today) {
-        return {
-          name: day,
-          total: activeStats.total_active,
-          loggedIn: activeStats.logged_in_users,
-          guests: activeStats.guest_users, // Changed from activeStats.guests to activeStats.guest_users
-          amt: activeStats.total_active
-        };
-      }
-      
+
+    // Prepare the weekly data to display on the chart
+    return dailyActivity.map((activity) => {
+      const activityDate = new Date(activity.date);
+      const activityDayIndex = activityDate.getDay(); // Sunday = 0, Monday = 1, ..., Saturday = 6
+
       return {
-        name: day,
-        total: dailyActivity.unique_users,
-        loggedIn: dailyActivity.logged_in_users,
-        guests: dailyActivity.guest_users, // Changed from 0 to dailyActivity.guest_users
-        amt: dailyActivity.unique_users
+        name: days[activityDayIndex],
+        total: activity.unique_users,
+        loggedIn: activity.logged_in_users,
+        guests: activity.guest_users,
       };
     });
   };
+
+  const today = new Date().toLocaleDateString(); // Get today's date as a string
+
+  // Find today's activity data
+  const todayActivity = dailyActivity.find(day => new Date(day.date).toLocaleDateString() === today);
 
   if (isLoading) return <div className="loading">Loading user activity data...</div>;
   if (error) return <div className="error-message">{error}</div>;
@@ -130,21 +117,36 @@ const UsersActivity = () => {
 
       {/* Daily Activity Section */}
       <div className="daily-stats-section">
-        <h2 className="section-title">📅 Daily Activity - {dailyActivity.date}</h2>
+        <h2 className="section-title">📅 Today's Activity - {today}</h2>
         <div className="stats-grid">
           <div className="stat-card total">
-            <h3>Unique Users</h3>
-            <p className="stat-value">{dailyActivity.unique_users}</p>
+            <h3>Active Users</h3>
+            <p className="stat-value">{todayActivity ? todayActivity.unique_users : 0}</p>
           </div>
           <div className="stat-card logged-in">
             <h3>Logged In</h3>
-            <p className="stat-value">{dailyActivity.logged_in_users}</p>
+            <p className="stat-value">{todayActivity ? todayActivity.logged_in_users : 0}</p>
           </div>
           <div className="stat-card guests">
             <h3>Guests</h3>
-            <p className="stat-value">{dailyActivity.guest_users}</p>
+            <p className="stat-value">{todayActivity ? todayActivity.guest_users : 0}</p>
           </div>
         </div>
+
+        {todayActivity && todayActivity.usernames.length > 0 ? (
+          <div className="active-users-list">
+            <h3>User Names:</h3>
+            <ul>
+              {todayActivity.usernames.map((username, index) => (
+                <li key={`${username}-${index}`}>
+                  {username === "Guest" ? "🎭 Guest" : `👤 ${username}`}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ) : (
+          <p className="no-users">No active users at the moment.</p>
+        )}
       </div>
 
       {/* Weekly Activity Chart */}
