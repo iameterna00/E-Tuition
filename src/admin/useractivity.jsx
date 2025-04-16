@@ -150,7 +150,7 @@ const UsersActivity = () => {
       </div>
 
       {/* Weekly Activity Chart */}
-      <div className="charts-section">
+      <div className="charts-section"  >
         <h2 className="section-title">📊 Weekly Activity Patterns</h2>
         <div className="chart-container">
           <ResponsiveContainer width="100%" height={400}>

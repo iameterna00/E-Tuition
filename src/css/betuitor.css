@@ -18,7 +18,11 @@
     margin-bottom: 10px;
     margin-top: -190px;
   }
-
+  .disabled-btn {
+    opacity: 0.6;
+    pointer-events: none;
+  }
+  
  
   .visitdashboard, .visitteachercommunity{
     border-radius: 20px;
