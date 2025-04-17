@@ -9,8 +9,9 @@ import { SiGoogleclassroom } from "react-icons/si";
 import { FaUserGear } from "react-icons/fa6";
 import { IoInformationCircle } from "react-icons/io5";
 import { generateToken } from '../../firebase_config';
+import { toast, ToastContainer, Zoom } from 'react-toastify';
 
-function BetuitotBanner({ setopentuitorinitialmodal, user, tuitorlogin, suggestions, setNotificationModal, setsuggestions }) {
+function BetuitotBanner({ setopentuitorinitialmodal, user, tuitorlogin, suggestions, setsuggestions }) {
   const [isTuitors, setIsTuitors] = useState('')
   const [isModalOpen, setIsModalOpen] = useState(false); // State to manage popup visibility
 
@@ -39,22 +40,45 @@ function BetuitotBanner({ setopentuitorinitialmodal, user, tuitorlogin, suggesti
     }
   }, [user]);
 
-  const handleEnableNotifications = async () => {         
+  const handleEnableNotifications = async () => {      
     if (!user) return;
     
     try {
-      console.log("Checking notification permission...");
+      const loadingToastId = toast.loading("Enabling notification!", {
+        position: "top-center",
+        autoClose: false, // ⛔ don't auto close loading toasts
+        transition: Zoom,
+        hideProgressBar: false,
+        theme: "colored",
+        style: {
+          background: '#007bff',
+          color: '#fff',
+        },
+      });
       
       if (Notification.permission === 'granted') {
         const token = await generateToken();
         if (token) {
           console.log("Token generated successfully.");
-          window.location.reload();
+          toast.update(loadingToastId, {
+            render: "Notifications enabled successfully!",
+            type: "success",
+            isLoading: false,
+            autoClose: 1500,
+            closeOnClick: true,
+            style: {
+              background: '#007bff',
+              color: '#fff',
+            },
+          });
+          setsuggestions(false)
+          
         } else {
           console.log("Token generation failed or returned empty");
         }
       } else if (Notification.permission === 'denied') {
         alert("Notifications are disabled. Please enable notifications in your browser settings.");
+        toast.dismiss(loadingToastId);
       } else {
         const permission = await Notification.requestPermission();
         console.log("Notification permission status:", permission);
@@ -74,13 +98,14 @@ function BetuitotBanner({ setopentuitorinitialmodal, user, tuitorlogin, suggesti
       }
     } catch (error) {
       console.error("Failed to enable notifications:", error);
-      setNotificationStatus("error");
+   
     }
   };
   
   
   return (
     <div className="betuitorBanner">
+      <ToastContainer/>
       <div className="betuitorfiltercontainer">
         <div className="bannerinsiders">
           <div className="bannerdiv">

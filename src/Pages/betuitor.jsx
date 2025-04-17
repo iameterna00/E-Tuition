@@ -11,7 +11,7 @@ import { webApi } from "../api";
 import { FaUsersGear } from "react-icons/fa6";
 import DemoVacancy from "../widgets/becomeTuitor/demovacancies";
 import { generateToken } from '../firebase_config';
-import { RiNotification2Fill, RiNotificationOffFill } from "react-icons/ri";
+
 
 
 function BecomeTuitor() {
@@ -21,7 +21,6 @@ function BecomeTuitor() {
   const [isUserLoaded, setIsUserLoaded] = useState(false);
   const [closetuitorlogin, setClosetuitorLogin] = useState(false);
   const [opentuitorinitialmodal, setopentuitorinitialmodal] = useState(false);
-  const [notificationModal, setNotificationModal] = useState(false);
   const [notificationStatus, setNotificationStatus] = useState("");
   const [suggestions, setsuggestions] = useState(true); 
 
@@ -80,50 +79,6 @@ function BecomeTuitor() {
 console.log(notificationStatus);
     checkNotificationPermission();
   }, []);
-
-
-  const handleEnableNotifications = async () => {        
-    if (!myuser) return;
-    
-    try {
-      setNotificationStatus("loading");
-      
-      if (Notification.permission === 'granted') {
-        const token = await generateToken();
-        if (token) {
-          setNotificationStatus("madeenabled");
-        } else {
-          console.log("Token generation failed or returned empty");
-          setNotificationStatus("error");
-        }
-      } else if (Notification.permission === 'denied') {
-        console.log("Notification permission is denied. Please enable notifications manually in browser settings.");
-        setNotificationStatus("error");
-        alert("Notifications are disabled. Please enable notifications in your browser settings.");
-      } else {
-        const permission = await Notification.requestPermission();
-        
-        if (permission === 'granted') {
-          const token = await generateToken();
-          if (token) {
-            setNotificationStatus("enabled");
-          } else {
-            console.log("Token generation failed or returned empty");
-            setNotificationStatus("error");
-          }
-        } else {
-          console.log("Notification permission denied.");
-          setNotificationStatus("error");
-          alert("Notifications permission was denied. Please enable notifications in your browser settings.");
-        }
-      }
-    } catch (error) {
-      console.error("Failed to enable notifications:", error);
-      setNotificationStatus("error");
-    }
-  };
-  
-
   
 
   useEffect(() => {
@@ -163,7 +118,6 @@ console.log(notificationStatus);
 
       <BetuitotBanner 
       setsuggestions={setsuggestions}
-        setNotificationModal={setNotificationModal}
         suggestions={suggestions}
         setopentuitorinitialmodal={setopentuitorinitialmodal} 
         user={myuser}
