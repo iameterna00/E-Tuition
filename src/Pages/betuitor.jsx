@@ -8,9 +8,11 @@ import "../css/login.css";
 import "../css/tuitorapply.css";
 import TeachingExperience from "../widgets/becomeTuitor/tuitorexperience";
 import { webApi } from "../api";
-import { useNavigate } from "react-router-dom";
 import { FaUsersGear } from "react-icons/fa6";
 import DemoVacancy from "../widgets/becomeTuitor/demovacancies";
+import { generateToken } from '../firebase_config';
+import { RiNotification2Fill, RiNotificationOffFill } from "react-icons/ri";
+
 
 function BecomeTuitor() {
   const [isAuthenticated, setIsAuthenticated] = useState(null);
@@ -19,36 +21,36 @@ function BecomeTuitor() {
   const [isUserLoaded, setIsUserLoaded] = useState(false);
   const [closetuitorlogin, setClosetuitorLogin] = useState(false);
   const [opentuitorinitialmodal, setopentuitorinitialmodal] = useState(false);
-  const navigate = useNavigate(); // React Router hook for navigation
+  const [notificationModal, setNotificationModal] = useState(false);
+  const [notificationStatus, setNotificationStatus] = useState("");
+  const [suggestions, setsuggestions] = useState(true); 
 
-  // Function to fetch user data and update purpose if necessary
+
   const fetchUserData = async (uid) => {
     if (!uid) return;
     try {
       const response = await fetch(`${webApi}/api/user/${uid}`);
-      const result = await response.json(); // Parse JSON
+      const result = await response.json(); 
   
-      console.log("Fetched User Data:", result); // Debugging
+      console.log("Fetched User Data:", result);
   
       if (result.success && result.data) {
-        setMYUsers(result.data); // Store only the `data` part
+        setMYUsers(result.data); 
   
-        // If the user's purpose is not 'teacher', update it
         if (result.data.teacherconfirm && result.data.purpose !== 'teacher') {
           const updateResponse = await fetch(`${webApi}/api/update-purpose`, {
-            method: 'POST', // POST request to update user
+            method: 'POST',
             headers: {
               'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ uid: result.data.uid, purpose: 'teacher' }),  // Update purpose to 'teacher'
+            body: JSON.stringify({ uid: result.data.uid, purpose: 'teacher' }), 
           });
   
           const updateResult = await updateResponse.json();
           if (updateResult.success) {
             console.log("User purpose updated to teacher.");
-            setMYUsers((prev) => ({ ...prev, purpose: 'teacher' }));  // Update local state
+            setMYUsers((prev) => ({ ...prev, purpose: 'teacher' }));  
             
-            // Reload the page after setting purpose to 'teacher'
             window.location.reload();
           } else {
             console.warn("Failed to update user purpose:", updateResult);
@@ -65,6 +67,63 @@ function BecomeTuitor() {
      
     }
   };
+  useEffect(() => {
+    const checkNotificationPermission = () => {
+      if (Notification.permission === 'granted') {
+        setNotificationStatus('enabled');
+      } else if (Notification.permission === 'denied') {
+        setNotificationStatus('blocked');
+      } else if ( myuser && myuser.fcm_token==='') {
+        setNotificationStatus('off'); // Or 'loading' if you want to show a loading state
+      }
+    };
+console.log(notificationStatus);
+    checkNotificationPermission();
+  }, []);
+
+
+  const handleEnableNotifications = async () => {        
+    if (!myuser) return;
+    
+    try {
+      setNotificationStatus("loading");
+      
+      if (Notification.permission === 'granted') {
+        const token = await generateToken();
+        if (token) {
+          setNotificationStatus("madeenabled");
+        } else {
+          console.log("Token generation failed or returned empty");
+          setNotificationStatus("error");
+        }
+      } else if (Notification.permission === 'denied') {
+        console.log("Notification permission is denied. Please enable notifications manually in browser settings.");
+        setNotificationStatus("error");
+        alert("Notifications are disabled. Please enable notifications in your browser settings.");
+      } else {
+        const permission = await Notification.requestPermission();
+        
+        if (permission === 'granted') {
+          const token = await generateToken();
+          if (token) {
+            setNotificationStatus("enabled");
+          } else {
+            console.log("Token generation failed or returned empty");
+            setNotificationStatus("error");
+          }
+        } else {
+          console.log("Notification permission denied.");
+          setNotificationStatus("error");
+          alert("Notifications permission was denied. Please enable notifications in your browser settings.");
+        }
+      }
+    } catch (error) {
+      console.error("Failed to enable notifications:", error);
+      setNotificationStatus("error");
+    }
+  };
+  
+
   
 
   useEffect(() => {
@@ -103,6 +162,9 @@ function BecomeTuitor() {
       )}
 
       <BetuitotBanner 
+      setsuggestions={setsuggestions}
+        setNotificationModal={setNotificationModal}
+        suggestions={suggestions}
         setopentuitorinitialmodal={setopentuitorinitialmodal} 
         user={myuser}
         tuitorlogin={()=>setClosetuitorLogin(true)}
