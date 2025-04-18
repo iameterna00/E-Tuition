@@ -14,6 +14,7 @@ import { IoSparkles } from 'react-icons/io5';
 import { TailSpin } from 'react-loader-spinner';
 import teacherscommunity from '../../assets/teacherscommunity.png';
 import { Link, useNavigate } from 'react-router-dom';
+import AdComponent from '../googleads/adscomponent';
 
 
 mapboxgl.accessToken = "pk.eyJ1IjoiYW5pc2hoLWpvc2hpIiwiYSI6ImNrdWo5d2lhdDFkb2oybnJ1MDB4OG1oc2EifQ.pLrp8FmZSLVfT3pAVVPBPg";
@@ -31,8 +32,6 @@ function TeacherVacancy() {
   const [referalmodal, setreferalmodal] = useState(false);
   const navigate = useNavigate();
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
-
-  const [isChatBotOpen, setIsChatBotOpen] = useState(false); // Keeps track if the user is loaded and checked
 
 
   // Function to handle the modal toggle
@@ -57,7 +56,7 @@ function TeacherVacancy() {
 
   useEffect(() => {
     const auth = getAuth();
-    
+  
     // Set up Firebase auth listener
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user || !user) {
@@ -167,12 +166,8 @@ function TeacherVacancy() {
   }, []);
   const navigatetovacancy = (vacancyid) => {
     navigate(`/vacancy/${vacancyid}`);
-
-
   
   }
-
- 
 
   return (
     <div className="teachervacancybody">
@@ -186,6 +181,9 @@ function TeacherVacancy() {
      </div>
      <img src={teacherscommunity} className='teacherscommunityimage' alt="" />
    
+     </div>
+     <div className="placeforadsteacherscommunity">
+    <AdComponent/>
      </div>
     
       <div id="geocoder" style={{ margin: "10px 0", width: "100%" }}></div>
