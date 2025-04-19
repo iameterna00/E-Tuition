@@ -3,51 +3,94 @@ import '../../css/home.css';
 import subjectsData from '../../JSON/subjects.json';
 import { ImBooks } from "react-icons/im";
 import { PiStudentFill } from "react-icons/pi";
-import { IoLocation } from "react-icons/io5";
+import { IoLocation, IoTime } from "react-icons/io5";
+
 const HomePageForm = () => {
   const [formData, setFormData] = useState({
-    grade: '',
-    name: '',
-    class: '',
+    destination: '',
+    studyLevel: '',
+    firstName: '',
+    lastName: '',
     age: '',
     email: '',
     phone: '',
-    subjects: '',
-    location: '',
+    startTime: '',
   });
+
+  const [invalidFields, setInvalidFields] = useState([]);
 
   const [subjects, setSubjects] = useState([]);
   const [filteredSubjects, setFilteredSubjects] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
-  const [currentStep, setCurrentStep] = useState(1); // Step tracking state
+  const [currentStep, setCurrentStep] = useState(1);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+
+    // Remove field from invalid list as soon as user starts typing
+    if (invalidFields.includes(name) && value.trim() !== '') {
+      setInvalidFields(invalidFields.filter(field => field !== name));
+    }
+  };
+
+  const validateStep = () => {
+    let requiredFields = [];
+
+    if (currentStep === 1) {
+      requiredFields = ['destination', 'studyLevel'];
+    } else if (currentStep === 2) {
+      requiredFields = ['firstName', 'lastName', 'age', 'email', 'phone'];
+    }
+
+    const newInvalids = requiredFields.filter(field => !formData[field]?.trim());
+    setInvalidFields(newInvalids);
+
+    return newInvalids.length === 0;
+  };
+
+  const nextStep = () => {
+    if (validateStep()) {
+      setCurrentStep(currentStep + 1);
+    }
+  };
+
+  const prevStep = () => {
+    setCurrentStep(currentStep - 1);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (!formData.startTime.trim()) {
+      setInvalidFields(['startTime']);
+      return;
+    }
+
+    setInvalidFields([]);
+
     console.log('Form submitted:', formData);
-    alert('Your request has been submitted successfully!');
+    // Add success message logic here (toast/snackbar/inline text)
     setFormData({
-      name: '',
-      class: '',
+      destination: '',
+      studyLevel: '',
+      firstName: '',
+      lastName: '',
       age: '',
       email: '',
       phone: '',
-      subjects: '',
-      location: '',
+      startTime: '',
     });
+    setCurrentStep(1);
   };
 
   useEffect(() => {
-    if (formData.class && subjectsData[formData.class]) {
-      setSubjects(subjectsData[formData.class]);
+    if (formData.destination && subjectsData[formData.destination]) {
+      setSubjects(subjectsData[formData.destination]);
     } else {
       setSubjects([]);
     }
-  }, [formData.class]);
+  }, [formData.destination]);
 
   useEffect(() => {
     if (searchTerm === '') {
@@ -61,69 +104,56 @@ const HomePageForm = () => {
     }
   }, [searchTerm, subjects]);
 
-  const nextStep = () => {
-    setCurrentStep(currentStep + 1);
-  };
+  const progressBarWidth = (currentStep / 3) * 100;
 
-  const prevStep = () => {
-    setCurrentStep(currentStep - 1);
+  const getInputStyle = (fieldName) => {
+    return invalidFields.includes(fieldName)
+      ? { border: '2px solid red' }
+      : { border: 'none' };
   };
-
-  const progressBarWidth = (currentStep / 3) * 100; // Calculates width for 3 steps
 
   return (
     <div className="FormBox">
       <div className="formmainContainer">
-        <h2>Couldn't Find a Tutor??</h2>
-        <p>Please fill out this form carefully, and we will reach out to you shortly to assist with your tutoring needs.</p>
+        <h2>Kube International can help you!</h2>
+        <p>
+          Enter your details and get a free counselling session with our experts so they can connect you to the right course, country, university – and even scholarships!
+        </p>
         <form className="form-container" onSubmit={handleSubmit}>
-          
-       
-       
-
-          {/* Step 1: Subject */}
+          {/* Step 1: Destination and Study Level */}
           {currentStep === 1 && (
-              <div className="classAndSubject">
-                <div className="studentFormHomeTuition">
-                  <h3>Class</h3>
-                  <select
-                    className="formSelectInput"
-                    name="class"
-                    style={{ border: 'none' }}
-                    value={formData.class}
-                    onChange={handleChange}
-                    required
-                  >
-                    <option value="">Select Class</option>
-                    <option value="Class 11">Class 11</option>
-                    <option value="Class 12">Class 12</option>
-                    
-                    {/* Add other classes */}
-                  </select>
-                </div>
-                <div className="studentFormHomeTuition">
-                  <h3>Subject</h3>
-                  <select
-                    className="formSelectInput"
-                    name="subjects"
-                    style={{ border: 'none' }}
-                    value={formData.subjects}
-                    onChange={handleChange}
-                    required
-                  >
-                    <option value="">Select Subject</option>
-                    {filteredSubjects.length > 0 ? (
-                      filteredSubjects.map((subject, index) => (
-                        <option key={index} value={subject}>
-                          {subject}
-                        </option>
-                      ))
-                    ) : (
-                      <option value="">Please select your class</option>
-                    )}
-                  </select>
-                </div>
+            <div className="classAndSubject">
+              <div className="studentFormHomeTuition">
+                <h3>Your preferred study destination</h3>
+                <select
+                  className="formSelectInput"
+                  name="destination"
+                  value={formData.destination}
+                  onChange={handleChange}
+                  style={getInputStyle('destination')}
+                >
+                  <option value="">Select</option>
+                  <option value="China">China</option>
+                  <option value="USA">USA</option>
+                  <option value="Japan">Japan</option>
+                </select>
               </div>
+              <div className="studentFormHomeTuition">
+                <h3>Preferred study level</h3>
+                <select
+                  className="formSelectInput"
+                  name="studyLevel"
+                  value={formData.studyLevel}
+                  onChange={handleChange}
+                  style={getInputStyle('studyLevel')}
+                >
+                  <option value="">Select</option>
+                  <option value="Undergraduate">Undergraduate</option>
+                  <option value="Postgraduate">Postgraduate</option>
+                  <option value="University Preparation">University Preparation</option>
+                </select>
+              </div>
+            </div>
           )}
 
           {/* Step 2: Student Details */}
@@ -131,16 +161,27 @@ const HomePageForm = () => {
             <div className="studentDetailsStep">
               <div className="nameandage">
                 <div className="studentFormHomeTuition">
-                  <h3>Name</h3>
+                  <h3>First name</h3>
                   <input
                     className="formInput"
                     type="text"
-                    name="name"
-                    style={{ border: 'none' }}
-                    placeholder="Student Name"
-                    value={formData.name}
+                    name="firstName"
+                    placeholder="First Name"
+                    value={formData.firstName}
                     onChange={handleChange}
-                    required
+                    style={getInputStyle('firstName')}
+                  />
+                </div>
+                <div className="studentFormHomeTuition">
+                  <h3>Last name</h3>
+                  <input
+                    className="formInput"
+                    type="text"
+                    name="lastName"
+                    placeholder="Last Name"
+                    value={formData.lastName}
+                    onChange={handleChange}
+                    style={getInputStyle('lastName')}
                   />
                 </div>
                 <div className="studentFormHomeTuition">
@@ -148,82 +189,66 @@ const HomePageForm = () => {
                   <input
                     className="formInput"
                     type="number"
-                    style={{ border: 'none' }}
                     name="age"
                     placeholder="Age"
                     value={formData.age}
                     onChange={handleChange}
-                    required
+                    style={getInputStyle('age')}
                   />
                 </div>
+              </div>
+              <div className="phoneandlocation">
                 <div className="studentFormHomeTuition">
                   <h3>Email</h3>
                   <input
                     className="formInput"
                     type="email"
-                    style={{ border: 'none' }}
                     name="email"
                     placeholder="Email"
                     value={formData.email}
                     onChange={handleChange}
-                    required
+                    style={getInputStyle('email')}
+                  />
+                </div>
+                <div className="studentFormHomeTuition">
+                  <h3>Phone Number</h3>
+                  <input
+                    className="formInput"
+                    type="tel"
+                    name="phone"
+                    placeholder="Phone Number"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    style={getInputStyle('phone')}
                   />
                 </div>
               </div>
-             <div className="phoneandlocation">
-             <div className="studentFormHomeTuition">
-                <h3>Phone Number</h3>
-                <input
-                  className="formInput"
-                  type="tel"
-                  style={{ border: 'none' }}
-                  name="phone"
-                  placeholder="Phone Number"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  required
-                />
-                
-              </div>
-             </div>
-              
             </div>
           )}
 
-          {/* Step 3: Location */}
+          {/* Step 3: Start Time */}
           {currentStep === 3 && (
             <div className="LocationStep">
               <div className="studentFormHomeTuition">
-                <h3>Location</h3>
-                <input
-                  className="formInput"
-                  type="text"
-                  name="location"
-                  style={{ border: 'none' }}
-                  placeholder="Enter your location"
-                  value={formData.location}
+                <h3>When would you like to start?</h3>
+                <select
+                  className="formSelectInput"
+                  name="startTime"
+                  value={formData.startTime}
                   onChange={handleChange}
-                  required
-                />
+                  style={getInputStyle('startTime')}
+                >
+                  <option value="">Select</option>
+                  <option value="Now">Now</option>
+                  <option value="3 Months">3 Months</option>
+                  <option value="6 Months">6 Months</option>
+                  <option value="12 Months">12 Months</option>
+                  <option value="More than 12 Months">More than 12 Months</option>
+                </select>
               </div>
-              <div className="studentFormHomeTuition">
-                <h3>Description (optional)</h3>
-                <input
-                  className="formInput"
-                  type="text"
-                  name="Description"
-                  style={{ border: 'none' }}
-                  placeholder="Describe a tuitor you want"
-                  value={formData.location}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-              
             </div>
-            
           )}
-{/*  */}
+
           {/* Navigation Buttons */}
           <div className="fornnavigationButtons">
             {currentStep > 1 && (
@@ -236,25 +261,25 @@ const HomePageForm = () => {
               <button type="submit">Submit</button>
             )}
           </div>
-             {/* Step Progress Bar */}
-             <div className="stepProgressBarContainer">
+
+          {/* Step Progress Bar */}
+          <div className="stepProgressBarContainer">
             <div className="stepProgressBar" style={{ width: `${progressBarWidth}%` }}></div>
           </div>
 
           {/* Step Indicators */}
           <div className="stepProgressBarNames">
             <div className={`stepIndicator ${currentStep >= 1 ? 'active' : ''}`}>
-              <div className="stepcount"><ImBooks />
-              </div>
-              <div className="stepname">Subject</div>
+              <div className="stepcount"><ImBooks /></div>
+              <div className="stepname">Destination</div>
             </div>
             <div className={`stepIndicator ${currentStep >= 2 ? 'active' : ''}`}>
               <div className="stepcount"><PiStudentFill /></div>
               <div className="stepname">Student Details</div>
             </div>
             <div className={`stepIndicator ${currentStep >= 3 ? 'active' : ''}`}>
-              <div className="stepcount"><IoLocation /></div>
-              <div className="stepname">Location</div>
+              <div className="stepcount"><IoTime /></div>
+              <div className="stepname">Start Date</div>
             </div>
           </div>
         </form>
