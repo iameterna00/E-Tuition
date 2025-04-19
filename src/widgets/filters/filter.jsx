@@ -6,13 +6,14 @@ function Filters({setLocationFilter, setGenderFilter, setSearchTerm, priceRange,
      <div className="filtercomponents" style={{display:"flex", width:"100%"}}>
      <div className="filterboxs">
           <div className="filterbox">
-            <h3>Gender</h3>
+            <h3>Category</h3>
             <select
                onChange={(e) => setGenderFilter(e.target.value)}
              name="Gender" id="Gender">
-              <option value="">Select Gender</option>
-              <option value="Male">Male</option>
-              <option value="Female">Female</option>
+              <option value="testprep">Test Preperation</option>
+              
+              <option value="academic">Academic</option>
+              
             </select>
           </div>
          <div className="filterox">

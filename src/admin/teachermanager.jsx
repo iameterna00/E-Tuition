@@ -57,6 +57,30 @@ function TeacherManager() {
       console.error("Error approving teacher:", error.response?.data || error.message);
     }
   };
+  const rejectTeacher = async (uid) => {
+    console.log("Rejecting teacher with UID:", uid);  // Fixed message
+    try {
+      const response = await axios.post(`${webApi}/api/teachers/reject`, {
+        uid: uid  // Only pass UID — no need for teacherconfirm here
+      });
+  
+      if (response.data.message) {
+        // Update local state to reflect rejection (e.g., remove or mark as rejected)
+        setTeachers(prevTeachers =>
+          prevTeachers.map((teacher) =>
+            teacher.uid === uid
+              ? { ...teacher, teacherconfirm: "rejected" }  // Set to "rejected" locally
+              : teacher
+          )
+        );
+        console.log("Teacher rejected:", uid);
+      }
+    } catch (error) {
+      console.error("Error rejecting teacher:", error.response?.data || error.message);
+    }
+  };
+  
+
 
   return (
     <div className="teachermanagerbody">
@@ -114,8 +138,9 @@ function TeacherManager() {
                 </div>
                 {/* Approve button */}
                 {teacher.teacherconfirm !== "approved" && (
-                  <div className="approveteacherbutton">
+                  <div style={{gap:"10px", display:"flex"}} className="approveteacherbutton">
                     <button onClick={() => approveTeacher(teacher.uid)}>Approve</button> {/* Pass 'uid' */}
+                    <button style={{backgroundColor:"red"}} onClick={() => rejectTeacher(teacher.uid)}>Reject</button> {/* Pass 'uid' */}
                   </div>
                 )}
                                 {teacher.teacherconfirm === "approved" && (

@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 const AddClass = () => {
   const [classDetails, setClassDetails] = useState({
-    classtype:"Academic",
+    course_categories:"testprep",
     subject: "",
     courseTitle: "",
     description: "",
@@ -74,7 +74,7 @@ const AddClass = () => {
     const formData = new FormData();
     formData.append("posterImage", document.getElementById("course-poster").files[0]); // Add image file
     formData.append("uid", uid);
-    formData.append("classtype", classDetails.classtype); // Include class type in the data
+    formData.append("classtype", classDetails.course_categories); // Include class type in the data
     formData.append("subject", classDetails.subject);
     formData.append("courseTitle", classDetails.courseTitle);
     formData.append("description", classDetails.description);
@@ -150,12 +150,12 @@ const AddClass = () => {
             <div className="right-side">
               <div className="form-group">
                 <label>Class Type</label>
-               <select name="classtype" id="" value={classDetails.classtype} onChange={handleChange} required>
-                <option value="Academic">
-                  Academic
+               <select name="classtype" id="" value={classDetails.course_categories} onChange={handleChange} required>
+                <option value="testprep">
+                Abroad Test Preparation
                 </option>
-                <option value="Abroad_cPreparation">
-                Abroad Preparation
+                <option value="academic">
+                  Academic
                 </option>
                 
                </select>

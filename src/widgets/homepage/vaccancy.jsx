@@ -8,7 +8,7 @@ import { webApi } from '../../api';
 function Vaccancy() {
   const [gigsData, setGigsData] = useState([]);
   const [locationFilter, setLocationFilter] = useState('');
-  const [genderFilter, setGenderFilter] = useState('');
+  const [genderFilter, setGenderFilter] = useState('testprep');
   const [searchTerm, setSearchTerm] = useState('');
   const [priceRange, setPriceRange] = useState([0, 25000]);
   const [loading, setLoading] = useState(true);
@@ -36,7 +36,7 @@ function Vaccancy() {
 
   const filteredGigs = gigsData.filter((gig) => {
     const matchesLocation = locationFilter ? gig.location.includes(locationFilter) : true;
-    const matchesGender = genderFilter ? gig.sex === genderFilter : true;
+    const matchesGender = genderFilter ? gig.coursecategory=== genderFilter : true;
     const matchesSearch = searchTerm
       ? gig.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
         gig.subjects.toLowerCase().includes(searchTerm.toLowerCase())
@@ -49,7 +49,7 @@ function Vaccancy() {
   <div className='homevacancybody'>
     <div className="home-vaccancy-page">
         <div className="title">
-        <h2>Available Tuitors</h2>
+        <h2>Available Courses</h2>
     </div>
   <div className="vaccancymainCntainer">
 
