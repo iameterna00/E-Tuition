@@ -61,7 +61,7 @@ function TeacherManager() {
     console.log("Rejecting teacher with UID:", uid);  // Fixed message
     try {
       const response = await axios.post(`${webApi}/api/teachers/reject`, {
-        uid: uid  // Only pass UID — no need for teacherconfirm here
+        uid: uid  
       });
   
       if (response.data.message) {
