@@ -116,7 +116,7 @@
   
   /* Form Styles */
   .tuition-form {
-    width: 100%;
+    width: 90%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -204,7 +204,20 @@
     justify-content: center;
     align-items: center;
   }
-  
+  .teacheredits{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    text-align: start;
+    background-color: rgb(38, 38, 38);
+    border-radius: 10px;
+    padding: 20px;
+  }
+  [data-theme='light'] .teacheredits{
+    background-color: rgb(255, 255, 255);
+  }
   .tuition-vacancy-card {
     width: 90%;
     display: flex;
@@ -297,5 +310,8 @@
   .tuition-form {
     width: 90%;
  
+  }
+  .teacheredits{
+    padding: 0px;
   }
 }

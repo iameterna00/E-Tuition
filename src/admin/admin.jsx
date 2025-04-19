@@ -36,7 +36,7 @@ const ADMIN = () => {
     lat: null,
     lng: null
   });
-  const [teacherData, setTeacherData] = useState({ teacherName: "", commission: "" });
+  const [teacherData, setTeacherData] = useState({ teacherName: "", commission: "", commissionDue:"" });
   const [vacancyId, setVacancyId] = useState(null);
   const [selectedTeacher, setSelectedTeacher] = useState(null);
   const [selectedTeacherCommission, setSelectedTeacherCommission] = useState("");
@@ -163,6 +163,53 @@ const handleSubmit = async (e) => {
     }
     setIsUpdatingStatus(false);
   };
+
+
+  const handleSubmitOnDue = async () => {
+    setIsAssigningTeacher(true);
+  
+    if (!vacancyId) {
+      console.error("No vacancy selected for teacher assignment (due)!");
+      return;
+    }
+  
+    // Set commissionDue instead of commission
+    const dueTeacher = {
+      teacherName: teacherData.teacherName,
+      commission: "", 
+      commissionDue: teacherData.commission,
+    };
+  
+    console.log("Submitting teacher on due:", dueTeacher, "to vacancy ID:", vacancyId);
+  
+    try {
+      const updatedVacancies = vacancies.map((vacancy) => {
+        if (vacancy._id === vacancyId) {
+          return {
+            ...vacancy,
+            teachers: [...vacancy.teachers, dueTeacher],
+            status: "pending",
+          };
+        }
+        return vacancy;
+      });
+  
+      await axios.put(`${webApi}/api/vacancies/${vacancyId}`, {
+        status: "pending",
+        teachers: updatedVacancies.find((v) => v._id === vacancyId).teachers,
+      });
+  
+      console.log("Teacher submitted on due successfully");
+      setVacancies(updatedVacancies);
+      setTeacherData({ teacherName: "", commission: "", commissionDue: "" });
+      setIsTeacherModalOpen(false);
+    } catch (err) {
+      console.error("Error updating due teacher data:", err.response ? err.response.data : err);
+    }
+  
+    setIsAssigningTeacher(false);
+  };
+  
 
 
   const handleTeacherSubmit = async (e) => {
@@ -320,6 +367,9 @@ const handleSubmit = async (e) => {
   const pendingCommissions = vacancies
     .filter((v) => v.status === "pending")
     .reduce((total, vacancy) => total + vacancy.teachers.reduce((sum, teacher) => sum + parseFloat(teacher.commission || 0), 0), 0);
+  const pendingCommissionsdue = vacancies
+    .filter((v) => v.status === "pending")
+    .reduce((total, vacancy) => total + vacancy.teachers.reduce((sum, teacher) => sum + parseFloat(teacher.commissionDue || 0), 0), 0);
   const completeRevenue = vacancies
     .filter((v) => v.status === "complete")
     .reduce((total, vacancy) => total + parseFloat(vacancy.teacherCommission || 0), 0);
@@ -371,7 +421,7 @@ const handleSubmit = async (e) => {
       {/* Display calculated values below tabs */}
       <div className="tab-stats">
         {tab === "available" && <p>Total Vacancies: {availableVacancies}</p>}
-        {tab === "pending" && <p>Total Commissions: ( {pendingvacancylength}) {pendingCommissions}</p>}
+        {tab === "pending" && <p>Total Commissions: ( {pendingvacancylength}) Rs {pendingCommissions} DUE: Rs {pendingCommissionsdue}</p>}
         {tab === "complete" && <p>Total Revenue: {completeRevenue}</p>}
       </div>
         {/* Loading screen */}
@@ -389,7 +439,12 @@ const handleSubmit = async (e) => {
       {/* Vacancy List */}
       <div className="tuition-vacancy-list">
       {filteredVacancies.map((v) => (
-        <div key={v._id} className="tuition-vacancy-card">
+        <div key={v._id} className="tuition-vacancy-card" style={{ borderLeft: `${
+          v.teachers?.some((teacher) => teacher.commissionDue)
+            ? '5px solid red'
+            : '5px solid #3498db'
+        }`,
+        }} >
           <h3 className="tuition-vacancy-title">
             {v.name} ({v.grade}) - {v.subject}
           </h3>
@@ -422,9 +477,11 @@ const handleSubmit = async (e) => {
               <h3 className="tuition-vacancy-info">Teachers Assigned:</h3>
               {v.teachers &&
                 v.teachers.map((teacher, index) => (
-                  <p key={index}>
-                    Teacher: {teacher.teacherName} | Commission: {teacher.commission}
-                  </p>
+                  <div key={index}>
+                   <p> Teacher: {teacher.teacherName} {teacher.commission && `| Commission: ${teacher.commission}`}
+                   {teacher.commissionDue && `| Due: ${teacher.commissionDue}`} </p>
+                 
+                  </div>
                 ))}
            <div className="teachersandcommission" style={{display:'flex', gap:'10px', cursor:'pointer' }} >
            <div className="addteacher" style={{ display: 'flex', gap: '5px',}} onClick={() => setIsTeacherModalOpen(true)}>
@@ -439,7 +496,7 @@ const handleSubmit = async (e) => {
           {tab === "complete" && (
             <div className="assignedteachers">
               <h3>Commission for {v.selectedTeacher || "No teacher assigned"}</h3>
-              <p>Commission: {v.teacherCommission || "N/A"}</p>
+              <p>Commission: {v.teacherCommission || "0"}</p>
             </div>
           )}
           <div className="tuition-action-buttons">
@@ -468,7 +525,7 @@ const handleSubmit = async (e) => {
 
       {/* Add Vacancy Modal */}
       
-      <button className="floating-button" style={{backgroundColor:isModalOpen? 'red':' #2d96ff'}} onClick={() => setIsModalOpen(!isModalOpen)}>{isModalOpen ? "X" : "Add"}  </button>
+      <button className="floating-button" style={{backgroundColor:isModalOpen? 'red':' #2d96ff', zIndex:"10000"}} onClick={() => setIsModalOpen(!isModalOpen)}>{isModalOpen ? "X" : "Add"}  </button>
       <button className="floating-searchbutton" onClick={searchclick} ><FaSearch style={{marginLeft:'-10px'}} fontSize={18}/></button>
       {isModalOpen && (
   <div className="modal-overlay">
@@ -521,22 +578,42 @@ const handleSubmit = async (e) => {
             <h2>Assign Teacher</h2>
             <form className="tuition-form" onSubmit={handleTeacherSubmit}>
               <input
+              style={{borderRadius:"10px"}}
                 type="text"
                 name="teacherName"
                 placeholder="Teacher Name"
                 value={teacherData.teacherName}
                 onChange={(e) => setTeacherData({ ...teacherData, teacherName: e.target.value })}
               />
+              
               <input
+               style={{borderRadius:"10px"}}
                 type="number"
                 name="commission"
                 placeholder="Commission"
                 value={teacherData.commission}
                 onChange={(e) => setTeacherData({ ...teacherData, commission: e.target.value })}
               />
-           <div className="buttons" style={{display:"flex", gap:'10px'}}>   <button type="submit">{isAssigningTeacher ? <FaSpinner className="newspinner" /> : "Assign Teacher"}</button>
-              <button className="tuition-delete-button" onClick={()=> setIsTeacherModalOpen(false)} >Cancel</button>
-              </div>
+         <div className="buttons" style={{ display: "flex", gap: '10px' }}>
+  <button type="submit">
+    {isAssigningTeacher ? <FaSpinner className="newspinner" /> : "Assign Teacher"}
+  </button>
+  <button
+    type="button"
+    onClick={handleSubmitOnDue}
+    className="submit-due-button"
+  >
+    Submit on Due
+  </button>
+  <button
+    className="tuition-delete-button"
+    type="button"
+    onClick={() => setIsTeacherModalOpen(false)}
+  >
+    Cancel
+  </button>
+</div>
+
             </form>
           </div>
         </div>
@@ -669,15 +746,16 @@ const handleSubmit = async (e) => {
        {isEditteacherModalOpen && editingVacancy && (
   <div className="modal-overlay">
     <div className="modal-content" style={{ textAlign: "start" }}>
-      <h2>Edit Vacancy</h2>
-      <form onSubmit={handleEditSubmit}>
+      <h2>Edit Teachers </h2>
+      <form  onSubmit={handleEditSubmit}>
 
         {editingVacancy.teachers?.map((teacher, index) => (
-          <div key={index} style={{ marginBottom: "10px" }}>
+          <div className="teacheredits" key={index} style={{ marginBottom: "10px" }}>
             <p style={{ margin: "0px" }}>Teacher {index + 1}</p>
 
             {/* Editable Teacher Name */}
             <input
+            style={{borderRadius:"10px"}}
               type="text"
               name={`teacherName-${index}`}
               value={teacher.teacherName || ""}
@@ -692,20 +770,41 @@ const handleSubmit = async (e) => {
             />
 
             {/* Editable Commission */}
-            <p style={{ margin: "0px" }}>Commission</p>
-            <input
-              type="number"
-              name={`commission-${index}`}
-              value={teacher.commission || ""}
-              onChange={(e) => {
-                const updatedTeachers = [...editingVacancy.teachers];
-                updatedTeachers[index] = {
-                  ...updatedTeachers[index],
-                  commission: e.target.value,
-                };
-                handleEditChange({ target: { name: "teachers", value: updatedTeachers } });
-              }}
-            />
+    <>
+          <p style={{ margin: "0px" }}>Commission</p>
+          <input
+          style={{borderRadius:"10px"}}
+            type="number"
+            name={`commission-${index}`}
+            value={teacher.commission || ""}
+            onChange={(e) => {
+              const updatedTeachers = [...editingVacancy.teachers];
+              updatedTeachers[index] = {
+                ...updatedTeachers[index],
+                commission: e.target.value,
+              };
+              handleEditChange({ target: { name: "teachers", value: updatedTeachers } });
+            }}
+          /></>
+    
+          
+        <>
+          <p style={{ margin: "0px", color:"red" }}>CommissionDue</p>
+          <input
+          style={{borderRadius:"10px"}}
+            type="number"
+            name={`commissionDue-${index}`}
+            value={teacher.commissionDue || ""}
+            onChange={(e) => {
+              const updatedTeachers = [...editingVacancy.teachers];
+              updatedTeachers[index] = {
+                ...updatedTeachers[index],
+                commissionDue: e.target.value,
+              };
+              handleEditChange({ target: { name: "teachers", value: updatedTeachers } });
+            }}
+          /></>
+     
           </div>
         ))}
 
