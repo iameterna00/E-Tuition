@@ -182,7 +182,7 @@ function TeacherVacancy() {
      <img src={teacherscommunity} className='teacherscommunityimage' alt="" />
    
      </div>
-     <div className="placeforadsteacherscommunity">
+     <div className="placeforadsteacherscommunity" style={{display:"none"}}>
     <AdComponent/>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1397824505506969"
         crossorigin="anonymous"></script>
