@@ -46,7 +46,7 @@ function BetuitotBanner({ setopentuitorinitialmodal, user, tuitorlogin, suggesti
     try {
       const loadingToastId = toast.loading("Enabling notification!", {
         position: "top-center",
-        autoClose: false, // ⛔ don't auto close loading toasts
+        autoClose: false, 
         transition: Zoom,
         hideProgressBar: false,
         theme: "colored",

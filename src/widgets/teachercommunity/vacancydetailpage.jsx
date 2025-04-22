@@ -243,8 +243,6 @@ const VacancyDetail = () => {
                 <button onClick={handleCopy}>Copy Code</button>
                 <ToastContainer />
               
-
-
               
               <button className="tuition-delete-button" onClick={closeModal}>
                 Close

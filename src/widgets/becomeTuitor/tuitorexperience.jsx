@@ -136,7 +136,8 @@ function TeachingExperience({ setopentuitorinitialmodal, user }) {
         setLoading(true);
     
         if (!teachingExperience || !selectedSchool || !selectedDegree || !cvFile || !identityFile || !gender) {
-            alert("Please complete all fields before submitting.");
+
+            
             setLoading(false); // Reset loading state if validation fails
             return;
         }
@@ -453,7 +454,10 @@ function TeachingExperience({ setopentuitorinitialmodal, user }) {
                                     <button onClick={handleNext} >Next</button>
                                 )}
                                 {step === 6 && isAgreed && (
-                                    <button onClick={handleTeacherxp} >{loading? <FaSpinner className="newspinner"/>:'Finish'}</button>
+                                    <button onClick={handleTeacherxp} 
+                                    disabled={loading} 
+                                    className={loading ? "disabled-btn" : ""}
+                                    >{loading? <FaSpinner className="newspinner"/>:'Finish'}</button>
                                 )}
                             </div>
                         </div>
