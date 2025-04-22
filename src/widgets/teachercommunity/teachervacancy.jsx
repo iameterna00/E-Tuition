@@ -184,6 +184,9 @@ function TeacherVacancy() {
      </div>
      <div className="placeforadsteacherscommunity">
     <AdComponent/>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1397824505506969"
+        crossorigin="anonymous"></script>
+
      </div>
     
       <div id="geocoder" style={{ margin: "10px 0", width: "100%" }}></div>
