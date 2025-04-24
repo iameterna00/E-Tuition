@@ -44,7 +44,6 @@ const ADMIN = () => {
   const [vacancyToDelete, setVacancyToDelete] = useState(null);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
-
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isUpdatingStatus, setIsUpdatingStatus] = useState(false);
   const [isAssigningTeacher, setIsAssigningTeacher] = useState(false);
