@@ -3,7 +3,7 @@ import { ThemeContext } from './utilities/themeprovider';
 import './css/nav.css';
 import KUBE from './assets/newcube.png';
 import { CiLight, CiLogout } from "react-icons/ci";
-import { MdDarkMode } from "react-icons/md";
+import { MdContacts, MdDarkMode } from "react-icons/md";
 import { FaBars, FaBook, FaChalkboardTeacher, FaPlane, FaSignInAlt, FaSignOutAlt, FaSun, FaTimes, FaUser } from 'react-icons/fa';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { getAuth, signOut } from "firebase/auth"; 
@@ -14,6 +14,7 @@ import { fetchUser, selectUser } from './services/Redux/userSlice';
 import { webApi } from './api';
 import { FaMessage, FaUsersGear } from "react-icons/fa6";
 import { FiLogOut } from "react-icons/fi";
+import { TiGroup } from 'react-icons/ti';
 
 
 
@@ -182,10 +183,10 @@ const Navbar = () => {
 
           <div  className={`navlinks ${menuOpen ? 'active' : ''}`}>
           <Link onClick={handleLinkClick} to='/studyabroad' className='navbuttons' style={{ textDecoration: 'none', color: 'inherit' }}>
-             {menuOpen && (<FaPlane/> )}<div>Contact</div>
+             {menuOpen && (<MdContacts /> )}<div>Contact</div>
             </Link>
           <Link onClick={handleLinkClick} to='/studyabroad' className='navbuttons' style={{ textDecoration: 'none', color: 'inherit' }}>
-             {menuOpen && (<FaPlane/> )}<div>About Us</div>
+             {menuOpen && (<TiGroup /> )}<div>About Us</div>
             </Link>
           <Link onClick={handleLinkClick} to='/studyabroad' className='navbuttons' style={{ textDecoration: 'none', color: 'inherit' }}>
              {menuOpen && (<FaPlane/> )}<div> Study Abroad</div>
