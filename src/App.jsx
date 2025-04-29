@@ -28,6 +28,7 @@ import VacancyDetail from './widgets/teachercommunity/vacancydetailpage.jsx';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { v4 as uuidv4 } from 'uuid'; 
 import UsersActivity from './admin/useractivity.jsx';
+import FooterComponent from './footer.jsx';
 
 
 
@@ -125,6 +126,7 @@ function App() {
             </Route>
             <Route path="/teacherscommunity" element={<TeacherCommunityPage />} />
           </Routes>
+          <FooterComponent/>
         </ThemeProvider>
       </Router>
     </Provider>

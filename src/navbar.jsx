@@ -182,6 +182,12 @@ const Navbar = () => {
 
           <div  className={`navlinks ${menuOpen ? 'active' : ''}`}>
           <Link onClick={handleLinkClick} to='/studyabroad' className='navbuttons' style={{ textDecoration: 'none', color: 'inherit' }}>
+             {menuOpen && (<FaPlane/> )}<div>Contact</div>
+            </Link>
+          <Link onClick={handleLinkClick} to='/studyabroad' className='navbuttons' style={{ textDecoration: 'none', color: 'inherit' }}>
+             {menuOpen && (<FaPlane/> )}<div>About Us</div>
+            </Link>
+          <Link onClick={handleLinkClick} to='/studyabroad' className='navbuttons' style={{ textDecoration: 'none', color: 'inherit' }}>
              {menuOpen && (<FaPlane/> )}<div> Study Abroad</div>
             </Link>
        
@@ -213,24 +219,7 @@ const Navbar = () => {
              <Link onClick={handleLinkClick} to='/chat' className='navbuttons' style={{ textDecoration: 'none', color: 'inherit' }}>
              {menuOpen && (<FaMessage/> )}<div> Chats</div>
             </Link>
-            {/* {user && (
-                 <div className="navbuttons" style={{ position:"relative", display: 'flex', gap: '10px' }} onClick={handlenotification} >
-                 {menuOpen ? (
-                   <>
-                   
-                   <IoIosNotifications fontSize={20} /> notifications
-                   </>
-                 ) : (
-                   <IoIosNotifications fontSize={20} /> 
-                 )}
-                   {notificationmodalopen && (
-                  <div className="dropdown-menupc" style={{
-                     position: 'absolute', top: '50px', right: '0',  padding: '10px 20px', display: 'flex', flexDirection: 'column', boxShadow: '0px 8px 16px rgba(0,0,0,0.2)', zIndex: 1 }}>
-                   <Notification/>
-                  </div>
-                )}
-               </div>
-               )} */}
+     
            {!menuOpen &&(
             <>
              {!user ? (
