@@ -122,6 +122,7 @@ input{
   color: white; /* White text in dark mode */
 }
 body {
+  height: 100%;
   margin: 0;
   font-family: 'Raleway', sans-serif;
   display: flex;
@@ -142,3 +143,11 @@ p{
   margin: 5px;
 }
 
+.page-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.mainapp-content {
+  flex: 1;
+}

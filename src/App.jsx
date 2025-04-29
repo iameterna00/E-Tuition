@@ -99,11 +99,13 @@ function App() {
   return (
     <Provider store={store}>
       <Router>
+        <div className="page-wrapper">
         <ThemeProvider>
           <Navbar />
           <ConditionalChatbot />
           <ScrollToTop />
-          <Routes>
+        <main className='mainapp-content'>
+        <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/university/:id" element={<UniversityDetail />} />
             <Route path="/academicclasses" element={<OnlineClasses />} />
@@ -126,8 +128,10 @@ function App() {
             </Route>
             <Route path="/teacherscommunity" element={<TeacherCommunityPage />} />
           </Routes>
+        </main>
           <FooterComponent/>
         </ThemeProvider>
+        </div>
       </Router>
     </Provider>
   );
