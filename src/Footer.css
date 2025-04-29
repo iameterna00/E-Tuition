@@ -11,7 +11,7 @@
     align-items: start;
     margin: auto;
     max-width: 90%;
-    gap: 20px;
+    gap: 10px;
   }
   
   .footer-logo h2 {
@@ -36,6 +36,7 @@
     text-align: start; 
     flex-direction: column;
     gap: 10px;
+    font-size: 14px;
   }
   
   .footer-links a {
@@ -53,7 +54,7 @@
     flex-direction: column;
     gap: 15px;
     text-align: start;
-    font-size: 20px;
+    
   }
   
   .footer-social a {
