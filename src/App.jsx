@@ -29,6 +29,7 @@ import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { v4 as uuidv4 } from 'uuid'; 
 import UsersActivity from './admin/useractivity.jsx';
 import FooterComponent from './footer.jsx';
+import ConditionalFooter from './services/conditionalfooter.jsx';
 
 
 
@@ -129,8 +130,9 @@ function App() {
             <Route path="/teacherscommunity" element={<TeacherCommunityPage />} />
           </Routes>
         </main>
-          <FooterComponent/>
+          <ConditionalFooter/>
         </ThemeProvider>
+     
         </div>
       </Router>
     </Provider>

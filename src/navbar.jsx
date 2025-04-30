@@ -182,12 +182,12 @@ const Navbar = () => {
       
 
           <div  className={`navlinks ${menuOpen ? 'active' : ''}`}>
-          <Link onClick={handleLinkClick} to='/contact' className='navbuttons' style={{ textDecoration: 'none', color: 'inherit' }}>
+          {/* <Link onClick={handleLinkClick} to='/contact' className='navbuttons' style={{ textDecoration: 'none', color: 'inherit' }}>
              {menuOpen && (<MdContacts /> )}<div>Contact</div>
             </Link>
           <Link onClick={handleLinkClick} to='/about' className='navbuttons' style={{ textDecoration: 'none', color: 'inherit' }}>
              {menuOpen && (<TiGroup /> )}<div>About Us</div>
-            </Link>
+            </Link> */}
           <Link onClick={handleLinkClick} to='/studyabroad' className='navbuttons' style={{ textDecoration: 'none', color: 'inherit' }}>
              {menuOpen && (<FaPlane/> )}<div> Study Abroad</div>
             </Link>

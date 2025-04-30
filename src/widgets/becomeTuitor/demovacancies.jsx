@@ -13,7 +13,7 @@ const DemoVacancy = ({login}) => {
     fetch(`${webApi}/api/demo_vacancies`) // Replace with your correct API endpoint
       .then((response) => response.json())
       .then((data) => {
-        setVacancies(data.slice(0, 6)); // Limit to the top 5 vacancies
+        setVacancies(data.slice(0, 4)); // Limit to the top 5 vacancies
         console.log(data);
       })
       .catch((error) => {
