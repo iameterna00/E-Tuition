@@ -34,7 +34,7 @@ const UniversityDetail = () => {
             <span className="description-bullet">•</span>
             <span>{trimmedLine.substring(2)}</span>
           </div>
-        );
+        ); 
       }
       
       return <p key={index} className="description-paragraph">{trimmedLine}</p>;
@@ -63,36 +63,62 @@ const UniversityDetail = () => {
           )}
         </div>
       </div>
+      {university.video && (
+  <video
+    src={university.video}
+    autoPlay
+    muted
+    loop
+    playsInline
+    controls={false}
+    style={{ width: '100%', maxHeight: '400px', objectFit: 'cover' }}
+  />
+) }
+{university.image &&(
+  <img
+    src={university.image}
+    alt={university.name}
+    style={{ width: '100%', maxHeight: '400px', objectFit: 'cover' }}
+  />
+)}
 
-      <div className="university-details">
-        {university.ranking && (
+
+
+      
+      {university.description && (
+        <div className="university-description">
+          <div className="description-content">
+          <h3>About</h3>
+            {formatDescription(university.description)}
+          </div>
+          <div className="university-details" style={{textAlign:'start'}}>
+    <div className="universitydetailsinsiders">
+    {university.ranking && (
           <div>
             <strong>Global Ranking:</strong> {university.ranking}
           </div>
         )}
         {university.tuition && (
           <div>
-            <strong>Tuition Fee:</strong> {university.tuition} /year
+            <strong>Tuition Fee:</strong> {formatDescription(university.tuition)}
           </div>
         )}
         {university.costOfLiving && (
           <div>
-            <strong>Estimated Cost of Living:</strong> {university.costOfLiving} /month
+            <strong>Estimated Cost of Living:</strong> {formatDescription(university.costOfLiving)} 
           </div>
         )}
+         {university.monthlyStipend && (
+          <div>
+            <strong>Monthly Stipend:</strong>  {formatDescription(university.monthlyStipend)}
+          </div>)}
         {university.programs && (
           <div>
             <strong>Popular Programs:</strong> {university.programs.join(", ")}
           </div>
         )}
-      </div>
-      
-      {university.description && (
-        <div className="university-description">
-          <h3>About</h3>
-          <div className="description-content">
-            {formatDescription(university.description)}
-          </div>
+    </div>
+      </div> 
         </div>
       )}
     </div>

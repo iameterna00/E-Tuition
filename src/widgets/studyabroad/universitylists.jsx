@@ -12,8 +12,9 @@ const UniversityList = ({ searchTerm, selectedCountry }) => {
   );
 
   return (
+ <div className="university-list-container">
+   <h3>Available Universities</h3>
     <div className="university-list">
-      <h3>Available Universities</h3>
       
       {filteredUniversities.length > 0 ? (
         filteredUniversities.map((university) => (
@@ -37,9 +38,11 @@ const UniversityList = ({ searchTerm, selectedCountry }) => {
           </div>
         ))
       ) : (
-        <p>No universities found.</p>
+        <div className="nouniversityfound" style={{height:"300px", display:'flex', justifyContent:'center', alignItems:'center'}}>
+          <p style={{display:'flex', justifyContent:'center', alignContent:'center'}}>No universities found.</p>
+        </div>
       )}
-    </div>
+    </div></div>
   );
 };
 

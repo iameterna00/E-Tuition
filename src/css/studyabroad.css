@@ -1,7 +1,6 @@
 /* Full-width banner */
 .studyabroadbanner {
     width: 100%;
-    background: linear-gradient(to right, #193232, #0f2027);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -10,6 +9,10 @@
   }
   .studyabroadbannertext{
     position: absolute;
+  }
+  .studyabroadbanner img {
+    width: 100%;
+    object-fit: cover;
   }
   
   /* Layout */
@@ -37,21 +40,22 @@
   
   /* University list */
   .university-list {
-    width: 75%;
+    width: 100%;
     padding: 20px;
   }
-  
+  .university-list-container{
+    width: 100%;
+    padding: 15px;
+  }
   .university-card {
     display: flex;
     align-items: center;
     justify-content: start;
     text-align: start;
-    padding: 15px;
     cursor: pointer;
     border-radius: 10px;
     margin-bottom: 15px;
-    background: #eaeaea;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background: #F5F5F5 ;
   }
   [data-theme = 'dark']  .university-card {
     background: #262626;
@@ -60,7 +64,7 @@
     background: #2c2c2c;
   }
   [data-theme = 'light'] .university-list :hover {
-    background: #d0d0d0;
+    background: #ebebeb;
   }
   .university-logo {
     width: 60px;
@@ -79,15 +83,15 @@
     color: #666;
   }
   .filter-container {
+    background-color: #F5F5F5;
     text-align: center;
     padding: 20px;
-    height: 600px;
+    height: 700px;
     overflow-y: auto;
   }
   /* Country Filter Container */
 .country-filter {
     display: flex;
-   
     flex-direction: column;
     gap: 15px;
 
@@ -171,6 +175,7 @@
     }
     [data-theme = 'light'] .floating-filter-button{
       background: #ffffff;
+      color: #000000;
     }
     .filteruniversityoverlay{
       display: block;

@@ -5,10 +5,10 @@ import { FaAnglesLeft, FaAnglesRight } from "react-icons/fa6";
 // List of countries with flag URLs
 const countries = [
   { name: "", flag: "https://theglobalcollege.com/wp-content/uploads/2020/03/what-is-global-at-college.jpg" },
-  { name: "USA", flag: "https://flagcdn.com/w40/us.png" },
-  { name: "Canada", flag: "https://flagcdn.com/w40/ca.png" },
-  { name: "China", flag: "https://flagcdn.com/w40/cn.png" },
-  { name: "Japan", flag: "https://flagcdn.com/w40/jp.png" },
+  { name: "USA", flag: "https://upload.wikimedia.org/wikipedia/en/thumb/a/a4/Flag_of_the_United_States.svg/960px-Flag_of_the_United_States.svg.png?20250221172329" },
+  { name: "Canada", flag: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Flag_of_Canada_%28Pantone%29.svg/1200px-Flag_of_Canada_%28Pantone%29.svg.png" },
+  { name: "China", flag: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Flag_of_the_People%27s_Republic_of_China.svg/1920px-Flag_of_the_People%27s_Republic_of_China.svg.png" },
+  { name: "Japan", flag: "https://upload.wikimedia.org/wikipedia/en/thumb/9/9e/Flag_of_Japan.svg/1920px-Flag_of_Japan.svg.png" },
 ];
 
 const Filter = ({ searchTerm, setSearchTerm, selectedCountry, setSelectedCountry }) => {
@@ -29,8 +29,6 @@ const Filter = ({ searchTerm, setSearchTerm, selectedCountry, setSelectedCountry
           left: filterVisible ? "0" : "-400px", 
           transition: "left 0.3s ease-in-out",
           width: "300px",
-          height: "100%",
-          boxShadow: "2px 0 5px rgba(0, 0, 0, 0.1)",
           zIndex: "10"
         }}
       >

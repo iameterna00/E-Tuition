@@ -1,6 +1,7 @@
 .university-detail {
-    max-width: 900px;
+    max-width: 70%;
     margin: 30px auto;
+    text-align: start;
     padding: 20px;
     border-radius: 12px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -40,16 +41,28 @@
   }
   
   .university-details {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    font-size: 1rem;
+    gap: 10px;
+    border-radius: 10px ;
+    max-width: 350px;
     margin-bottom: 30px;
+    background-color:rgb(250, 250, 250);
+    border: 1px solid #9e9e9e3f;
   }
-  
+  [data-theme = 'dark'] .university-details {
+    background: #2a2a2a;
+    
+  }
+  .universitydetailsinsiders{
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
   .university-description {
     margin-top: 20px;
     text-align: start;
+    display: flex;
+    justify-content: space-between;
   }
   
 
@@ -70,5 +83,19 @@
         height: 80px;
         border-radius: 8px;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .university-detail{
+        max-width: 100%;
+        padding: 20px 10px;
+      }
+      .university-details{
+        max-width: 100%;
+        padding: 0px;
+        margin: 20px 0;
+      }
+   
+
+      .university-description{
+        flex-direction: column-reverse;
       }
   }
