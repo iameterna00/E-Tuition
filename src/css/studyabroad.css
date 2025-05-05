@@ -1,11 +1,7 @@
 /* Full-width banner */
 .studyabroadbanner {
     width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+
   }
   .studyabroadbannertext{
     position: absolute;
@@ -14,7 +10,35 @@
     width: 100%;
     object-fit: cover;
   }
+  .studyabroadbannerphone img {
+    display: none;
+    height: 400px;
+    object-fit: cover;
+  }
+  .stuyaboadform{
+    width: 100%;
+    margin-top: -10px;
+    display: flex;
+    justify-content: center;
+    background-color: #edfcff;
+  }
+  [data-theme = 'dark'] .stuyaboadform {
+    background: #1d1d1d80;
+
+  }
   
+.studyabroadforminsiders{
+  display: flex;
+  margin: 0 20px;
+  max-width: 1200px;
+}
+  
+  .studyabroadforminsiders img{
+    max-width: 500px;
+    max-height: 600px;
+    padding: 20px;
+
+  }
   /* Layout */
   .content-container {
     display: flex;
@@ -135,7 +159,158 @@
   .filteruniversityoverlay{
     display: none;
   }
+.abroadform-container{
+  position: fixed;
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  
+ 
+}
+.abroadforminsiders{
+  display: flex;
+  margin-top: -75px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  background-color: white;
+  gap: 50px;
+  border-radius: 20px;
+  width: 100%;
+  justify-content: space-between;
+
+}
+.abroadforms{
+  padding: 40px;
+}
+.abroadforms h2{
+  padding: 10px;
+  color: #353535;
+}
+[data-theme='dark'] .abroadforms h2 {
+  color: rgba(215, 215, 215, 0.726);
+}
+[data-theme='dark'] .abroadforms p {
+  color: rgba(215, 215, 215, 0.755);
+}
+
+
+.abroadforms p{
+  padding: 10px;
+  margin: -30px 10px 0 0px;
+  color: #353535;
+}
+
+.abroadforms .form-row {
+  display: flex;
+  gap:50px; 
+  margin-bottom: 15px;
+}
+
+.abroadforms .form-row label {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.frontpage {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-radius: 12px;
+}
+.phonenumbercontainer{
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 10px;
+}
+
+.countrycode{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.abroadforms{
+  width: 100%;
+  text-align: start;
+}
+.abroadforms input{
+  border-color: #505050;
+  border-radius: 14px;
+}
+.abroadforms select{
+  border-color: #505050;
+  border-radius: 14px;
+  background-color: transparent;
+}
+[data-theme='light'] .abroadforms select {
+  color: black;
+}
+
+
+.formbanner{
+  margin-right: -30px;
+  object-fit: cover;
+}
+.bottombutton{
+  display: flex;
+  width: 100%;
+  justify-content: start;
+  gap: 10px;
+  padding: 10px;
+}
+.submit{
+  width: 100%;
+  max-width: 300px;
+}
   @media (max-width: 768px) {
+    .abroadform-container{
+      position: fixed;
+      width: 100%;
+      height: 100vh;
+      overflow-y: auto;
+      border-radius: 0px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      background-color: white;
+    }
+    .submit{
+      width: 100%;
+      max-width: 100%;
+    }
+    .abroadforms .form-row {
+      display: flex;
+      gap:0px; /* space between the two inputs */
+      margin-bottom: 15px;
+      margin: 10px;
+      flex-direction: column;
+    }
+    .formbanner{
+      display:none;
+    }
+    
+    .abroadforms .form-row label {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .abroadforms {
+      padding: 10px;
+      margin-left: -10px;
+      width: calc(100% - 20px);
+    }
+    
+    .abroadforminsiders{
+      padding: 20px ;
+      display: flex;
+      margin-top: 0px;
+      margin-bottom: 100px;
+      height: 100%;
+      width: 95%;
+      flex-direction: column;
+      justify-content: center;
+    }    
     .filter-container {
       width: 100%;
       height: 100%;
@@ -143,8 +318,10 @@
       top: 70px;
       border-radius: 0px;
     }
+
     .university-list {
       width: 100%;
+      padding: 0px;
     }
     .content-container {
       display: flex;
@@ -181,11 +358,20 @@
       display: block;
       position: fixed;
       top: 70px;
-      left: 0;
+      left: 0px;
       width: 100%;
       height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
+      background-color: rgba(13, 13, 13, 0.452);
       z-index: 8;
+    }
+    .studyabroadbannerphone img {
+      display: flex;
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+    }
+    .studyabroadbanner img {
+      display: none;
     }
     
   }

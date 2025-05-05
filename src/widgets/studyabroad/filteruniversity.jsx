@@ -28,8 +28,7 @@ const Filter = ({ searchTerm, setSearchTerm, selectedCountry, setSelectedCountry
           top: "70px",
           left: filterVisible ? "0" : "-400px", 
           transition: "left 0.3s ease-in-out",
-          width: "300px",
-          zIndex: "10"
+          width: "300px",          zIndex: "a10"
         }}
       >
         <div className="titleoffilterunive" style={{ display: "flex", justifyContent: "space-between", width: "90%", paddingTop: "30px" }}>

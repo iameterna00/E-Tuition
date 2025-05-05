@@ -332,7 +332,7 @@ const VacancyCard = ({ vacancy, locationSource, openModal, openreferalmodal, nav
           <h4><FaChalkboardTeacher /> Grade: {vacancy.grade}</h4>
           <h4><FaLocationDot /> Location: {vacancy.location ? vacancy.location : 'Online'}</h4>
           <h4><FaBook /> Subject: {vacancy.subject}</h4>
-          <h4><FaClock /> Duration: {vacancy.duration}</h4>
+          <h4><FaClock /> Time: {vacancy.time}</h4>
           <h4><FaGraduationCap /> No of students: {vacancy.noofstudents}</h4>
           <h4><FaUser /> Tutor Type: {vacancy.tutorType ? vacancy.tutorType : 'Any'}</h4>
           <h4><MdDateRange /> {new Date(vacancy.created_at).toLocaleString("en-US", {

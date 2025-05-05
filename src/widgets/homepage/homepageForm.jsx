@@ -3,7 +3,8 @@ import '../../css/home.css';
 import subjectsData from '../../JSON/subjects.json';
 import { ImBooks } from "react-icons/im";
 import { PiStudentFill } from "react-icons/pi";
-import { IoLocation, IoTime } from "react-icons/io5";
+import { IoTime } from "react-icons/io5";
+import girl from "../../assets/abroadbaner.png"
 
 const HomePageForm = () => {
   const [formData, setFormData] = useState({
@@ -115,14 +116,15 @@ const HomePageForm = () => {
   return (
     <div className="FormBox">
       <div className="formmainContainer">
-        <h2>Kube International can help you!</h2>
+        <h2>Kube International can help you study abroad</h2>
         <p>
           Enter your details and get a free counselling session with our experts so they can connect you to the right course, country, university – and even scholarships!
         </p>
         <form className="form-container" onSubmit={handleSubmit}>
           {/* Step 1: Destination and Study Level */}
           {currentStep === 1 && (
-            <div className="classAndSubject">
+         <div className="formstepone">
+             <div className="classAndSubject">
               <div className="studentFormHomeTuition">
                 <h3>Your preferred study destination</h3>
                 <select
@@ -154,6 +156,8 @@ const HomePageForm = () => {
                 </select>
               </div>
             </div>
+              <img src={girl} alt="" />
+         </div>
           )}
 
           {/* Step 2: Student Details */}
@@ -250,15 +254,15 @@ const HomePageForm = () => {
           )}
 
           {/* Navigation Buttons */}
-          <div className="fornnavigationButtons">
+          <div className="formnavigationButtons">
             {currentStep > 1 && (
-              <button type="button" onClick={prevStep}>Previous</button>
+              <button  className='nextstep' type="button" onClick={prevStep}>Previous</button>
             )}
             {currentStep !== 3 && (
-              <button type="button" onClick={nextStep}>Next</button>
+              <button  className='nextstep' type="button" onClick={nextStep}>Next Step</button>
             )}
             {currentStep === 3 && (
-              <button type="submit">Submit</button>
+              <button className='nextstep' type="submit">Submit</button>
             )}
           </div>
 

@@ -195,6 +195,16 @@
     margin-bottom: 20px;
     color: var(--primary-text-color-light);
   }
+  .formstepone{
+    display: flex;
+    width: 100%;
+    gap: 20px;
+  }
+  .formstepone img{
+    width: 100%;
+    max-width: 300px;
+    max-height: 300px;
+  }
   .classAndSubject{
     display: flex;
     flex-direction: column;
@@ -202,10 +212,23 @@
     width: 100%;
     gap: 10px;
   }
+
+
+  [data-theme='light'] .nextstep {
+    border-radius: 10px;
+    background-color:#23a7fef4 ;
+   }
+   [data-theme='dark'] .nextstep {
+    border-radius: 10px;
+   }
+    [data-theme='light'] .nextstep:hover {
+    color: white;
+   }
   .formmainContainer {
     padding: 20px;
     border-radius: 20px;
     width: 70%;
+    text-align: start;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -221,7 +244,7 @@
   }
 
   [data-theme='dark'] .FormBox {
-   color: white;
+   color: rgb(166, 83, 83);
   }
   
   [data-theme='light'] .FormBox{
@@ -246,7 +269,7 @@
     width: 100%;
     margin-bottom: 15px;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid #cccccc;
     background-color: transparent;
     font-size: 16px;
     color: #222; /* Default text color for light theme */
@@ -307,18 +330,18 @@
 
   /* STEPS */
 
-  .fornnavigationButtons{
+  .formnavigationButtons{
     display: flex;
     gap: 10px;
     padding: 10px;
     justify-content: center;
-    align-self: center;
+    align-self: start;
   }
 
   .stepProgressBarContainer {
     width: 100%;
     height: 8px;
-    background-color: #36454b7f;
+    background-color: #36454b4d;
     border-radius: 5px;
     margin-bottom: 20px;
   }
@@ -326,6 +349,7 @@
   .stepProgressBar {
     height: 100%;
     display: flex;
+    border-radius: 50px;
     transition: width 0.5s ease-in-out; 
   }
   [data-theme='dark'] .stepProgressBar {
@@ -356,7 +380,7 @@
   }
   
   .stepProgressBarNames .stepIndicator.active {
-    background-color:  #36454b32
+    background-color:  #699eb332
   }
 
   .stepIndicator .stepcount {
@@ -811,7 +835,9 @@
 
 
 @media (max-width: 1000px) {
-
+  .formstepone img{
+   display: none;
+  }
   .vaccancy-container {
     grid-template-columns: repeat(2, 1fr); /* Two cards per row */
   }
