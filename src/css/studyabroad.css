@@ -19,6 +19,7 @@
     width: 100%;
     margin-top: -10px;
     display: flex;
+    align-items: center;
     justify-content: center;
     background-color: #d7f8ffd5;
   }
@@ -26,17 +27,20 @@
     background: #1f232680;
 
   }
+
   
 .studyabroadforminsiders{
   display: flex;
   margin: 0 20px;
+  gap: 40px;
   max-width: 1200px;
 }
   
   .studyabroadforminsiders img{
     max-width: 500px;
     max-height: 600px;
-    padding: 20px;
+    margin-top: 50px;
+    padding: 30px;
 
   }
   /* Layout */
@@ -173,18 +177,22 @@
   display: flex;
   margin-top: -75px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-  background-color: white;
+  background-color: #c9f5ff;
   gap: 50px;
   border-radius: 20px;
   width: 100%;
+  align-items: center;
   justify-content: space-between;
 
+}
+[data-theme='dark'] .abroadforminsiders {
+  background-color: #252f30;
 }
 .abroadforms{
   padding: 40px;
 }
 .abroadforms h2{
-  padding: 10px;
+  padding: 10px 0;
   color: #353535;
 }
 [data-theme='dark'] .abroadforms h2 {
@@ -196,7 +204,7 @@
 
 
 .abroadforms p{
-  padding: 10px;
+  padding: 10px 0;
   margin: -30px 10px 0 0px;
   color: #353535;
 }
@@ -216,7 +224,7 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-  width: 100%;
+  width:calc(100% + 20px);
   border-radius: 12px;
 }
 .phonenumbercontainer{
@@ -235,7 +243,7 @@
 }
 
 [data-theme='light'] .countrycode input {
-  background-color:  #bfdde4;;
+  background-color:  #f0f0f0;;
  
 }
 .abroadforms{
@@ -244,23 +252,44 @@
 }
 .abroadforms input{
   border-color: #505050;
-  border-radius: 14px;
+  border-radius: 10px;
+  height: 30px;
+  background-color: white;
+}
+[data-theme='dark'] .abroadforms input {
+  background-color: rgb(63, 63, 63);
+  border-color: #787878;
+ 
 }
 .abroadforms select{
-  border-color: #505050;
-  border-radius: 14px;
+  border-color: #404040;
+  border-radius: 10px;
+  height: 50px;
   margin-bottom: 20px;
-  background-color: transparent;
+  background-color: white;
 }
 [data-theme='light'] .abroadforms select {
   color: black;
- 
+  
+}
+[data-theme='dark'] .abroadforms select {
+  background-color:  rgb(63, 63, 63);
+  
 }
 
 
+.formbannercontainer{
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+}
 .formbanner{
-  margin-right: -30px;
+  margin: 10px;
   object-fit: cover;
+  max-height: 500px;
+  max-width: 500px;
 }
 .bottombutton{
   display: flex;
@@ -271,6 +300,7 @@
 }
 .submit{
   width: 100%;
+  border-radius: 20px;
   max-width: 300px;
 }
   @media (max-width: 768px) {

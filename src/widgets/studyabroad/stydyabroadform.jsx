@@ -29,7 +29,7 @@ const AbroadStudentForm = ({country, university, close, itsfrontpage}) => {
   return (
     
     <form className="abroadforms" onSubmit={handleSubmit}>
-  <h2 style={{padding:'10px'}} >Kube can help you!</h2>
+  <h2 >Kube can help you!</h2>
   <p>Enter your details and get a free counselling session with our experts so they can connect you to the right course, country, university – and even scholarships!</p>
 
   <div className='form-row'>

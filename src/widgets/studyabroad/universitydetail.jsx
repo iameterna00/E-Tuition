@@ -57,7 +57,9 @@ const UniversityDetail = () => {
   country={university.country}
   university={university.name}
 />
+<div className="formbannercontainer">
 <img className='formbanner' src={banner} alt="" />
+</div>
       </div>
     </div>
  )} 

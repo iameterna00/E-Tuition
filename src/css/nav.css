@@ -11,12 +11,15 @@
 }
 
 [data-theme='dark'] .navbar.solid {
-  background-color: rgb(40,45,45); /* Default to white for light theme */
+  background-color: rgb(40, 45, 45);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4); /* subtle bottom shadow */
 }
 
-[data-theme='light'] .navbar.solid{
-  background-color: white; /* Dark background color for dark theme */
+[data-theme='light'] .navbar.solid {
+  background-color: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* lighter shadow for light theme */
 }
+
 
 
 .Logo{
