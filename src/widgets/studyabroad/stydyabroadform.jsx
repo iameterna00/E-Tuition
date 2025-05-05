@@ -107,7 +107,7 @@ const AbroadStudentForm = ({country, university, close, itsfrontpage}) => {
   <div className="bottombutton">
     <button className='submit' type="submit">Submit</button>
   {!itsfrontpage &&(
-      <button type="button" onClick={close}>Close</button>
+      <button type="button" className='submit' onClick={close}>Close</button>
   )}
   </div>
 </form>

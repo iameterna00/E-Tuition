@@ -217,9 +217,11 @@ const Navbar = () => {
             {/* <Link to='/academicclasses' style={{ textDecoration: 'none', color: 'inherit' }}>
               <button className="navbuttons">Academic Classes</button>
             </Link> */}
-             <Link onClick={handleLinkClick} to='/chat' className='navbuttons' style={{ textDecoration: 'none', color: 'inherit' }}>
-             {menuOpen && (<FaMessage/> )}<div> Chats</div>
-            </Link>
+           {user &&(
+              <Link onClick={handleLinkClick} to='/chat' className='navbuttons' style={{ textDecoration: 'none', color: 'inherit' }}>
+              {menuOpen && (<FaMessage/> )}<div> Chats</div>
+             </Link>
+           )}
      
            {!menuOpen &&(
             <>

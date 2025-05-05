@@ -11,6 +11,8 @@ const UniversityDetail = () => {
   const { id } = useParams();
   const university = universitiesData.find((uni) => uni.id === parseInt(id));
 
+  
+
   if (!university) {
     return (
       <div className="university-not-found">
@@ -48,7 +50,8 @@ const UniversityDetail = () => {
   };
 
   return (
-   <div className="university-detailsbody">
+    <div className={`university-detailsbody ${isapplynow ? 'no-scroll' : ''}`}>
+
        {isapplynow &&(
         <div className="abroadform-container">
       <div className="abroadforminsiders">
