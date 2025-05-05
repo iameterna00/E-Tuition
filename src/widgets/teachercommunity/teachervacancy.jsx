@@ -10,7 +10,6 @@ import { FaChalkboardTeacher, FaChevronDown, FaClock, FaLink, FaMoneyBill, FaMon
 import { RiFocus2Line } from "react-icons/ri";
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { IoSparkles } from 'react-icons/io5';
-
 import { TailSpin } from 'react-loader-spinner';
 import teacherscommunity from '../../assets/teacherscommunity.png';
 import { Link, useNavigate } from 'react-router-dom';

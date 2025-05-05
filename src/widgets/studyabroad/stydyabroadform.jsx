@@ -43,21 +43,39 @@ const AbroadStudentForm = ({country, university, close, itsfrontpage}) => {
     </label>
   </div>
 
-  <div className={`${itsfrontpage ? 'frontpage' : 'form-row '}`}>
-    <label>
-      Email:
-      <input type="email" name="email" value={formData.email} onChange={handleChange} required />
-    </label>
-  <label>Mobile number *
-  <div className="phonenumbercontainer">
-  <div className="countrycode">
-  <input type='text' value={'+977'}></input>
+  <div className={`${itsfrontpage ? 'frontpage' : 'form-row'}`}>
+  <div className="phonenumberform">
+    <label htmlFor="phone">Email *</label>
+    <div className="phonenumbercontainer">
+      <input
+        type="tel"
+        id="phone"
+        name="phone"
+        value={formData.email}
+        onChange={handleChange}
+        required
+      />
+    </div>
   </div>
-      <input type="tel" name="phone" value={formData.phone} onChange={handleChange} required />
-   
+
+  <div className="phonenumberform">
+    <label htmlFor="phone">Mobile number *</label>
+    <div className="phonenumbercontainer">
+      <div className="countrycode">
+        <input readOnly type="text" value="+977" />
+      </div>
+      <input
+        type="tel"
+        id="phone"
+        name="phone"
+        value={formData.phone}
+        onChange={handleChange}
+        required
+      />
+    </div>
   </div>
-  </label>
-  </div>
+</div>
+
 
   <div className="form-row">
     <label>

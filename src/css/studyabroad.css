@@ -20,10 +20,10 @@
     margin-top: -10px;
     display: flex;
     justify-content: center;
-    background-color: #edfcff;
+    background-color: #d7f8ffd5;
   }
   [data-theme = 'dark'] .stuyaboadform {
-    background: #1d1d1d80;
+    background: #1f232680;
 
   }
   
@@ -216,22 +216,28 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+  width: 100%;
   border-radius: 12px;
 }
 .phonenumbercontainer{
   display: flex;
   width: 100%;
-  align-items: center;
   gap: 10px;
 }
 
+
 .countrycode{
   display: flex;
-  justify-content: center;
-  align-items: center;
+  max-width: 70px;
+}
+.countrycode input {
+  background-color: rgba(84, 84, 84, 0.342);
 }
 
-
+[data-theme='light'] .countrycode input {
+  background-color:  #bfdde4;;
+ 
+}
 .abroadforms{
   width: 100%;
   text-align: start;
@@ -243,10 +249,12 @@
 .abroadforms select{
   border-color: #505050;
   border-radius: 14px;
+  margin-bottom: 20px;
   background-color: transparent;
 }
 [data-theme='light'] .abroadforms select {
   color: black;
+ 
 }
 
 
@@ -361,7 +369,6 @@
       left: 0px;
       width: 100%;
       height: 100%;
-      background-color: rgba(13, 13, 13, 0.452);
       z-index: 8;
     }
     .studyabroadbannerphone img {
@@ -373,5 +380,11 @@
     .studyabroadbanner img {
       display: none;
     }
-    
+    .studyabroadforminsiders img{
+      display: none;
+  
+    }
+    .frontpage {
+      padding: 0 10px;
+    }
   }
