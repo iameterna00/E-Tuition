@@ -10,7 +10,7 @@ const countries = [
   { name: "Canada", flag: "https://www.fastlaneeducation.com/uploads/posts/Canada-1702274627.jpg" },
   { name: "China", flag: "https://www.shiftcities.org/sites/default/files/styles/16_9_extra_large/public/2021-12/china%20%284%29%20small.png?itok=cF7KwsFH" },
   { name: "Japan", flag: "https://keystoneacademic-res.cloudinary.com/image/upload/element/17/176271_Tokyo.jpg" },
-  { name: "Austrilia", flag: "https://static.independent.co.uk/2023/12/06/14/iStock-646880230.jpg?quality=75&width=1368&crop=3%3A2%2Csmart&auto=webp"}
+  { name: "Australia", flag: "https://static.independent.co.uk/2023/12/06/14/iStock-646880230.jpg?quality=75&width=1368&crop=3%3A2%2Csmart&auto=webp"}
 ];
 
 const Filter = () => {
