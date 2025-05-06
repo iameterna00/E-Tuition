@@ -210,7 +210,6 @@
     gap: 10px;
   }
 
-
   [data-theme='light'] .nextstep {
     border-radius: 10px;
     background-color:#23a7fef4 ;
@@ -221,6 +220,7 @@
     [data-theme='light'] .nextstep:hover {
     color: white;
    }
+
   .formmainContainer {
     padding: 20px;
     border-radius: 20px;
@@ -231,7 +231,7 @@
     justify-content: center;
     align-items: center
   }
-  .form-container {
+  .homeform-container {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -249,7 +249,7 @@
   }
 
   
-  body.dark-mode .form-container {
+  body.dark-mode .homeform-container {
     background-color: var(--primary-bg-color-dark);
   }
   
@@ -281,16 +281,14 @@
   }
   
   [data-theme='dark'] .formSelectInput {
-    background-color: #222;
+    background-color: #313131;
     border-radius: 8px;
   }
   [data-theme='light'] .formSelectInput {
     color: rgb(65, 65, 65);
     background-color: #f1f1f1;
     border-radius: 8px;
-    
   }
-
   
   .nameandage{
     display: flex;
@@ -312,7 +310,7 @@
     flex-direction: column;
   }
   [data-theme='dark'] .formInput {
-    background-color: #222;
+    background-color: #313131;
     border-radius: 8px;
   }
   [data-theme='light'] .formInput {
@@ -321,11 +319,6 @@
     border-radius: 8px;
     
   }
-
-
-
-
-  /* STEPS */
 
   .formnavigationButtons{
     display: flex;

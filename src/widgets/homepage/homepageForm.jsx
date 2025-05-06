@@ -120,7 +120,7 @@ const HomePageForm = () => {
         <p style={{width:"100%"}}>
           Enter your details and get a free counselling session with our experts so they can connect you to the right course, country, university – and even scholarships!
         </p>
-        <form className="form-container" onSubmit={handleSubmit}>
+        <form className="homeform-container" onSubmit={handleSubmit}>
           {/* Step 1: Destination and Study Level */}
           {currentStep === 1 && (
          <div className="formstepone">
