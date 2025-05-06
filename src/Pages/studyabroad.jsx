@@ -8,8 +8,6 @@ import AbroadStudentForm from "../widgets/studyabroad/stydyabroadform.jsx";
 import bannergirl from "../assets/abroadbanner2.png"
 
 const StudyAbroad = () => {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [selectedCountry, setSelectedCountry] = useState("");
 
   return (
     <div className="study-abroad-container" style={{marginBottom:"20px"}}>
@@ -34,14 +32,9 @@ const StudyAbroad = () => {
       <div className="content-container">
         {/* Left Filter */}
         <Filter 
-          searchTerm={searchTerm} 
-          setSearchTerm={setSearchTerm} 
-          selectedCountry={selectedCountry} 
-          setSelectedCountry={setSelectedCountry} 
         />
 
-        {/* Right University List */}
-        <UniversityList searchTerm={searchTerm} selectedCountry={selectedCountry} />
+
       </div>
     </div>
   );

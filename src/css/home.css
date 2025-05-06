@@ -191,10 +191,7 @@
     background: rgb(255, 255, 255);
   }
 
-  h1 {
-    margin-bottom: 20px;
-    color: var(--primary-text-color-light);
-  }
+
   .formstepone{
     display: flex;
     width: 100%;
@@ -227,7 +224,7 @@
   .formmainContainer {
     padding: 20px;
     border-radius: 20px;
-    width: 70%;
+    width: 80%;
     text-align: start;
     display: flex;
     flex-direction: column;
@@ -862,6 +859,9 @@
 }
 
 @media (max-width: 768px) {
+  .vaccancymainCntainer{
+    width: 90%;
+  }
   .filterbox select {
     width: 150px;
     padding: 8px;
@@ -906,6 +906,7 @@
 @media (max-width: 480px) {
   .vaccancyfilters {
     display: flex;
+    width: 100%;
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;

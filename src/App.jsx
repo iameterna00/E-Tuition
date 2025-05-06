@@ -28,8 +28,8 @@ import VacancyDetail from './widgets/teachercommunity/vacancydetailpage.jsx';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { v4 as uuidv4 } from 'uuid'; 
 import UsersActivity from './admin/useractivity.jsx';
-import FooterComponent from './footer.jsx';
 import ConditionalFooter from './services/conditionalfooter.jsx';
+import UniversityList from './widgets/studyabroad/universitylists.jsx';
 
 
 
@@ -108,7 +108,9 @@ function App() {
         <main className='mainapp-content'>
         <Routes>
             <Route path="/" element={<HomePage />} />
+            <Route path="/universities/:countryParam" element={<UniversityList />} />
             <Route path="/university/:id" element={<UniversityDetail />} />
+
             <Route path="/academicclasses" element={<OnlineClasses />} />
             <Route path="/coursesdetails/:id" element={<CourseDetails />} />
             <Route path="/tutorhome" element={<BecomeTuitor />} />

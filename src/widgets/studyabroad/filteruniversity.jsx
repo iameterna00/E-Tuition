@@ -1,78 +1,57 @@
 import React, { useState } from "react";
 import "../../css/studyabroad.css"; 
 import { FaAnglesLeft, FaAnglesRight } from "react-icons/fa6";
+import { useNavigate } from "react-router-dom";
 
 // List of countries with flag URLs
 const countries = [
   { name: "", flag: "https://theglobalcollege.com/wp-content/uploads/2020/03/what-is-global-at-college.jpg" },
-  { name: "USA", flag: "https://upload.wikimedia.org/wikipedia/en/thumb/a/a4/Flag_of_the_United_States.svg/960px-Flag_of_the_United_States.svg.png?20250221172329" },
-  { name: "Canada", flag: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Flag_of_Canada_%28Pantone%29.svg/1200px-Flag_of_Canada_%28Pantone%29.svg.png" },
-  { name: "China", flag: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Flag_of_the_People%27s_Republic_of_China.svg/1920px-Flag_of_the_People%27s_Republic_of_China.svg.png" },
-  { name: "Japan", flag: "https://upload.wikimedia.org/wikipedia/en/thumb/9/9e/Flag_of_Japan.svg/1920px-Flag_of_Japan.svg.png" },
+  { name: "USA", flag: "https://www.welleducationhub.edu.np/wp-content/uploads/2024/01/study-in-usa.jpg" },
+  { name: "Canada", flag: "https://www.fastlaneeducation.com/uploads/posts/Canada-1702274627.jpg" },
+  { name: "China", flag: "https://www.shiftcities.org/sites/default/files/styles/16_9_extra_large/public/2021-12/china%20%284%29%20small.png?itok=cF7KwsFH" },
+  { name: "Japan", flag: "https://keystoneacademic-res.cloudinary.com/image/upload/element/17/176271_Tokyo.jpg" },
+  { name: "Austrilia", flag: "https://static.independent.co.uk/2023/12/06/14/iStock-646880230.jpg?quality=75&width=1368&crop=3%3A2%2Csmart&auto=webp"}
 ];
 
-const Filter = ({ searchTerm, setSearchTerm, selectedCountry, setSelectedCountry }) => {
-  const [filterVisible, setFilterVisible] = useState(false); // Track filter visibility
-  
-  // Toggle filter visibility
-  const toggleFilter = () => {
-    setFilterVisible(!filterVisible);
+const Filter = () => {
+  const navigate = useNavigate();
+
+  const handleCountrySelect = (country) => {
+    const countryParam = country === "" ? "all" : country;
+    navigate(`/universities/${countryParam}`);
   };
 
+
   return (
-    <div>
-      <div className={`${filterVisible ? "filteruniversityoverlay" : ""}`}onClick={toggleFilter} ></div>
-      <div
-        className={`filter-container ${filterVisible ? "slide-in" : "slide-out"}`}
-        style={{
-          top: "70px",
-          left: filterVisible ? "0" : "-400px", 
-          transition: "left 0.3s ease-in-out",
-          width: "300px",          zIndex: "a10"
-        }}
+    <div className="filter-container">
+      <div className="filter-containerinsiders"
       >
-        <div className="titleoffilterunive" style={{ display: "flex", justifyContent: "space-between", width: "90%", paddingTop: "30px" }}>
-          <h3>Filter Programs</h3>
-          <div className="closefilteruniversityicon">
-            <FaAnglesLeft fontSize={20} onClick={toggleFilter} />
-          </div>
+        <div className="titleoffilterunive" style={{ display: "flex",flexDirection:'column', justifyContent: "space-between", width: "90%", paddingTop: "30px", textAlign:'start' }}>
+          <h2>Find Your Dream Destinations</h2>
+          <p>Start your study abroad journey in these welcoming study locations! Our expert counsellors will guide you through choosing the perfect study abroad universities & colleges program.</p>
         </div>
 
-        <input
-          style={{ width: "90%", borderRadius: "10px" }}
+        {/* <input
+          style={{ width: "90%", maxWidth:'300px', borderRadius: "10px" }}
           type="text"
           placeholder="Search program by title..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
+         
+        /> */}
 
         {/* Country selection with circular flag images */}
         <div className="country-filter">
           {countries.map((country) => (
             <div
               key={country.name}
-              className={`country-option ${selectedCountry === country.name ? "selected" : ""}`}
-              onClick={() => {setSelectedCountry(country.name), setFilterVisible(false)}}
+              className={`country-option`}
+                onClick={() => handleCountrySelect(country.name)}
             >
               <img src={country.flag} alt={country.name} />
-              <p>{country.name === '' ? 'All' : country.name}</p>
+              <p className="countrynames" >{country.name === '' ? 'All' : country.name}</p>
             </div>
           ))}
         </div>
       </div>
-
-      {/* Floating filter button */}
-      {!filterVisible && (
-    <button
-    className="floating-filter-button"
-    onClick={toggleFilter}
-  >
-              <p>Filter</p>
-          <FaAnglesRight fontSize={15} />
-      
-        
-        </button>
-      )}
     </div>
   );
 };

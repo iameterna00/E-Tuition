@@ -116,8 +116,8 @@ const HomePageForm = () => {
   return (
     <div className="FormBox">
       <div className="formmainContainer">
-        <h2>Kube International can help you study abroad</h2>
-        <p>
+        <h2 style={{textAlign:'start', width:"100%"}} > Kube International can help you study abroad</h2>
+        <p style={{width:"100%"}}>
           Enter your details and get a free counselling session with our experts so they can connect you to the right course, country, university – and even scholarships!
         </p>
         <form className="form-container" onSubmit={handleSubmit}>
