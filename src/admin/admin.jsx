@@ -555,7 +555,7 @@ const handleSubmit = async (e) => {
 
       {/* Add Vacancy Modal */}
       <FloatingActionButton adminpage={true}/>
-      <button className="floating-button" style={{backgroundColor:isModalOpen? 'red':'rgb(38, 127, 215)', zIndex:"10000"}} onClick={() => setIsModalOpen(!isModalOpen)}>{isModalOpen ? "X" : "Add"}  </button>
+      <button className="floating-button" style={{backgroundColor:isModalOpen? '#c12623':'rgb(38, 127, 215)', zIndex:"10000", color:"white"}} onClick={() => setIsModalOpen(!isModalOpen)}>{isModalOpen ? "X" : "Add"}  </button>
       <button className="floating-searchbutton" onClick={searchclick} ><FaSearch style={{marginLeft:'-10px'}} fontSize={18}/></button>
       {isModalOpen && (
   <div className="modal-overlay">
