@@ -39,7 +39,7 @@
     border-radius: 50%;
     height: 40px;
     width: 40px;
-    background-color:rgb(38, 127, 215);
+    background-color:rgb(1, 130, 156);
 
   }
   .fab-container {
@@ -54,7 +54,7 @@
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    background-color: #267fd7;
+    background-color:rgb(1, 130, 156);
     border: none;
     color: white;
     display: flex;

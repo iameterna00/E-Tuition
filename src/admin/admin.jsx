@@ -463,7 +463,7 @@ const handleSubmit = async (e) => {
 </h3>
 
           <p className="tuition-vacancy-info">
-            <MdOutlineLocationOn color="teal" fontSize={20} opacity={0.5} /> {v.location}
+            <MdOutlineLocationOn color="teal" fontSize={20}/> {v.location}
           </p>
           <p className="tuition-vacancy-info">
             <MdOutlineSchool color="teal" fontSize={20} />Grade: {v.grade}
@@ -555,7 +555,7 @@ const handleSubmit = async (e) => {
 
       {/* Add Vacancy Modal */}
       <FloatingActionButton adminpage={true}/>
-      <button className="floating-button" style={{backgroundColor:isModalOpen? '#c12623':'rgb(38, 127, 215)', zIndex:"10000", color:"white"}} onClick={() => setIsModalOpen(!isModalOpen)}>{isModalOpen ? "X" : "Add"}  </button>
+      <button className="floating-button" style={{backgroundColor:isModalOpen? '#c12623':'rgb(1, 130, 156)', zIndex:"10000", color:"white"}} onClick={() => setIsModalOpen(!isModalOpen)}>{isModalOpen ? "X" : "Add"}  </button>
       <button className="floating-searchbutton" onClick={searchclick} ><FaSearch style={{marginLeft:'-10px'}} fontSize={18}/></button>
       {isModalOpen && (
   <div className="modal-overlay">
