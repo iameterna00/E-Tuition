@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { webApi } from '../api';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import FloatingActionButton from './floatingactionbutton';
 
 const UsersActivity = () => {
+  const getNepalDate = () => {
+    const now = new Date();
+    // Adjust for UTC+5:45
+    const nepalOffset = 5.75 * 60 * 60 * 1000;
+    return new Date(now.getTime() + nepalOffset);
+  };
   const [activeStats, setActiveStats] = useState({
     total_active: 0,
     logged_in_users: 0,
@@ -11,9 +16,10 @@ const UsersActivity = () => {
     users: []
   });
   const [selectedWeek, setSelectedWeek] = useState(() => {
-    const today = new Date();
-    const startOfWeek = new Date(today.setDate(today.getDate() - today.getDay()));
-    return startOfWeek.toISOString().split('T')[0]; 
+    const today = getNepalDate();
+    const sunday = new Date(today);
+    sunday.setDate(today.getDate() - today.getDay()); // Correct Sunday calculation
+    return sunday.toISOString().split('T')[0]; // Returns YYYY-MM-DD
   });
   const [availableWeeks, setAvailableWeeks] = useState([]);
   const [dailyActivity, setDailyActivity] = useState([]);
@@ -66,17 +72,18 @@ const UsersActivity = () => {
     fetchDailyActivity();
   }, [selectedWeek]);
   
-
   const generatePastWeeks = (numWeeks = 10) => {
     const weeks = [];
-    const today = new Date();
-  
+    const today = getNepalDate();
+    const currentSunday = new Date(today);
+    currentSunday.setDate(today.getDate() - today.getDay());
+    
     for (let i = 0; i < numWeeks; i++) {
-      const startOfWeek = new Date(today);
-      startOfWeek.setDate(today.getDate() - today.getDay() - i * 7); // Assuming week starts on Sunday
-      weeks.push(startOfWeek.toISOString().split('T')[0]);
+      const weekStart = new Date(currentSunday);
+      weekStart.setDate(currentSunday.getDate() - (i * 7));
+      weeks.push(weekStart.toISOString().split('T')[0]);
     }
-  
+    
     return weeks;
   };
 
@@ -108,7 +115,6 @@ const UsersActivity = () => {
 
   return (
     <div className="user-activity-container">
-        <FloatingActionButton/>
       {/* Real-time Stats Section */}
       <div className="live-stats-section">
         <h2 className="section-title">🔴 Live Active Users</h2>

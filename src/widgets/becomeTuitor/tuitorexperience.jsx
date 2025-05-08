@@ -14,6 +14,7 @@ function TeachingExperience({ setopentuitorinitialmodal, user }) {
     const [teachingExperience, setTeachingExperience] = useState("");
     const [searchSchool, setSearchSchool] = useState("");
     const [searchDegree, setSearchDegree] = useState("");
+    const [phoneNumber, setPhoneNumber] = useState("");
     const [showSuggestions, setShowSuggestions] = useState(false);
     const [showDegreeSuggestion, setShowDegreeSuggestion] = useState(false);
     const [selectedDegree, setSelectedDegree] = useState("");
@@ -147,6 +148,7 @@ function TeachingExperience({ setopentuitorinitialmodal, user }) {
         formData.append("school", selectedSchool);
         formData.append("degree", selectedDegree);
         formData.append("cvFile", cvFile, cvFile.name);
+        formData.append("phone", phoneNumber);
         formData.append("identityType", identityType);
         formData.append("identityFile", identityFile, identityFile.name);
         formData.append("teachergender", gender);
@@ -205,10 +207,10 @@ function TeachingExperience({ setopentuitorinitialmodal, user }) {
                     <div className="teacherexperienceinsiders">
                         {step === 1 && (
                             <>
-                                <h2>How much teaching experience do you have?</h2>
-                                <p>Select your total years of teaching experience.</p>
+                                <h2>What grade levels are you experienced in teaching</h2>
+                                <p>Select the highest class level you have taught.</p>
                                 <div className="teaching-options">
-                                    {["Less than 1 year", "1-3 years", "More than 3 years"].map((option) => (
+                                    {["Up to class 8", "Up to class 10", "Up to class 12"].map((option) => (
                                         <label key={option} className="radio-label">
                                             <input
                                                 type="radio"
@@ -281,8 +283,26 @@ function TeachingExperience({ setopentuitorinitialmodal, user }) {
                                             ))}
                                         </div>
                                     )}
+                                   
                                 </div>
+                              <div className="degree-input">
+                              <p>Enter Your Phone Number</p>
+                              <input
+                                    type="text"
+                                    value={phoneNumber}
+                                    onChange={(e) => {
+                                        const value = e.target.value;
+                                        // Allow only digits and limit to 10 characters
+                                        if (/^\d{0,10}$/.test(value)) {
+                                        setPhoneNumber(value);
+                                        }
+                                    }}
+                                    placeholder="Phone Number"
+                                    />
+
+                              </div>
                             </>
+                            
                         )}
 
 {step === 3 && (
@@ -401,17 +421,19 @@ function TeachingExperience({ setopentuitorinitialmodal, user }) {
       </p>
 
     {/* Checkbox and "I agree" text on the same line */}
-<div style={{ display: "flex", alignItems: "center", gap: "8px", marginTop: "20px" }}>
-  <input
-  style={{height:"20px", marginTop:"15px", cursor:"pointer"}}
+<div style={{ display: "flex", alignItems: "center", gap: "8px", marginTop: "20px", justifyContent:"end"}}>
+ <div className="imputdiv">
+ <input
+  style={{height:"20px", marginBottom:"0px", cursor:"pointer"}}
     type="checkbox"
     checked={isAgreed}
     onChange={(e) => setIsAgreed(e.target.checked)}
     id="termsCheckbox"
   />
-  <label htmlFor="termsCheckbox" style={{ whiteSpace: "nowrap", cursor: "pointer", marginRight:"10px" }}>
+ </div>
+  <p htmlFor="termsCheckbox" style={{ whiteSpace: "nowrap", cursor: "pointer", marginRight:"10px" }}>
     Agree to terms and conditions
-  </label>
+  </p>
 </div>
 
     </div>
@@ -440,7 +462,7 @@ function TeachingExperience({ setopentuitorinitialmodal, user }) {
                                 {step === 1 && teachingExperience && (
                                     <button onClick={handleNext}>Next</button>
                                 )}
-                                 {step === 2 && selectedSchool.trim() !== "" && selectedDegree.trim() !== "" && (
+                                 {step === 2 && selectedSchool.trim() !== "" && selectedDegree.trim() !== "" && /^\d{10}$/.test(phoneNumber.trim()) && (
                                     <button onClick={handleNext}>Next</button>
                                 )}
                                 {step === 3 && cvFile && identityFile && (

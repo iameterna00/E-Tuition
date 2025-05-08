@@ -279,15 +279,14 @@
   color: rgb(255, 255, 255); /* Set text color to white */
 }
 .termsandconditioncontainer{
-  border-radius: 20px;
+  border-radius: 14px;
   padding: 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
   gap: 10px;
   margin: 10px;
-  height: 400px;
+  height: 90%;
   width: 90%;
   max-width: 700px;
 }
@@ -437,6 +436,8 @@
       justify-content: center;
       align-items: center;
     }
+
+    
     .learnfromuscontainer{
       width: 100%;
       display: flex;
