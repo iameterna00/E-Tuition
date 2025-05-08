@@ -14,6 +14,7 @@ import { TailSpin } from 'react-loader-spinner';
 import teacherscommunity from '../../assets/teacherscommunity.png';
 import { Link, useNavigate } from 'react-router-dom';
 import AdComponent from '../googleads/adscomponent';
+import PhoneCheckModal from './teachernumberfill';
 
 
 mapboxgl.accessToken = "pk.eyJ1IjoiYW5pc2hoLWpvc2hpIiwiYSI6ImNrdWo5d2lhdDFkb2oybnJ1MDB4OG1oc2EifQ.pLrp8FmZSLVfT3pAVVPBPg";
@@ -242,7 +243,7 @@ function TeacherVacancy() {
           <VacancyCard key={vacancy._id} vacancy={vacancy} locationSource={locationSource} openModal={openModal} openreferalmodal={openreferalmodal} navigatetovacancy={navigatetovacancy} />
         ))}
 </div>
-
+        <PhoneCheckModal/>
 
       {/* Modal */}
       {isModalOpen && selectedVacancy && (
