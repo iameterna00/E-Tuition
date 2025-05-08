@@ -283,8 +283,17 @@
   .vacancycommunitydetails{
     text-align: start;
   }
+  .vacancydetailtexts{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+  }
   .vacancycommunitydetails h4{
-   margin: 5px;
+   margin: 6px;
+   display: flex;
+   gap: 10px;
+   align-items: center;
   }
   .Vacancytabs{
     display: flex;

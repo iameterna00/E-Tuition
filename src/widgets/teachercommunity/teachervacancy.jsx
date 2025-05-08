@@ -253,7 +253,7 @@ function TeacherVacancy() {
             <p>{selectedVacancy.description}</p>
             <div className="contactwhatsappbutton">
               <a href={generateWhatsappMessage(selectedVacancy)} target="_blank" rel="noopener noreferrer">
-                <button>Apply on WhatsApp</button>
+                <button>Apply</button>
               </a>
               <button className='tuition-delete-button' onClick={closeModal}>Close</button>
             </div>
@@ -328,13 +328,13 @@ const VacancyCard = ({ vacancy, locationSource, openModal, openreferalmodal, nav
           </h3>
         )}
         <div className="vacancycommunitydetails">
-          <h4><FaChalkboardTeacher /> Grade: {vacancy.grade}</h4>
-          <h4><FaLocationDot /> Location: {vacancy.location ? vacancy.location : 'Online'}</h4>
-          <h4><FaBook /> Subject: {vacancy.subject}</h4>
-          <h4><FaClock /> Time: {vacancy.time}</h4>
-          <h4><FaGraduationCap /> No of students: {vacancy.noofstudents}</h4>
-          <h4><FaUser /> Tutor Type: {vacancy.tutorType ? vacancy.tutorType : 'Any'}</h4>
-          <h4><MdDateRange /> {new Date(vacancy.created_at).toLocaleString("en-US", {
+          <h4><FaChalkboardTeacher color="teal" /> Grade: {vacancy.grade}</h4>
+          <h4><FaLocationDot color="teal"  /> Location: {vacancy.location ? vacancy.location : 'Online'}</h4>
+          <h4><FaBook color="teal" /> Subject: {vacancy.subject}</h4>
+          <h4><FaClock color="teal" /> Time: {vacancy.time}</h4>
+          <h4><FaGraduationCap color="teal" /> No of students: {vacancy.noofstudents}</h4>
+          <h4><FaUser color="teal" /> Tutor Type: {vacancy.tutorType ? vacancy.tutorType : 'Any'}</h4>
+          <h4><MdDateRange color="teal" /> Added on:  {new Date(vacancy.created_at).toLocaleString("en-US", {
             month: "short",
             day: "2-digit",
             hour: "2-digit",

@@ -88,7 +88,8 @@ function TeacherManager() {
         <h2>Teacher Management System</h2>
 
         {/* Tabs for switching between Pending and Approved teachers */}
-        <div className="tuition-tabs">
+    <div className="tuitiontabwrapper">
+    <div className="tuition-tabs" >
           {["Pending", "Approved"].map((status) => (
             <button
               key={status}
@@ -99,6 +100,7 @@ function TeacherManager() {
             </button>
           ))}
         </div>
+    </div>
 
         {/* Search Bar */}
         <div className="teachersearchbarcontainer">

@@ -395,10 +395,10 @@ const handleSubmit = async (e) => {
   return (
     <div className="tuition-container">
        <div className="topbuttons" style={{gap:"10px", display:"flex"}} >
-       <button onClick={() => navigate('teacher/')}>
-      Go to Teacher Page
+       <button style={{border:'1px solid grey'}} className="generateVacancy" onClick={() => navigate('teacher/')}>
+     Teacher Page
     </button>
-    <button onClick={() => navigate('useractivity')}>
+    <button  style={{border:'1px solid grey'}} className="generateVacancy" onClick={() => navigate('useractivity')}>
       User Anlytics
     </button>
        </div>
@@ -443,7 +443,8 @@ const handleSubmit = async (e) => {
 
 
       {/* Vacancy List */}
-      <div className="tuition-vacancy-list">
+  <div className="vacancy-wrapper">
+  <div className="tuition-vacancy-list">
       {filteredVacancies.map((v) => (
         <div key={v._id} className="tuition-vacancy-card" style={{ borderLeft: `${
           v.teachers?.some((teacher) => teacher.commissionDue)
@@ -469,19 +470,19 @@ const handleSubmit = async (e) => {
 </h3>
 
           <p className="tuition-vacancy-info">
-            <MdOutlineLocationOn fontSize={20} opacity={0.5} /> {v.location}
+            <MdOutlineLocationOn color="teal" fontSize={20} opacity={0.5} /> {v.location}
           </p>
           <p className="tuition-vacancy-info">
-            <MdOutlineSchool fontSize={20} />Grade: {v.grade}
+            <MdOutlineSchool color="teal" fontSize={20} />Grade: {v.grade}
           </p>
           <p className="tuition-vacancy-info">
-            <IoBookOutline fontSize={20}/>Subject: {v.subject}
+            <IoBookOutline color="teal" fontSize={20}/>Subject: {v.subject}
           </p>
-          <p className="tuition-vacancy-info"><LuDollarSign fontSize={16} />Salary: {v.salary}</p>
-          <p><BsSuitcaseLg fontSize={16} /> Time: {v.time}</p>
-          {v.minRequirement && <p className="tuition-vacancy-info"><LuTarget fontSize={18}/>Requirement: {v.minRequirement}</p>}
+          <p className="tuition-vacancy-info"><LuDollarSign color="teal" fontSize={16} />Salary: {v.salary}</p>
+          <p><BsSuitcaseLg color="teal" fontSize={16} /> Time: {v.time}</p>
+          {v.minRequirement && <p className="tuition-vacancy-info"><LuTarget color="teal" fontSize={18}/>Requirement: {v.minRequirement}</p>}
           <p className="tuition-vacancy-info" style={{display:"flex", justifyContent:"center", alignItems:'center', gap:"5px"}} >
-          <SlCalender/> UploadDate: {new Date(v.created_at).toLocaleString("en-US", {
+          <SlCalender color="teal"/> UploadDate: {new Date(v.created_at).toLocaleString("en-US", {
               month: "short",
               day: "2-digit",
               hour: "2-digit",
@@ -493,7 +494,7 @@ const handleSubmit = async (e) => {
 
           {tab === "available" && (
             <div className="uploadvacancycontainer">
-              <DownloadImageButton vacancy={v} />
+              <DownloadImageButton color="teal" vacancy={v} />
               <div className="addtowebsite"><button className="generateVacancy">Add to website</button></div>
             </div>
          
@@ -531,13 +532,13 @@ const handleSubmit = async (e) => {
              <>
               <button className="generateVacancy" onClick={() => updateStatus(v._id, "pending")}>
               {isUpdatingStatus ? (
-  <FaSpinner className="newspinner" />
-) : (
-  <>
-    <GoClock style={{ marginRight: "4px" }} />
-    Pending
-  </>
-)}
+                <FaSpinner className="newspinner" />
+              ) : (
+                <>
+                  <GoClock style={{ marginRight: "4px" }} />
+                  Pending
+                </>
+              )}
 
               </button>
               <button className="generateVacancy" onClick={() => handleEditClick(v)}>
@@ -557,6 +558,7 @@ const handleSubmit = async (e) => {
         </div>
       ))}
     </div>
+  </div>
 
       {/* Add Vacancy Modal */}
       
