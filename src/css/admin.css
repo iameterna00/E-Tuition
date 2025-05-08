@@ -85,7 +85,7 @@
     background-color: rgb(255, 255, 255);
   }
   [data-theme='dark'] .modal-overlay {
-    background-color: black;
+    background-color: rgb(27, 31, 34);
   }
   .mapboxgl-ctrl-geocoder--input{
     color: black !important;
@@ -93,7 +93,6 @@
   .modal-content {
     display: flex;
     flex-direction: column;
-    justify-content: center; 
     align-items: center;
     max-height: 90vh; 
     width: 100%;
@@ -123,12 +122,10 @@
   .tuition-form {
     width: 90%;
     display: flex;
-    justify-content: center;
     align-items: center;
     flex-wrap: wrap;
     flex-direction: column;
     gap: 12px;
-    justify-content: center;
     margin-bottom: 20px;
   }
   [data-theme='light'] .tuition-form input {
@@ -158,6 +155,13 @@
     background-color: #d1e7ff62; /* Light blue background for the options */
     color: #333; /* Dark text color for the options */
   }
+  
+.modal-submit-container {
+  position: fixed;
+  bottom: 30px;
+  display: flex;
+  justify-content: flex-end;
+}
   
   .tuition-button {
     background-color: #3498db;
@@ -374,7 +378,7 @@
     font-size: 14px;
   }
   .tuition-form {
-    width: 90%;
+    width: 80%;
  
   }
   .teacheredits{

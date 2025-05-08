@@ -12,7 +12,7 @@ const UsersActivity = () => {
   const [selectedWeek, setSelectedWeek] = useState(() => {
     const today = new Date();
     const startOfWeek = new Date(today.setDate(today.getDate() - today.getDay()));
-    return startOfWeek.toISOString().split('T')[0]; // yyyy-mm-dd format
+    return startOfWeek.toISOString().split('T')[0]; 
   });
   const [availableWeeks, setAvailableWeeks] = useState([]);
   const [dailyActivity, setDailyActivity] = useState([]);
@@ -223,19 +223,19 @@ const UsersActivity = () => {
               <Bar 
                 dataKey="total" 
                 name="Total Active" 
-                fill="#4CAF50"
+                fill="teal"
                 radius={[10, 10, 0, 0]} 
               />
               <Bar 
                 dataKey="loggedIn" 
                 name="Logged In" 
-                fill="#42A5F5"
+                fill="#00a4e6"
                 radius={[10, 10, 0, 0]} 
               />
               <Bar 
                 dataKey="guests" 
                 name="Guests" 
-                fill="#EF5350"
+                fill="#c23e3e"
                 radius={[10, 10, 0, 0]} 
               />
             </BarChart>
