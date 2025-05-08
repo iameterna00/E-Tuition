@@ -3,7 +3,6 @@
   .tuition-container {
     width: 80%;
     margin: auto;
-    min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -335,6 +334,7 @@
     display: flex;
     justify-content: center;
     width: 100%;
+    min-height: 100vh;
   }
   
   /* Vacancy List */
