@@ -256,7 +256,11 @@
   .tuition-vacancy-title {
     font-size: 18px;
     margin-top: 10px;
+    width: 100%;
+    margin-left: 10px;
+    justify-content: space-between;
     font-weight: bold;
+    margin-bottom: 10px;
   
   }
   

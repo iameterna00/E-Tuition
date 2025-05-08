@@ -3,7 +3,7 @@ import axios from "axios";
 import "../css/admin.css";
 import { IoIosAddCircle } from "react-icons/io";
 import DownloadImageButton from "../services/downloadimage";
-import { FaSpinner, FaEdit, FaSearch, FaTimes, FaClock } from "react-icons/fa";  
+import { FaSpinner, FaEdit, FaSearch, FaTimes, FaClock, FaRegCopy } from "react-icons/fa";  
 import { useNavigate } from "react-router-dom";
 import MapSelector from "./mapselectoradmin";
 import EditableMapSelector from "./editablemaps";
@@ -451,9 +451,20 @@ const handleSubmit = async (e) => {
             : '5px solidrgb(255, 255, 255)'
         }`,
         }} >
-          <h3 className="tuition-vacancy-title">
-            {v.name}
-          </h3>
+<h3 className="tuition-vacancy-title" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+  {v.name}
+  <button
+    onClick={() => navigator.clipboard.writeText(v.name)}
+    title="Copy name"
+    style={{
+      cursor: 'pointer',
+      padding: 0,
+    }}
+  >
+    <FaRegCopy />
+  </button>
+</h3>
+
           <p className="tuition-vacancy-info">
             <MdOutlineLocationOn fontSize={20} opacity={0.5} /> {v.location}
           </p>
