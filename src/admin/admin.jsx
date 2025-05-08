@@ -3,7 +3,7 @@ import axios from "axios";
 import "../css/admin.css";
 import { IoIosAddCircle } from "react-icons/io";
 import DownloadImageButton from "../services/downloadimage";
-import { FaSpinner, FaEdit, FaSearch, FaTimes, FaClock, FaRegCopy } from "react-icons/fa";  
+import { FaSpinner, FaEdit, FaSearch, FaRegCopy, FaPlus } from "react-icons/fa";  
 import { useNavigate } from "react-router-dom";
 import MapSelector from "./mapselectoradmin";
 import EditableMapSelector from "./editablemaps";
@@ -16,6 +16,7 @@ import { BsSuitcaseLg } from "react-icons/bs";
 import { IoBookOutline } from "react-icons/io5";
 import { SlCalender } from "react-icons/sl";
 import { RiDeleteBinLine } from "react-icons/ri";
+import FloatingActionButton from "./floatingactionbutton";
 
 
 const ADMIN = () => {
@@ -394,14 +395,6 @@ const handleSubmit = async (e) => {
 
   return (
     <div className="tuition-container">
-       <div className="topbuttons" style={{gap:"10px", display:"flex"}} >
-       <button style={{border:'1px solid grey'}} className="generateVacancy" onClick={() => navigate('teacher/')}>
-     Teacher Page
-    </button>
-    <button  style={{border:'1px solid grey'}} className="generateVacancy" onClick={() => navigate('useractivity')}>
-      User Anlytics
-    </button>
-       </div>
     <h1 className="tuition-heading">Tuition Vacancy Management</h1>
     {/* 🔍 Search Bar for Vacancy Name & Location */}
     <input
@@ -561,8 +554,8 @@ const handleSubmit = async (e) => {
   </div>
 
       {/* Add Vacancy Modal */}
-      
-      <button className="floating-button" style={{backgroundColor:isModalOpen? 'red':' #2d96ff', zIndex:"10000"}} onClick={() => setIsModalOpen(!isModalOpen)}>{isModalOpen ? "X" : "Add"}  </button>
+      <FloatingActionButton adminpage={true}/>
+      <button className="floating-button" style={{backgroundColor:isModalOpen? 'red':'rgb(38, 127, 215)', zIndex:"10000"}} onClick={() => setIsModalOpen(!isModalOpen)}>{isModalOpen ? "X" : "Add"}  </button>
       <button className="floating-searchbutton" onClick={searchclick} ><FaSearch style={{marginLeft:'-10px'}} fontSize={18}/></button>
       {isModalOpen && (
   <div className="modal-overlay">

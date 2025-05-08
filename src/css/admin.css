@@ -41,9 +41,103 @@
     height: 40px;
     width: 40px;
     z-index: 10000;
-    background-color: #2d96ff;
+    background-color:rgb(38, 127, 215);
 
   }
+  .fab-container {
+    position: fixed;
+    bottom: 170px;
+    right: 20px;
+    z-index: 1000;
+  }
+  
+  .fab-main {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #267fd7;
+    border: none;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease;
+    z-index: 1001;
+  }
+  
+  .fab-main:active {
+    transform: scale(0.95);
+  }
+  
+  .fab-circle-menu {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 210px;  /* Increased container size */
+  height: 210px; /* Increased container size */
+  }
+  
+  .fab-circle-item {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #345672;
+    border: none;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    opacity: 0;
+  }
+  
+  .fab-circle-item.user {
+    bottom: 20px;
+    right: 60px;
+    animation: fadeIn 0.3s ease 0.1s forwards;
+  }
+  
+  .fab-circle-item.plus {
+    bottom: 70px;
+    right: 20px;
+    animation: fadeIn 0.3s ease 0.2s forwards;
+  }
+  .fab-circle-item.plus {
+    bottom: 80px;
+    right: 20px;
+    animation: fadeIn 0.3s ease 0.2s forwards;
+  }
+  .fab-circle-item.admin {
+    bottom: 75px;
+    right: 80px;
+    animation: fadeIn 0.3s ease 0.2s forwards;
+  }
+  
+  .fab-circle-item:hover {
+    background-color: #4a7fe0;
+    transform: scale(1.1);
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: scale(0.5);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+
+
+  
   .tuition-search-bar{
     display: flex;
     justify-content: center;
@@ -209,6 +303,9 @@
   [data-theme = 'light'] .tuition-tab{
     background-color: transparent;
     color: black;
+  }
+  [data-theme = 'dark'] .tuition-tab{
+    background-color: transparent;
   }
   
   .tuition-tab:hover {

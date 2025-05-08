@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { webApi } from '../api';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import FloatingActionButton from './floatingactionbutton';
 
 const UsersActivity = () => {
   const [activeStats, setActiveStats] = useState({
@@ -107,6 +108,7 @@ const UsersActivity = () => {
 
   return (
     <div className="user-activity-container">
+        <FloatingActionButton/>
       {/* Real-time Stats Section */}
       <div className="live-stats-section">
         <h2 className="section-title">🔴 Live Active Users</h2>

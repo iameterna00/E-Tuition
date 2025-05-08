@@ -3,6 +3,7 @@ import axios from "axios";
 import { webApi } from "../api";
 import { FaSearch } from "react-icons/fa";
 import "./teachermanager.css";
+import FloatingActionButton from "./floatingactionbutton";
 
 function TeacherManager() {
   const [tab, setTab] = useState("Pending");
@@ -84,6 +85,7 @@ function TeacherManager() {
 
   return (
     <div className="teachermanagerbody">
+      <FloatingActionButton/>
       <div className="teachermanagercontainer">
         <h2>Teacher Management System</h2>
 
