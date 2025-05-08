@@ -458,6 +458,7 @@ const handleSubmit = async (e) => {
     title="Copy name"
     style={{
       cursor: 'pointer',
+      backgroundColor:'none',
       padding: 0,
     }}
   >
