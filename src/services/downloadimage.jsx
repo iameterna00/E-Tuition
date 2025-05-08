@@ -98,9 +98,9 @@ const vacancyDetails = [
         </div>
       </div>
 
-      <div className="generateVacancy">
-        <button style={{ backgroundColor: "green" }} onClick={downloadImage}>
-          <BsStars /> Generate Vacancy
+      <div >
+        <button className='generateVacancy'  onClick={downloadImage}>
+          <BsStars /> Generate
         </button>
       </div>
     </>

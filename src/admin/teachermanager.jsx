@@ -38,7 +38,7 @@ function TeacherManager() {
     console.log("Approving teacher with UID:", uid);  // Log the UID for debugging
     try {
       const response = await axios.post(`${webApi}/api/teachers/confirm`, {
-        uid: uid,  // Pass 'uid' instead of 'teacher_id'
+        uid: uid, 
         teacherconfirm: "approved"
       });
 
@@ -102,6 +102,7 @@ function TeacherManager() {
 
         {/* Search Bar */}
         <div className="teachersearchbarcontainer">
+        <h3>Available Teachers: {filteredTeachers.length}</h3>
           <div className="teacherssearch-bar-container">
             <input
               type="text"
@@ -125,13 +126,15 @@ function TeacherManager() {
                   className="teacher-profile"
                 />
                 <h3>{teacher.name}</h3>
-                <p><strong>Email:</strong> {teacher.uid}</p>
                 <p><strong>Email:</strong> {teacher.email}</p>
                 <p><strong>Location:</strong> {teacher.address}</p>
                 <p><strong>Degree:</strong> {teacher.degree}</p>
                 <p><strong>College:</strong> {teacher.school}</p>
                 <p><strong>Current Grade:</strong> {teacher.currentGrade}</p>
                 <p><strong>Requested at:</strong> {teacher.requestedforteacheron}</p>
+                <p><strong>Phone:</strong> {teacher.phone}</p>
+                <p><strong>Lat:</strong> {teacher.latitude}</p>
+                <p><strong>Lng:</strong> {teacher.longitude}</p>
                 <div className="teacher-links">
                   <a href={teacher.cvFileUrl} target="_blank" rel="noopener noreferrer">📄 View CV</a>
                   <a href={teacher.identityFileUrl} target="_blank" rel="noopener noreferrer">🆔 View Identity</a>

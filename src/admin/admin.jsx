@@ -9,6 +9,13 @@ import MapSelector from "./mapselectoradmin";
 import EditableMapSelector from "./editablemaps";
 import { webApi } from "../api";
 import { auth } from '../firebase_config'; 
+import { GoClock } from "react-icons/go";
+import { LuDollarSign, LuTarget } from "react-icons/lu";
+import { MdOutlineLocationOn, MdOutlineSchool } from "react-icons/md";
+import { BsSuitcaseLg } from "react-icons/bs";
+import { IoBookOutline } from "react-icons/io5";
+import { SlCalender } from "react-icons/sl";
+import { RiDeleteBinLine } from "react-icons/ri";
 
 
 const ADMIN = () => {
@@ -441,32 +448,39 @@ const handleSubmit = async (e) => {
         <div key={v._id} className="tuition-vacancy-card" style={{ borderLeft: `${
           v.teachers?.some((teacher) => teacher.commissionDue)
             ? '5px solid red'
-            : '5px solid #3498db'
+            : '5px solidrgb(255, 255, 255)'
         }`,
         }} >
           <h3 className="tuition-vacancy-title">
-            {v.name} ({v.grade}) - {v.subject}
+            {v.name}
           </h3>
           <p className="tuition-vacancy-info">
-            Location: {v.location} | Students: {v.noofstudent}
+            <MdOutlineLocationOn fontSize={20} opacity={0.5} /> {v.location}
           </p>
-          <p className="tuition-vacancy-info">Salary: {v.salary} | Time: {v.time}</p>
-          {v.minRequirement && <p className="tuition-vacancy-info">Requirement: {v.minRequirement}</p>}
+          <p className="tuition-vacancy-info">
+            <MdOutlineSchool fontSize={20} />Grade: {v.grade}
+          </p>
+          <p className="tuition-vacancy-info">
+            <IoBookOutline fontSize={20}/>Subject: {v.subject}
+          </p>
+          <p className="tuition-vacancy-info"><LuDollarSign fontSize={16} />Salary: {v.salary}</p>
+          <p><BsSuitcaseLg fontSize={16} /> Time: {v.time}</p>
+          {v.minRequirement && <p className="tuition-vacancy-info"><LuTarget fontSize={18}/>Requirement: {v.minRequirement}</p>}
           <p className="tuition-vacancy-info" style={{display:"flex", justifyContent:"center", alignItems:'center', gap:"5px"}} >
-  UploadDate: <FaClock/> {new Date(v.created_at).toLocaleString("en-US", {
-    month: "short",
-    day: "2-digit",
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: true, // Set to true for 12-hour format with AM/PM
-  })}
+          <SlCalender/> UploadDate: {new Date(v.created_at).toLocaleString("en-US", {
+              month: "short",
+              day: "2-digit",
+              hour: "2-digit",
+              minute: "2-digit",
+              hour12: true, // Set to true for 12-hour format with AM/PM
+            })}
 </p>
 
 
           {tab === "available" && (
             <div className="uploadvacancycontainer">
               <DownloadImageButton vacancy={v} />
-              <div className="addtowebsite"><button>Add to website</button></div>
+              <div className="addtowebsite"><button className="generateVacancy">Add to website</button></div>
             </div>
          
             
@@ -501,10 +515,18 @@ const handleSubmit = async (e) => {
           <div className="tuition-action-buttons">
             {tab === "available" && (
              <>
-              <button onClick={() => updateStatus(v._id, "pending")}>
-                {isUpdatingStatus ? <FaSpinner className="newspinner" /> : "Move To Pending"}
+              <button className="generateVacancy" onClick={() => updateStatus(v._id, "pending")}>
+              {isUpdatingStatus ? (
+  <FaSpinner className="newspinner" />
+) : (
+  <>
+    <GoClock style={{ marginRight: "4px" }} />
+    Pending
+  </>
+)}
+
               </button>
-              <button onClick={() => handleEditClick(v)}>
+              <button className="generateVacancy" onClick={() => handleEditClick(v)}>
     <FaEdit /> Edit
   </button>
 
@@ -516,7 +538,7 @@ const handleSubmit = async (e) => {
                 <button onClick={() => updateStatus(v._id, "complete")}>Move to Complete</button>
               </>
             )}
-            <button className="tuition-delete-button" onClick={() => handleDeleteClick(v._id)}>Delete</button>
+            <button className="tuition-delete-button" onClick={() => handleDeleteClick(v._id)}> <RiDeleteBinLine/> Delete</button>
           </div>
         </div>
       ))}

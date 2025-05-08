@@ -9,7 +9,12 @@ const UsersActivity = () => {
     guest_users: 0,
     users: []
   });
-
+  const [selectedWeek, setSelectedWeek] = useState(() => {
+    const today = new Date();
+    const startOfWeek = new Date(today.setDate(today.getDate() - today.getDay()));
+    return startOfWeek.toISOString().split('T')[0]; // yyyy-mm-dd format
+  });
+  const [availableWeeks, setAvailableWeeks] = useState([]);
   const [dailyActivity, setDailyActivity] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -34,11 +39,17 @@ const UsersActivity = () => {
     return () => clearInterval(intervalId);
   }, []);
 
+  useEffect(() => {
+    const weeks = generatePastWeeks(10); // past 12 weeks
+    setAvailableWeeks(weeks);
+  }, []);
+  
+
   // Fetch daily activity data
   useEffect(() => {
     const fetchDailyActivity = async () => {
       try {
-        const response = await fetch(`${webApi}/api/weekly-activity`);
+        const response = await fetch(`${webApi}/api/weekly-activity?week=${selectedWeek}`);
         if (!response.ok) throw new Error("Failed to fetch daily activity");
         const data = await response.json();
         setDailyActivity(data);
@@ -52,15 +63,30 @@ const UsersActivity = () => {
     };
 
     fetchDailyActivity();
-  }, []);
+  }, [selectedWeek]);
+  
 
+  const generatePastWeeks = (numWeeks = 10) => {
+    const weeks = [];
+    const today = new Date();
+  
+    for (let i = 0; i < numWeeks; i++) {
+      const startOfWeek = new Date(today);
+      startOfWeek.setDate(today.getDate() - today.getDay() - i * 7); // Assuming week starts on Sunday
+      weeks.push(startOfWeek.toISOString().split('T')[0]);
+    }
+  
+    return weeks;
+  };
+
+  
   const prepareWeeklyData = () => {
     const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
     // Prepare the weekly data to display on the chart
     return dailyActivity.map((activity) => {
       const activityDate = new Date(activity.date);
-      const activityDayIndex = activityDate.getDay(); // Sunday = 0, Monday = 1, ..., Saturday = 6
+      const activityDayIndex = activityDate.getDay(); 
 
       return {
         name: days[activityDayIndex],
@@ -71,7 +97,7 @@ const UsersActivity = () => {
     });
   };
 
-  const today = new Date().toLocaleDateString(); // Get today's date as a string
+  const today = new Date().toLocaleDateString(); 
 
   // Find today's activity data
   const todayActivity = dailyActivity.find(day => new Date(day.date).toLocaleDateString() === today);
@@ -148,6 +174,20 @@ const UsersActivity = () => {
           <p className="no-users">No active users at the moment.</p>
         )}
       </div>
+      <div className="week-selector">
+          <label htmlFor="weekDropdown">Select Week:</label>
+          <select
+            id="weekDropdown"
+            value={selectedWeek}
+            onChange={(e) => setSelectedWeek(e.target.value)}
+          >
+            {availableWeeks.map((weekStart) => (
+              <option key={weekStart} value={weekStart}>
+                Week starting {new Date(weekStart).toLocaleDateString()}
+              </option>
+            ))}
+          </select>
+        </div>
 
       {/* Weekly Activity Chart */}
       <div className="charts-section"  >

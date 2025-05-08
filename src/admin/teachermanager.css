@@ -28,7 +28,7 @@
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: end;
+    justify-content: space-between;
     margin-bottom: 20px;
 }
 
@@ -258,10 +258,28 @@
   .error-message {
     color: #d32f2f;
   }
+  .week-selector{
+    text-align: start;
+    padding: 10px;
+  }
+  .week-selector select{
+  border-radius: 20px;
+  border: none;
+  }
+  [data-theme="dark"]  .week-selector select{
+    background-color: #273036;
+  }
+  [data-theme="light"]  .week-selector select{
+    background-color: #ffffff;
+    color: black;
+  }
+  
+
+  
   
   @media (max-width: 768px) {
     .stats-grid {
-      grid-template-columns: 1fr;
+      grid-template-columns: 2fr;
     }
     
     .user-activity-container {
@@ -270,4 +288,14 @@
     .recharts-responsive-container{
       margin-left: -30px;
     }
+    .teachersearchbarcontainer {
+    flex-direction: column;
+    gap: 20px;
+  }
+  .teacher-list{
+    padding: 0px;
+  }
+  .teachermanagercontainer{
+    padding: 0px;
+  }
   }

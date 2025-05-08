@@ -110,7 +110,6 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/universities/:countryParam" element={<UniversityList />} />
             <Route path="/university/:id" element={<UniversityDetail />} />
-
             <Route path="/academicclasses" element={<OnlineClasses />} />
             <Route path="/coursesdetails/:id" element={<CourseDetails />} />
             <Route path="/tutorhome" element={<BecomeTuitor />} />

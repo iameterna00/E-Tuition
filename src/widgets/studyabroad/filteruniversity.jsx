@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "../../css/studyabroad.css"; 
-import { FaAnglesLeft, FaAnglesRight } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 
 // List of countries with flag URLs
@@ -21,12 +20,11 @@ const Filter = () => {
     navigate(`/universities/${countryParam}`);
   };
 
-
   return (
     <div className="filter-container">
       <div className="filter-containerinsiders"
       >
-        <div className="titleoffilterunive" style={{ display: "flex",flexDirection:'column', justifyContent: "space-between", width: "90%", paddingTop: "30px", textAlign:'start' }}>
+        <div className="titleoffilterunive" style={{ display: "flex",flexDirection:'column', justifyContent: "space-between", width: "90%", paddingTop: "30px",paddingBottom:"30px", textAlign:'start' }}>
           <h2>Find Your Dream Destinations</h2>
           <p>Start your study abroad journey in these welcoming study locations! Our expert counsellors will guide you through choosing the perfect study abroad universities & colleges program.</p>
         </div>
