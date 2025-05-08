@@ -454,11 +454,13 @@ const handleSubmit = async (e) => {
 <h3 className="tuition-vacancy-title" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
   {v.name}
   <button
+  className="copyname"
     onClick={() => navigator.clipboard.writeText(v.name)}
     title="Copy name"
     style={{
       cursor: 'pointer',
-      backgroundColor:'none',
+      backgroundColor:'transparent',
+      borderColor:'none',
       padding: 0,
     }}
   >

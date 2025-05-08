@@ -263,6 +263,14 @@
     margin-bottom: 10px;
   
   }
+  [data-theme='light'] .copyname{
+    background-color: transparent;
+    color: black;
+  }
+  [data-theme='dark'] .copyname{
+    background-color: transparent;
+    color: rgb(255, 255, 255);
+  }
   
   .tuition-vacancy-info {
     font-size: 14px;
