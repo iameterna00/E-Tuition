@@ -5,19 +5,13 @@ import { useNavigate } from "react-router-dom";
 
 const FloatingActionButton = ({adminpage}) => {
   const [showIcons, setShowIcons] = useState(false);
-  const holdTimeout = useRef(null);
   const fabRef = useRef(null);
   const navigate = useNavigate();
 
-  const handleHoldStart = () => {
-    holdTimeout.current = setTimeout(() => {
-      setShowIcons(true);
-    }, 300);
+  const iconclick = () => {
+      setShowIcons(!showIcons);
   };
 
-  const handleHoldEnd = () => {
-    clearTimeout(holdTimeout.current);
-  };
 
   const handleClickOutside = (e) => {
     if (fabRef.current && !fabRef.current.contains(e.target)) {
@@ -52,10 +46,7 @@ const FloatingActionButton = ({adminpage}) => {
     <div className="fab-container" style={{bottom: adminpage? '170px': '70px'}} ref={fabRef}>
       <button
         className="fab-main"
-        onMouseDown={handleHoldStart}
-        onMouseUp={handleHoldEnd}
-        onTouchStart={handleHoldStart}
-        onTouchEnd={handleHoldEnd}
+        onClick={iconclick}
       >
         <FaGear fontSize={20} />
       </button>

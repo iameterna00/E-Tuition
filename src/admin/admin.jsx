@@ -395,7 +395,7 @@ const handleSubmit = async (e) => {
 
   return (
     <div className="tuition-container">
-    <h1 className="tuition-heading">Tuition Vacancy Management</h1>
+    <h1 className="tuition-heading">Kube Vacancy Management</h1>
     {/* 🔍 Search Bar for Vacancy Name & Location */}
     <input
       type="text"
@@ -420,7 +420,7 @@ const handleSubmit = async (e) => {
       {/* Display calculated values below tabs */}
       <div className="tab-stats">
         {tab === "available" && <p>Total Vacancies: {availableVacancies}</p>}
-        {tab === "pending" && <p>Total Commissions: ( {pendingvacancylength}) Rs {pendingCommissions} DUE: Rs {pendingCommissionsdue}</p>}
+        {tab === "pending" && <p>Amount Received: ( {pendingvacancylength}) Rs {pendingCommissions} DUE: Rs {pendingCommissionsdue}</p>}
         {tab === "complete" && <p>Total Revenue: {completeRevenue}</p>}
       </div>
         {/* Loading screen */}
