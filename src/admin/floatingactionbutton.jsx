@@ -1,5 +1,7 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { FaUser, FaChalkboardTeacher, FaCode } from 'react-icons/fa';
+import { useState, useRef, useEffect } from 'react';
+import { BsGraphUpArrow } from 'react-icons/bs';
+import { FaCode } from 'react-icons/fa';
+import { LiaChalkboardTeacherSolid } from "react-icons/lia";
 import { FaGear } from 'react-icons/fa6';
 import { useNavigate } from "react-router-dom";
 
@@ -53,25 +55,25 @@ const FloatingActionButton = ({adminpage}) => {
 
       {showIcons && (
         <div className="fab-circle-menu">
-          <button 
+          <div 
             className="fab-circle-item user" 
             onClick={handleUserClick}
           >
-            <FaUser fontSize={18} />
-          </button>
-          <button 
+            <BsGraphUpArrow fontSize={16} />
+          </div>
+          <div 
             className="fab-circle-item plus" 
             onClick={handlePlusClick}
           >
-            <FaChalkboardTeacher fontSize={20} />
-          </button>
+            <LiaChalkboardTeacherSolid fontSize={20} />
+          </div>
           {!adminpage && (
-                 <button 
+                 <div 
                  className="fab-circle-item admin" 
                  onClick={handleadminClick}
                >
-                 <FaCode fontSize={20} />
-               </button>
+                 <FaCode fontSize={16} />
+               </div>
           )}
         </div>
       )}

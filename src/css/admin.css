@@ -74,8 +74,6 @@
     position: absolute;
     bottom: 0;
     right: 0;
-    width: 210px;  /* Increased container size */
-  height: 210px; /* Increased container size */
   }
   
   .fab-circle-item {
@@ -83,7 +81,7 @@
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    background-color: #345672;
+    background-color: #345672d8;
     border: none;
     color: white;
     display: flex;
