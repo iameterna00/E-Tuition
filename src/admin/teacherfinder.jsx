@@ -112,18 +112,30 @@ useEffect(() => {
       mapRef.current.teacherMarkers.forEach(marker => marker.remove());
     }
     mapRef.current.teacherMarkers = [];
-
+    
 teachers.forEach((teacher) => {
   if (teacher.latitude && teacher.longitude) {
-    // Create a custom circle marker
+    // Set marker color based on gender
+    let bgColor = "rgb(59, 226, 137)"; // default green for male/other
+    
+    // Improved gender check
+    if (teacher.gender) {
+      const gender = teacher.gender.trim().toLowerCase();
+      if (gender === "female" || gender === "f" || gender.startsWith("female")) {
+        bgColor = "rgb(255, 105, 180)"; // pink for female
+      }
+    }
+
     const el = document.createElement('div');
     el.style.width = '18px';
     el.style.height = '18px';
-    el.style.background = 'rgb(59, 226, 137)';
+    el.style.background = bgColor;
+    // ... rest of your code
     el.style.border = '2px solid #fff';
     el.style.borderRadius = '50%';
-    el.style.boxShadow = '0 0 8px rgb(42, 255, 74)';
+    el.style.boxShadow = '0 0 8px ' + bgColor;
     el.title = teacher.name || "Teacher";
+
 
     const marker = new mapboxgl.Marker(el)
       .setLngLat([teacher.longitude, teacher.latitude])
