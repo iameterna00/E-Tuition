@@ -4,7 +4,7 @@ import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder"; // Import the geocoder
 import "mapbox-gl/dist/mapbox-gl.css"; // Mapbox CSS
 import "@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css"; // Geocoder CSS
 
-const MapSelector = ({ formData, setFormData }) => {
+const MapSelector = ({setFormData }) => {
   const mapContainerRef = useRef(null); // Ref for the map container
   const mapRef = useRef(null); // Ref for the map instance
   const markerRef = useRef(null); // Ref for the marker instance

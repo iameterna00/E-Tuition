@@ -63,7 +63,7 @@ const FloatingActionButton = ({adminpage}) => {
           </div>
           <div 
             className="fab-circle-item plus" 
-            onClick={handlePlusClick}
+            onClick={handlePlusClick} h
           >
             <LiaChalkboardTeacherSolid fontSize={20} />
           </div>

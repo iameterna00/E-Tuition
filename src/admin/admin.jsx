@@ -17,6 +17,7 @@ import { IoBookOutline } from "react-icons/io5";
 import { SlCalender } from "react-icons/sl";
 import { RiDeleteBinLine } from "react-icons/ri";
 import FloatingActionButton from "./floatingactionbutton";
+import TeacherLocations from "./teacherfinder";
 
 
 const ADMIN = () => {
@@ -26,6 +27,7 @@ const ADMIN = () => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isEditteacherModalOpen, setIsteacherEditModalOpen] = useState(false);
   const [isCompleteTeacherModalOpen, setIsCompleteTeacherModalOpen] = useState(false);
+  const [searchTeacher, setSearchTeacher] = useState(false);
   const [tab, setTab] = useState("available");
   const [editingVacancy, setEditingVacancy] = useState(null);
   const [formData, setFormData] = useState({
@@ -50,6 +52,7 @@ const ADMIN = () => {
   const [selectedTeacherCommission, setSelectedTeacherCommission] = useState("");
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [vacancyToDelete, setVacancyToDelete] = useState(null);
+  const [selectedVacancy, setSelectedVacancy] = useState(null);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -357,6 +360,11 @@ const handleSubmit = async (e) => {
       alert("Error updating vacancy: " + (err.response?.data?.message || "Unknown error"));
     }
   };
+
+  const searchteacher = (v) =>{
+    setSelectedVacancy(v)
+    setSearchTeacher(true)
+  }
   
   
 
@@ -488,7 +496,7 @@ const handleSubmit = async (e) => {
           {tab === "available" && (
             <div className="uploadvacancycontainer">
               <DownloadImageButton color="teal" vacancy={v} />
-              <div className="addtowebsite"><button className="generateVacancy">Add to website</button></div>
+              <div className="addtowebsite"><button onClick={()=> searchteacher(v)} className="generateVacancy">Add to website</button></div>
             </div>
          
             
@@ -682,6 +690,22 @@ const handleSubmit = async (e) => {
       <div className="modal-actions" style={{display:"flex", gap:'10px'}}>
         <button className="cancel-button" onClick={() => setIsDeleteModalOpen(false)}>Cancel</button>
         <button className="tuition-delete-button" onClick={confirmDeleteVacancy}> {isDeleting ? <FaSpinner className="newspinner" /> : "Delete"}</button>
+      </div>
+    </div>
+  </div>
+)}
+
+{searchTeacher && (
+  <div className="modal-overlay" style={{justifyContent:"center", alignItems:"center"}}>
+    <div className="modal-content" style={{padding:"20px"}}>
+      <h2>Find Tutors</h2>
+    <TeacherLocations 
+    vlat={selectedVacancy.lat}
+    vlng={selectedVacancy.lng}
+    />
+      <div className="modal-actions" style={{display:"flex", gap:'10px'}}>
+        <button className="cancel-button" style={{marginTop:'20px'}}  onClick={() => setSearchTeacher(false)}>Close</button>
+      
       </div>
     </div>
   </div>
