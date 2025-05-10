@@ -218,10 +218,11 @@
     max-height: 90vh; 
     width: 100%;
     max-width: 600px;
-    background-color: #181c1e;
+    background-color: rgb(35, 40, 40);
     min-height: 300px;
     overflow-y: auto; 
     border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Added shadow */
   
   }
     [data-theme='light']  .modal-contentsearchteacher {
@@ -524,5 +525,9 @@
   }
   .teacheredits{
     padding: 0px;
+  }
+    .modal-content {
+      padding: 10px;
+      width: calc(100% - 20px);
   }
 }

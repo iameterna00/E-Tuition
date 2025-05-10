@@ -715,8 +715,8 @@ const handleSubmit = async (e) => {
   </div>
 )}
   {isEditModalOpen && editingVacancy && (
-          <div className="modal-overlay">
-          <div className="modal-content" style={{ textAlign: "start" }}>
+          <div className="modal-overlay"  style={{display:"flex", flexDirection:"column",alignItems:'start', justifyContent:'flex-start' }}>
+          <div className="modal-content" style={{ textAlign: "start", height:"90vh", }}>
             <h2>Edit Vacancy</h2>
             <form  className="editformvacancy"
             onSubmit={handleEditSubmit}>
@@ -793,17 +793,14 @@ const handleSubmit = async (e) => {
               />
           <EditableMapSelector editingVacancy={editingVacancy} setEditingVacancy={setEditingVacancy} />
 
-
-
-      
-             <div className="editvacancybuttions" style={{margin:"10px"}}>
-             <button type="submit">Save</button>
-              <button className="tuition-delete-button" style={{ marginLeft: "5px" }} type="button" onClick={() => setIsEditModalOpen(false)}>
+            </form>
+          </div>
+               <div className="editvacancybuttions" style={{margin:"10px", width:"100%", justifyContent:'center', display:'flex', gap:"10px"}}>
+             <button style={{ width:"60%",maxWidth:"250px" }} type="submit">Save</button>
+              <button className="tuition-delete-button" style={{ width:"30%", maxWidth:"200px" }} type="button" onClick={() => setIsEditModalOpen(false)}>
                 Cancel
               </button>
              </div>
-            </form>
-          </div>
         </div>
       )}
        {isEditteacherModalOpen && editingVacancy && (

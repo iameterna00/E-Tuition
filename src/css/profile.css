@@ -234,10 +234,9 @@ body.modal-open {
 }
 .identitymodal{
     border-radius: 12px;
-    padding: 20px;
-    width: 90%;
+    width:100%;
     max-width: 700px;
-    height: 95%;
+    height: 100vh;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     position: relative;
     text-align: start;
@@ -252,7 +251,7 @@ body.modal-open {
   }
   .modal-contentstudentform {
     overflow-y: auto;
-    max-height: 70vh; /* Adjust this for your desired height */
+    max-height: 80vh; /* Adjust this for your desired height */
     padding: 0px;
 }
 .submit-btn {
@@ -323,15 +322,6 @@ body.modal-open {
         position: relative;
         text-align: center;
     }
-    .identitymodal{
-        border-radius: 0px;
-        padding: 20px;
-        width: 90%;
-        max-width: 700px;
-        height: 95%;
-        overflow-y: auto;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 
-    }
 
 }
