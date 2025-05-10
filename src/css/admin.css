@@ -247,7 +247,7 @@
   
   /* Form Styles */
   .tuition-form {
-    width: 90%;
+    width: 100%;
     display: flex;
     align-items: center;
     flex-wrap: wrap;
@@ -289,13 +289,14 @@
   width: 100%;
   padding: 10px 0;
   display: flex;
+  z-index: 10;
   justify-content: center;
   box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1); /* Optional: Add a shadow */
 }
 [data-theme='light'] .modal-submit-container {
   background-color: rgb(255, 255, 255);
 }
-[data-theme='dark'].modal-submit-container {
+[data-theme='dark'] .modal-submit-container {
   background-color: rgb(27, 31, 34);
 }
   
@@ -520,7 +521,7 @@
     font-size: 14px;
   }
   .tuition-form {
-    width: 80%;
+    width: 100%;
  
   }
   .teacheredits{

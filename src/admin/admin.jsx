@@ -23,6 +23,7 @@ import { TiArrowBackOutline } from "react-icons/ti";
 
 const ADMIN = () => {
   const [vacancies, setVacancies] = useState([]);
+  const formRef = useRef();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isTeacherModalOpen, setIsTeacherModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
@@ -719,7 +720,8 @@ const handleSubmit = async (e) => {
           <div className="modal-content" style={{ textAlign: "start", height:"90vh", }}>
             <h2>Edit Vacancy</h2>
             <form  className="editformvacancy"
-            onSubmit={handleEditSubmit}>
+              ref={formRef}
+              onSubmit={handleEditSubmit}>
               <p style={{ margin: "0px" }}>Name</p>
               <input
                 type="text"
@@ -796,7 +798,7 @@ const handleSubmit = async (e) => {
             </form>
           </div>
                <div className="editvacancybuttions" style={{margin:"10px", width:"100%", justifyContent:'center', display:'flex', gap:"10px"}}>
-             <button style={{ width:"60%",maxWidth:"250px" }} type="submit">Save</button>
+             <button style={{ width:"60%",maxWidth:"250px" }}  onClick={() => formRef.current?.requestSubmit()}>Save</button>
               <button className="tuition-delete-button" style={{ width:"30%", maxWidth:"200px" }} type="button" onClick={() => setIsEditModalOpen(false)}>
                 Cancel
               </button>
