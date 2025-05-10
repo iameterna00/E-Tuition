@@ -116,19 +116,19 @@ useEffect(() => {
 teachers.forEach((teacher) => {
   if (teacher.latitude && teacher.longitude) {
     // Set marker color based on gender
-    let bgColor = "rgb(59, 226, 137)"; // default green for male/other
+    let bgColor = "rgb(0, 229, 237)"; // default green for male/other
     
     // Improved gender check
     if (teacher.gender) {
       const gender = teacher.gender.trim().toLowerCase();
       if (gender === "female" || gender === "f" || gender.startsWith("female")) {
-        bgColor = "rgb(255, 105, 180)"; // pink for female
+        bgColor = "rgb(157, 0, 255)"; // pink for female
       }
     }
 
     const el = document.createElement('div');
-    el.style.width = '18px';
-    el.style.height = '18px';
+    el.style.width = '12px';
+    el.style.height = '12px';
     el.style.background = bgColor;
     // ... rest of your code
     el.style.border = '2px solid #fff';

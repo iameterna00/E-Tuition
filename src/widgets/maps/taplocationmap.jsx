@@ -111,8 +111,8 @@ const TapLocationMap = ({ user, handleLatLngChange }) => {
     // Create popup content
     const popupContent = `
       <div class="popup-content" style="color: white; text-align: center;">
-        <h3>Selected Property Location:</h3>
-        <p style="color: black;">${locationName}</p>
+        <h3>Selected  Location:</h3>
+        <p>${locationName}</p>
       </div>`;
 
     // Create a new popup

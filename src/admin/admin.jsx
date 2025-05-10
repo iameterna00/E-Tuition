@@ -3,7 +3,7 @@ import axios from "axios";
 import "../css/admin.css";
 import { IoIosAddCircle } from "react-icons/io";
 import DownloadImageButton from "../services/downloadimage";
-import { FaSpinner, FaEdit, FaSearch, FaRegCopy, FaPlus } from "react-icons/fa";  
+import { FaSpinner, FaEdit, FaSearch, FaRegCopy } from "react-icons/fa";  
 import { useNavigate } from "react-router-dom";
 import MapSelector from "./mapselectoradmin";
 import EditableMapSelector from "./editablemaps";
@@ -11,13 +11,14 @@ import { webApi } from "../api";
 import { auth } from '../firebase_config'; 
 import { GoClock } from "react-icons/go";
 import { LuDollarSign, LuTarget } from "react-icons/lu";
-import { MdOutlineLocationOn, MdOutlineSchool } from "react-icons/md";
+import { MdDoneOutline, MdOutlineLocationOn, MdOutlineSchool } from "react-icons/md";
 import { BsSuitcaseLg } from "react-icons/bs";
 import { IoBookOutline } from "react-icons/io5";
 import { SlCalender, SlSymbolMale } from "react-icons/sl";
 import { RiDeleteBinLine } from "react-icons/ri";
 import FloatingActionButton from "./floatingactionbutton";
 import TeacherLocations from "./teacherfinder";
+import { TiArrowBackOutline } from "react-icons/ti";
 
 
 const ADMIN = () => {
@@ -553,11 +554,11 @@ const handleSubmit = async (e) => {
             )}
             {tab === "pending" && (
               <>
-                <button onClick={() => updateStatus(v._id, "available")}>Move to Available</button>
-                <button onClick={() => updateStatus(v._id, "complete")}>Move to Complete</button>
+                <button className="generateVacancy"  onClick={() => updateStatus(v._id, "available")}><TiArrowBackOutline />Available</button>
+                <button className="generateVacancy" onClick={() => updateStatus(v._id, "complete")}><MdDoneOutline scalfe={12} />Complete</button>
               </>
             )}
-            <button className="tuition-delete-button" onClick={() => handleDeleteClick(v._id)}> <RiDeleteBinLine/> Delete</button>
+            <button className="tuition-delete-button" onClick={() => handleDeleteClick(v._id)}> <RiDeleteBinLine/></button>
           </div>
         </div>
       ))}
@@ -699,15 +700,15 @@ const handleSubmit = async (e) => {
 )}
 
 {searchTeacher && (
-  <div className="modal-overlay" style={{justifyContent:"center", alignItems:"center"}}>
-    <div className="modal-content" style={{padding:"20px"}}>
+  <div className="modal-overlaysearchteacher" style={{justifyContent:"center", alignItems:"center"}}>
+    <div className="modal-contentsearchteacher" style={{padding:"20px"}}>
       <h2>Find Tutors</h2>
     <TeacherLocations 
     vlat={selectedVacancy.lat}
     vlng={selectedVacancy.lng}
     />
-      <div className="modal-actions" style={{display:"flex", gap:'10px'}}>
-        <button className="cancel-button" style={{marginTop:'20px'}}  onClick={() => setSearchTeacher(false)}>Close</button>
+      <div className="modal-actionscontentsearchteacher" style={{display:"flex", gap:'10px'}}>
+        <button className="cancel-button" style={{marginTop:'20px', backgroundColor:"red", color:'white'}}  onClick={() => setSearchTeacher(false)}>Close</button>
       
       </div>
     </div>
