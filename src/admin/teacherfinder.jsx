@@ -5,6 +5,8 @@ import axios from "axios";
 import { webApi } from "../api";
 import "mapbox-gl/dist/mapbox-gl.css";
 import "@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css";
+import { FaRegCopy } from "react-icons/fa";
+import ReactDOMServer from "react-dom/server";
 
 const TeacherLocations = ({ vlat, vlng }) => {
   const mapContainerRef = useRef(null);
@@ -111,46 +113,70 @@ useEffect(() => {
     }
     mapRef.current.teacherMarkers = [];
 
-    teachers.forEach((teacher) => {
-      if (teacher.latitude && teacher.longitude) {
-        // Create a custom circle marker
-        const el = document.createElement('div');
-        el.style.width = '18px';
-        el.style.height = '18px';
-        el.style.background = 'rgb(59, 226, 137)';
-        el.style.border = '2px solid #fff';
-        el.style.borderRadius = '50%';
-        el.style.boxShadow = '0 0 8px rgb(42, 255, 74)';
-        el.title = teacher.name || "Teacher";
+teachers.forEach((teacher) => {
+  if (teacher.latitude && teacher.longitude) {
+    // Create a custom circle marker
+    const el = document.createElement('div');
+    el.style.width = '18px';
+    el.style.height = '18px';
+    el.style.background = 'rgb(59, 226, 137)';
+    el.style.border = '2px solid #fff';
+    el.style.borderRadius = '50%';
+    el.style.boxShadow = '0 0 8px rgb(42, 255, 74)';
+    el.title = teacher.name || "Teacher";
 
-        const marker = new mapboxgl.Marker(el)
-          .setLngLat([teacher.longitude, teacher.latitude])
-          .addTo(mapRef.current);
+    const marker = new mapboxgl.Marker(el)
+      .setLngLat([teacher.longitude, teacher.latitude])
+      .addTo(mapRef.current);
 
-        // Create popup
-        const popup = new mapboxgl.Popup({
-          closeButton: false,
-          closeOnClick: false,
-          offset: 25
-        }).setHTML(`
-          <div>
-            <strong>${teacher.name || "No Name"}</strong><br/>
-            Email: ${teacher.email || "N/A"}<br/>
-            Phone: ${teacher.phone || "N/A"}
-          </div>
-        `);
+    // Unique ID for the copy button
+    const copyId = `copy-phone-${teacher.uid || teacher._id || Math.random()}`;
 
-        // Show popup on hover
-        el.addEventListener('mouseenter', () => {
-          popup.addTo(mapRef.current).setLngLat([teacher.longitude, teacher.latitude]);
-        });
-        el.addEventListener('mouseleave', () => {
-          popup.remove();
-        });
+    // Render the React icon to SVG string
+    const copyIconSVG = ReactDOMServer.renderToString(
+      <FaRegCopy size={18} style={{ verticalAlign: "middle" }} />
+    );
 
-        mapRef.current.teacherMarkers.push(marker);
+    // Create popup with copy icon SVG
+    const popup = new mapboxgl.Popup({
+      closeButton: false,
+      closeOnClick: false,
+      offset: 25
+    }).setHTML(`
+      <div>
+        <strong>${teacher.name || "No Name"}</strong><br/>
+        Email: ${teacher.email || "N/A"}<br/>
+        Phone: ${teacher.phone || "N/A"}
+        <span id="${copyId}" style="cursor:pointer; margin-left:8px; vertical-align:middle;" title="Copy phone">${copyIconSVG}</span>
+      </div>
+    `);
+
+    // Show popup on hover
+    el.addEventListener('mouseenter', () => {
+      popup.addTo(mapRef.current).setLngLat([teacher.longitude, teacher.latitude]);
+      // Add copy event after popup is added to DOM
+      setTimeout(() => {
+        const copyBtn = document.getElementById(copyId);
+        if (copyBtn) {
+          copyBtn.onclick = () => {
+            navigator.clipboard.writeText(teacher.phone || "");
+            copyBtn.innerHTML = "✅";
+            setTimeout(() => { copyBtn.innerHTML = copyIconSVG; }, 1000);
+          };
+        }
+      }, 0);
+    });
+
+    // Remove popup if clicking anywhere else on the map
+    mapRef.current.on('click', (e) => {
+      if (e.originalEvent.target !== el) {
+        popup.remove();
       }
     });
+
+    mapRef.current.teacherMarkers.push(marker);
+  }
+});
   }, [teachers]);
 
   return (

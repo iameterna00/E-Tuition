@@ -14,7 +14,7 @@ import { LuDollarSign, LuTarget } from "react-icons/lu";
 import { MdOutlineLocationOn, MdOutlineSchool } from "react-icons/md";
 import { BsSuitcaseLg } from "react-icons/bs";
 import { IoBookOutline } from "react-icons/io5";
-import { SlCalender } from "react-icons/sl";
+import { SlCalender, SlSymbolMale } from "react-icons/sl";
 import { RiDeleteBinLine } from "react-icons/ri";
 import FloatingActionButton from "./floatingactionbutton";
 import TeacherLocations from "./teacherfinder";
@@ -479,6 +479,9 @@ const handleSubmit = async (e) => {
           <p className="tuition-vacancy-info">
             <IoBookOutline color="teal" fontSize={20}/>Subject: {v.subject}
           </p>
+          <p className="tuition-vacancy-info">
+            <SlSymbolMale color="teal" fontSize={20}/>Gender: {v.tutorType}
+          </p>
           <p className="tuition-vacancy-info"><LuDollarSign color="teal" fontSize={16} />Salary: {v.salary}</p>
           <p><BsSuitcaseLg color="teal" fontSize={16} /> Time: {v.time}</p>
           {v.minRequirement && <p className="tuition-vacancy-info"><LuTarget color="teal" fontSize={18}/>Requirement: {v.minRequirement}</p>}
@@ -496,7 +499,7 @@ const handleSubmit = async (e) => {
           {tab === "available" && (
             <div className="uploadvacancycontainer">
               <DownloadImageButton color="teal" vacancy={v} />
-              <div className="addtowebsite"><button onClick={()=> searchteacher(v)} className="generateVacancy">Add to website</button></div>
+              <div className="addtowebsite"><button onClick={()=> searchteacher(v)} className="generateVacancy">Find Teacher</button></div>
             </div>
          
             
