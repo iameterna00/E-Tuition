@@ -4,8 +4,8 @@ import EditableMapSelector from '../editablemaps'
 export default function EditModal({isEditModalOpen, editingVacancy, handleEditChange, setEditingVacancy, setIsEditModalOpen, formRef, handleEditSubmit}) {
   return (
     <>  {isEditModalOpen && editingVacancy && (
-              <div className="modal-overlay"  style={{display:"flex", flexDirection:"column",alignItems:'start', justifyContent:'flex-start' }}>
-              <div className="modal-content" style={{ textAlign: "start", height:"90vh", }}>
+              <div className="modal-overlay"  style={{display:"flex", flexDirection:"column",alignItems:'start' }}>
+              <div className="modal-content" style={{ textAlign: "start", height:"90dvh", }}>
                 <h2>Edit Vacancy</h2>
                 <form  className="editformvacancy"
                   ref={formRef}
@@ -65,7 +65,7 @@ export default function EditModal({isEditModalOpen, editingVacancy, handleEditCh
                     type="text"
                     name="duration"
                     value={editingVacancy.duration || ""}
-                    onChange={handleEditChange}
+                    onChange={handleEditChange} 
                   />
                    <p>subject</p>
                       <input
