@@ -4,25 +4,13 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsive
 import FloatingActionButton from './floatingactionbutton';
 
 const UsersActivity = () => {
-  const getNepalDate = () => {
-    const now = new Date();
-    // Adjust for UTC+5:45
-    const nepalOffset = 5.75 * 60 * 60 * 1000;
-    return new Date(now.getTime() + nepalOffset);
-  };
   const [activeStats, setActiveStats] = useState({
     total_active: 0,
     logged_in_users: 0,
     guest_users: 0,
     users: []
   });
-  const [selectedWeek, setSelectedWeek] = useState(() => {
-    const today = getNepalDate();
-    const sunday = new Date(today);
-    sunday.setDate(today.getDate() - today.getDay()); // Correct Sunday calculation
-    return sunday.toISOString().split('T')[0]; // Returns YYYY-MM-DD
-  });
-  const [availableWeeks, setAvailableWeeks] = useState([]);
+
   const [dailyActivity, setDailyActivity] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -47,17 +35,11 @@ const UsersActivity = () => {
     return () => clearInterval(intervalId);
   }, []);
 
-  useEffect(() => {
-    const weeks = generatePastWeeks(10); // past 12 weeks
-    setAvailableWeeks(weeks);
-  }, []);
-  
-
   // Fetch daily activity data
   useEffect(() => {
     const fetchDailyActivity = async () => {
       try {
-        const response = await fetch(`${webApi}/api/weekly-activity?week=${selectedWeek}`);
+        const response = await fetch(`${webApi}/api/weekly-activity`);
         if (!response.ok) throw new Error("Failed to fetch daily activity");
         const data = await response.json();
         setDailyActivity(data);
@@ -71,31 +53,15 @@ const UsersActivity = () => {
     };
 
     fetchDailyActivity();
-  }, [selectedWeek]);
-  
-  const generatePastWeeks = (numWeeks = 10) => {
-    const weeks = [];
-    const today = getNepalDate();
-    const currentSunday = new Date(today);
-    currentSunday.setDate(today.getDate() - today.getDay());
-    
-    for (let i = 0; i < numWeeks; i++) {
-      const weekStart = new Date(currentSunday);
-      weekStart.setDate(currentSunday.getDate() - (i * 7));
-      weeks.push(weekStart.toISOString().split('T')[0]);
-    }
-    
-    return weeks;
-  };
+  }, []);
 
-  
   const prepareWeeklyData = () => {
     const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
     // Prepare the weekly data to display on the chart
     return dailyActivity.map((activity) => {
       const activityDate = new Date(activity.date);
-      const activityDayIndex = activityDate.getDay(); 
+      const activityDayIndex = activityDate.getDay(); // Sunday = 0, Monday = 1, ..., Saturday = 6
 
       return {
         name: days[activityDayIndex],
@@ -106,7 +72,7 @@ const UsersActivity = () => {
     });
   };
 
-  const today = new Date().toLocaleDateString(); 
+  const today = new Date().toLocaleDateString(); // Get today's date as a string
 
   // Find today's activity data
   const todayActivity = dailyActivity.find(day => new Date(day.date).toLocaleDateString() === today);
@@ -116,7 +82,7 @@ const UsersActivity = () => {
 
   return (
     <div className="user-activity-container">
-      <FloatingActionButton/>
+        <FloatingActionButton/>
       {/* Real-time Stats Section */}
       <div className="live-stats-section">
         <h2 className="section-title">🔴 Live Active Users</h2>
@@ -184,20 +150,6 @@ const UsersActivity = () => {
           <p className="no-users">No active users at the moment.</p>
         )}
       </div>
-      <div className="week-selector">
-          <label htmlFor="weekDropdown">Select Week:</label>
-          <select
-            id="weekDropdown"
-            value={selectedWeek}
-            onChange={(e) => setSelectedWeek(e.target.value)}
-          >
-            {availableWeeks.map((weekStart) => (
-              <option key={weekStart} value={weekStart}>
-                Week starting {new Date(weekStart).toLocaleDateString()}
-              </option>
-            ))}
-          </select>
-        </div>
 
       {/* Weekly Activity Chart */}
       <div className="charts-section"  >
@@ -233,19 +185,19 @@ const UsersActivity = () => {
               <Bar 
                 dataKey="total" 
                 name="Total Active" 
-                fill="teal"
+                fill="#4CAF50"
                 radius={[10, 10, 0, 0]} 
               />
               <Bar 
                 dataKey="loggedIn" 
                 name="Logged In" 
-                fill="#00a4e6"
+                fill="#42A5F5"
                 radius={[10, 10, 0, 0]} 
               />
               <Bar 
                 dataKey="guests" 
                 name="Guests" 
-                fill="#c23e3e"
+                fill="#EF5350"
                 radius={[10, 10, 0, 0]} 
               />
             </BarChart>

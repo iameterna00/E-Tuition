@@ -57,10 +57,12 @@ function TeacherManager() {
   );
 
   // Approve teacher by updating 'teacherconfirm' status to 'approved'
-  const approveTeacher = async (uid) => {
+  const approveTeacher = async (uid, email, name) => {
     try {
       const response = await axios.post(`${webApi}/api/teachers/confirm`, {
         uid: uid, 
+        email: email,
+        name: name,
         teacherconfirm: "approved"
       });
 
@@ -183,7 +185,7 @@ function TeacherManager() {
                   {/* Approve button */}
                   {teacher.teacherconfirm !== "approved" && (
                     <div style={{gap:"10px", display:"flex"}} className="approveteacherbutton">
-                      <button onClick={() => approveTeacher(teacher.uid)}>Approve</button>
+                      <button onClick={() => approveTeacher(teacher.uid, teacher.email, teacher.name)}>Approve</button>
                       <button style={{backgroundColor:"red"}} onClick={() => rejectTeacher(teacher.uid)}>Reject</button>
                     </div>
                   )}
