@@ -213,11 +213,12 @@
   }
     .modal-contentsearchteacher {
     display: flex;
+    z-index: 101;
     flex-direction: column;
     align-items: center;
     max-height: 90vh; 
     width: 100%;
-    max-width: 600px;
+    max-width: 800px;
     background-color: rgb(35, 40, 40);
     min-height: 300px;
     overflow-y: auto; 
@@ -226,7 +227,7 @@
   
   }
     [data-theme='light']  .modal-contentsearchteacher {
-    background-color: rgb(248, 253, 254);
+    background-color: rgb(241, 241, 241);
   }
   
   .teachermodal-content{

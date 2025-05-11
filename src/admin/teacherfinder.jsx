@@ -188,8 +188,8 @@ const TeacherLocations = ({ vlat, vlng, useVacancyTeachers }) => {
         offset: 25
       }).setHTML(`
         <div>
-          ${useVacancyTeachers ? `<strong> Grade ${teacher.grade || "No grade"}</strong><br/>
-          sub: ${teacher.subject || "N/A"}<br/>` : `<strong>${teacher.name || "No Name"}</strong><br/>
+          ${useVacancyTeachers ? `<strong>Grade ${teacher.grade || "No grade"}</strong><br/>
+          Sub: ${teacher.subject || "N/A"}<br/>` : `<strong>${teacher.name || "No Name"}</strong><br/>
           Email: ${teacher.email || "N/A"}<br/>`}
           Phone: ${teacher.phone || "N/A"}
           <span id="${copyId}" style="cursor:pointer; margin-left:8px; vertical-align:middle;" title="Copy phone">${copyIconSVG}</span>
@@ -227,7 +227,7 @@ const TeacherLocations = ({ vlat, vlng, useVacancyTeachers }) => {
     <div
       ref={mapContainerRef}
       style={{
-        maxWidth: "600px",
+        maxWidth: "800px",
         height: "400px",
         width: "100%",
         borderRadius: "8px",
