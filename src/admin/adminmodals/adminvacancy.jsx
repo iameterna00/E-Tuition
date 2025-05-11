@@ -9,7 +9,7 @@ import { BsSuitcaseLg } from "react-icons/bs";
 import { IoBookOutline } from "react-icons/io5";
 import { SlCalender, SlSymbolMale } from 'react-icons/sl';
 import { FaRegCopy } from 'react-icons/fa';
-import DownloadImageButton from "../services/downloadimage";
+import DownloadImageButton from "../../services/downloadimage";
 
 const AdminVacancyCard = ({
   v,

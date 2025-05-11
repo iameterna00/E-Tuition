@@ -12,7 +12,7 @@ import DeleteVacancy from "./adminmodals/deletevacancymodal";
 import AddVacancyModal from "./adminmodals/addvacancymodal";
 import AssignTeacherModal from "./adminmodals/assignteachermodal";
 import ConfirmTeacherModal from "./adminmodals/confirmteachermodal";
-import AdminVacancyCard from "./adminvacancy";
+import AdminVacancyCard from "./adminmodals/adminvacancy";
 
 
 const ADMIN = () => {
