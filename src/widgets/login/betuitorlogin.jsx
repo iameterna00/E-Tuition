@@ -9,7 +9,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 
 
-function TuitorLogin({ close }) {
+function TuitorLogin({ close, isvacancy }) {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [emailLogin, setEmailLogin] = useState(false);
@@ -24,14 +24,15 @@ function TuitorLogin({ close }) {
   const auth = getAuth();
   const navigate = useNavigate();
 
-  // Check if the user is logged in or not
+
   useEffect(() => {
+    console.log('this is vacancypage ', isvacancy)
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         setUser(user)
-        setIsLoggedIn(true); // User is logged in
+        setIsLoggedIn(true);
       } else {
-        setIsLoggedIn(false); // User is not logged in
+        setIsLoggedIn(false); 
       }
     });
     return () => unsubscribe();
@@ -236,9 +237,9 @@ function TuitorLogin({ close }) {
   return (
     <div className="tuitorlogincontainer">
       <div className="tuitorlogincontents">
-        <div className="closebutton" onClick={close}>
+      {isvacancy ? (null):(  <div className="closebutton" onClick={close}>
           X
-        </div>
+        </div>)}
         <div className={`tuitorgraphics ${isLoggedIn ? 'inactive' : ''}`}>
           <img className="tuitorgraphicsimg" src={joinus} alt="" />
           <div className="tuitorgraphicstext">
@@ -260,10 +261,13 @@ function TuitorLogin({ close }) {
         <div className={`tuitorloginform ${isLoggedIn ? 'active' : ''}`}>
           {!emailLogin && !isLoggedIn &&  (
             <div className="loginmethods">
-              <h2>
+             {isvacancy?( <h2>
+                Please Login
+                <br />To Check Vacancies!
+              </h2>):( <h2>
                 Welcome! Create Your
                 <br /> E-Tuitor Account
-              </h2>
+              </h2>)}
               <div className="continuewithgoogle" onClick={handleGoogleLogin}>
                 <img className="continuewithgoogleimg" src={google} alt="" />
                 <p>Continue with Google</p>

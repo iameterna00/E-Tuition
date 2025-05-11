@@ -85,7 +85,7 @@ export default function EditModal({isEditModalOpen, editingVacancy, handleEditCh
     
                 </form>
               </div>
-                   <div className="editvacancybuttions" style={{margin:"10px", width:"100%", justifyContent:'center', display:'flex', gap:"10px"}}>
+                   <div className="editvacancybuttions">
                  <button style={{ width:"60%",maxWidth:"250px" }}  onClick={() => formRef.current?.requestSubmit()}>Save</button>
                   <button className="tuition-delete-button" style={{ width:"30%", maxWidth:"200px" }} type="button" onClick={() => setIsEditModalOpen(false)}>
                     Cancel

@@ -386,6 +386,17 @@
   .tuition-vacancy-list p{
     margin: 5px 0px;
   }
+  .editvacancybuttions{
+    width: 100%;
+    display: flex;
+    background-color: rgb(38, 38, 38);
+    padding: 10px;
+    gap: 10px;
+    position: fixed;
+    bottom: 20px;
+    z-index: 100;
+    height: 50px;
+  }
   .teacheredits{
     display: flex;
     flex-direction: column;

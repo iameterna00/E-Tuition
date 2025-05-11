@@ -15,6 +15,9 @@ import teacherscommunity from '../../assets/teacherscommunity.png';
 import { Link, useNavigate } from 'react-router-dom';
 import AdComponent from '../googleads/adscomponent';
 import PhoneCheckModal from './teachernumberfill';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectUser } from '../../services/Redux/userSlice';
+import TuitorLogin from '../login/betuitorlogin';
 
 
 mapboxgl.accessToken = "pk.eyJ1IjoiYW5pc2hoLWpvc2hpIiwiYSI6ImNrdWo5d2lhdDFkb2oybnJ1MDB4OG1oc2EifQ.pLrp8FmZSLVfT3pAVVPBPg";
@@ -29,12 +32,38 @@ function TeacherVacancy() {
   const geocoderRef = useRef(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedVacancy, setSelectedVacancy] = useState(null);
+  const [isVacancy, setisVacancy] = useState(true);
   const [referalmodal, setreferalmodal] = useState(false);
   const navigate = useNavigate();
-  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+  const dispatch = useDispatch();
+  const [userlogin, setUserLogin] =useState(true);
+  const myuser = useSelector(selectUser);
+  
+
+useEffect(() => {
+  const authInstance = getAuth();
+  const unsubscribe = authInstance.onAuthStateChanged((firebaseUser) => {
+    if (firebaseUser) {
+      dispatch(fetchUser(firebaseUser.uid));
+      setUserLogin(true)
+    }
+    else{
+      setUserLogin(false);
+    }
+  });
+
+  return () => unsubscribe();
+}, [dispatch]);
+
+// Now react to updates in myuser separately
+useEffect(() => {
+  if (myuser) {
+    console.log('Updated myuser:', myuser);
+    // setpurpose(myuser.purpose); // Make sure setpurpose is defined in your component
+  }
+}, [myuser]);
 
 
-  // Function to handle the modal toggle
   const openModal = (vacancy) => {
     setSelectedVacancy(vacancy); // Set selected vacancy
     setIsModalOpen(true);
@@ -54,40 +83,26 @@ function TeacherVacancy() {
     return `https://wa.me/9768771793?text=${encodeURIComponent(message)}`;
   };
 
-  useEffect(() => {
-    const auth = getAuth();
-  
-    // Set up Firebase auth listener
-    const unsubscribe = onAuthStateChanged(auth, async (user) => {
-      if (user || !user) {
-        setIsUserLoggedIn(true);
-        setLoading(true);
-        try {
-          // Commented out token generation - uncomment if needed later
-          // const idToken = await user.getIdToken();
-          
-          const response = await axios.get(`${webApi}/api/vacancyforteachers`, {
-            // headers: { Authorization: `Bearer ${idToken}` },
-          });
-          
-          setVacancies(response.data);
-          console.log('Fetched vacancies:', response.data);
-        } catch (error) {
-          console.error("Error fetching vacancies:", error);
-        } finally {
-          setLoading(false);
-        }
-      } else {
-        setIsUserLoggedIn(false);
-        setVacancies([]);
-      }
-    });
+useEffect(() => {
+  const fetchVacancies = async () => {
+    setLoading(true);
+    try {
+      const response = await axios.get(`${webApi}/api/vacancyforteachers`);
+      setVacancies(response.data);
+      console.log('Fetched vacancies:', response.data);
+    } catch (error) {
+      console.error("Error fetching vacancies:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchVacancies();
+  return () => {
+  };
+}, []);
 
 
-  
-    return () => unsubscribe(); // Cleanup on unmount
-  }, []); // Runs only once on mount
-  // Filter vacancies based on user location
   useEffect(() => {
     if (userLocation) {
       const updatedVacancies = vacancies.map((vacancy) => {
@@ -205,7 +220,7 @@ function TeacherVacancy() {
           Search Vacancies Near Me <MdGpsFixed className='gpsicon' fontSize={20} />
         </button>
       </div>
-      {isUserLoggedIn && loading && ( <div className="vacancy-loader-container" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '400px',  width: '100%', flexDirection: 'column'}}>
+      { loading && ( <div className="vacancy-loader-container" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '400px',  width: '100%', flexDirection: 'column'}}>
         <TailSpin
   height="40"
   width="40"
@@ -214,11 +229,12 @@ function TeacherVacancy() {
 />
       <p>loading vacancies..</p>
     </div>)}
-    {/* {!isUserLoggedIn && (
-        <div style={{ textAlign: 'center', marginTop: '20px' }}>
-          <p>Please <Link to="/login">Login</Link> to join the Teacher's Community and view available vacancies.</p>
-        </div>
-      )} */}
+    {!userlogin && (
+        <TuitorLogin 
+       close={() => setUserLogin(true)}
+        isvacancy={true}
+        />
+      )}
       <div className="vacancy-list">
      
         
@@ -244,6 +260,7 @@ function TeacherVacancy() {
         ))}
 </div>
         <PhoneCheckModal/>
+      
 
       {/* Modal */}
       {isModalOpen && selectedVacancy && (

@@ -9,7 +9,7 @@ import { webApi } from "../../api";
 import { FaSpinner } from "react-icons/fa";  
 import TapLocationMap from "../maps/taplocationmap";
 
-function TeachingExperience({ setopentuitorinitialmodal, user }) {
+function TeachingExperience({ setopentuitorinitialmodal, user, isVacancy }) {
     const [step, setStep] = useState(1);
     const [teachingExperience, setTeachingExperience] = useState("");
     const [searchSchool, setSearchSchool] = useState("");
@@ -207,6 +207,7 @@ function TeachingExperience({ setopentuitorinitialmodal, user }) {
                     <div className="teacherexperienceinsiders">
                         {step === 1 && (
                             <>
+                            {isVacancy &&(<p>Complete 6 quick steps to unlock job matches tailored just for you!</p> )}
                                 <h2>What grade levels are you experienced in teaching</h2>
                                 <p>Select the highest class level you have taught.</p>
                                 <div className="teaching-options">
