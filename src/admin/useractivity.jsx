@@ -185,19 +185,19 @@ const UsersActivity = () => {
               <Bar 
                 dataKey="total" 
                 name="Total Active" 
-                fill="#4CAF50"
+                fill="rgb(0, 175, 114)"
                 radius={[10, 10, 0, 0]} 
               />
               <Bar 
                 dataKey="loggedIn" 
                 name="Logged In" 
-                fill="#42A5F5"
+                fill="rgb(0, 175, 175)"
                 radius={[10, 10, 0, 0]} 
               />
               <Bar 
                 dataKey="guests" 
                 name="Guests" 
-                fill="#EF5350"
+                fill="rgb(175, 0, 50)"
                 radius={[10, 10, 0, 0]} 
               />
             </BarChart>
