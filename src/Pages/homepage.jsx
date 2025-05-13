@@ -10,6 +10,7 @@ import { FaUsersGear } from "react-icons/fa6"; // Ensure you're using the correc
 import Chatbot from "../chatbot/chatbot";
 import { IoChatbubbles } from "react-icons/io5";
 import { FaChevronCircleDown, FaChevronDown } from "react-icons/fa";
+import About from "./aboutus";
 
 function HomePage() {
     const [userChecked, setUserChecked] = useState(false); 
@@ -74,6 +75,7 @@ function HomePage() {
             <Vaccancy />
         </div>
             <HomePageForm />
+            <About/>
          
         </>
     );

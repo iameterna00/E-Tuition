@@ -13,7 +13,7 @@ const FooterComponent = () => {
 
         <div className="footer-Info">
         <h3>Kathmandu, Nepal</h3>
-        <p>ehometuitionnp@gmail.com</p>
+        <p>kubenp@gmail.com</p>
         <p>+977 9768771793</p>
         <p>Bhupi Sherchan Marg, Baneshwor,  Kathmandu</p>
         </div>
@@ -22,9 +22,9 @@ const FooterComponent = () => {
         <div className="footer-links">
           <h3>Quick Links</h3>
           <a href="/">Home</a>
-          <a href="/about">About</a>
+        
           <a href="/chat">Chat</a>
-          <a href="/contact">Contact</a>
+         
         </div>
 
         <div className="footer-social">
