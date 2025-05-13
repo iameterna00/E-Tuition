@@ -1,11 +1,14 @@
 import nanjinglogo from "../../assets/nanjing.png";
+import jiansu from "../../assets/jiangsu.png";
+
+
 
 const universitiesData = [
   {
     id: 1,
     name: "Jiangsu Medical University",
     country: "China",
-    image:'https://n.17gz.org/upload/image/2021/09_10/LOGIN_IMAGES/c3dcd16ed7d54ec5b80bf2688675c2f8.jpg?token=6f60ff88ecae1d7e236892d0bcc65422196cb582786',
+    image: jiansu,
     address: "China, Jiang Su Sheng, Zhen Jiang Shi, Jing Kou Qu, 226000",
     ranking: "341",
     tuition: `- USD 2,500–5,400 per year`,
