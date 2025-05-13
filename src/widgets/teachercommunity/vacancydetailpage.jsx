@@ -159,7 +159,7 @@ const VacancyDetail = () => {
               <h3>Important Notes</h3>
               <ul>
                 <li>
-                  A <strong>one-time service charge of 25%</strong> of the vacancy's listed salary is applicable upon successful teacher placement.
+                  A <strong>one-time service charge of 30%</strong> of the vacancy's listed salary is applicable upon successful teacher placement.
                 </li>
                 <li>
                   Teachers may be asked to conduct <strong>demo classes for up to 2 days</strong> as part of the selection process.
