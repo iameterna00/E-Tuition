@@ -113,7 +113,10 @@
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   transition: transform 0.3s ease;
 }
-
+   [data-theme = 'light'] .stat{
+      background: #ffffff;
+      color: #000000;
+    }
 .stat:hover {
   transform: translateY(-5px);
 }
@@ -130,6 +133,7 @@
 }
 .testimonial-title {
   font-size: 1.8rem;
+  
   margin-top: 3rem;
 }
 
@@ -139,6 +143,7 @@
   justify-content: center;
   gap: 1.5rem;
   margin-top: 2rem;
+  color: #fff;
 }
 
 .testimonial {
@@ -151,7 +156,10 @@
   transform: translateY(30px);
   transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
-
+  [data-theme = 'light'] .testimonial{
+      background: #ffffff;
+      color: #000000;
+    }
 .testimonial.fade-in {
   opacity: 1;
   transform: translateY(0);
