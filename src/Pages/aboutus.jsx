@@ -67,7 +67,7 @@ const About = () => {
         </div>
       </div>
 
-      <h2 className="testimonial-title">Feedbacks</h2>
+      <h2 className="testimonial-title">Feedback</h2>
       <div className="testimonials">
         {testimonials.map((t, i) => (
           <div key={i} className="testimonial fade-in">
