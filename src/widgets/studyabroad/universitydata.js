@@ -578,10 +578,10 @@ const universitiesData = [
   image: "https://www.utoronto.ca/sites/default/files/styles/banner_951/public/2025-04/Lawson%20Announcement_Hero%20Banner-edit.jpg?h=b1a4fe10&itok=fgVyxM8G",
   address: "27 King's College Cir, Toronto, ON M5S 1A1, Canada",
   ranking: "21 (QS World University Rankings 2025)",
-  tuition: "- CAD 45,000–62,000 per year",
-  costOfLiving: "- CAD 1,300–2,200 /month",
+  tuition: "- USD 45,000–62,000 per year",
+  costOfLiving: "- USD 1,300–2,200 /month",
   monthlyStipend: `
-  - CAD 1,800–2,500/month for research students
+  - USD 1,800–2,500/month for research students
   - Scholarships available for international undergraduates`,
   programs: [
     "Computer Science",
@@ -620,10 +620,10 @@ const universitiesData = [
   image: "https://www.usnews.com/object/image/00000156-6b7c-d0b3-ad56-ff7dbd8b0000/160808-mcgilluniversity-submitted.jpg?update-time=1470682544421&size=responsiveFlow970",
   address: "845 Sherbrooke St W, Montreal, QC H3A 0G4, Canada",
   ranking: "30 (QS World University Rankings 2025)",
-  tuition: "- CAD 22,000–52,000 per year",
-  costOfLiving: "- CAD 1,000–1,800 /month",
+  tuition: "- USD 22,000–52,000 per year",
+  costOfLiving: "- USD 1,000–1,800 /month",
   monthlyStipend: `
-  - CAD 1,700–2,400/month for research students
+  - USD 1,700–2,400/month for research students
   - Entrance and merit-based scholarships available`,
   programs: [
     "Medicine",
@@ -662,10 +662,10 @@ const universitiesData = [
   image: "https://static.wixstatic.com/media/b69726_293737668081439c893727043912a253~mv2.jpg/v1/fill/w_1000,h_563,al_c,q_85,usm_0.66_1.00_0.01/b69726_293737668081439c893727043912a253~mv2.jpg",
   address: "2329 West Mall, Vancouver, BC V6T 1Z4, Canada",
   ranking: "34 (QS World University Rankings 2025)",
-  tuition: "- CAD 39,000–55,000 per year",
-  costOfLiving: "- CAD 1,400–2,200 /month",
+  tuition: "- USD 39,000–55,000 per year",
+  costOfLiving: "- USD 1,400–2,200 /month",
   monthlyStipend: `
-  - CAD 2,000–2,800/month for graduate research students
+  - USD 2,000–2,800/month for graduate research students
   - International Major Entrance Scholarship (IMES) and more`,
   programs: [
     "Forestry",
