@@ -71,40 +71,18 @@
     padding: 0 20px;
   }
   
-  /* University list */
-  .university-list {
-    width: 100%;
-    padding: 20px;
-  }
-  .university-list-container{
-    width: 100%;
-    padding: 15px;
-  }
-  .university-card {
-    display: flex;
-    align-items: center;
-    justify-content: start;
-    text-align: start;
-    cursor: pointer;
-    border-radius: 10px;
-    margin-bottom: 15px;
-    background: #F5F5F5 ;
-  }
-  [data-theme = 'dark']  .university-card {
-    background: #262626;
-  }
-  [data-theme = 'dark'] .university-list :hover {
-    background: #2c2c2c;
-  }
-  [data-theme = 'light'] .university-list :hover {
-    background: #ebebeb;
-  }
-  .university-logo {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    margin-right: 15px;
-  }
+.universitylistmain{
+  display: flex;
+
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  padding: 0px 20px;
+}
+.university-info{
+  padding: 10px;
+}
   
   .university-info h4 {
     margin: 0;
@@ -196,7 +174,9 @@
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
   background-color: #c9f5ff;
   gap: 50px;
+  padding: 10px 20px;
   width: 100%;
+  height: 100%;
   overflow-y: auto;
   scrollbar-width: none;
   align-items: center;
@@ -406,6 +386,10 @@
       display: flex;
       padding: 10px;
     }
+    
+      .country-option:hover .countrynames {
+        font-size: 40px;
+      }
     .floating-filter-button{
       display: flex;
       position: fixed;

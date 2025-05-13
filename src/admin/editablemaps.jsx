@@ -10,7 +10,7 @@ const EditableMapSelector = ({ editingVacancy, setEditingVacancy }) => {
   const markerRef = useRef(null);
 
   useEffect(() => {
-    mapboxgl.accessToken = "pk.eyJ1IjoiYW5pc2hoLWpvc2hpIiwiYSI6ImNrdWo5d2lhdDFkb2oybnJ1MDB4OG1oc2EifQ.pLrp8FmZSLVfT3pAVVPBPg";
+    mapboxgl.accessToken =import.meta.env.VITE_API_MAP_BOX;
 
     // Initialize the map only once
     mapRef.current = new mapboxgl.Map({

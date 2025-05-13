@@ -266,7 +266,7 @@ function TuitorLogin({ close, isvacancy }) {
                 <br />To Check Vacancies!
               </h2>):( <h2>
                 Welcome! Create Your
-                <br /> E-Tuitor Account
+                <br /> Account
               </h2>)}
               <div className="continuewithgoogle" onClick={handleGoogleLogin}>
                 <img className="continuewithgoogleimg" src={google} alt="" />

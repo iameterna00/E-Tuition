@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { webApi } from '../../api';
-import { FaMoneyBill, FaMoneyBillWave } from 'react-icons/fa';
+import { FaChalkboardTeacher, FaMoneyBill, FaMoneyBillWave } from 'react-icons/fa';
 import { RiFocus2Line } from "react-icons/ri";
 import { IoIosSend } from 'react-icons/io';
-import { FaUserGroup } from "react-icons/fa6";
+import { FaBook, FaClock, FaGraduationCap, FaLocationDot, FaUser, FaUserGroup } from "react-icons/fa6";
 
 const DemoVacancy = ({login}) => {
   const [vacancies, setVacancies] = useState([]);
@@ -13,7 +13,7 @@ const DemoVacancy = ({login}) => {
     fetch(`${webApi}/api/demo_vacancies`) // Replace with your correct API endpoint
       .then((response) => response.json())
       .then((data) => {
-        setVacancies(data.slice(0, 4)); // Limit to the top 5 vacancies
+        setVacancies(data.slice(0, 6)); // Limit to the top 5 vacancies
         console.log(data);
       })
       .catch((error) => {
@@ -23,7 +23,8 @@ const DemoVacancy = ({login}) => {
 
   return (
     <div className="vacancy-grid-container" style={{display:"flex", width:"100%", justifyContent:"center", alignItems:'center', flexDirection:"column"}}>
-      <h2>Available Vacancies</h2>
+      <h2>Vacancies For Private Teachers</h2>
+      <p style={{marginTop:"-20px", marginBottom:"10px"}} >Kube helps private tuitors to find their best placements</p>
       <div className="vacancy-grid" style={{display:'flex', justifyContent:"center", alignItems:"center", width:"100%", flexWrap:"wrap", gap:"10px"}}>
         {vacancies.map((vacancy) => (
            <div style={{width:"100%", maxWidth:"400px"}} key={vacancy.id} className="vaccancydemocard">
@@ -44,12 +45,12 @@ const DemoVacancy = ({login}) => {
                      </h3>
                    )}
                  <div className="vacancycommunitydetails">
-                   <h4>Grade: {vacancy.grade}</h4>
-                   <h4>Location: {vacancy.location}</h4>
-                   <h4>Subject: {vacancy.subject}</h4>
-                   <h4>Duration: {vacancy.duration}</h4>
-                   <h4>No of students: {vacancy.grade}</h4>
-                   <h4>Tuitor Type: {vacancy.tutorType}</h4>
+                    <h4><FaChalkboardTeacher color="teal" /> Grade: {vacancy.grade}</h4>
+                           <h4><FaLocationDot color="teal"  /> Location: {vacancy.location ? vacancy.location : 'Online'}</h4>
+                           <h4><FaBook color="teal" /> Subject: {vacancy.subject}</h4>
+                           <h4><FaClock color="teal" /> Time: {vacancy.time}</h4>
+                           <h4><FaGraduationCap color="teal" /> No of students: {vacancy.noofstudents}</h4>
+                           <h4><FaUser color="teal" /> Tutor Type: {vacancy.tutorType ? vacancy.tutorType : 'Any'}</h4>
                   <div className="minrequirements">
                   <h4 style={{display:"flex", alignItems:'center', gap:"5px", fontSize:"18px"}}><RiFocus2Line size={25}/>Requirement:</h4>
                   <p style={{marginLeft:"10px", fontWeight:"600"}}> {vacancy.minRequirement}</p>

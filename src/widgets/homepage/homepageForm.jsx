@@ -19,7 +19,7 @@ const HomePageForm = () => {
   });
 
   const [invalidFields, setInvalidFields] = useState([]);
-
+  const [loading, setLoading] = useState(false);
   const [subjects, setSubjects] = useState([]);
   const [filteredSubjects, setFilteredSubjects] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
@@ -60,30 +60,38 @@ const HomePageForm = () => {
     setCurrentStep(currentStep - 1);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    if (!formData.startTime.trim()) {
-      setInvalidFields(['startTime']);
-      return;
-    }
+  if (!formData.startTime.trim()) {
+    setInvalidFields(['startTime']);
+    return;
+  }
 
-    setInvalidFields([]);
+  setInvalidFields([]);
+  setLoading(true); // Show spinner
 
-    console.log('Form submitted:', formData);
-    // Add success message logic here (toast/snackbar/inline text)
-    setFormData({
-      destination: '',
-      studyLevel: '',
-      firstName: '',
-      lastName: '',
-      age: '',
-      email: '',
-      phone: '',
-      startTime: '',
-    });
-    setCurrentStep(1);
-  };
+  // Simulate 2 second delay
+  await new Promise((resolve) => setTimeout(resolve, 2000));
+
+  window.alert('Form has been submitted!');
+  console.log('Form submitted:', formData);
+
+  setFormData({
+    destination: '',
+    studyLevel: '',
+    firstName: '',
+    lastName: '',
+    age: '',
+    email: '',
+    phone: '',
+    startTime: '',
+  });
+
+  setCurrentStep(1);
+  setLoading(false); // Hide spinner
+};
+
 
   useEffect(() => {
     if (formData.destination && subjectsData[formData.destination]) {
@@ -261,9 +269,12 @@ const HomePageForm = () => {
             {currentStep !== 3 && (
               <button  className='nextstep' type="button" onClick={nextStep}>Next Step</button>
             )}
-            {currentStep === 3 && (
-              <button className='nextstep' type="submit">Submit</button>
-            )}
+           {currentStep === 3 && (
+  <button className='nextstep' type="submit" disabled={loading}>
+    {loading ? <span className="spinner"></span> : 'Submit'}
+  </button>
+)}
+
           </div>
 
           {/* Step Progress Bar */}

@@ -719,9 +719,21 @@
   transition: all 0.3s ease-in-out;
 }
 .vaccancy-image:hover {
-  height: 200px;
+  height: 150px;
 
 }
+.university-image {
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 10px 10px 0px 0px;
+  transition: all 0.3s ease-in-out;
+}
+.university-image:hover {
+  height: 100px;
+
+}
+
 .gigsdefualtposter{
   width: 100%;
   position: relative;
@@ -774,10 +786,7 @@
   }
 .vaccancy-details{
   border-radius: 0 0 10px 10px;
-  
 
-
-  
 }
 [data-theme='dark'] .vaccancy-details{
   background-color: rgba(25, 25, 25, 0.97);
@@ -788,6 +797,13 @@
   }
 .vacancydetailsinsiders{
   padding: 10px;
+}
+.university-card{
+  transition: all 0.3s ease-in-out;
+}
+.university-card:hover{
+  transform: translateY(-5px);
+  transition: all 0.3s ease-in-out;
 }
 .vaccancyprofilecontainer h3{
   font-size: 15px;

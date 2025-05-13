@@ -11,7 +11,7 @@ const MapSelector = ({setFormData }) => {
 
   useEffect(() => {
     // Set Mapbox access token
-    mapboxgl.accessToken = "pk.eyJ1IjoiYW5pc2hoLWpvc2hpIiwiYSI6ImNrdWo5d2lhdDFkb2oybnJ1MDB4OG1oc2EifQ.pLrp8FmZSLVfT3pAVVPBPg";
+   mapboxgl.accessToken = import.meta.env.VITE_API_MAP_BOX;
 
     // Initialize the map
     mapRef.current = new mapboxgl.Map({
