@@ -23,8 +23,9 @@ const FooterComponent = () => {
           <h3>Quick Links</h3>
           <a href="/">Home</a>
         
-          <a href="/chat">Chat</a>
-         
+          <a href="/chat">Chats</a>
+          <a href="/tutorhome">Tutor Home</a>
+          <a href="/studyabroad">Study Abroad</a>
         </div>
 
         <div className="footer-social">
