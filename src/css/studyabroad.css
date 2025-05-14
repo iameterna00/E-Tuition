@@ -369,7 +369,7 @@
     .abroadforminsiders{
       display: flex;
       height: 100%;
-      width: 90%;
+      width: calc(100% - 20px);
       padding: 10px;
       flex-direction: column;
    
