@@ -207,8 +207,8 @@ function TeachingExperience({ setopentuitorinitialmodal, user, isVacancy }) {
                     <div className="teacherexperienceinsiders">
                         {step === 1 && (
                             <>
-                            {isVacancy &&(<p>Complete 6 quick steps to unlock job matches tailored just for you!</p> )}
-                                <h2>What grade levels are you experienced in teaching</h2>
+                            {isVacancy &&(<h1 >Tutor's Form</h1> )}
+                                <h2 >What grade levels are you experienced in teaching</h2>
                                 <p>Select the highest class level you have taught.</p>
                                 <div className="teaching-options">
                                     {["Up to class 8", "Up to class 10", "Up to class 12"].map((option) => (
