@@ -73,11 +73,10 @@
   
 .universitylistmain{
   display: flex;
-
   align-items: center;
   flex-direction: column;
   gap: 20px;
-  width: 100%;
+  width: calc(100% - 40px);
   padding: 0px 20px;
 }
 .university-info{
@@ -446,5 +445,13 @@
       .countrynames{
         font-size: 30px;
       }
+    }
+    .universitylistmain{
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      gap: 20px;
+      width:100%;
+      padding: 0px 0px;
     }
   }

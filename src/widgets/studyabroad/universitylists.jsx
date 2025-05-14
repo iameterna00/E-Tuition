@@ -49,7 +49,7 @@ const UniversityList = () => {
         priceRange={priceRange}
         handlePriceChange={handlePriceChange}
       />
-        <h3>Available Universities</h3>
+        <h3 style={{marginTop:'20px'}}>Available Universities</h3>
         <div className="vaccancy-container">
           {filteredUniversities.length > 0 ? (
             filteredUniversities.map((university) => (
