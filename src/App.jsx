@@ -29,6 +29,7 @@ import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { v4 as uuidv4 } from 'uuid'; 
 import UsersActivity from './admin/useractivity.jsx';
 import ConditionalFooter from './services/conditionalfooter.jsx';
+import PrivacyPolicy from './Pages/privacypolicy';
 import UniversityList from './widgets/studyabroad/universitylists.jsx';
 
 
@@ -118,10 +119,9 @@ function App() {
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/chat" element={<Chats />} />
             <Route path="/studyabroad" element={<StudyAbroad />} />
-      
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/vacancy/:vacancyId/ref/:referralCode" element={<VacancyDetail />} />
             <Route path="/vacancy/:vacancyId" element={<VacancyDetail />} />
-
             <Route path="/class/:classId/chat" element={<ClassChatRoom />} />
             <Route element={<AdminRoute />}>
               <Route path="/admin" element={<ADMIN />} />

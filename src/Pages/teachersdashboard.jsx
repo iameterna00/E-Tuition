@@ -4,7 +4,7 @@ import KUBE from '../assets/newcube.png';
 import Dictator from '../assets/newcube.png';
 import Master from '../assets/Master.png';
 import { RadialBarChart, RadialBar, ResponsiveContainer, Tooltip, LineChart, Line, XAxis, YAxis, CartesianGrid, Legend, Tooltip as RechartsTooltip } from 'recharts';
-import { FaFile, FaIdCard } from 'react-icons/fa';
+import { FaEdit, FaFile, FaIdCard } from 'react-icons/fa';
 
 const hoursTaught = 120;
 const studentsTaught = 15;
@@ -62,8 +62,8 @@ function GradientDefs() {
   );
 }
 
-const hoursData = [{ name: "Hours Taught", value: hoursPercentage }];
-const studentsData = [{ name: "Students Taught", value: studentsPercentage }];
+const hoursData = [{ name: "Online Classes", value: hoursPercentage }];
+const studentsData = [{ name: "Physical Classes", value: studentsPercentage }];
 
 function TeacherDashboard({ user }) {
     const { level, image } = getLevel();
@@ -80,11 +80,11 @@ function TeacherDashboard({ user }) {
                 <h3>{user.name}</h3><img style={{ height: '20px', marginTop: '4px' }} src={KUBE} alt="" />
               </div>
               <p>@{user.username}</p>
-              <Link to={'/profile'} style={{ display: 'flex', justifyContent: 'center', width: '100%', maxWidth: "300px", backgroundColor: "transparent", border: "1px solid grey", borderRadius: "20px" }}>
-                <button className='viewprofile' style={{ display: 'flex', justifyContent: 'center', width: '100%', maxWidth: "300px", backgroundColor: "transparent" }}>
-                  View Profile
+              <div style={{ display: 'flex', justifyContent: 'center', width: '100%', maxWidth: "300px", backgroundColor: "transparent", border: "1px solid grey", borderRadius: "20px" }}>
+                <button className='viewprofile' style={{ display: 'flex', justifyContent: 'center', width: '100%', maxWidth: "300px", backgroundColor: "transparent", gap:'10px', alignItems:'center' }}>
+                  Edit Profile <FaEdit/>
                 </button>
-              </Link>
+              </div>
               <div style={{display:"flex", width:"100%", margin:'10px', flexDirection:"column", alignItems:'start'}} className="teacherqualificationcontainer">
               <h3>Qualifications</h3>
               <div className="yourdegree" style={{ textAlign: 'start' }}>
@@ -136,7 +136,7 @@ function TeacherDashboard({ user }) {
 
           <div className="progress-container">
             <div className="progress-chart">
-              <h4 style={{ margin: '5px' }}>Hours Taught</h4>
+              <h4 style={{ margin: '5px' }}>Online Classes</h4>
               <div className="progress-circle">
                 <ResponsiveContainer width="100%" height={180}>
                   <RadialBarChart
@@ -162,7 +162,7 @@ function TeacherDashboard({ user }) {
             </div>
 
             <div className="progress-chart">
-              <h4 style={{ margin: '5px' }}>Students Taught</h4>
+              <h4 style={{ margin: '5px' }}>Physical Classes</h4>
               <div className="progress-circle">
                 <ResponsiveContainer width="100%" height={180}>
                   <RadialBarChart
