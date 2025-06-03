@@ -28,7 +28,7 @@ const TeacherLocations = ({ vlat, vlng, useVacancyTeachers, moreTeacherSource })
         latitude: t.Latitude,
         longitude: t.Longitude,
         cvFileUrl: t.CV_URL,
-        gender: "Not specified", 
+        gender: t.Gender, 
       }));
       setTeachers(mapped);
       return;
