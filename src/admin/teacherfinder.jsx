@@ -8,15 +8,32 @@ import "@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css";
 import { FaRegCopy } from "react-icons/fa";
 import ReactDOMServer from "react-dom/server";
 import { getAuth } from "firebase/auth";
+import MoreTeachers from '../JSON/teachers_details.json'
 
-const TeacherLocations = ({ vlat, vlng, useVacancyTeachers }) => {
+const TeacherLocations = ({ vlat, vlng, useVacancyTeachers, moreTeacherSource }) => {
   const mapContainerRef = useRef(null);
   const mapRef = useRef(null);
   const [teachers, setTeachers] = useState([]);
 
   useEffect(() => {
-    const fetchTeachers = async () => {
+ const fetchTeachers = async () => {
   try {
+    // If we're using MoreTeachers JSON instead of API
+    if (moreTeacherSource) {
+      const mapped = MoreTeachers.map((t, index) => ({
+        uid: `local-${index}`,
+        name: t.FullName,
+        email: t.Email,
+        phone: t.Phone,
+        latitude: t.Latitude,
+        longitude: t.Longitude,
+        cvFileUrl: t.CV_URL,
+        gender: "Not specified", 
+      }));
+      setTeachers(mapped);
+      return;
+    }
+
     const auth = getAuth();
     const user = auth.currentUser;
 
@@ -37,12 +54,10 @@ const TeacherLocations = ({ vlat, vlng, useVacancyTeachers }) => {
       },
     });
 
-    // Handle response differently based on endpoint
     const teacherData = useVacancyTeachers ? res.data : res.data?.teachers;
-    
+
     if (Array.isArray(teacherData)) {
       setTeachers(teacherData);
-      console.log(teacherData);
     } else {
       console.error("Unexpected teacher data format:", res.data);
     }
@@ -51,8 +66,9 @@ const TeacherLocations = ({ vlat, vlng, useVacancyTeachers }) => {
   }
 };
 
+
     fetchTeachers();
-  }, [useVacancyTeachers]);
+  }, [useVacancyTeachers , moreTeacherSource]);
 
   useEffect(() => {
     mapboxgl.accessToken = "pk.eyJ1IjoiYW5pc2hoLWpvc2hpIiwiYSI6ImNrdWo5d2lhdDFkb2oybnJ1MDB4OG1oc2EifQ.pLrp8FmZSLVfT3pAVVPBPg";
@@ -193,9 +209,9 @@ const TeacherLocations = ({ vlat, vlng, useVacancyTeachers }) => {
           Email: ${teacher.email || "N/A"}<br/>`}
           Phone: ${teacher.phone || "N/A"}
           <span id="${copyId}" style="cursor:pointer; margin-left:8px; vertical-align:middle;" title="Copy phone">${copyIconSVG}</span>
+          ${teacher.cvFileUrl ? `<br/><button onclick="window.open('${teacher.cvFileUrl}', '_blank')">View CV</button>` : ""}
         </div>
       `);
-
       // Show popup on hover
       el.addEventListener('mouseenter', () => {
         popup.addTo(mapRef.current).setLngLat([teacher.longitude, teacher.latitude]);

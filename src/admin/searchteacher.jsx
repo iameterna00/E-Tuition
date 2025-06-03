@@ -7,9 +7,13 @@ export default function SearchTeacher({
   setSearchTeacher,
 }) {
   const [useVacancyTeachers, setUseVacancyTeachers] = useState(false);
+  const [moreTeacherSource, setMoreTeacherSource] = useState(false);
 
   const togglePlacementSource = () => {
     setUseVacancyTeachers((prev) => !prev);
+  };
+    const toggleMoreSource = () => {
+    setMoreTeacherSource((prev) => !prev);
   };
 
   return (
@@ -22,6 +26,7 @@ export default function SearchTeacher({
               vlat={selectedVacancy.lat}
               vlng={selectedVacancy.lng}
               useVacancyTeachers={useVacancyTeachers}
+              moreTeacherSource={moreTeacherSource}
             />
             <div className="modal-actionscontentsearchteacher" style={{ display: "flex", gap: '10px' }}>
               <button
@@ -30,6 +35,13 @@ export default function SearchTeacher({
                 style={{ marginTop: '20px', padding:"10px 20px", border:"1px solid grey" }}
               >
                 {useVacancyTeachers ? "Live Teachers" : "Past Placements"}
+              </button>
+                 <button
+                className="generateVacancy"
+                onClick={toggleMoreSource}
+                style={{ marginTop: '20px', padding:"10px 20px", border:"1px solid grey" }}
+              >
+                {moreTeacherSource ? "Close Source" : "More Source"}
               </button>
               <button
                 className="cancel-button"
