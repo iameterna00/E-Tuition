@@ -177,8 +177,8 @@ const TeacherLocations = ({ vlat, vlng, useVacancyTeachers, moreTeacherSource })
       }
 
       const el = document.createElement('div');
-      el.style.width = '12px';
-      el.style.height = '12px';
+      el.style.width = '10px';
+      el.style.height = '10px';
       el.style.background = bgColor;
       el.style.border = '2px solid #fff';
       el.style.borderRadius = '50%';
@@ -213,7 +213,7 @@ const TeacherLocations = ({ vlat, vlng, useVacancyTeachers, moreTeacherSource })
         </div>
       `);
       // Show popup on hover
-      el.addEventListener('mouseenter', () => {
+      el.addEventListener('click', () => {
         popup.addTo(mapRef.current).setLngLat([teacher.longitude, teacher.latitude]);
         // Add copy event after popup is added to DOM
         setTimeout(() => {
