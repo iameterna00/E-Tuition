@@ -1,5 +1,7 @@
 import { useState } from "react";
 import TeacherLocations from "./teacherfinder";
+import { BiSolidBinoculars } from "react-icons/bi";
+import { TbZoomCancelFilled } from "react-icons/tb";
 
 export default function SearchTeacher({
   searchTeacher,
@@ -41,7 +43,7 @@ export default function SearchTeacher({
                 onClick={toggleMoreSource}
                 style={{ marginTop: '20px', padding:"10px 20px", border:"1px solid grey" }}
               >
-                {moreTeacherSource ? "Close Source" : "More Source"}
+                {moreTeacherSource ? <TbZoomCancelFilled />:  <BiSolidBinoculars />}
               </button>
               <button
                 className="cancel-button"
