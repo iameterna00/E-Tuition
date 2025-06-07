@@ -1,4 +1,499 @@
 [
+       {
+        "FullName": "Pratiksha Shahi",
+        "Email": "pratikshashahi027@gmail.com",
+        "Phone": "9766456568",
+        "Latitude": 27.7029,
+        "Longitude": 85.3334,
+        "CV_URL": "https://res.cloudinary.com/dzpkdp4li/raw/upload/v1746801091/teacher_cvs/ut1smhtbi8ug58thej8u.pdf",
+        "Gender": "Male"
+    },
+    {
+        "FullName": "Manish kumar barnwal",
+        "Email": "barnwalmanish3374@gmail.com",
+        "Phone": "9818148003",
+        "Latitude": 27.688664661942095,
+        "Longitude": 85.32666921681086,
+        "CV_URL": "https://res.cloudinary.com/dzpkdp4li/image/upload/v1749233499/teacher_cvs/ihax13votzfxscyyvhls.jpg",
+        "Gender": "Male"
+    },
+    {
+        "FullName": "Nilesh Deo",
+        "Email": "deonilesh465@gmail.com",
+        "Phone": "9801577241",
+        "Latitude": 26.794209078686478,
+        "Longitude": 87.28985912291516,
+        "CV_URL": "https://res.cloudinary.com/dzpkdp4li/image/upload/v1749274543/teacher_cvs/nmgbva9zddl9rodlyuah.png",
+        "Gender": "Male"
+    },
+    {
+        "FullName": "Namrata Pareeyar",
+        "Email": "missselenophile07@gmail.com",
+        "Phone": "9829806256",
+        "Latitude": 27.662148,
+        "Longitude": 85.3085787,
+        "CV_URL": "https://res.cloudinary.com/dzpkdp4li/raw/upload/v1746369322/teacher_cvs/hqthgfgvmhhzl2zfdl8m.pdf",
+        "Gender": "Male"
+    },
+    {
+        "FullName": "Aakash Khatri",
+        "Email": "aakashkhatri20022@gmail.com",
+        "Phone": "9866560994",
+        "Latitude": 27.674508114658256,
+        "Longitude": 85.32315038216048,
+        "CV_URL": "https://res.cloudinary.com/dzpkdp4li/raw/upload/v1749097246/teacher_cvs/ognnp3qdkdeltzv2zacc.pdf",
+        "Gender": "Male"
+    },
+    {
+        "FullName": "Santoshi Ghimire",
+        "Email": "ghimiresantoshi310@gmail.com",
+        "Phone": "9828185670",
+        "Latitude": 27.7794697,
+        "Longitude": 85.3677003,
+        "CV_URL": "https://res.cloudinary.com/dzpkdp4li/image/upload/v1749207278/teacher_cvs/v9flrouhhiqvyqzfe0ai.jpg",
+        "Gender": "Male"
+    },
+    {
+        "FullName": "Saman Bhattarai",
+        "Email": "samanbhattarai21@gmail.com",
+        "Phone": "9842378798",
+        "Latitude": 27.6934,
+        "Longitude": 85.2806,
+        "CV_URL": "https://res.cloudinary.com/dzpkdp4li/raw/upload/v1748868804/teacher_cvs/qgvkn76qg8h7kwxhemr0.pdf",
+        "Gender": "Male"
+    },
+    {
+        "FullName": "Rustam Timalsina",
+        "Email": "rustamtimalsina179@gmail.com",
+        "Phone": "9848915588",
+        "Latitude": 27.7241441,
+        "Longitude": 85.3119318,
+        "CV_URL": "https://res.cloudinary.com/dzpkdp4li/raw/upload/v1746026907/teacher_cvs/zkmhd9vgfqvidqjzvypl.pdf",
+        "Gender": "Male"
+    },
+    {
+        "FullName": "Bishal Kumar Mahato",
+        "Email": "vkumarmahato55@gmail.com",
+        "Phone": "9807736201",
+        "Latitude": 27.732051536956913,
+        "Longitude": 85.317787463677,
+        "CV_URL": "https://res.cloudinary.com/dzpkdp4li/image/upload/v1749190532/teacher_cvs/mogl8fxz9d4u2sqmaspb.jpg",
+        "Gender": "Male"
+    },
+    {
+        "FullName": "Madan Bohara",
+        "Email": "076bel022.madan@pcampus.edu.np",
+        "Phone": "9815612942",
+        "Latitude": 27.68,
+        "Longitude": 85.3148,
+        "CV_URL": "https://res.cloudinary.com/dzpkdp4li/image/upload/v1749279698/teacher_cvs/qocxufxkhohzpx0tmc3l.jpg",
+        "Gender": "Male"
+    },
+    {
+        "FullName": "Lucky Singh",
+        "Email": "lucky35130@gmail.com",
+        "Phone": "9816204251",
+        "Latitude": 27.6934,
+        "Longitude": 85.2806,
+        "CV_URL": "https://res.cloudinary.com/dzpkdp4li/raw/upload/v1749140030/teacher_cvs/fxe24ccphmplqdlhfd7y.pdf",
+        "Gender": "Male"
+    },
+    {
+        "FullName": "Ujjwal Devkota",
+        "Email": "ujjwaldevkota99@gmail.com",
+        "Phone": "9846262537",
+        "Latitude": 27.6595,
+        "Longitude": 85.3447,
+        "CV_URL": "https://res.cloudinary.com/dzpkdp4li/raw/upload/v1746510978/teacher_cvs/d5k2vebgtofjyyywt0bl.pdf",
+        "Gender": "Male"
+    },
+    {
+        "FullName": "Pooja Murau",
+        "Email": "poojamurau10@gmail.com",
+        "Phone": "9821032412",
+        "Latitude": 27.683211,
+        "Longitude": 85.324132,
+        "CV_URL": "https://res.cloudinary.com/dzpkdp4li/image/upload/v1748187239/teacher_cvs/oipegcgacbdssqwhovnb.jpg",
+        "Gender": "Male"
+    },
+    {
+        "FullName": "Manish Bohara",
+        "Email": "boharam727@gmail.com",
+        "Phone": "9845766724",
+        "Latitude": 27.6815287,
+        "Longitude": 85.323617,
+        "CV_URL": "https://res.cloudinary.com/dzpkdp4li/raw/upload/v1748877816/teacher_cvs/xz1oohicyaybfixkm4r4.pdf",
+        "Gender": "Male"
+    },
+    {
+        "FullName": "Durgamani Limbu",
+        "Email": "durgamanimaden@gmail.com",
+        "Phone": "9867986312",
+        "Latitude": 26.4609446,
+        "Longitude": 87.291521,
+        "CV_URL": "https://res.cloudinary.com/dzpkdp4li/raw/upload/v1748862739/teacher_cvs/ngevzr2zovct0vifx8dz.pdf",
+        "Gender": "Male"
+    },
+    {
+        "FullName": "anil yadav",
+        "Email": "anilprasadyadav2075@gmail.com",
+        "Phone": "9821812585",
+        "Latitude": 27.7246,
+        "Longitude": 85.3249,
+        "CV_URL": "https://res.cloudinary.com/dzpkdp4li/image/upload/v1746720172/teacher_cvs/x6wtshyoq6aspere6mal.jpg",
+        "Gender": "Male"
+    },
+    {
+        "FullName": "Monika kayastha",
+        "Email": "monikayastha@gmail.com",
+        "Phone": "9741673959",
+        "Latitude": 27.7367773,
+        "Longitude": 85.3120604,
+        "CV_URL": "https://res.cloudinary.com/dzpkdp4li/raw/upload/v1748188626/teacher_cvs/qknlyvgykoviggipffxf.pdf",
+        "Gender": "Male"
+    },
+    {
+        "FullName": "𝐃𝐢𝐩𝐞𝐬𝐡 𝐆𝐡𝐚𝐫𝐭𝐢 𝐌𝐚𝐠𝐚𝐫",
+        "Email": "dipeshmagar.081@kathford.edu.np",
+        "Phone": "9847661674",
+        "Latitude": 27.6651484,
+        "Longitude": 85.3351282,
+        "CV_URL": "https://res.cloudinary.com/dzpkdp4li/image/upload/v1747045799/teacher_cvs/gdiqut8xgqg8jlvl91wl.jpg",
+        "Gender": "Male"
+    },
+    {
+        "FullName": "Ankit Bhattarai",
+        "Email": "bhattaraiankit10@gmail.com",
+        "Phone": "9841366137",
+        "Latitude": 27.687,
+        "Longitude": 85.4246,
+        "CV_URL": "https://res.cloudinary.com/dzpkdp4li/raw/upload/v1748186853/teacher_cvs/gslz313u9mubpryjcsau.pdf",
+        "Gender": "Male"
+    },
+    {
+        "FullName": "Suresh shrestha",
+        "Email": "samirsaru@1234gmail.com",
+        "Phone": "9849596172",
+        "Latitude": 27.661194,
+        "Longitude": 84.1171126,
+        "CV_URL": "https://res.cloudinary.com/dzpkdp4li/image/upload/v1749192499/teacher_cvs/rac8pvncheih48afqcgg.jpg",
+        "Gender": "Male"
+    },
+    {
+        "FullName": "Astha Lamichhane",
+        "Email": "astha.lamichhane0@gmail.com",
+        "Phone": "9863439507",
+        "Latitude": 27.689262,
+        "Longitude": 85.4565369,
+        "CV_URL": "https://res.cloudinary.com/dzpkdp4li/raw/upload/v1747299105/teacher_cvs/k0lm21u0oscqoyqkjd6p.pdf",
+        "Gender": "Male"
+    },
+    {
+        "FullName": "Bivek Sah",
+        "Email": "sahbivek887@gmail.com",
+        "Phone": "9865341554",
+        "Latitude": 27.724549476659174,
+        "Longitude": 85.34149125839531,
+        "CV_URL": "https://res.cloudinary.com/dzpkdp4li/raw/upload/v1746973531/teacher_cvs/on8mjyxfyv56mfpkfofc.pdf",
+        "Gender": "Male"
+    },
+    {
+        "FullName": "Sandesh Dhital",
+        "Email": "dhitalsandesh1@gmail.com",
+        "Phone": "9849781518",
+        "Latitude": 27.7243862,
+        "Longitude": 85.2744391,
+        "CV_URL": "https://res.cloudinary.com/dzpkdp4li/raw/upload/v1748360499/teacher_cvs/pzofyg2oyywh3zbqf9r5.pdf",
+        "Gender": "Male"
+    },
+    {
+        "FullName": "Birendra Kohli",
+        "Email": "kohlibirendra16@gmail.com",
+        "Phone": "9768401503",
+        "Latitude": 27.6842,
+        "Longitude": 85.3078,
+        "CV_URL": "https://res.cloudinary.com/dzpkdp4li/image/upload/v1749138723/teacher_cvs/yjqjlzhrkneg1nn5g7no.jpg",
+        "Gender": "Male"
+    },
+    {
+        "FullName": "Sudha Yadav",
+        "Email": "sudhakumariyadaw@gmail.com",
+        "Phone": "9702709693",
+        "Latitude": 27.747381585408878,
+        "Longitude": 85.33150338294465,
+        "CV_URL": "https://res.cloudinary.com/dzpkdp4li/image/upload/v1748232331/teacher_cvs/xniznhmcma1xgt7rwk30.jpg",
+        "Gender": "Male"
+    },
+    {
+        "FullName": "Aakreti Dotel",
+        "Email": "aakidotel13@gmail.com",
+        "Phone": "9860900742",
+        "Latitude": 27.7076,
+        "Longitude": 85.2991,
+        "CV_URL": "https://res.cloudinary.com/dzpkdp4li/image/upload/v1746956795/teacher_cvs/o8tf3kc1kptrf5ylohgs.jpg",
+        "Gender": "Male"
+    },
+    {
+        "FullName": "Sabin shrestha",
+        "Email": "sabinstha1995@gmail.com",
+        "Phone": "9863462629",
+        "Latitude": 27.7482,
+        "Longitude": 85.3701,
+        "CV_URL": "https://res.cloudinary.com/dzpkdp4li/image/upload/v1746786509/teacher_cvs/ekrtsxnidt8whbopijwf.jpg",
+        "Gender": "Male"
+    },
+    {
+        "FullName": "Rabindra Kumar Mahato",
+        "Email": "rabindramahato1126@gmail.com",
+        "Phone": "9864115560",
+        "Latitude": 27.702339607008422,
+        "Longitude": 85.42183084017496,
+        "CV_URL": "https://res.cloudinary.com/dzpkdp4li/image/upload/v1748927886/teacher_cvs/l72aiojbqlpl1k2v1roc.jpg",
+        "Gender": "Male"
+    },
+    {
+        "FullName": "Uttam Pradhan",
+        "Email": "uttampra1@gmail.com",
+        "Phone": "9702187345",
+        "Latitude": 27.7634375,
+        "Longitude": 85.3607989,
+        "CV_URL": "https://res.cloudinary.com/dzpkdp4li/image/upload/v1749178793/teacher_cvs/yqimzx6c8uoktezny3bf.jpg",
+        "Gender": "Male"
+    },
+    {
+        "FullName": "Pappu",
+        "Email": "kumarpappu2059@gmail.com",
+        "Phone": "9821154834",
+        "Latitude": 27.7246,
+        "Longitude": 85.3249,
+        "CV_URL": "https://res.cloudinary.com/dzpkdp4li/image/upload/v1749178129/teacher_cvs/etr2iox4tzfr5njypt17.jpg",
+        "Gender": "Male"
+    },
+    {
+        "FullName": "Bishal Shrestha",
+        "Email": "bishal2003shrestha@gmail.com",
+        "Phone": "9862280240",
+        "Latitude": 27.7399593,
+        "Longitude": 85.3531515,
+        "CV_URL": "https://res.cloudinary.com/dzpkdp4li/raw/upload/v1749188296/teacher_cvs/ilox0wzsmtarllqm5rsw.pdf",
+        "Gender": "Male"
+    },
+    {
+        "FullName": "Pratik Budhathoki",
+        "Email": "budhathokipratik54@gmail.com",
+        "Phone": "9841040679",
+        "Latitude": 27.6841,
+        "Longitude": 85.4034,
+        "CV_URL": "https://res.cloudinary.com/dzpkdp4li/raw/upload/v1746773565/teacher_cvs/hwf38wkgkcw1pzikrvam.pdf",
+        "Gender": "Male"
+    },
+    {
+        "FullName": "Bikash Mahaseth",
+        "Email": "bikashmahaseth18@gmail.com",
+        "Phone": "9840032100",
+        "Latitude": 27.6671,
+        "Longitude": 85.3877,
+        "CV_URL": "https://res.cloudinary.com/dzpkdp4li/image/upload/v1749130259/teacher_cvs/xmctqrxxjzpgga1fxhfq.png",
+        "Gender": "Male"
+    },
+    {
+        "FullName": "Tupesh Ghimire",
+        "Email": "tupeshghimire@gmail.com",
+        "Phone": "9845508957",
+        "Latitude": 27.661570531486884,
+        "Longitude": 85.38453413180802,
+        "CV_URL": "https://res.cloudinary.com/dzpkdp4li/raw/upload/v1749130923/teacher_cvs/hxif1mx31hnna76b92lp.pdf",
+        "Gender": "Male"
+    },
+    {
+        "FullName": "Chandan Yadav",
+        "Email": "chancy4575@gmail.com",
+        "Phone": "9825223787",
+        "Latitude": 27.66650918170002,
+        "Longitude": 85.43589512310307,
+        "CV_URL": "https://res.cloudinary.com/dzpkdp4li/image/upload/v1747061008/teacher_cvs/ewn3mzg9xrus6cxvdmnl.jpg",
+        "Gender": "Male"
+    },
+    {
+        "FullName": "Prabesh Bhattarai",
+        "Email": "pbhattrai88@gmail.com",
+        "Phone": "9825326657",
+        "Latitude": 27.67557762850239,
+        "Longitude": 85.37631368650183,
+        "CV_URL": "https://res.cloudinary.com/dzpkdp4li/raw/upload/v1749144951/teacher_cvs/nbgo25yw2e4bidtn1aru.pdf",
+        "Gender": "Male"
+    },
+    {
+        "FullName": "Prasamsa Rokaya",
+        "Email": "prasamsa0@gmail.com",
+        "Phone": "9746500711",
+        "Latitude": 27.6934,
+        "Longitude": 85.2806,
+        "CV_URL": "https://res.cloudinary.com/dzpkdp4li/raw/upload/v1748362362/teacher_cvs/eszsknrygmoxplekjshy.pdf",
+        "Gender": "Female"
+    },
+    {
+        "FullName": "Pooja sah",
+        "Email": "poojasah80.ps@gmail.com",
+        "Phone": "9827802690",
+        "Latitude": 27.6815949,
+        "Longitude": 85.2936481,
+        "CV_URL": "https://res.cloudinary.com/dzpkdp4li/image/upload/v1747291735/teacher_cvs/d3drhikez4fehd70segg.jpg",
+        "Gender": "Female"
+    },
+    {
+        "FullName": "Kritika ray",
+        "Email": "rkritika765@gmail.com",
+        "Phone": "9849900621",
+        "Latitude": 27.7004,
+        "Longitude": 85.2471,
+        "CV_URL": "https://res.cloudinary.com/dzpkdp4li/image/upload/v1746862740/teacher_cvs/jrkh2sjyrdt76nmqbebg.jpg",
+        "Gender": "Female"
+    },
+    {
+        "FullName": "Anjana Acharya",
+        "Email": "anacharya2601@gmail.com",
+        "Phone": "9840584514",
+        "Latitude": 27.6934,
+        "Longitude": 85.2806,
+        "CV_URL": "https://res.cloudinary.com/dzpkdp4li/image/upload/v1749138147/teacher_cvs/vjrk5kbgmgca16ljyxyw.jpg",
+        "Gender": "Female"
+    },
+    {
+        "FullName": "Sagar Samsher Thapa",
+        "Email": "sagarrthapa09@gmail.com",
+        "Phone": "9860671391",
+        "Latitude": 27.75400584336681,
+        "Longitude": 85.35363563056276,
+        "CV_URL": "https://res.cloudinary.com/dzpkdp4li/raw/upload/v1746334301/teacher_cvs/swkxa3c4z4ksj463upku.pdf",
+        "Gender": "Male"
+    },
+    {
+        "FullName": "Roshan Awasthi",
+        "Email": "rawasthi442@gmail.com",
+        "Phone": "9848999411",
+        "Latitude": 27.713333168511237,
+        "Longitude": 85.37174221828948,
+        "CV_URL": "https://res.cloudinary.com/dzpkdp4li/raw/upload/v1749129114/teacher_cvs/lzfztz9duaryhjlxkcu3.pdf",
+        "Gender": "Male"
+    },
+    {
+        "FullName": "Nisha Shah",
+        "Email": "nishashah98211@gmail.com",
+        "Phone": "9843929885",
+        "Latitude": 27.6748011,
+        "Longitude": 85.371901,
+        "CV_URL": "https://res.cloudinary.com/dzpkdp4li/image/upload/v1746536462/teacher_cvs/ke9a155jbmrjh8dekaqn.jpg",
+        "Gender": "Male"
+    },
+    {
+        "FullName": "Isha Valandyo",
+        "Email": "ishavalandhyo@gmail.com",
+        "Phone": "9863039628",
+        "Latitude": 27.672576,
+        "Longitude": 85.3475328,
+        "CV_URL": "https://res.cloudinary.com/dzpkdp4li/raw/upload/v1747152871/teacher_cvs/p7v0xgsd6atpi4tut4dc.pdf",
+        "Gender": "Male"
+    },
+    {
+        "FullName": "Bhumita kulung",
+        "Email": "bhumitakulung@gmail.com",
+        "Phone": "9769802156",
+        "Latitude": 27.7156827,
+        "Longitude": 85.2797542,
+        "CV_URL": "https://res.cloudinary.com/dzpkdp4li/image/upload/v1748962165/teacher_cvs/nfvey15rslqafruaqas9.png",
+        "Gender": "Female"
+    },
+    {
+        "FullName": "Sumika",
+        "Email": "sumikasapkota13@gmail.com",
+        "Phone": "9748277180",
+        "Latitude": 27.67631936155702,
+        "Longitude": 85.32116065027023,
+        "CV_URL": "https://res.cloudinary.com/dzpkdp4li/image/upload/v1748708622/teacher_cvs/wydkw2t6zkzymrp06hpc.png",
+        "Gender": "Female"
+    },
+    {
+        "FullName": "Bipana Adhikari",
+        "Email": "bipanaa0213@gmail.com",
+        "Phone": "9742855337",
+        "Latitude": 27.7391,
+        "Longitude": 85.3105,
+        "CV_URL": "https://res.cloudinary.com/dzpkdp4li/raw/upload/v1749197859/teacher_cvs/n1wt8kqxz68szczaud2d.docx",
+        "Gender": "Female"
+    },
+    {
+        "FullName": "Bhumika Sapkota",
+        "Email": "bhumisapkota2@gmail.com",
+        "Phone": "9768953750",
+        "Latitude": 27.6725,
+        "Longitude": 85.3209,
+        "CV_URL": "https://res.cloudinary.com/dzpkdp4li/raw/upload/v1749139028/teacher_cvs/c16z97zu47ecyobicyfd.pdf",
+        "Gender": "Female"
+    },
+    {
+        "FullName": "Anuska chaudhary",
+        "Email": "anuskachaudhary89@gmail.com",
+        "Phone": "9802918619",
+        "Latitude": 27.6931,
+        "Longitude": 85.2895,
+        "CV_URL": "https://res.cloudinary.com/dzpkdp4li/raw/upload/v1749191404/teacher_cvs/iszan83gx52qeyby1o4e.docx",
+        "Gender": "Female"
+    },
+    {
+        "FullName": "Riya Ghimire",
+        "Email": "riyaghimire2062@gmail.com",
+        "Phone": "9811350750",
+        "Latitude": 27.6832365,
+        "Longitude": 85.3297822,
+        "CV_URL": "https://res.cloudinary.com/dzpkdp4li/image/upload/v1748956925/teacher_cvs/hmqzd2gsi7atfpelvo95.jpg",
+        "Gender": "Female"
+    },
+    {
+        "FullName": "Manish Bhattarai",
+        "Email": "manishbhattarai117@gmail.com",
+        "Phone": "9861325556",
+        "Latitude": 27.7482,
+        "Longitude": 85.3701,
+        "CV_URL": "https://res.cloudinary.com/dzpkdp4li/raw/upload/v1748587144/teacher_cvs/j0xl0bcdihnfaq5cvrkb.pdf",
+        "Gender": "Male"
+    },
+    {
+        "FullName": "nischal baskota",
+        "Email": "nischalbaskota08@gmail.com",
+        "Phone": "9842585630",
+        "Latitude": 27.724404814967002,
+        "Longitude": 85.35254283371616,
+        "CV_URL": "https://res.cloudinary.com/dzpkdp4li/raw/upload/v1747729308/teacher_cvs/e5yej9juiluas4pdebhu.pdf",
+        "Gender": "Male"
+    },
+    {
+        "FullName": "Surakshya Gautam",
+        "Email": "surakshyagautam142@gmail.com",
+        "Phone": "9844594679",
+        "Latitude": 27.71453152262766,
+        "Longitude": 85.32617282937281,
+        "CV_URL": "https://res.cloudinary.com/dzpkdp4li/raw/upload/v1747578894/teacher_cvs/prkfcbe7kuo13ynqq43v.pdf",
+        "Gender": "Male"
+    },
+    {
+        "FullName": "Diwani Sapkota",
+        "Email": "diwanisapkota12@gmail.com",
+        "Phone": "9768437048",
+        "Latitude": 27.7047309,
+        "Longitude": 85.2955813,
+        "CV_URL": "https://res.cloudinary.com/dzpkdp4li/image/upload/v1748940478/teacher_cvs/ztunfdm0kkj2etra0dz0.jpg",
+        "Gender": "Female"
+    },
+    {
+        "FullName": "Anzila Singh",
+        "Email": "anzilasingh643@gmail.com",
+        "Phone": "9863173643",
+        "Latitude": 27.72234408393891,
+        "Longitude": 85.32518559540053,
+        "CV_URL": "https://res.cloudinary.com/dzpkdp4li/image/upload/v1748967397/teacher_cvs/wnypks2sxeoaydk80txt.png",
+        "Gender": "Female"
+    },
     {
         "FullName": "Kunal shah",
         "Email": "shahkunal453@gmail.com",
